@@ -1,3 +1,6 @@
+# sqlite database file
+db.sqlite3
+
 # Vim swap files
 *.swp
 
