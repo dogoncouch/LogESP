@@ -12,8 +12,7 @@ class HardwareAsset(models.Model):
 
 class SystemAsset(models.Model):
     parent_hardware = models.ManyToManyField(HardwareAsset)
-    parent_systems = models.ForeignKey('self',
-            null=True, on_delete=models.SET_NULL)
+    parent_systems = models.ManyToManyField('self')
     asset_owner = models.CharField(max_length=30)
     asset_custodian = models.CharField(max_length=30)
     asset_name = models.CharField(max_length=30)
