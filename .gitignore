@@ -1,5 +1,7 @@
 # sqlite database file
 db.sqlite3
+# database migrations (for early development)
+hwam/migrations/0*.py
 
 # Vim swap files
 *.swp
