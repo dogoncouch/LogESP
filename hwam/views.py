@@ -13,27 +13,24 @@ def index(request):
 
 def ou_index(request):
     ou_list = OrganizationalUnit.objects.order_by('unit_name')
-    template = loader.get_template('hwam/ou_index.html')
     context = {
             'ou_list': ou_list,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'hwam/ou_index.html', context)
 
 def hw_index(request):
     hw_list = HardwareAsset.objects.order_by('org_unit')
-    template = loader.get_template('hwam/hw_index.html')
     context = {
             'hw_list': hw_list,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'hwam/ou_index.html', context)
 
 def sw_index(request):
     sw_list = SoftwareAsset.objects.order_by('org_unit')
-    template = loader.get_template('hwam/sw_index.html')
     context = {
             'sw_list': sw_list,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'hwam/ou_index.html', context)
 
 def ou_detail(request, organizational_unit_id):
     response = "Details for organizational unit %s."
