@@ -1,0 +1,9 @@
+{% if ou_list %}
+    <ul>
+        {% for u in ou_list %}
+            <li><a href="{{u.id}}/">{{ u.unit_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No organizational units.</p>
+{% endif %}

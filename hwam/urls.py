@@ -11,7 +11,7 @@ urlpatterns = [
         name='ou_detail'),
     path('hw/<int:hardware_asset_id>/', views.hw_detail,
         name='hw_detail'),
-    path('hw/<int:software_asset_id>/', views.sw_detail,
+    path('sw/<int:software_asset_id>/', views.sw_detail,
         name='sw_detail'),
 ]
 

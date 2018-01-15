@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.template import loader
 
 from .models import OrganizationalUnit
 from .models import HardwareAsset
@@ -12,18 +13,27 @@ def index(request):
 
 def ou_index(request):
     ou_list = OrganizationalUnit.objects.order_by('unit_name')
-    output = '<br>'.join(u.unit_name for u in ou_list)
-    return HttpResponse(output)
+    template = loader.get_template('hwam/ou_index.html')
+    context = {
+            'ou_list': ou_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 def hw_index(request):
     hw_list = HardwareAsset.objects.order_by('org_unit')
-    output = '<br>'.join(a.asset_name for a in hw_list)
-    return HttpResponse(output)
+    template = loader.get_template('hwam/hw_index.html')
+    context = {
+            'hw_list': hw_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 def sw_index(request):
     sw_list = SoftwareAsset.objects.order_by('org_unit')
-    output = '<br>'.join(a.asset_name for a in sw_list)
-    return HttpResponse(output)
+    template = loader.get_template('hwam/sw_index.html')
+    context = {
+            'sw_list': sw_list,
+    }
+    return HttpResponse(template.render(context, request))
 
 def ou_detail(request, organizational_unit_id):
     response = "Details for organizational unit %s."

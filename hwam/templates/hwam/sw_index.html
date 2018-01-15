@@ -1,0 +1,9 @@
+{% if sw_list %}
+    <ul>
+        {% for a in sw_list %}
+            <li><a href="{{a.id}}/">{{ a.asset_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No assets.</p>
+{% endif %}
