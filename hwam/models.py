@@ -4,41 +4,41 @@ from django.db import models
 
 class OrganizationalUnit(models.Model):
     unit_name = models.CharField(max_length=30)
-    unit_desc = models.CharField(max_length=200)
-    asset_contact = models.CharField(max_length=30)
+    unit_desc = models.CharField(max_length=200, null=True, blank=True)
+    asset_contact = models.CharField(max_length=30, null=True, blank=True)
     def __str__(self):
         return self.unit_name
     
 class HardwareAsset(models.Model):
-    asset_owner = models.CharField(max_length=30)
-    asset_custodian = models.CharField(max_length=30)
+    asset_owner = models.CharField(max_length=30, null=True, blank=True)
+    asset_custodian = models.CharField(max_length=30, null=True, blank=True)
     asset_name = models.CharField(max_length=30)
-    asset_desc = models.CharField(max_length=200)
-    device_type = models.CharField(max_length=20)
-    property_id = models.CharField(max_length=30)
-    location = models.CharField(max_length=40)
-    status = models.CharField(max_length=20)
-    date_added = models.DateTimeField('date added', null=True)
-    date_eol = models.DateTimeField('end of life', null=True)
+    asset_desc = models.CharField(max_length=200, null=True, blank=True)
+    device_type = models.CharField(max_length=20, null=True, blank=True)
+    property_id = models.CharField(max_length=30, null=True, blank=True)
+    location = models.CharField(max_length=40, null=True, blank=True)
+    status = models.CharField(max_length=20, null=True, blank=True)
+    date_added = models.DateField('date added', null=True, blank=True)
+    date_eol = models.DateField('end of life', null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
-            null=True, on_delete=models.SET_NULL)
+            null=True, blank=True, on_delete=models.SET_NULL)
     def __str__(self):
         return self.asset_name
 
 class SystemAsset(models.Model):
-    parent_hardware = models.ManyToManyField(HardwareAsset)
-    parent_systems = models.ManyToManyField('self')
-    asset_owner = models.CharField(max_length=30)
-    custodian_swam = models.CharField(max_length=30)
-    custodian_csm = models.CharField(max_length=30)
-    custodian_vul = models.CharField(max_length=30)
+    parent_hardware = models.ManyToManyField(HardwareAsset, blank=True)
+    parent_systems = models.ManyToManyField('self', blank=True)
+    asset_owner = models.CharField(max_length=30, null=True, blank=True)
+    custodian_swam = models.CharField(max_length=30, null=True, blank=True)
+    custodian_csm = models.CharField(max_length=30, null=True, blank=True)
+    custodian_vul = models.CharField(max_length=30, null=True, blank=True)
     asset_name = models.CharField(max_length=30)
-    asset_desc = models.CharField(max_length=200)
-    system_type = models.CharField(max_length=20)
-    date_added = models.DateField('date added', null=True)
-    date_eol = models.DateField('end of life', null=True)
+    asset_desc = models.CharField(max_length=200, null=True, blank=True)
+    system_type = models.CharField(max_length=20, null=True, blank=True)
+    date_added = models.DateField('date added', null=True, blank=True)
+    date_eol = models.DateField('end of life', null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
-            null=True, on_delete=models.SET_NULL)
+            null=True, blank=True, on_delete=models.SET_NULL)
     def __str__(self):
         return self.asset_name
 
