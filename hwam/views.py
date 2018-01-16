@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.views import generic
 
 from .models import OrganizationalUnit
 from .models import HardwareAsset
@@ -10,26 +12,28 @@ from .models import SoftwareAsset
 def index(request):
     return HttpResponse("This is the HWAM index page")
 
-def ou_index(request):
-    ou_list = OrganizationalUnit.objects.order_by('unit_name')
-    context = {
-            'ou_list': ou_list,
-    }
-    return render(request, 'hwam/ou_index.html', context)
+class OUIndexView(generic.ListView):
+    model = OrganizationalUnit
+    template_name = 'hwam/ou_index.html'
+    context_object_name = 'ou_list'
 
-def hw_index(request):
-    hw_list = HardwareAsset.objects.order_by('org_unit')
-    context = {
-            'hw_list': hw_list,
-    }
-    return render(request, 'hwam/hw_index.html', context)
+class HWIndexView(generic.ListView):
+    model = HardwareAsset
+    template_name = 'hwam/hw_index.html'
+    context_object_name = 'hw_list'
 
-def sw_index(request):
-    sw_list = SoftwareAsset.objects.order_by('org_unit')
-    context = {
-            'sw_list': sw_list,
-    }
-    return render(request, 'hwam/sw_index.html', context)
+    def get_queryset(self):
+        """Return a list of hardware assets"""
+        return HardwareAsset.objects.order_by('org_unit')
+
+class SWIndexView(generic.ListView):
+    model = SoftwareAsset
+    template_name = 'hwam/sw_index.html'
+    context_object_name = 'sw_list'
+
+    def get_queryset(self):
+        """Return a list of software assets"""
+        return SoftwareAsset.objects.order_by('org_unit')
 
 def ou_detail(request, organizational_unit_id):
     ou = get_object_or_404(OrganizationalUnit, pk=organizational_unit_id)
