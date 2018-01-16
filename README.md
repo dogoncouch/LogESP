@@ -45,7 +45,6 @@ python manage.py runserver
 
 Navigate to `http://localhost:8000/admin` and log in as the superuser account you just created. First create an organizational unit, then some hardware and software assets. You can also create users and groups.
 - View your assets:
-URLs:
     - http://localhost:8000/hwam/ou
     - http://localhost:8000/hwam/hw
     - http://localhost:8000/hwam/sw
