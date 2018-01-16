@@ -18,6 +18,7 @@ class HardwareAsset(models.Model):
     org_unit = models.ForeignKey(OrganizationalUnit,
             related_name='hardware_assets',
             on_delete=models.PROTECT)
+    # To Do: Add clearance level
     asset_owner = models.ForeignKey(User,
             related_name='hardware_assets_owned',
             null=True, blank=True, on_delete=models.SET_NULL)
@@ -44,6 +45,7 @@ class SoftwareAsset(models.Model):
     org_unit = models.ForeignKey(OrganizationalUnit,
             related_name='software_assets',
             on_delete=models.PROTECT)
+    # To Do: Add clearance level
     custodian_swam = models.ForeignKey(User,
             related_name='systems_swam',
             null=True, blank=True, on_delete=models.SET_NULL)
