@@ -4,12 +4,12 @@
     <li>Organizational Unit: {{ hw.org_unit }}</li>
     <li>Parent Hardware:<ul>
         {% for a in sw.parent_hardware.all %}
-            <li>{{ a.asset_name }}</li>
+            <li><a href="{% url 'hw_detail' a.id %}">{{ a.asset_name }}</a></li>
         {% endfor %}
         </ul></li>
     <li>Parent Software:<ul>
         {% for a in sw.parent_software.all %}
-            <li>{{ a.asset_name }}</li>
+            <li><a href="{% url 'sw_detail' a.id %}">{{ a.asset_name }}</a></li>
         {% endfor %}
         </ul></li>
     <li>Custodians:<ul>

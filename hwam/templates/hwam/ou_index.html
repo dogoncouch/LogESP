@@ -1,7 +1,7 @@
 {% if ou_list %}
     <ul>
         {% for u in ou_list %}
-            <li><a href="{{u.id}}/">{{ u.unit_name }}</a></li>
+            <li><a href="{% url 'ou_detail' u.id %}">{{ u.unit_name }}</a></li>
         {% endfor %}
     </ul>
 {% else %}
