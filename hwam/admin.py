@@ -3,6 +3,34 @@ from django.contrib import admin
 # Register your models here.
 from .models import OrganizationalUnit,HardwareAsset, SoftwareAsset
 
-admin.site.register(OrganizationalUnit)
-admin.site.register(HardwareAsset)
-admin.site.register(SoftwareAsset)
+class OrganizationalUnitAdmin(admin.ModelAdmin):
+    list_display = ['unit_name', 'unit_contact']
+    fields = ['unit_name', 'unit_desc', 'unit_contact']
+
+class HardwareAssetAdmin(admin.ModelAdmin):
+    list_display = ['asset_name', 'org_unit', 'location', 'is_active']
+    fieldsets = [
+            (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
+            ('Contacts', {'fields': ['asset_owner', 'asset_custodian']}),
+            ('Device Information', {'fields': ['device_type', 'property_id']}),
+            ('Status Information', {'fields': ['location', 'status']}),
+            ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
+            ]
+
+class SoftwareAssetAdmin(admin.ModelAdmin):
+    list_display = ['asset_name', 'org_unit', 'is_active']
+    fieldsets = [
+            (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
+            ('Contacts', {'fields': [
+                'custodian_swam', 'custodian_csm', 'custodian_vul']}),
+            ('Parent Systems', {'fields': ['parent_hardware', 'parent_software']}),
+            ('Device Information', {'fields': [
+                'software_type', 'sw_property_id',
+                'package_name', 'package_version']}),
+            ('Status Information', {'fields': ['status']}),
+            ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
+            ]
+
+admin.site.register(OrganizationalUnit, OrganizationalUnitAdmin)
+admin.site.register(HardwareAsset, HardwareAssetAdmin)
+admin.site.register(SoftwareAsset, SoftwareAssetAdmin)

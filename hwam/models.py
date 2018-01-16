@@ -35,6 +35,11 @@ class HardwareAsset(models.Model):
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
         return self.asset_name
+    def is_active(self):
+        return self.status == 'Active'
+    is_active.admin_order_field = 'status'
+    is_active.boolean = True
+    is_active.short_description = 'Active?'
 
 class SoftwareAsset(models.Model):
     parent_hardware = models.ManyToManyField(HardwareAsset,
@@ -67,3 +72,8 @@ class SoftwareAsset(models.Model):
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
         return self.asset_name
+    def is_active(self):
+        return self.status == 'Active'
+    is_active.admin_order_field = 'status'
+    is_active.boolean = True
+    is_active.short_description = 'Active?'
