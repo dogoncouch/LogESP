@@ -1,8 +1,5 @@
 # LogDissect Security Intelligence
-A web application for managing security information.
-
-## WARNING
-Still in early development; use at your own risk.
+A web application for managing security information. Still in early development; use at your own risk.
 
 ## Functions
 LDSI applications:
