@@ -1,16 +1,20 @@
 <h1>{{ ou.unit_name }} (Organizational Unit)</h1>
 <p>{{ ou.unit_desc }}</p>
 <ul>
-    <li>Contact Name: {{ ou.unit_contact.username }}</li>
-    <li>Contact Email: {{ ou.unit_contact.email }}</li>
+    <li>Contact: {{ ou.unit_contact.username }}
+        <a href="mailto:{{ ou.unit_contact.email }}">
+            {{ ou.unit_contact.email }}</a>
+    </li>
     <li>Hardware Assets:<ul>
         {% for a in ou.hardware_assets.all %}
-            <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a.asset_name }}</a></li>
+            <li><a href="{% url 'hwam:hw_detail' a.id %}">
+                    {{ a.asset_name }}</a></li>
         {% endfor %}
         </ul></li>
     <li>Software Assets:<ul>
         {% for a in ou.software_assets.all %}
-            <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a.asset_name }}</a></li>
+            <li><a href="{% url 'hwam:sw_detail' a.id %}">
+                    {{ a.asset_name }}</a></li>
         {% endfor %}
         </ul></li>
 </ul>

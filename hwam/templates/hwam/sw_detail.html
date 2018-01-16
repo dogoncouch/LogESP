@@ -1,11 +1,43 @@
 <h1>{{ sw.asset_name }} (Software Asset)</h1>
 <p>{{ sw.asset_desc }}</p>
 <ul>
-    <li>Organizational Unit: {{ sw.org_unit }}</li>
+    <li>Organizational Unit:
+        <a href="{% url 'hwam:ou_detail' sw.org_unit.id %}">
+            {{ sw.org_unit }}</a></li>
     <li>Custodians:<ul>
-            <li>Inventory (SWAM): {{ sw.custodian_swam.username }}</li>
-            <li>Configuration (CSM): {{ sw.custodian_csm.username }}</li>
-            <li>Patching (VUL): {{ sw.custodian_vul.username }}</li>
+            <li>Inventory (SWAM):
+                {% if sw.custodian_swam %}
+                    {{ sw.custodian_swam.username }}
+                    <a href="mailto:{{ sw.custodian_swam.email }}">
+                        {{ sw.custodian_swam.email }}</a>
+                {% else %}
+                    {{ sw.org_unit.unit_contact.username }}
+                    <a href="mailto:{{ sw.org_unit.unit_contact.email }}">
+                        {{ sw.org_unit.unit_contact.email }}</a>
+                {% endif %}
+            </li>
+            <li>Configuration (CSM):
+                {% if sw.custodian_csm %}
+                    {{ sw.custodian_csm.username }}
+                    <a href="mailto:{{ sw.custodian_csm.email }}">
+                        {{ sw.custodian_csm.email }}</a>
+                {% else %}
+                    {{ sw.org_unit.unit_contact.username }}
+                    <a href="mailto:{{ sw.org_unit.unit_contact.email }}">
+                        {{ sw.org_unit.unit_contact.email }}</a>
+                {% endif %}
+            </li>
+            <li>Patching (VUL):
+                {% if sw.custodian_vul %}
+                    {{ sw.custodian_vul.username }}
+                    <a href="mailto:{{ sw.custodian_vul.email }}">
+                        {{ sw.custodian_vul.email }}</a>
+                {% else %}
+                    {{ sw.org_unit.unit_contact.username }}
+                    <a href="mailto:{{ sw.org_unit.unit_contact.email }}">
+                        {{ sw.org_unit.unit_contact.email }}</a>
+                {% endif %}
+            </li>
         </ul></li>
     <li>Parent Hardware:<ul>
         {% for a in sw.parent_hardware.all %}

@@ -7,7 +7,7 @@ class OrganizationalUnit(models.Model):
     unit_name = models.CharField(max_length=30)
     unit_desc = models.CharField(max_length=200, null=True, blank=True)
     unit_contact = models.ForeignKey(User,
-            null=True, blank=True, on_delete=models.SET_NULL)
+            on_delete=models.PROTECT)
     def __str__(self):
         return self.unit_name
     
@@ -16,7 +16,7 @@ class HardwareAsset(models.Model):
     asset_desc = models.CharField(max_length=200, null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
             related_name='hardware_assets',
-            null=True, blank=True, on_delete=models.SET_NULL)
+            on_delete=models.PROTECT)
     asset_owner = models.ForeignKey(User,
             related_name='hardware_assets_owned',
             null=True, blank=True, on_delete=models.SET_NULL)
@@ -44,7 +44,7 @@ class SoftwareAsset(models.Model):
     asset_desc = models.CharField(max_length=200, null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
             related_name='software_assets',
-            null=True, blank=True, on_delete=models.SET_NULL)
+            on_delete=models.PROTECT)
     custodian_swam = models.ForeignKey(User,
             related_name='systems_swam',
             null=True, blank=True, on_delete=models.SET_NULL)
