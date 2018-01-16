@@ -27,10 +27,11 @@ class HardwareAsset(models.Model):
 
 class SoftwareAsset(models.Model):
     parent_hardware = models.ManyToManyField(HardwareAsset,
-            blank=True, symmetrical=False)
+            related_name='child_software', blank=True)
             #through='HWAssetNesting', through_fields=('child', 'parent'))
     parent_software = models.ManyToManyField('self',
-            blank=True, symmetrical=False)
+            related_name='child_software', blank=True,
+            symmetrical=False)
             #through='SWAssetNesting', through_fields=('child', 'parent'))
     asset_name = models.CharField(max_length=30)
     asset_desc = models.CharField(max_length=200, null=True, blank=True)

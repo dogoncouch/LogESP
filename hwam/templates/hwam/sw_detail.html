@@ -1,7 +1,12 @@
 <h1>{{ sw.asset_name }} (Software Asset)</h1>
 <p>{{ sw.asset_desc }}</p>
 <ul>
-    <li>Organizational Unit: {{ hw.org_unit }}</li>
+    <li>Organizational Unit: {{ sw.org_unit }}</li>
+    <li>Custodians:<ul>
+            <li>Inventory (SWAM): {{ sw.custodian_swam }}</li>
+            <li>Configuration (CSM): {{ sw.custodian_csm }}</li>
+            <li>Patching (VUL): {{ sw.custodian_vul }}</li>
+        </ul></li>
     <li>Parent Hardware:<ul>
         {% for a in sw.parent_hardware.all %}
             <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a.asset_name }}</a></li>
@@ -12,10 +17,10 @@
             <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a.asset_name }}</a></li>
         {% endfor %}
         </ul></li>
-    <li>Custodians:<ul>
-            <li>Inventory (SWAM): {{ sw.custodian_swam }}</li>
-            <li>Configuration (CSM): {{ sw.custodian_csm }}</li>
-            <li>Patching (VUL): {{ sw.custodian_vul }}</li>
+    <li>Child Software:<ul>
+        {% for a in sw.child_software.all %}
+            <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a.asset_name }}</a></li>
+        {% endfor %}
         </ul></li>
     <li>Software Type: {{ sw.software_type }}</li>
     <li>Software Property ID: {{ sw.sw_property_id }}</li>
