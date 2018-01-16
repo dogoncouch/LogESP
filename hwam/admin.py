@@ -16,6 +16,8 @@ class HardwareAssetAdmin(admin.ModelAdmin):
             ('Status Information', {'fields': ['location', 'status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
             ]
+    list_filter = ['asset_name', 'org_unit', 'device_type', 'date_added',
+            'status', 'asset_owner', 'asset_custodian']
 
 class SoftwareAssetAdmin(admin.ModelAdmin):
     list_display = ['asset_name', 'org_unit', 'is_active']
@@ -30,6 +32,8 @@ class SoftwareAssetAdmin(admin.ModelAdmin):
             ('Status Information', {'fields': ['status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
             ]
+    list_filter = ['asset_name', 'org_unit', 'software_type', 'date_added',
+            'status', 'custodian_swam', 'custodian_csm', 'custodian_vul']
 
 admin.site.register(OrganizationalUnit, OrganizationalUnitAdmin)
 admin.site.register(HardwareAsset, HardwareAssetAdmin)
