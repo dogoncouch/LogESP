@@ -8,7 +8,8 @@ class OrganizationalUnitAdmin(admin.ModelAdmin):
     fields = ['unit_name', 'unit_desc', 'unit_contact']
 
 class HardwareAssetAdmin(admin.ModelAdmin):
-    list_display = ['asset_name', 'org_unit', 'location', 'is_active']
+    list_display = ['asset_name', 'org_unit', 'location',
+            'device_type', 'is_active']
     fieldsets = [
             (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
             ('Contacts', {'fields': ['asset_owner', 'asset_custodian']}),
@@ -20,7 +21,7 @@ class HardwareAssetAdmin(admin.ModelAdmin):
             'status', 'asset_owner', 'asset_custodian']
 
 class SoftwareAssetAdmin(admin.ModelAdmin):
-    list_display = ['asset_name', 'org_unit', 'is_active']
+    list_display = ['asset_name', 'org_unit', 'software_type', 'is_active']
     fieldsets = [
             (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
             ('Contacts', {'fields': [
