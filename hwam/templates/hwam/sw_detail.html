@@ -3,9 +3,9 @@
 <ul>
     <li>Organizational Unit: {{ sw.org_unit }}</li>
     <li>Custodians:<ul>
-            <li>Inventory (SWAM): {{ sw.custodian_swam }}</li>
-            <li>Configuration (CSM): {{ sw.custodian_csm }}</li>
-            <li>Patching (VUL): {{ sw.custodian_vul }}</li>
+            <li>Inventory (SWAM): {{ sw.custodian_swam.username }}</li>
+            <li>Configuration (CSM): {{ sw.custodian_csm.username }}</li>
+            <li>Patching (VUL): {{ sw.custodian_vul.username }}</li>
         </ul></li>
     <li>Parent Hardware:<ul>
         {% for a in sw.parent_hardware.all %}

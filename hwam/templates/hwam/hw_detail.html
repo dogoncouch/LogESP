@@ -2,8 +2,8 @@
 <p>{{ hw.asset_desc }}</p>
 <ul>
     <li>Organizational Unit: {{ hw.org_unit }}</li>
-    <li>Owner: {{ hw.asset_owner }}</li>
-    <li>Custodian: {{ hw.asset_custodian }}</li>
+    <li>Owner: {{ hw.asset_owner.username }}</li>
+    <li>Custodian: {{ hw.asset_custodian.username }}</li>
     <li>Child Software:<ul>
         {% for a in hw.child_software.all %}
             <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a.asset_name }}</a></li>
