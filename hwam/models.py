@@ -18,11 +18,11 @@ class HardwareAsset(models.Model):
             related_name='hardware_assets',
             null=True, blank=True, on_delete=models.SET_NULL)
     asset_owner = models.ForeignKey(User,
+            related_name='hardware_assets_owned',
             null=True, blank=True, on_delete=models.SET_NULL)
     asset_custodian = models.ForeignKey(User,
+            related_name='hardware_assets_cust',
             null=True, blank=True, on_delete=models.SET_NULL)
-    asset_owner = models.CharField(max_length=30, null=True, blank=True)
-    asset_custodian = models.CharField(max_length=30, null=True, blank=True)
     device_type = models.CharField(max_length=20, null=True, blank=True)
     property_id = models.CharField(max_length=30, null=True, blank=True)
     location = models.CharField(max_length=40, null=True, blank=True)
