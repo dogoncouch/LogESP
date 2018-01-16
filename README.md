@@ -8,8 +8,7 @@ LDSI applications:
 - SIEM - Security Information and Event Management
 
 ## Installing
-This is not recommended:
-
+LDSI is still under development, but you can try it out:
 - Requirements: python 3.x, django >=2.0, git, pip
 - Clone the repo:
 ```
