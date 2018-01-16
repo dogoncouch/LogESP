@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -35,15 +34,17 @@ class SWIndexView(generic.ListView):
         """Return a list of software assets"""
         return SoftwareAsset.objects.order_by('org_unit')
 
-def ou_detail(request, organizational_unit_id):
-    ou = get_object_or_404(OrganizationalUnit, pk=organizational_unit_id)
-    return render(request, 'hwam/ou_detail.html', {'ou': ou})
+class OUDetailView(generic.DetailView):
+    model = OrganizationalUnit
+    template_name = 'hwam/ou_detail.html'
+    context_object_name = 'ou'
 
-def hw_detail(request, hardware_asset_id):
-    hw = get_object_or_404(HardwareAsset, pk=hardware_asset_id)
-    return render(request, 'hwam/hw_detail.html', {'hw': hw})
+class HWDetailView(generic.DetailView):
+    model = HardwareAsset
+    template_name = 'hwam/hw_detail.html'
+    context_object_name = 'hw'
 
-def sw_detail(request, software_asset_id):
-    sw = get_object_or_404(SoftwareAsset, pk=software_asset_id)
-    return render(request, 'hwam/sw_detail.html', {'sw': sw})
-
+class SWDetailView(generic.DetailView):
+    model = SoftwareAsset
+    template_name = 'hwam/sw_detail.html'
+    context_object_name = 'sw'
