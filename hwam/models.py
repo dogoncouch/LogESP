@@ -56,6 +56,8 @@ class SoftwareAsset(models.Model):
             related_name='systems_vul',
             null=True, blank=True, on_delete=models.SET_NULL)
     software_type = models.CharField(max_length=20, null=True, blank=True)
+    package_name = models.CharField(max_length=20, null=True, blank=True)
+    package_version = models.CharField(max_length=20, null=True, blank=True)
     sw_property_id = models.CharField(max_length=30, null=True, blank=True)
     status = models.CharField(max_length=20, null=True, blank=True)
     date_added = models.DateField('date added', null=True, blank=True)

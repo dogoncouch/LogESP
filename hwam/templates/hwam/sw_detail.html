@@ -55,6 +55,9 @@
         {% endfor %}
         </ul></li>
     <li>Software Type: {{ sw.software_type }}</li>
+    <li>Package Name/Version:
+        {{ sw.package_name }}-{{ sw.package_version }}
+    </li> 
     <li>Software Property ID: {{ sw.sw_property_id }}</li>
     <li>Status: {{ sw.status }}</li>
     <li>Lifespan:<ul>
