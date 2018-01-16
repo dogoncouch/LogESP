@@ -1,7 +1,7 @@
 {% if hw_list %}
     <ul>
         {% for a in hw_list %}
-            <li><a href="{% url 'hw_detail' a.id %}">{{ a.asset_name }}</a></li>
+            <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a.asset_name }}</a></li>
         {% endfor %}
     </ul>
 {% else %}

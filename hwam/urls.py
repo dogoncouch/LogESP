@@ -2,6 +2,8 @@
 from django.urls import path
 
 from . import views
+
+app_name = 'hwam'
 urlpatterns = [
     path('', views.index, name='index'),
     path('ou/', views.ou_index, name='ou_index'),
