@@ -8,6 +8,7 @@ class OrganizationalUnit(models.Model):
     unit_desc = models.CharField(max_length=200, null=True, blank=True)
     unit_contact = models.ForeignKey(User,
             on_delete=models.PROTECT)
+    # To Do: Add permissions (read/create/edit/delete ou assets)
     def __str__(self):
         return self.unit_name
     
@@ -35,11 +36,9 @@ class HardwareAsset(models.Model):
 class SoftwareAsset(models.Model):
     parent_hardware = models.ManyToManyField(HardwareAsset,
             related_name='child_software', blank=True)
-            #through='HWAssetNesting', through_fields=('child', 'parent'))
     parent_software = models.ManyToManyField('self',
             related_name='child_software', blank=True,
             symmetrical=False)
-            #through='SWAssetNesting', through_fields=('child', 'parent'))
     asset_name = models.CharField(max_length=30)
     asset_desc = models.CharField(max_length=200, null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
@@ -61,13 +60,3 @@ class SoftwareAsset(models.Model):
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
         return self.asset_name
-
-#class HWAssetNesting(models.Model):
-#    parent = models.ForeignKey(HardwareAsset, on_delete=models.CASCADE)
-#    child = models.ForeignKey(SoftwareAsset, on_delete=models.CASCADE)
-
-#class SWAssetNesting(models.Model):
-#    parent = models.ForeignKey(SoftwareAsset, on_delete=models.CASCADE)
-#    child = models.ForeignKey(SoftwareAsset, on_delete=models.CASCADE,
-#            related_name='child_asset')
-
