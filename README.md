@@ -24,20 +24,23 @@ pip install django
 ```
 
 - Create/migrate the database:
-
-    cd ldsi
-    python manage.py migrate
-    python manage.py makemigrations
-    python manage.py migrate
+```
+cd ldsi
+python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
+```
 
 - Create a superuser:
-
-    python manage.py createsuperuser
-    (provide username, password)
+```
+python manage.py createsuperuser
+(provide username, password)
+```
 
 - Start the server:
-
-    python manage.py runserver
+```
+python manage.py runserver
+```
 
 - Create some objects:
 
