@@ -1,0 +1,26 @@
+<h1>{{ sw.asset_name }} (Software Asset)</h1>
+<p>{{ sw.asset_desc }}</p>
+<ul>
+    <li>Organizational Unit: {{ hw.org_unit }}</li>
+    <li>Parent Hardware:<ul>
+        {% for a in sw.parent_hardware.all %}
+            <li>{{ a.asset_name }}</li>
+        {% endfor %}
+        </ul></li>
+    <li>Parent Software:<ul>
+        {% for a in sw.parent_software.all %}
+            <li>{{ a.asset_name }}</li>
+        {% endfor %}
+        </ul></li>
+    <li>Custodians:<ul>
+            <li>Inventory (SWAM): {{ sw.custodian_swam }}</li>
+            <li>Configuration (CSM): {{ sw.custodian_csm }}</li>
+            <li>Patching (VUL): {{ sw.custodian_vul }}</li>
+        </ul></li>
+    <li>Software Type: {{ sw.software_type }}</li>
+    <li>Software Property ID: {{ sw.sw_property_id }}</li>
+    <li>Status: {{ sw.status }}</li>
+    <li>Lifespan:<ul>
+    <li>Date Added: {{ sw.date_added }}</li>
+    <li>EOL Date: {{ sw.date_eol }}</li></ul></li>
+</ul>

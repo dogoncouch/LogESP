@@ -1,0 +1,14 @@
+<h1>{{ hw.asset_name }} (Hardware Asset)</h1>
+<p>{{ hw.asset_desc }}</p>
+<ul>
+    <li>Organizational Unit: {{ hw.org_unit }}</li>
+    <li>Owner: {{ hw.asset_owner }}</li>
+    <li>Custodian: {{ hw.asset_custodian }}</li>
+    <li>Device Type: {{ hw.device_type }}</li>
+    <li>Property ID: {{ hw.property_id }}</li>
+    <li>Location: {{ hw.location }}</li>
+    <li>Status: {{ hw.status }}</li>
+    <li>Lifespan:<ul>
+    <li>Date Added: {{ hw.date_added }}</li>
+    <li>EOL Date: {{ hw.date_eol }}</li></ul></li>
+</ul>
