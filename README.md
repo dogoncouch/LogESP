@@ -12,14 +12,16 @@ This is not recommended:
 
 - Requirements: python 3.x, django >=2.0, git, pip
 - Clone the repo:
-
-    git clone https://github.com/dogoncouch/ldsi.git
+```
+git clone https://github.com/dogoncouch/ldsi.git
+```
 
 - (Optional) Create a virtual environment and install django:
-
-    virtualenv ldsi_env
-    source ldsi_env/bin/activate
-    pip install django
+```
+virtualenv ldsi_env
+source ldsi_env/bin/activate
+pip install django
+```
 
 - Create/migrate the database:
 
@@ -38,6 +40,7 @@ This is not recommended:
     python manage.py runserver
 
 - Create some objects:
+
 Navigate to `http://localhost:8000/admin` and log in as the superuser account you just created. First create an organizational unit, then some hardware and software assets. You can also create users and groups.
 - View your assets:
 URLs:
