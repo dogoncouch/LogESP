@@ -10,19 +10,19 @@ LDSI applications:
 ## Installing
 LDSI is still under development, but you can try it out:
 - Requirements: python 3.x, django >=2.0, git, pip
-- Clone the repo:
+- Step 1: Clone the repo:
 ```
 git clone https://github.com/dogoncouch/ldsi.git
 ```
 
-- (Optional) Create a virtual environment and install django:
+- Step 2: (Optional) Create a virtual environment and install django:
 ```
 virtualenv ldsi_env
 source ldsi_env/bin/activate
 pip install django
 ```
 
-- Create/migrate the database:
+- Step 3: Create/migrate the database:
 ```
 cd ldsi
 python manage.py migrate
@@ -30,21 +30,22 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-- Create a superuser:
+- Step 4: Create a superuser:
 ```
 python manage.py createsuperuser
 (provide username, password)
 ```
 
-- Start the server:
+- Step 5: Start the server:
 ```
 python manage.py runserver
 ```
 
-- Create some objects:
+- Step 6: Create some objects:
 
 Navigate to `http://localhost:8000/admin` and log in as the superuser account you just created. First create an organizational unit, then some hardware and software assets. You can also create users and groups.
-- View your assets:
+
+- Step 7: View your assets:
     - http://localhost:8000/hwam/ou
     - http://localhost:8000/hwam/hw
     - http://localhost:8000/hwam/sw
