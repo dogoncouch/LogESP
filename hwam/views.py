@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic
 
@@ -9,12 +10,16 @@ from .models import SoftwareAsset
 # Create your views here.
 
 def index(request):
-    return HttpResponse("This is the HWAM index page")
+    return render(request, 'hwam/index.html')
 
 class OUIndexView(generic.ListView):
     model = OrganizationalUnit
     template_name = 'hwam/ou_index.html'
     context_object_name = 'ou_list'
+
+    def get_queryset(self):
+        """Return a list of organizational units"""
+        return OrganizationalUnit.objects.order_by('parent_ou')
 
 class HWIndexView(generic.ListView):
     model = HardwareAsset

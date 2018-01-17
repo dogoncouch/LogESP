@@ -5,6 +5,19 @@
         <a href="mailto:{{ ou.unit_contact.email }}">
             {{ ou.unit_contact.email }}</a>
     </li>
+    {% if ou.parent_ou %}
+        <li>Parent OU:
+            <a href="{% url 'hwam:ou_detail' ou.parent_ou.id %}">
+                {{ ou.parent_ou.unit_name }}</a></li>
+    {% endif %}
+    {% if ou.child_ous %}
+        <li>Child OUs:<ul>
+        {% for u in ou.child_ous.all %}
+            <li><a href="{% url 'hwam:ou_detail' u.id %}">
+                {{ u.unit_name }}</a></li>
+        {% endfor %}
+        </ul></li>
+    {% endif %}
     <li>Hardware Assets:<ul>
         {% for a in ou.hardware_assets.all %}
             <li><a href="{% url 'hwam:hw_detail' a.id %}">

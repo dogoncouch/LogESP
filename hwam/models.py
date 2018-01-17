@@ -9,10 +9,14 @@ class OrganizationalUnit(models.Model):
     unit_desc = models.CharField(max_length=200, null=True, blank=True)
     unit_contact = models.ForeignKey(User,
             on_delete=models.PROTECT)
+    parent_ou = models.ForeignKey('self',
+            related_name='child_ous',
+            null=True, blank=True, on_delete=models.CASCADE)
+            #symmetrical=False)
     # To Do: Add permissions (read/create/edit/delete ou assets)
     def __str__(self):
         return self.unit_name
-    
+
 class HardwareAsset(models.Model):
     asset_name = models.CharField(max_length=30)
     asset_desc = models.CharField(max_length=200, null=True, blank=True)

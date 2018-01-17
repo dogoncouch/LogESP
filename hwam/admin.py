@@ -4,8 +4,8 @@ from django.contrib import admin
 from .models import OrganizationalUnit,HardwareAsset, SoftwareAsset
 
 class OrganizationalUnitAdmin(admin.ModelAdmin):
-    list_display = ['unit_name', 'unit_contact']
-    fields = ['unit_name', 'unit_desc', 'unit_contact']
+    list_display = ['unit_name', 'parent_ou', 'unit_contact']
+    fields = ['unit_name', 'unit_desc', 'unit_contact', 'parent_ou']
 
 class HardwareAssetAdmin(admin.ModelAdmin):
     list_display = ['asset_name', 'org_unit', 'location',
