@@ -10,7 +10,7 @@
             <a href="{% url 'hwam:ou_detail' ou.parent_ou.id %}">
                 {{ ou.parent_ou.unit_name }}</a></li>
     {% endif %}
-    {% if ou.child_ous %}
+    {% if ou.child_ous.all %}
         <li>Child OUs:<ul>
         {% for u in ou.child_ous.all %}
             <li><a href="{% url 'hwam:ou_detail' u.id %}">

@@ -19,7 +19,10 @@ class OUIndexView(generic.ListView):
 
     def get_queryset(self):
         """Return a list of organizational units"""
-        return OrganizationalUnit.objects.order_by('parent_ou')
+        parents = \
+                [u for u in OrganizationalUnit.objects.all() if u.parent_ou==None]
+        return parents
+        #return OrganizationalUnit.objects.order_by('parent_ou')
 
 class HWIndexView(generic.ListView):
     model = HardwareAsset
