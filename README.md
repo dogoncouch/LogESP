@@ -8,7 +8,7 @@ LDSI applications:
 - SIEM - Security Information and Event Management
 
 ## Installing
-Requirements: python 3.x, django >=2.0, git, pip.
+Requirements: python 3.x, django >=2.0, git, pip. Note: replace `python` with `python3` if Python 2 is your default version (or if you're not sure what I'm talking about).
 
 - Step 1: Clone the repo:
 ```
