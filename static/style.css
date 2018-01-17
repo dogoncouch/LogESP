@@ -1,0 +1,29 @@
+BODY {
+    background: #000000;
+    color: #EAE9E7;
+}
+
+DIV.navbar-content {
+    border: 3px solid;
+    border-color: #444444;
+    padding: 0.25%;
+    font-size: 1.2em;
+    float: top;
+}
+
+A.static:link, A.static:visited {
+    color: #4444FF;
+    text-decoration: none;
+}
+
+A.static:hover {
+    text-decoration: underline;
+}
+
+A:visited {
+    color: #995CDD;
+}
+
+UL {
+    list-style-position: outside;
+}

@@ -3,13 +3,15 @@
     <div class="navbar">
         <div class="navbar-side-navbar-left"></div>
         <div class="navbar-content">
-            <a href="{% url 'hwam:index' %}">HWAM Home</a>
+            <b>HWAM</b>
             &middot
-            <a href="{% url 'hwam:ou_index' %}">Org. Units</a>
+            <a class="static" href="{% url 'hwam:index' %}">Home</a>
             &middot
-            <a href="{% url 'hwam:hw_index' %}">Hardware Assets</a>
+            <a class="static" href="{% url 'hwam:ou_index' %}">Org. Units</a>
             &middot
-            <a href="{% url 'hwam:sw_index' %}">Software Assets</a>
+            <a class="static" href="{% url 'hwam:hw_index' %}">Hardware Assets</a>
+            &middot
+            <a class="static" href="{% url 'hwam:sw_index' %}">Software Assets</a>
         </div>
         <div class="navbar-side-navbar-left"></div>
     </div>
