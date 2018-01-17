@@ -25,6 +25,9 @@ class OrganizationalUnit(models.Model):
         return obj
 
 class HardwareAsset(models.Model):
+    parent_hardware = models.ForeignKey('self',
+            related_name='child_hardware',
+            null=True, blank=True, on_delete=models.SET_NULL)
     asset_name = models.CharField(max_length=30)
     asset_desc = models.CharField(max_length=200, null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,

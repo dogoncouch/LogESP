@@ -13,6 +13,7 @@ class HardwareAssetAdmin(admin.ModelAdmin):
     fieldsets = [
             (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
             ('Contacts', {'fields': ['asset_owner', 'asset_custodian']}),
+            ('Parent Hardware', {'fields': ['parent_hardware']}),
             ('Device Information', {'fields': ['device_type', 'property_id']}),
             ('Status Information', {'fields': ['location', 'status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),

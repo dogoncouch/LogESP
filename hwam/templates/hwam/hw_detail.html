@@ -28,6 +28,20 @@
                 {{ hw.org_unit.unit_contact.email }}</a>
         {% endif %}
     </li>
+    {% if hw.parent_hardware %}
+    <li>Parent Hardware:<ul>
+        <li><a href="{% url 'hwam:hw_detail' hw.parent_hardware.id %}">
+                {{ hw.parent_hardware.asset_name }}</a></li>
+        </ul></li>
+    {% endif %}
+    {% if hw.child_hardware.all %}
+    <li>Child Hardware:<ul>
+        {% for a in hw.child_hardware.all %}
+            <li><a href="{% url 'hwam:hw_detail' a.id %}">
+                    {{ a.asset_name }}</a></li>
+        {% endfor %}
+        </ul></li>
+    {% endif %}
     {% if hw.child_software.all %}
         <li>Child Software:<ul>
             {% for a in hw.child_software.all %}
