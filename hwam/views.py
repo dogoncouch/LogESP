@@ -44,7 +44,15 @@ class SWIndexView(generic.ListView):
 
     def get_queryset(self):
         """Return a list of software assets"""
-        return SoftwareAsset.objects.order_by('org_unit')
+        swl = []
+        swl.append(SoftwareAsset.objects.exclude(
+            parent_hardware=None).order_by('org_unit'))
+        swl.append(SoftwareAsset.objects.filter(
+            parent_hardware=None).order_by('org_unit'))
+        if len(swl[0]) + len(swl[1]) > 0:
+            return swl
+        else:
+            return None
 
 class OUDetailView(generic.DetailView):
     model = OrganizationalUnit
