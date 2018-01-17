@@ -28,12 +28,14 @@
                 {{ hw.org_unit.unit_contact.email }}</a>
         {% endif %}
     </li>
-    <li>Child Software:<ul>
-        {% for a in hw.child_software.all %}
-            <li><a href="{% url 'hwam:sw_detail' a.id %}">
-                    {{ a.asset_name }}</a></li>
-        {% endfor %}
-        </ul></li>
+    {% if hw.child_software.all %}
+        <li>Child Software:<ul>
+            {% for a in hw.child_software.all %}
+                <li><a href="{% url 'hwam:sw_detail' a.id %}">
+                        {{ a.asset_name }}</a></li>
+            {% endfor %}
+            </ul></li>
+    {% endif %}
     <li>Device Type: {{ hw.device_type }}</li>
     <li>Property ID: {{ hw.property_id }}</li>
     <li>Location: {{ hw.location }}</li>

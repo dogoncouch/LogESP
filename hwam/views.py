@@ -18,15 +18,9 @@ class OUIndexView(generic.ListView):
     context_object_name = 'ou_list'
 
     def get_queryset(self):
-        """Return a dictionary tree of organizational units"""
-        #ous = []
-        #for ou in OrganizationalUnit.objects.filter(parent=None):
-        #    ous.append(ou.serializable_object())
-        #return ous
-        parents = \
-                [u for u in OrganizationalUnit.objects.all() if u.parent_ou==None]
+        """Return a list of parent-less organizational units"""
+        parents = OrganizationalUnit.objects.filter(parent_ou=None)
         return parents
-        #return OrganizationalUnit.objects.order_by('parent_ou')
 
 class HWIndexView(generic.ListView):
     model = HardwareAsset
@@ -43,14 +37,13 @@ class SWIndexView(generic.ListView):
     context_object_name = 'sw_list'
 
     def get_queryset(self):
-        """Return a list of software assets"""
-        swl = []
-        swl.append(SoftwareAsset.objects.exclude(
-            parent_hardware=None).order_by('org_unit'))
-        swl.append(SoftwareAsset.objects.filter(
-            parent_hardware=None).order_by('org_unit'))
-        if len(swl[0]) + len(swl[1]) > 0:
-            return swl
+        """Return a tuple of software assets"""
+        p = SoftwareAsset.objects.exclude(
+            parent_hardware=None).order_by('org_unit')
+        c = SoftwareAsset.objects.filter(
+            parent_hardware=None).order_by('org_unit')
+        if len(p) + len(c) > 0:
+            return (p, c)
         else:
             return None
 

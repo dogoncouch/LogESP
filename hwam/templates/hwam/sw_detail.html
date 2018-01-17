@@ -41,21 +41,30 @@
                 {% endif %}
             </li>
         </ul></li>
+    {% if sw.parent_hardware.all %}
     <li>Parent Hardware:<ul>
         {% for a in sw.parent_hardware.all %}
-            <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a.asset_name }}</a></li>
+            <li><a href="{% url 'hwam:hw_detail' a.id %}">
+                    {{ a.asset_name }}</a></li>
         {% endfor %}
         </ul></li>
-    <li>Parent Software:<ul>
-        {% for a in sw.parent_software.all %}
-            <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a.asset_name }}</a></li>
-        {% endfor %}
-        </ul></li>
-    <li>Child Software:<ul>
-        {% for a in sw.child_software.all %}
-            <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a.asset_name }}</a></li>
-        {% endfor %}
-        </ul></li>
+    {% endif %}
+    {% if sw.parent_software.all %}
+        <li>Parent Software:<ul>
+            {% for a in sw.parent_software.all %}
+                <li><a href="{% url 'hwam:sw_detail' a.id %}">
+                        {{ a.asset_name }}</a></li>
+            {% endfor %}
+            </ul></li>
+    {% endif %}
+    {% if sw.child_software.all %}
+        <li>Child Software:<ul>
+            {% for a in sw.child_software.all %}
+                <li><a href="{% url 'hwam:sw_detail' a.id %}">
+                        {{ a.asset_name }}</a></li>
+            {% endfor %}
+            </ul></li>
+    {% endif %}
     <li>Software Type: {{ sw.software_type }}</li>
     <li>Package Name/Version:
         {{ sw.package_name }}-{{ sw.package_version }}
@@ -63,6 +72,6 @@
     <li>Software Property ID: {{ sw.sw_property_id }}</li>
     <li>Status: {{ sw.status }}</li>
     <li>Lifespan:<ul>
-    <li>Date Added: {{ sw.date_added }}</li>
-    <li>EOL Date: {{ sw.date_eol }}</li></ul></li>
+        <li>Date Added: {{ sw.date_added }}</li>
+        <li>EOL Date: {{ sw.date_eol }}</li></ul></li>
 </ul>
