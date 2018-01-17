@@ -18,7 +18,11 @@ class OUIndexView(generic.ListView):
     context_object_name = 'ou_list'
 
     def get_queryset(self):
-        """Return a list of organizational units"""
+        """Return a dictionary tree of organizational units"""
+        #ous = []
+        #for ou in OrganizationalUnit.objects.filter(parent=None):
+        #    ous.append(ou.serializable_object())
+        #return ous
         parents = \
                 [u for u in OrganizationalUnit.objects.all() if u.parent_ou==None]
         return parents

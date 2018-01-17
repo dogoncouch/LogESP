@@ -5,7 +5,7 @@
 {% if ou_list %}
     <ul>
         {% for u in ou_list %}
-            <li><a href="{% url 'hwam:ou_detail' u.id %}">{{ u.unit_name }}</a></li>
+            {% include "hwam/tree_view.html" %}
         {% endfor %}
     </ul>
 {% else %}

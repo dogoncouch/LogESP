@@ -16,6 +16,13 @@ class OrganizationalUnit(models.Model):
     # To Do: Add permissions (read/create/edit/delete ou assets)
     def __str__(self):
         return self.unit_name
+    def children(self):
+        return OrganizationalUnit.objects.filter(parent=self.pk)
+    def serializable_object(self):
+        obj = {'name': self.unit_name, 'children': []}
+        for child in self.children():
+            obj['children'].append(child.serializable_object())
+        return obj
 
 class HardwareAsset(models.Model):
     asset_name = models.CharField(max_length=30)

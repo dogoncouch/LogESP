@@ -1,0 +1,11 @@
+<li><a href="{% url 'hwam:ou_detail' u.id %}">{{ u.unit_name }}</a>
+    {% if u.child_ous.all %}
+        <ul>
+            {% for c in u.child_ous.all %}
+                {% with u=c template_name="hwam/tree_view.html" %}
+                    {% include template_name %}
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>
