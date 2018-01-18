@@ -1,0 +1,11 @@
+<li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a.asset_name }}</a>
+    {% if a.child_hardware.all %}
+        <ul>
+            {% for c in a.child_hardware.all %}
+                {% with a=c template_name="hwam/hw_tree_view.html" %}
+                    {% include template_name %}
+                {% endwith %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+</li>

@@ -5,7 +5,7 @@
 {% if hw_list %}
     <ul>
         {% for a in hw_list %}
-            <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a.asset_name }}</a></li>
+            {% include "hwam/hw_tree_view.html" %}
         {% endfor %}
     </ul>
 {% else %}

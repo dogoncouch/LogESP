@@ -28,8 +28,9 @@ class HWIndexView(generic.ListView):
     context_object_name = 'hw_list'
 
     def get_queryset(self):
-        """Return a list of hardware assets"""
-        return HardwareAsset.objects.order_by('org_unit')
+        """Return a list of parent-less hardware assets"""
+        return HardwareAsset.objects.filter(
+                parent_hardware=None).order_by('org_unit')
 
 class SWIndexView(generic.ListView):
     model = SoftwareAsset
