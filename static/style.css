@@ -11,12 +11,12 @@ DIV.navbar-content {
     float: top;
 }
 
-A.static:link, A.static:visited {
+A.navbar:link, A.navbar:visited {
     color: #4444FF;
     text-decoration: none;
 }
 
-A.static:hover {
+A.navbar:hover {
     text-decoration: underline;
 }
 

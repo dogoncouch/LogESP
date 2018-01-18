@@ -5,11 +5,13 @@
         <div class="navbar-content">
             <b>LDSI</b>
             &middot
-            <a class="static" href="{% url 'index' %}">Home</a>
+            <a class="navbar" href="{% url 'index' %}">Home</a>
             &middot
-            <a class="static" href="{% url 'hwam:index' %}">HWAM</a>
+            <a class="navbar" href="{% url 'hwam:index' %}">HWAM</a>
             &middot
-            <a class="static" href="{% url 'admin:index' %}">Admin</a>
+            <a class="navbar" href="{% url 'risk:index' %}">Risk</a>
+            &middot
+            <a class="navbar" href="{% url 'admin:index' %}">Admin</a>
         </div>
         <div class="navbar-side-navbar-left"></div>
     </div>
