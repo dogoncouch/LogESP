@@ -56,7 +56,7 @@ class NonAdvThreatSource(models.Model):
     def __str__(self):
         return self.name
 
-class ThreatEventCategory(models.Model):
+class ThreatEventType(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
@@ -65,7 +65,7 @@ class ThreatEventCategory(models.Model):
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    category = models.ForeignKey(ThreatEventCategory,
+    event_type = models.ForeignKey(ThreatEventType,
             related_name='adv_events',
             null=True, blank=True, on_delete=models.SET_NULL)
     sources = models.ManyToManyField(AdvThreatSource,
@@ -83,7 +83,7 @@ class AdvThreatEvent(models.Model):
 class NonAdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    category = models.ForeignKey(ThreatEventCategory,
+    event_type = models.ForeignKey(ThreatEventType,
             related_name='nonadv_events',
             null=True, blank=True, on_delete=models.SET_NULL)
     sources = models.ManyToManyField(NonAdvThreatSource,
@@ -136,17 +136,17 @@ class Vulnerability(models.Model):
     def __str__(self):
         return self.name
 
-class Condition(models.Model):
+class RiskCondition(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     condition_type = models.ForeignKey(ConditionType,
-            related_name='conditions',
+            related_name='risk_conditions',
             null=True, blank=True, on_delete = models.SET_NULL)
     pervasiveness = models.IntegerField(validators=[validate_scale_range])
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     threat_events = models.ManyToManyField(NonAdvThreatEvent,
-            related_name='conditions', blank=True)
+            related_name='risk_conditions', blank=True)
     def __str__(self):
         return self.name
 

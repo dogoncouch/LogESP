@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import OrganizationalUnit,HardwareAsset, SoftwareAsset
+from .models import OrganizationalUnit, HardwareAsset, SoftwareAsset
 
 class OrganizationalUnitAdmin(admin.ModelAdmin):
     list_display = ['unit_name', 'parent_ou', 'unit_contact']

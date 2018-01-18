@@ -12,7 +12,6 @@ urlpatterns = [
     path('nte/<int:pk>/', views.NTEDetailView.as_view(), name='nte_detail'),
     #path('advthreat/', views.ATIndexView.as_view(), name='at_index'),
     #path('nathreat/', views.NTIndexView.as_view(), name='nt_index'),
-    #path('threatevt/', views.TEIndexView.as_view(), name='te_index'),
     #path('vuln/', views.VLIndexView.as_view(), name='vl_index'),
     #path('cond/', views.CNIndexView.as_view(), name='cn_index'),
     #path('advthreat/<int:pk>/', views.ATDetailView.as_view(), name='at_detail'),

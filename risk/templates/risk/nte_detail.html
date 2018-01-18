@@ -5,7 +5,7 @@
 
 <p>{{ nte.desc }}</p>
 <ul>
-    <li>Category: {{ nte.category }}</li>
+    <li>Type: {{ nte.type }}</li>
     <li>Sources:<ul>
             {% for s in nte.sources %}
                 <li>{{ s }}</li>
@@ -25,7 +25,7 @@
             {% endfor %}
         </ul></li>
     <li>Vulnerabilities:<ul>
-            {% for v in nte.vulnerabilities %}
+            {% for v in nte.risk_conditions %}
                 <li>{{ v }}</li>
             {% endfor %}
         </ul></li>
