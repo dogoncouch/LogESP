@@ -70,18 +70,33 @@ class NonAdvThreatSource(models.Model):
     in_scope = models.BooleanField(default=True)
     range_of_effect = models.IntegerField(validators=[validate_scale_range])
 
-class ThreatEvent(models.Model):
+class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     category = models.ForeignKey(ThreatEventCategory,
+            related_name='adv_events',
             null=True, blank=True, on_delete=models.SET_NULL)
-    adv_sources = models.ManyToManyField(AdvThreatSource,
-            related_name='threat_events', blank=True)
-    nonadv_sources = models.ManyToManyField(NonAdvThreatSource,
+    sources = models.ManyToManyField(AdvThreatSource,
             related_name='threat_events', blank=True)
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
+    likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
+    likelihood_impact = models.IntegerField(validators=[validate_scale_range])
+
+class NonAdvThreatEvent(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    category = models.ForeignKey(ThreatEventCategory,
+            related_name='nonadv_events',
+            null=True, blank=True, on_delete=models.SET_NULL)
+    sources = models.ManyToManyField(NonAdvThreatSource,
+            related_name='threat_events', blank=True)
+    relevance = models.IntegerField(choices=relevance_choices, default=1)
+    info_source = models.CharField(max_length=50, null=True, blank=True)
+    tier = models.IntegerField(validators=[validate_tier_range])
+    likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
+    likelihood_impact = models.IntegerField(validators=[validate_scale_range])
 
 class Vulnerability(models.Model):
     name = models.CharField(max_length=30)
@@ -92,7 +107,7 @@ class Vulnerability(models.Model):
     severity = models.IntegerField(validators=[validate_scale_range])
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
-    threat_events = models.ManyToManyField(ThreatEvent,
+    threat_events = models.ManyToManyField(AdvThreatEvent,
             related_name='vulnerabilities', blank=True)
 
 class Condition(models.Model):
@@ -104,5 +119,5 @@ class Condition(models.Model):
     pervasiveness = models.IntegerField(validators=[validate_scale_range])
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
-    threat_events = models.ManyToManyField(ThreatEvent,
+    threat_events = models.ManyToManyField(NonAdvThreatEvent,
             related_name='conditions', blank=True)
