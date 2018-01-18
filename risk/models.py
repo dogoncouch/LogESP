@@ -26,7 +26,7 @@ class ThreatSrcType(models.Model):
             related_name='source_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        return ':'.join((self.source_category.name, self.name))
 
 class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -111,7 +111,7 @@ class ConditionCategory(models.Model):
             related_name = 'condition_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        return ':'.join((self.condition_class.name, self.name))
 
 class ConditionType(models.Model):
     name = models.CharField(max_length=30)
@@ -120,7 +120,9 @@ class ConditionType(models.Model):
             related_name = 'condition_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        val = (self.condition_category.condition_class.name,
+                self.condition_category.name, self.name)
+        return ':'.join(val)
 
 class Vulnerability(models.Model):
     name = models.CharField(max_length=30)

@@ -36,7 +36,7 @@ class HardwareCategory(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
-        return self.name
+        return ':'.join((self.hardware_class.name, self.name))
     hardware_class = models.ForeignKey(HardwareClass,
             related_name='hardware_categories',
             on_delete=models.PROTECT)
@@ -45,7 +45,9 @@ class HardwareType(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
-        return self.name
+        val = (self.hardware_category.hardware_class.name,
+                self.hardware_category.name, self.name)
+        return ':'.join(val)
     hardware_category = models.ForeignKey(HardwareCategory,
             related_name='hardware_types',
             on_delete=models.PROTECT)
@@ -95,7 +97,7 @@ class SoftwareType(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
-        return self.name
+        return ':'.join((self.software_category.name, self.name))
     software_category = models.ForeignKey(SoftwareCategory,
             related_name='software_types',
             on_delete=models.PROTECT)
