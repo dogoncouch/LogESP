@@ -4,7 +4,7 @@ A web application for managing security information. Still in early development;
 ## Functions
 LDSI applications:
 - HWAM - Asset Management
-- RISK - Risk Management
+- Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
 - SIEM - Security Information and Event Management
 
 ## Installing

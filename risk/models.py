@@ -6,8 +6,8 @@ from risk.choices import *
 # Create your models here.
 
 def validate_scale_range(value):
-    if not 0 <= value <= 100:
-        raise ValidationError('%s not in 0-100 range' % value)
+    if not 0 < value <= 100:
+        raise ValidationError('%s not in 1-100 range' % value)
 
 def validate_tier_range(value):
     if not 1 <= value <= 3:
