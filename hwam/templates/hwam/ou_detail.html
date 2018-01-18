@@ -1,6 +1,7 @@
 {% include "hwam/base.html" %}
 
 <h1>{{ ou.unit_name }} (Organizational Unit)</h1>
+<a href="{% url 'admin:hwam_organizationalunit_change' ou.id %}">Edit</a>
 <p>{{ ou.unit_desc }}</p>
 <ul>
     <li>Contact: {{ ou.unit_contact.username }}
