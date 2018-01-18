@@ -73,8 +73,7 @@ class HardwareAsset(models.Model):
     device_model = models.CharField(max_length=20, null=True, blank=True)
     property_id = models.CharField(max_length=30, null=True, blank=True)
     location = models.CharField(max_length=40, null=True, blank=True)
-    status = models.IntegerField(choices=status_choices, default=6,
-            null=True, blank=True)
+    status = models.IntegerField(choices=status_choices, default=6)
     date_added = models.DateField('date added', default=timezone.now,
             null=True, blank=True)
     date_eol = models.DateField('end of life', null=True, blank=True)
@@ -128,14 +127,14 @@ class SoftwareAsset(models.Model):
     package_name = models.CharField(max_length=20, null=True, blank=True)
     package_version = models.CharField(max_length=20, null=True, blank=True)
     sw_property_id = models.CharField(max_length=30, null=True, blank=True)
-    status = models.CharField(max_length=20, null=True, blank=True)
+    status = models.IntegerField(choices=status_choices, default=6)
     date_added = models.DateField('date added', default=timezone.now,
             null=True, blank=True)
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
         return self.asset_name
     def is_active(self):
-        return self.status == 'Active'
+        return self.status == 1
     is_active.admin_order_field = 'status'
     is_active.boolean = True
     is_active.short_description = 'Active?'
