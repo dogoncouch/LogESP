@@ -24,28 +24,6 @@ class ThreatSrcType(models.Model):
             related_name='source_types',
             on_delete=models.CASCADE)
 
-class ThreatEventCategory(models.Model):
-    name = models.CharField(max_length=30)
-    desc = models.CharField(max_length=200, null=True, blank=True)
-
-class ConditionClass(models.Model):
-    name = models.CharField(max_length=30)
-    desc = models.CharField(max_length=200, null=True, blank=True)
-
-class ConditionCategory(models.Model):
-    name = models.CharField(max_length=30)
-    desc = models.CharField(max_length=200, null=True, blank=True)
-    condition_class = models.ForeignKey(ConditionClass,
-            related_name = 'condition_categories',
-            on_delete=models.CASCADE)
-
-class ConditionType(models.Model):
-    name = models.CharField(max_length=30)
-    desc = models.CharField(max_length=200, null=True, blank=True)
-    condition_category = models.ForeignKey(ConditionCategory,
-            related_name = 'condition_types',
-            on_delete=models.CASCADE)
-
 class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
@@ -69,6 +47,10 @@ class NonAdvThreatSource(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     in_scope = models.BooleanField(default=True)
     range_of_effect = models.IntegerField(validators=[validate_scale_range])
+
+class ThreatEventCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
 
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
@@ -98,6 +80,24 @@ class NonAdvThreatEvent(models.Model):
     likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
     likelihood_impact = models.IntegerField(validators=[validate_scale_range])
 
+class ConditionClass(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+
+class ConditionCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    condition_class = models.ForeignKey(ConditionClass,
+            related_name = 'condition_categories',
+            on_delete=models.CASCADE)
+
+class ConditionType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    condition_category = models.ForeignKey(ConditionCategory,
+            related_name = 'condition_types',
+            on_delete=models.CASCADE)
+
 class Vulnerability(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
@@ -121,3 +121,27 @@ class Condition(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     threat_events = models.ManyToManyField(NonAdvThreatEvent,
             related_name='conditions', blank=True)
+
+class ImpactType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+
+class Impact(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    impact_type = models.ForeignKey(ImpactType,
+            related_name='impacts',
+            null=True, blank=True, on_delete=models.SET_NULL)
+    info_source = models.CharField(max_length=50, null=True, blank=True)
+    tier = models.IntegerField(validators=[validate_tier_range])
+    severity = models.IntegerField(validators=[validate_scale_range])
+    impact_tier = models.IntegerField(validators=[validate_tier_range])
+    #ous_impacted = 
+    #hw_impacted = 
+    #sw_impacted = 
+    adv_events = models.ForeignKey(AdvThreatEvent,
+            related_name='impacts',
+            null=True, blank=True, on_delete = models.SET_NULL)
+    nonadv_events = models.ForeignKey(NonAdvThreatEvent,
+            related_name='impacts',
+            null=True, blank=True, on_delete = models.SET_NULL)
