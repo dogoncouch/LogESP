@@ -1,4 +1,4 @@
-{% include "hwam/base.html" %}
+{% include "risk/base.html" %}
 
 <h1>Adversarial Threat Events</h1>
 
@@ -6,7 +6,7 @@
     <ul>
         {% for ate in ate_list %}
             <li><a href="{% url 'risk:ate_detail' ate.id %}">
-                    {{ ate.asset_name }}</a></li>
+                    {{ ate }}</a></li>
         {% endfor %}
     </ul>
 {% else %}

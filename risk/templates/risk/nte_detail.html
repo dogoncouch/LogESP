@@ -1,0 +1,30 @@
+{% include "risk/base.html" %}
+
+<h1>{{ nte.name }} (Non-Adversarial Threat Event)</h1>
+<p>{{ nte.desc }}</p>
+<ul>
+    <li>Category: {{ nte.category }}</li>
+    <li>Sources:<ul>
+            {% for s in nte.sources %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul></li>
+    <li>Relevance: {{ nte.relevance }}</li>
+    <li>Info Source: {{ nte.info_source }}</li>
+    <li>Tier: {{nte.tier }}</li>
+    <li>Likelihoods:<ul>
+            <li>Likelihood of initiation: {{ nte.likelihood_initiation }}</li>
+            <li>Likelihood of adverse impact: {{ nte.likelihood_impact }}</li>
+            <li>Calculated Likelihood: {{ nte.calc_likelihood }}</li>
+        </ul></li>
+    <li>Impacts:<ul>
+            {% for i in nte.impacts %}
+                <li>{{ i }}</li>
+            {% endfor %}
+        </ul></li>
+    <li>Vulnerabilities:<ul>
+            {% for v in nte.vulnerabilities %}
+                <li>{{ v }}</li>
+            {% endfor %}
+        </ul></li>
+</ul>

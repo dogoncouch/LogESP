@@ -1,0 +1,14 @@
+{% include "risk/base.html" %}
+
+<h1>Non-Adversarial Threat Events</h1>
+
+{% if nte_list %}
+    <ul>
+        {% for nte in nte_list %}
+            <li><a href="{% url 'risk:nte_detail' nte.id %}">
+                    {{ nte }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No adversarial threats.</p>
+{% endif %}
