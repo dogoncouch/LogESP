@@ -1,6 +1,8 @@
 {% include "risk/base.html" %}
 
 <h1>Adversarial Threat Events</h1>
+<a href="{% url 'admin:risk_advthreatevent_changelist' %}">Admin</a>
+<a href="{% url 'admin:risk_advthreatevent_add' %}">Add</a>
 
 {% if ate_list %}
     <ul>

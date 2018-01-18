@@ -1,6 +1,8 @@
 {% include "risk/base.html" %}
 
 <h1>Non-Adversarial Threat Events</h1>
+<a href="{% url 'admin:risk_nonadvthreatevent_changelist' %}">Admin</a>
+<a href="{% url 'admin:risk_nonadvthreatevent_add' %}">Add</a>
 
 {% if nte_list %}
     <ul>
