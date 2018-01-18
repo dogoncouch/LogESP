@@ -10,6 +10,18 @@ class OrganizationalUnitAdmin(admin.ModelAdmin):
     list_display = ['unit_name', 'parent_ou', 'unit_contact']
     fields = ['unit_name', 'unit_desc', 'unit_contact', 'parent_ou']
 
+class HardwareClassAdmin(admin.ModelAdmin):
+    list_display = ['name', 'desc']
+    fields = ['name', 'desc']
+
+class HardwareCategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'hardware_class']
+    fields = ['name', 'desc', 'hardware_class']
+
+class HardwareTypeAdmin(admin.ModelAdmin):
+    list_display = ['name', 'hardware_category']
+    fields = ['name', 'desc', 'hardware_category']
+
 class HardwareAssetAdmin(admin.ModelAdmin):
     list_display = ['asset_name', 'org_unit', 'location',
             'hardware_type', 'is_active']
@@ -25,6 +37,14 @@ class HardwareAssetAdmin(admin.ModelAdmin):
             ]
     list_filter = ['asset_name', 'org_unit', 'hardware_type', 'date_added',
             'status', 'asset_owner', 'asset_custodian']
+
+class SoftwareCategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'desc']
+    fields = ['name', 'desc']
+
+class SoftwareTypeAdmin(admin.ModelAdmin):
+    list_display = ['name', 'software_category']
+    fields = ['name', 'desc', 'software_category']
 
 class SoftwareAssetAdmin(admin.ModelAdmin):
     list_display = ['asset_name', 'org_unit', 'software_type', 'is_active']
@@ -46,5 +66,10 @@ class SoftwareAssetAdmin(admin.ModelAdmin):
 #admin.site.register(HardwareType)
 #admin.site.register(SoftwareCategory, SoftwareType)
 admin.site.register(OrganizationalUnit, OrganizationalUnitAdmin)
+admin.site.register(HardwareClass, HardwareClassAdmin)
+admin.site.register(HardwareCategory, HardwareCategoryAdmin)
+admin.site.register(HardwareType, HardwareTypeAdmin)
 admin.site.register(HardwareAsset, HardwareAssetAdmin)
+admin.site.register(SoftwareCategory, SoftwareCategoryAdmin)
+admin.site.register(SoftwareType, SoftwareTypeAdmin)
 admin.site.register(SoftwareAsset, SoftwareAssetAdmin)
