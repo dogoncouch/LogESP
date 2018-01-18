@@ -16,6 +16,8 @@ def validate_tier_range(value):
 class ThreatSrcCategory(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class ThreatSrcType(models.Model):
     name = models.CharField(max_length=30)
@@ -23,6 +25,8 @@ class ThreatSrcType(models.Model):
     source_category = models.ForeignKey(ThreatSrcCategory,
             related_name='source_types',
             on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -36,6 +40,8 @@ class AdvThreatSource(models.Model):
     capability = models.IntegerField(validators=[validate_scale_range])
     intent = models.IntegerField(validators=[validate_scale_range])
     targeting = models.IntegerField(validators=[validate_scale_range])
+    def __str__(self):
+        return self.name
 
 class NonAdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -47,10 +53,14 @@ class NonAdvThreatSource(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     in_scope = models.BooleanField(default=True)
     range_of_effect = models.IntegerField(validators=[validate_scale_range])
+    def __str__(self):
+        return self.name
 
 class ThreatEventCategory(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
@@ -65,6 +75,10 @@ class AdvThreatEvent(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
     likelihood_impact = models.IntegerField(validators=[validate_scale_range])
+    def __str__(self):
+        return self.name
+    def calc_likelihood(self):
+        return self.likelihood_initiation * self.likelihood_impact // 100
 
 class NonAdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
@@ -79,10 +93,16 @@ class NonAdvThreatEvent(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
     likelihood_impact = models.IntegerField(validators=[validate_scale_range])
+    def __str__(self):
+        return self.name
+    def calc_likelihood(self):
+        return self.likelihood_initiation * self.likelihood_impact // 100
 
 class ConditionClass(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class ConditionCategory(models.Model):
     name = models.CharField(max_length=30)
@@ -90,6 +110,8 @@ class ConditionCategory(models.Model):
     condition_class = models.ForeignKey(ConditionClass,
             related_name = 'condition_categories',
             on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 class ConditionType(models.Model):
     name = models.CharField(max_length=30)
@@ -97,6 +119,8 @@ class ConditionType(models.Model):
     condition_category = models.ForeignKey(ConditionCategory,
             related_name = 'condition_types',
             on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 class Vulnerability(models.Model):
     name = models.CharField(max_length=30)
@@ -109,6 +133,8 @@ class Vulnerability(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     threat_events = models.ManyToManyField(AdvThreatEvent,
             related_name='vulnerabilities', blank=True)
+    def __str__(self):
+        return self.name
 
 class Condition(models.Model):
     name = models.CharField(max_length=30)
@@ -121,10 +147,14 @@ class Condition(models.Model):
     tier = models.IntegerField(validators=[validate_tier_range])
     threat_events = models.ManyToManyField(NonAdvThreatEvent,
             related_name='conditions', blank=True)
+    def __str__(self):
+        return self.name
 
 class ImpactType(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class Impact(models.Model):
     name = models.CharField(max_length=30)
@@ -139,9 +169,10 @@ class Impact(models.Model):
     #ous_impacted = 
     #hw_impacted = 
     #sw_impacted = 
-    adv_events = models.ForeignKey(AdvThreatEvent,
-            related_name='impacts',
-            null=True, blank=True, on_delete = models.SET_NULL)
-    nonadv_events = models.ForeignKey(NonAdvThreatEvent,
-            related_name='impacts',
-            null=True, blank=True, on_delete = models.SET_NULL)
+    adv_events = models.ManyToManyField(AdvThreatEvent,
+            related_name='impacts', blank=True)
+    nonadv_event = models.ManyToManyField(NonAdvThreatEvent,
+            related_name='impacts', blank=True)
+    def __str__(self):
+        return self.name
+

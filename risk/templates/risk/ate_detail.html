@@ -1,0 +1,61 @@
+{% include "risk/base.html" %}
+
+<h1>{{ ate.name }} (Adversarial Threat Event)</h1>
+<p>{{ ate.desc }}</p>
+<ul>
+    <li>Category: {{ ate.category }}</li>
+    <li>Sources:<ul>
+            {% for s in ate.sources %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul></li>
+    <li>Relevance: {{ ate.relevance }}</li>
+    <li>Info Source: {{ ate.info_source }}</li>
+    <li>Tier: {{ate.tier }}</li>
+    <li>Likelihoods:<ul>
+            <li>Likelihood of initiation: {{ ate.likelihood_initiation }}</li>
+            <li>Likelihood of adverse impact: {{ ate.likelihood_impact }}</li>
+            <li>Calculated Likelihood: {{ ate.calc_likelihood }}</li>
+        </ul></li>
+    <li>Impacts:<ul>
+            {% for i in ate.impacts %}
+                <li>{{ i }}</li>
+            {% endfor %}
+        </ul></li>
+    <li>Vulnerabilities:<ul>
+            {% for v in ate.vulnerabilities %}
+                <li>{{ v }}</li>
+            {% endfor %}
+        </ul></li>
+
+
+    <li>Contact: {{ ou.unit_contact.username }}
+        <a href="mailto:{{ ou.unit_contact.email }}">
+            {{ ou.unit_contact.email }}</a>
+    </li>
+    {% if ou.parent_ou %}
+        <li>Parent OU:
+            <a href="{% url 'hwam:ou_detail' ou.parent_ou.id %}">
+                {{ ou.parent_ou.unit_name }}</a></li>
+    {% endif %}
+    {% if ou.child_ous.all %}
+        <li>Child OUs:<ul>
+        {% for u in ou.child_ous.all %}
+            <li><a href="{% url 'hwam:ou_detail' u.id %}">
+                {{ u.unit_name }}</a></li>
+        {% endfor %}
+        </ul></li>
+    {% endif %}
+    <li>Hardware Assets:<ul>
+        {% for a in ou.hardware_assets.all %}
+            <li><a href="{% url 'hwam:hw_detail' a.id %}">
+                    {{ a.asset_name }}</a></li>
+        {% endfor %}
+        </ul></li>
+    <li>Software Assets:<ul>
+        {% for a in ou.software_assets.all %}
+            <li><a href="{% url 'hwam:sw_detail' a.id %}">
+                    {{ a.asset_name }}</a></li>
+        {% endfor %}
+        </ul></li>
+</ul>

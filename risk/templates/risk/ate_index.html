@@ -1,0 +1,14 @@
+{% include "hwam/base.html" %}
+
+<h1>Adversarial Threat Events</h1>
+
+{% if ate_list %}
+    <ul>
+        {% for ate in ate_list %}
+            <li><a href="{% url 'risk:ate_detail' ate.id %}">
+                    {{ ate.asset_name }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No adversarial threats.</p>
+{% endif %}

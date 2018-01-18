@@ -6,6 +6,10 @@ from . import views
 app_name = 'risk'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('ate/', views.ATEIndexView.as_view(), name='ate_index'),
+    path('nte/', views.NTEIndexView.as_view(), name='nte_index'),
+    path('ate/<int:pk>/', views.ATEDetailView.as_view(), name='ate_detail'),
+    path('nte/<int:pk>/', views.NTEDetailView.as_view(), name='nte_detail'),
     #path('advthreat/', views.ATIndexView.as_view(), name='at_index'),
     #path('nathreat/', views.NTIndexView.as_view(), name='nt_index'),
     #path('threatevt/', views.TEIndexView.as_view(), name='te_index'),
