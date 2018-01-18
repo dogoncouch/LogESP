@@ -3,7 +3,6 @@ from django.contrib import admin
 # Register your models here.
 from .models import HardwareClass, HardwareCategory, HardwareType
 from .models import SoftwareCategory, SoftwareType
-
 from .models import OrganizationalUnit, HardwareAsset, SoftwareAsset
 
 class OrganizationalUnitAdmin(admin.ModelAdmin):
@@ -62,9 +61,6 @@ class SoftwareAssetAdmin(admin.ModelAdmin):
     list_filter = ['asset_name', 'org_unit', 'software_type', 'date_added',
             'status', 'custodian_swam', 'custodian_csm', 'custodian_vul']
 
-#admin.site.register(HardwareClass, HardwareCategory)
-#admin.site.register(HardwareType)
-#admin.site.register(SoftwareCategory, SoftwareType)
 admin.site.register(OrganizationalUnit, OrganizationalUnitAdmin)
 admin.site.register(HardwareClass, HardwareClassAdmin)
 admin.site.register(HardwareCategory, HardwareCategoryAdmin)
