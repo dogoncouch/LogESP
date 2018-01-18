@@ -1,7 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views import generic
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 
 from .models import OrganizationalUnit
 from .models import HardwareAsset
@@ -12,7 +13,7 @@ from .models import SoftwareAsset
 def index(request):
     return render(request, 'hwam/index.html')
 
-class OUIndexView(generic.ListView):
+class OUIndexView(ListView):
     model = OrganizationalUnit
     template_name = 'hwam/ou_index.html'
     context_object_name = 'ou_list'
@@ -22,7 +23,7 @@ class OUIndexView(generic.ListView):
         parents = OrganizationalUnit.objects.filter(parent_ou=None)
         return parents
 
-class HWIndexView(generic.ListView):
+class HWIndexView(ListView):
     model = HardwareAsset
     template_name = 'hwam/hw_index.html'
     context_object_name = 'hw_list'
@@ -32,7 +33,7 @@ class HWIndexView(generic.ListView):
         return HardwareAsset.objects.filter(
                 parent_hardware=None).order_by('org_unit')
 
-class SWIndexView(generic.ListView):
+class SWIndexView(ListView):
     model = SoftwareAsset
     template_name = 'hwam/sw_index.html'
     context_object_name = 'sw_list'
@@ -48,17 +49,45 @@ class SWIndexView(generic.ListView):
         else:
             return None
 
-class OUDetailView(generic.DetailView):
+class OUDetailView(DetailView):
     model = OrganizationalUnit
     template_name = 'hwam/ou_detail.html'
     context_object_name = 'ou'
 
-class HWDetailView(generic.DetailView):
+class HWDetailView(DetailView):
     model = HardwareAsset
     template_name = 'hwam/hw_detail.html'
     context_object_name = 'hw'
 
-class SWDetailView(generic.DetailView):
+class SWDetailView(DetailView):
     model = SoftwareAsset
     template_name = 'hwam/sw_detail.html'
     context_object_name = 'sw'
+
+class OUCreateView(CreateView):
+    model = OrganizationalUnit
+    fields = ['unit_name', 'unit_desc', 'unit_contact', 'parent_ou']
+
+class HWCreateView(CreateView):
+    model = HardwareAsset
+    fields = ['asset_name', 'asset_desc', 'org_unit',
+            'asset_owner', 'asset_custodian',
+            'parent_hardware',
+            'hardware_type', 'property_id',
+            'device_maker', 'device_model',
+            'location', 'status',
+            'date_added', 'date_eol',
+            ]
+
+class SWCreateView(CreateView):
+    model = SoftwareAsset
+    fields = [
+            'asset_name', 'asset_desc', 'org_unit',
+            'custodian_swam', 'custodian_csm', 'custodian_vul',
+            'parent_hardware', 'parent_software',
+            'software_type', 'sw_property_id',
+            'package_name', 'package_version',
+            'status',
+            'date_added', 'date_eol',
+            ]
+

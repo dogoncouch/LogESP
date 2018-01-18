@@ -12,5 +12,8 @@ urlpatterns = [
     path('ou/<int:pk>/', views.OUDetailView.as_view(), name='ou_detail'),
     path('hw/<int:pk>/', views.HWDetailView.as_view(), name='hw_detail'),
     path('sw/<int:pk>/', views.SWDetailView.as_view(), name='sw_detail'),
+    path('ou/add/', views.OUCreateView.as_view(), name='ou_create'),
+    path('hw/add/', views.HWCreateView.as_view(), name='hw_create'),
+    path('sw/add/', views.SWCreateView.as_view(), name='sw_create'),
 ]
 
