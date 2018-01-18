@@ -1,6 +1,8 @@
 {% include "hwam/base.html" %}
 
 <h1>Organizational Units</h1>
+<a href="{% url 'admin:hwam_organizationalunit_changelist' %}">Admin</a>
+<a href="{% url 'admin:hwam_organizationalunit_add' %}">Add</a>
 
 {% if ou_list %}
     <ul>

@@ -9,16 +9,18 @@ class OrganizationalUnitAdmin(admin.ModelAdmin):
 
 class HardwareAssetAdmin(admin.ModelAdmin):
     list_display = ['asset_name', 'org_unit', 'location',
-            'device_type', 'is_active']
+            'hardware_type', 'is_active']
     fieldsets = [
             (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
             ('Contacts', {'fields': ['asset_owner', 'asset_custodian']}),
             ('Parent Hardware', {'fields': ['parent_hardware']}),
-            ('Device Information', {'fields': ['device_type', 'property_id']}),
+            ('Device Information', {'fields': [
+                'hardware_type', 'property_id',
+                'device_maker', 'device_model']}),
             ('Status Information', {'fields': ['location', 'status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
             ]
-    list_filter = ['asset_name', 'org_unit', 'device_type', 'date_added',
+    list_filter = ['asset_name', 'org_unit', 'hardware_type', 'date_added',
             'status', 'asset_owner', 'asset_custodian']
 
 class SoftwareAssetAdmin(admin.ModelAdmin):

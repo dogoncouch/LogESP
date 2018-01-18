@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from hwam.choices import *
+
 # Create your models here.
 
 class OrganizationalUnit(models.Model):
@@ -24,6 +26,30 @@ class OrganizationalUnit(models.Model):
             obj['children'].append(child.serializable_object())
         return obj
 
+class HardwareClass(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+class HardwareCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+    hardware_class = models.ForeignKey(HardwareClass,
+            related_name='hardware_categories',
+            on_delete=models.PROTECT)
+
+class HardwareType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+    hardware_class = models.ForeignKey(HardwareCategory,
+            related_name='hardware_types',
+            on_delete=models.PROTECT)
+
 class HardwareAsset(models.Model):
     parent_hardware = models.ForeignKey('self',
             related_name='child_hardware',
@@ -40,20 +66,40 @@ class HardwareAsset(models.Model):
     asset_custodian = models.ForeignKey(User,
             related_name='hardware_assets_cust',
             null=True, blank=True, on_delete=models.SET_NULL)
-    device_type = models.CharField(max_length=20, null=True, blank=True)
+    hardware_type = models.ForeignKey(HardwareType,
+            related_name='assets',
+            null=True, blank=True, on_delete=models.SET_NULL)
+    device_maker = models.CharField(max_length=20, null=True, blank=True)
+    device_model = models.CharField(max_length=20, null=True, blank=True)
     property_id = models.CharField(max_length=30, null=True, blank=True)
     location = models.CharField(max_length=40, null=True, blank=True)
-    status = models.CharField(max_length=20, null=True, blank=True)
+    status = models.IntegerField(choices=status_choices, default=6,
+            null=True, blank=True)
     date_added = models.DateField('date added', default=timezone.now,
             null=True, blank=True)
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
         return self.asset_name
     def is_active(self):
-        return self.status == 'Active'
+        return self.status == 1
     is_active.admin_order_field = 'status'
     is_active.boolean = True
     is_active.short_description = 'Active?'
+
+class SoftwareCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+class SoftwareType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+    hardware_class = models.ForeignKey(SoftwareCategory,
+            related_name='software_types',
+            on_delete=models.PROTECT)
 
 class SoftwareAsset(models.Model):
     parent_hardware = models.ManyToManyField(HardwareAsset,
@@ -76,7 +122,9 @@ class SoftwareAsset(models.Model):
     custodian_vul = models.ForeignKey(User,
             related_name='systems_vul',
             null=True, blank=True, on_delete=models.SET_NULL)
-    software_type = models.CharField(max_length=20, null=True, blank=True)
+    software_type = models.ForeignKey(SoftwareType,
+            related_name='assets',
+            null=True, blank=True, on_delete=models.SET_NULL)
     package_name = models.CharField(max_length=20, null=True, blank=True)
     package_version = models.CharField(max_length=20, null=True, blank=True)
     sw_property_id = models.CharField(max_length=30, null=True, blank=True)
