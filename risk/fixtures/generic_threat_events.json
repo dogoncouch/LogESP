@@ -1,0 +1,1547 @@
+[
+{
+  "model": "risk.advthreatevent",
+  "pk": 1,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 1,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 2,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 2,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 3,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 3,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 4,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 4,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 5,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 5,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 6,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 6,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 7,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 7,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 8,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 8,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 9,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 9,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 10,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 10,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 11,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 11,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 12,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 12,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 13,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 13,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 14,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 14,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 15,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 15,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 16,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 16,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 17,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 17,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 18,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 18,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 19,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 19,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 20,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 20,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 21,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 21,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 22,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 22,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 23,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 23,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 24,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 24,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 25,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 25,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 26,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 26,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 27,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 27,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 28,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 28,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 29,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 29,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 30,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 30,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 31,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 31,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 32,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 32,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 33,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 33,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 34,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 34,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 35,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 35,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 36,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 36,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 37,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 37,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 38,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 38,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 39,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 39,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 40,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 40,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 41,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 41,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 42,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 42,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 43,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 43,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 44,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 44,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 45,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 45,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 46,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 46,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 47,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 47,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 48,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 48,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 49,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 49,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 50,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 50,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 51,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 51,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 52,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 52,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 53,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 53,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 54,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 54,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 55,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 55,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 56,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 56,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 57,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 57,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 58,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 58,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 59,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 59,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 60,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 60,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 61,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 61,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 62,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 62,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 63,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 63,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 64,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 64,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 65,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 65,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 66,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 66,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 67,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 67,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 68,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 68,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 69,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 69,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 70,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 70,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 71,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 71,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 72,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 72,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 73,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 73,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 74,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 74,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 75,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 75,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 76,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 76,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 77,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 77,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 78,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 78,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 79,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 79,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 80,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 80,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 81,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 81,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 82,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 82,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 83,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 83,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.advthreatevent",
+  "pk": 84,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 84,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 1,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 1,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 2,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 2,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 3,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 3,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 4,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 4,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 5,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 5,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 6,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 6,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 7,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 7,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 8,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 8,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 9,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 9,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 10,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 10,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 11,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 11,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 12,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 12,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 13,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 13,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 14,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 14,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 15,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 15,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 16,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 16,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 17,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 17,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 18,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 18,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+},
+{
+  "model": "risk.nonadvthreatevent",
+  "pk": 19,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat event.",
+    "event_type": 19,
+    "relevance": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "likelihood_initiation": null,
+    "likelihood_impact": null,
+    "sources": []
+  }
+}
+]

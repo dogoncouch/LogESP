@@ -38,8 +38,10 @@ class AdvThreatSource(models.Model):
     in_scope = models.BooleanField(default=True)
     capability = models.IntegerField(validators=[validate_scale_range],
             null=True, blank=True)
-    intent = models.IntegerField(validators=[validate_scale_range])
-    targeting = models.IntegerField(validators=[validate_scale_range])
+    intent = models.IntegerField(validators=[validate_scale_range],
+            null=True, blank=True)
+    targeting = models.IntegerField(validators=[validate_scale_range],
+            null=True, blank=True)
     def __str__(self):
         return self.name
 

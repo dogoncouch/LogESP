@@ -1,0 +1,479 @@
+[
+{
+  "model": "risk.advthreatsource",
+  "pk": 1,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 2,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 2,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 3,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 3,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 4,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 4,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 5,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 5,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 6,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 6,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 7,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 7,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 8,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 8,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 9,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 9,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 10,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 10,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.advthreatsource",
+  "pk": 11,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 11,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "capability": null,
+    "intent": null,
+    "targeting": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 1,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 1,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 2,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 2,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 3,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 3,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 4,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 4,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 5,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 5,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 6,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 6,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 7,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 7,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 8,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 8,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 9,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 9,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 10,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 10,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 11,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 11,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 12,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 12,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 13,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 13,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 14,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 14,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 15,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 15,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 16,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 16,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 17,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 17,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 18,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 18,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 19,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 19,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 20,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 20,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 21,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 21,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 22,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 22,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 23,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 23,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsource",
+  "pk": 24,
+  "fields": {
+    "name": "NIST Generic",
+    "desc": "Built-in generic NIST threat source.",
+    "source_type": 24,
+    "info_source": "NIST",
+    "tier": 1,
+    "in_scope": false,
+    "range_of_effect": null
+  }
+}
+]
