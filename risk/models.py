@@ -26,7 +26,7 @@ class AdvThreatSrcType(models.Model):
             related_name='source_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return ':'.join((self.source_category.name, self.name))
+        return '.'.join((self.source_category.name, self.name))
 
 class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -56,7 +56,7 @@ class NonAdvThreatSrcCategory(models.Model):
             related_name='source_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return ':'.join((self.source_class.name, self.name))
+        return '.'.join((self.source_class.name, self.name))
 
 class NonAdvThreatSrcType(models.Model):
     name = models.CharField(max_length=30)
@@ -67,7 +67,7 @@ class NonAdvThreatSrcType(models.Model):
     def __str__(self):
         val = (self.source_category.source_class.name,
                 self.source_category.name, self.name)
-        return ':'.join(val)
+        return '.'.join(val)
 
 class NonAdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -95,7 +95,7 @@ class AdvThreatEventType(models.Model):
             related_name='event_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return ':'.join((self.source_category.name, self.name))
+        return '.'.join((self.source_category.name, self.name))
 
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
@@ -152,7 +152,7 @@ class VulnerabilityCategory(models.Model):
             related_name = 'vuln_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return ':'.join((self.vuln_class.name, self.name))
+        return '.'.join((self.vuln_class.name, self.name))
 
 class VulnerabilityType(models.Model):
     name = models.CharField(max_length=30)
@@ -163,7 +163,7 @@ class VulnerabilityType(models.Model):
     def __str__(self):
         val = (self.vuln_category.vuln_class.name,
                 self.vuln_category.name, self.name)
-        return ':'.join(val)
+        return '.'.join(val)
 
 class Vulnerability(models.Model):
     name = models.CharField(max_length=30)
@@ -192,7 +192,7 @@ class ConditionCategory(models.Model):
             related_name = 'condition_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return ':'.join((self.condition_class.name, self.name))
+        return '.'.join((self.condition_class.name, self.name))
 
 class ConditionType(models.Model):
     name = models.CharField(max_length=30)
@@ -203,7 +203,7 @@ class ConditionType(models.Model):
     def __str__(self):
         val = (self.condition_category.condition_class.name,
                 self.condition_category.name, self.name)
-        return ':'.join(val)
+        return '.'.join(val)
 
 class RiskCondition(models.Model):
     name = models.CharField(max_length=30)

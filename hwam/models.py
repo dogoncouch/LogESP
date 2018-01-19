@@ -7,8 +7,8 @@ from hwam.choices import *
 # Create your models here.
 
 class OrganizationalUnit(models.Model):
-    unit_name = models.CharField(max_length=30)
-    unit_desc = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
     unit_contact = models.ForeignKey(User,
             on_delete=models.PROTECT)
     parent_ou = models.ForeignKey('self',
@@ -17,11 +17,18 @@ class OrganizationalUnit(models.Model):
             #symmetrical=False)
     # To Do: Add permissions (read/create/edit/delete ou assets)
     def __str__(self):
-        return self.unit_name
+        return self.absolute_name()
+    def absolute_name(self):
+        if self.parent_ou:
+            return '.'.join((self.parent_ou.name, self.name))
+        else:
+            return self.name
+    absolute_name.admin_order_field = 'name'
     def children(self):
-        return OrganizationalUnit.objects.filter(parent=self.pk)
+        return OrganizationalUnit.objects.filter(
+                parent_ou=self.pk).order_by('name')
     def serializable_object(self):
-        obj = {'name': self.unit_name, 'children': []}
+        obj = {'name': self.name, 'children': []}
         for child in self.children():
             obj['children'].append(child.serializable_object())
         return obj

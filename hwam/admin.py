@@ -6,8 +6,8 @@ from .models import SoftwareCategory, SoftwareType
 from .models import OrganizationalUnit, HardwareAsset, SoftwareAsset
 
 class OrganizationalUnitAdmin(admin.ModelAdmin):
-    list_display = ['unit_name', 'parent_ou', 'unit_contact']
-    fields = ['unit_name', 'unit_desc', 'unit_contact', 'parent_ou']
+    list_display = ['name', 'parent_ou', 'unit_contact']
+    fields = ['name', 'desc', 'unit_contact', 'parent_ou']
 
 class HardwareClassAdmin(admin.ModelAdmin):
     list_display = ['name', 'desc']
