@@ -2,8 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import AdvThreatSrcCategory, AdvThreatSrcType
-from .models import NonAdvThreatSrcCategory, NonAdvThreatSrcType
-from .models import AdvThreatSource, NonAdvThreatSource
+from .models import AdvThreatSource
+from .models import NonAdvThreatSrcClass, NonAdvThreatSrcCategory
+from .models import NonAdvThreatSrcType, NonAdvThreatSource
 from .models import AdvThreatEventType, NonAdvThreatEventType
 from .models import AdvThreatEvent, NonAdvThreatEvent
 from .models import VulnerabilityClass, VulnerabilityCategory, VulnerabilityType
@@ -23,6 +24,7 @@ admin.site.register(AdvThreatEvent)
 admin.site.register(NonAdvThreatEvent)
 admin.site.register(AdvThreatSrcCategory)
 admin.site.register(AdvThreatSrcType)
+admin.site.register(NonAdvThreatSrcClass)
 admin.site.register(NonAdvThreatSrcCategory)
 admin.site.register(NonAdvThreatSrcType)
 admin.site.register(AdvThreatSource)

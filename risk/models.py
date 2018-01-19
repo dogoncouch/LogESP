@@ -43,11 +43,20 @@ class AdvThreatSource(models.Model):
     def __str__(self):
         return self.name
 
-class NonAdvThreatSrcCategory(models.Model):
+class NonAdvThreatSrcClass(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
         return self.name
+
+class NonAdvThreatSrcCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    source_class = models.ForeignKey(NonAdvThreatSrcClass,
+            related_name='source_categories',
+            on_delete=models.CASCADE)
+    def __str__(self):
+        return ':'.join((self.source_class.name, self.name))
 
 class NonAdvThreatSrcType(models.Model):
     name = models.CharField(max_length=30)
@@ -56,7 +65,9 @@ class NonAdvThreatSrcType(models.Model):
             related_name='source_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return ':'.join((self.source_category.name, self.name))
+        val = (self.source_category.source_class.name,
+                self.source_category.name, self.name)
+        return ':'.join(val)
 
 class NonAdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
