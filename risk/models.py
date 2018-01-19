@@ -13,16 +13,16 @@ def validate_tier_range(value):
     if not 1 <= value <= 3:
         raise ValidationError('%s not in 1-3 range' % value)
 
-class ThreatSrcCategory(models.Model):
+class AdvThreatSrcCategory(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
         return self.name
 
-class ThreatSrcType(models.Model):
+class AdvThreatSrcType(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    source_category = models.ForeignKey(ThreatSrcCategory,
+    source_category = models.ForeignKey(AdvThreatSrcCategory,
             related_name='source_types',
             on_delete=models.CASCADE)
     def __str__(self):
@@ -31,7 +31,7 @@ class ThreatSrcType(models.Model):
 class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    source_type = models.ForeignKey(ThreatSrcType,
+    source_type = models.ForeignKey(AdvThreatSrcType,
             related_name='adv_sources',
             null=True, blank=True, on_delete = models.SET_NULL)
     info_source = models.CharField(max_length=50, null=True, blank=True)
@@ -43,10 +43,25 @@ class AdvThreatSource(models.Model):
     def __str__(self):
         return self.name
 
+class NonAdvThreatSrcCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+class NonAdvThreatSrcType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    source_category = models.ForeignKey(NonAdvThreatSrcCategory,
+            related_name='source_types',
+            on_delete=models.CASCADE)
+    def __str__(self):
+        return ':'.join((self.source_category.name, self.name))
+
 class NonAdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    source_type = models.ForeignKey(ThreatSrcType,
+    source_type = models.ForeignKey(NonAdvThreatSrcType,
             related_name='nonadv_sources',
             null=True, blank=True, on_delete = models.SET_NULL)
     info_source = models.CharField(max_length=50, null=True, blank=True)
@@ -56,7 +71,7 @@ class NonAdvThreatSource(models.Model):
     def __str__(self):
         return self.name
 
-class ThreatEventType(models.Model):
+class AdvThreatEventType(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
@@ -65,7 +80,7 @@ class ThreatEventType(models.Model):
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    event_type = models.ForeignKey(ThreatEventType,
+    event_type = models.ForeignKey(AdvThreatEventType,
             related_name='adv_events',
             null=True, blank=True, on_delete=models.SET_NULL)
     sources = models.ManyToManyField(AdvThreatSource,
@@ -80,10 +95,16 @@ class AdvThreatEvent(models.Model):
     def calc_likelihood(self):
         return self.likelihood_initiation * self.likelihood_impact // 100
 
+class NonAdvThreatEventType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
 class NonAdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
-    event_type = models.ForeignKey(ThreatEventType,
+    event_type = models.ForeignKey(NonAdvThreatEventType,
             related_name='nonadv_events',
             null=True, blank=True, on_delete=models.SET_NULL)
     sources = models.ManyToManyField(NonAdvThreatSource,
@@ -97,6 +118,46 @@ class NonAdvThreatEvent(models.Model):
         return self.name
     def calc_likelihood(self):
         return self.likelihood_initiation * self.likelihood_impact // 100
+
+class VulnerabilityClass(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+class VulnerabilityCategory(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    vuln_class = models.ForeignKey(VulnerabilityClass,
+            related_name = 'vuln_categories',
+            on_delete=models.CASCADE)
+    def __str__(self):
+        return ':'.join((self.vuln_class.name, self.name))
+
+class VulnerabilityType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    vuln_category = models.ForeignKey(VulnerabilityCategory,
+            related_name = 'vuln_types',
+            on_delete=models.CASCADE)
+    def __str__(self):
+        val = (self.vuln_category.vuln_class.name,
+                self.vuln_category.name, self.name)
+        return ':'.join(val)
+
+class Vulnerability(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    condition_type = models.ForeignKey(VulnerabilityType,
+            related_name='vulnerabilities',
+            null=True, blank=True, on_delete = models.SET_NULL)
+    severity = models.IntegerField(validators=[validate_scale_range])
+    info_source = models.CharField(max_length=50, null=True, blank=True)
+    tier = models.IntegerField(validators=[validate_tier_range])
+    threat_events = models.ManyToManyField(AdvThreatEvent,
+            related_name='vulnerabilities', blank=True)
+    def __str__(self):
+        return self.name
 
 class ConditionClass(models.Model):
     name = models.CharField(max_length=30)
@@ -123,20 +184,6 @@ class ConditionType(models.Model):
         val = (self.condition_category.condition_class.name,
                 self.condition_category.name, self.name)
         return ':'.join(val)
-
-class Vulnerability(models.Model):
-    name = models.CharField(max_length=30)
-    desc = models.CharField(max_length=200, null=True, blank=True)
-    condition_type = models.ForeignKey(ConditionType,
-            related_name='vulnerabilities',
-            null=True, blank=True, on_delete = models.SET_NULL)
-    severity = models.IntegerField(validators=[validate_scale_range])
-    info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
-    threat_events = models.ManyToManyField(AdvThreatEvent,
-            related_name='vulnerabilities', blank=True)
-    def __str__(self):
-        return self.name
 
 class RiskCondition(models.Model):
     name = models.CharField(max_length=30)
