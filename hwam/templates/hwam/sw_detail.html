@@ -2,7 +2,7 @@
 
 <h1>{{ sw.asset_name }} (Software Asset)</h1>
 <a href="{% url 'hwam:sw_update' sw.id %}">Edit</a>
-<p>{{ sw.asset_desc }}</p>
+<p>{{ sw.desc }}</p>
 <ul>
     <li>Organizational Unit:
         <a href="{% url 'hwam:ou_detail' sw.org_unit.id %}">

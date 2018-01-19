@@ -2,7 +2,7 @@
 
 <h1>{{ ou }} (Organizational Unit)</h1>
 <a href="{% url 'hwam:ou_update' ou.id %}">Edit</a>
-<p>{{ ou.unit_desc }}</p>
+<p>{{ ou.desc }}</p>
 <ul>
     <li>Contact: {{ ou.unit_contact.username }}
         <a href="mailto:{{ ou.unit_contact.email }}">
