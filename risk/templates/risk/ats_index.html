@@ -1,0 +1,16 @@
+{% include "risk/base.html" %}
+
+<h1>Adversarial Threat Sources</h1>
+<a href="{% url 'admin:risk_advthreatsource_changelist' %}">Admin</a>
+<a href="{% url 'risk:ats_create' %}">Add</a>
+
+{% if ats_list %}
+    <ul>
+        {% for ate in ats_list %}
+            <li><a href="{% url 'risk:ats_detail' ats.id %}">
+                    {{ ats }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No adversarial threat sources.</p>
+{% endif %}

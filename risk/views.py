@@ -16,20 +16,40 @@ class ATEIndexView(ListView):
     template_name = 'risk/ate_index.html'
     context_object_name = 'ate_list'
 
-class ATEDetailView(DetailView):
-    model = AdvThreatEvent
-    template_name = 'risk/ate_detail.html'
-    context_object_name = 'ate'
-
 class NTEIndexView(ListView):
     model = NonAdvThreatEvent
     template_name = 'risk/nte_index.html'
     context_object_name = 'nte_list'
 
+class ATSIndexView(ListView):
+    model = AdvThreatSource
+    template_name = 'risk/ats_index.html'
+    context_object_name = 'ats_list'
+
+class NTSIndexView(ListView):
+    model = NonAdvThreatSource
+    template_name = 'risk/nts_index.html'
+    context_object_name = 'nts_list'
+
+class ATEDetailView(DetailView):
+    model = AdvThreatEvent
+    template_name = 'risk/ate_detail.html'
+    context_object_name = 'ate'
+
 class NTEDetailView(DetailView):
     model = NonAdvThreatEvent
     template_name = 'risk/nte_detail.html'
     context_object_name = 'nte'
+
+class ATSDetailView(DetailView):
+    model = AdvThreatSource
+    template_name = 'risk/ats_detail.html'
+    context_object_name = 'ats'
+
+class NTSDetailView(DetailView):
+    model = NonAdvThreatSource
+    template_name = 'risk/nts_detail.html'
+    context_object_name = 'nts'
 
 class ATECreateView(CreateView):
     model = AdvThreatEvent
@@ -47,6 +67,20 @@ class NTECreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('risk:nte_detail', args=(self.object.id,))
 
+class ATSCreateView(CreateView):
+    model = AdvThreatSource
+    fields = ['name', 'desc', 'source_type', 'info_source', 'tier',
+            'in_scope', 'capability', 'intent', 'targeting']
+    def get_success_url(self):
+        return reverse_lazy('risk:ats_detail', args=(self.object.id,))
+
+class NTSCreateView(CreateView):
+    model = NonAdvThreatSource
+    fields = ['name', 'desc', 'source_type', 'info_source', 'tier',
+            'in_scope', 'range_of_effect']
+    def get_success_url(self):
+        return reverse_lazy('risk:nts_detail', args=(self.object.id,))
+
 class ATEUpdateView(UpdateView):
     model = AdvThreatEvent
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
@@ -62,5 +96,19 @@ class NTEUpdateView(UpdateView):
             'likelihood_impact']
     def get_success_url(self):
         return reverse_lazy('risk:nte_detail', args=(self.object.id,))
+
+class ATSUpdateView(UpdateView):
+    model = AdvThreatSource
+    fields = ['name', 'desc', 'source_type', 'info_source', 'tier',
+            'in_scope', 'capability', 'intent', 'targeting']
+    def get_success_url(self):
+        return reverse_lazy('risk:ats_detail', args=(self.object.id,))
+
+class NTSUpdateView(UpdateView):
+    model = NonAdvThreatSource
+    fields = ['name', 'desc', 'source_type', 'info_source', 'tier',
+            'in_scope', 'range_of_effect']
+    def get_success_url(self):
+        return reverse_lazy('risk:nts_detail', args=(self.object.id,))
 
 

@@ -1,0 +1,20 @@
+{% include "risk/base.html" %}
+
+<h1>{{ ats.name }} (Adversarial Threat Source)</h1>
+<a href="{% url 'risk:ats_update' ats.id %}">Edit</a>
+
+<p>{{ ats.desc }}</p>
+
+<ul>
+    <li>In Scope?: {{ ats.in_scope }}</li>
+    <li>Threat Source Type: {{ ats.source_type }}</li>
+    <li>Info Source:<ul>
+            <li>Info Source: {{ ats.info_source }}</li>
+            <li>Info Source Tier: {{ ats.tier }}</li>
+        </ul></li>
+    <li>Threat Source Details:<ul>
+            <li>Capability: {{ ats.capability }}</li>
+            <li>Intent: {{ ats.intent }}</li>
+            <li>Targeting: {{ ats.targeting }}</li>
+        </ul></li>
+</ul>
