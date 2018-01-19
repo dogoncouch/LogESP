@@ -15,7 +15,7 @@
     {% endif %}
     {% if ou.child_ous.all %}
         <li>Child OUs:<ul>
-        {% for u in ou.child_ous.all %}
+        {% for u in ou.children %}
             <li><a href="{% url 'hwam:ou_detail' u.id %}">
                 {{ u }}</a></li>
         {% endfor %}
