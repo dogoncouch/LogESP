@@ -68,7 +68,7 @@
   "pk": 1,
   "fields": {
     "name": "Perimeter network recon",
-    "desc": null,
+    "desc": "Perform perimeter network reconnaissance/scanning.",
     "source_category": 1
   }
 },
@@ -77,7 +77,7 @@
   "pk": 2,
   "fields": {
     "name": "Sniff exposed networks",
-    "desc": null,
+    "desc": "Perform network sniffing of exposed networks.",
     "source_category": 1
   }
 },
@@ -86,7 +86,7 @@
   "pk": 3,
   "fields": {
     "name": "Open source discovery",
-    "desc": null,
+    "desc": "Gather information using open source discovery of organizational information",
     "source_category": 1
   }
 },
@@ -95,7 +95,7 @@
   "pk": 4,
   "fields": {
     "name": "Targeted recon",
-    "desc": null,
+    "desc": "Perform reconnaissance and surveillance of targeted organizations.",
     "source_category": 1
   }
 },
@@ -104,7 +104,7 @@
   "pk": 5,
   "fields": {
     "name": "Malware-focused internal recon",
-    "desc": null,
+    "desc": "Perform malware-directed internal reconnaissance.",
     "source_category": 1
   }
 },
@@ -113,7 +113,7 @@
   "pk": 6,
   "fields": {
     "name": "Phishing attacks",
-    "desc": null,
+    "desc": "Craft phishing attacks.",
     "source_category": 2
   }
 },
@@ -122,7 +122,7 @@
   "pk": 7,
   "fields": {
     "name": "Spear phishing attacks",
-    "desc": null,
+    "desc": "Craft spear phishing attacks.",
     "source_category": 2
   }
 },
@@ -131,7 +131,7 @@
   "pk": 8,
   "fields": {
     "name": "Deployed IT env attacks",
-    "desc": null,
+    "desc": "Craft attacks specifically based on deployed information technology environment.",
     "source_category": 2
   }
 },
@@ -140,7 +140,7 @@
   "pk": 9,
   "fields": {
     "name": "Counterfeit/spoof website",
-    "desc": null,
+    "desc": "Create counterfeit/spoof websites.",
     "source_category": 2
   }
 },
@@ -149,7 +149,7 @@
   "pk": 10,
   "fields": {
     "name": "Counterfeit certificates",
-    "desc": null,
+    "desc": "Create counterfeit certificates.",
     "source_category": 2
   }
 },
@@ -158,7 +158,7 @@
   "pk": 11,
   "fields": {
     "name": "Create false organization",
-    "desc": null,
+    "desc": "Create and operate false front organizations to inject malicious components into the supply chain.",
     "source_category": 2
   }
 },
@@ -194,7 +194,7 @@
   "pk": 15,
   "fields": {
     "name": "Malware via removable media",
-    "desc": null,
+    "desc": "Deliver malware by providing removable media.",
     "source_category": 3
   }
 },
@@ -292,8 +292,8 @@
   "model": "risk.advthreateventtype",
   "pk": 26,
   "fields": {
-    "name": "Exploit staff physical access",
-    "desc": null,
+    "name": "Staff physical access",
+    "desc": "Exploit physical access of authorized staff to gain access to organizational facilities.",
     "source_category": 4
   }
 },
@@ -301,7 +301,7 @@
   "model": "risk.advthreateventtype",
   "pk": 27,
   "fields": {
-    "name": "Exploit exposed IT mistakes",
+    "name": "Exposed IT mistakes",
     "desc": "Exploit poorly configured or unauthorized information systems exposed to the internet.",
     "source_category": 4
   }
@@ -310,8 +310,8 @@
   "model": "risk.advthreateventtype",
   "pk": 28,
   "fields": {
-    "name": "Exploit split tunneling",
-    "desc": null,
+    "name": "Split tunneling",
+    "desc": "Exploit split tunneling.",
     "source_category": 4
   }
 },
@@ -319,7 +319,7 @@
   "model": "risk.advthreateventtype",
   "pk": 29,
   "fields": {
-    "name": "Exploit multi-tenancy env",
+    "name": "Cloud multi-tenancy",
     "desc": "Exploit multi-tenancy in a cloud environment.",
     "source_category": 4
   }
@@ -400,7 +400,7 @@
   "model": "risk.advthreateventtype",
   "pk": 38,
   "fields": {
-    "name": "Compromise reintroduced system",
+    "name": "Reintroduced system",
     "desc": "Compromise information systems or devices used externally and reintroduced into the enterprise.",
     "source_category": 4
   }
@@ -409,7 +409,7 @@
   "model": "risk.advthreateventtype",
   "pk": 39,
   "fields": {
-    "name": "Compromise critical software",
+    "name": "Critical software",
     "desc": "Compromise software of organizational critical information systems.",
     "source_category": 4
   }
@@ -427,7 +427,7 @@
   "model": "risk.advthreateventtype",
   "pk": 41,
   "fields": {
-    "name": "Compromise critical info",
+    "name": "Critical info",
     "desc": "Compromise mission-critical information.",
     "source_category": 4
   }
@@ -436,7 +436,7 @@
   "model": "risk.advthreateventtype",
   "pk": 42,
   "fields": {
-    "name": "Compromise hardware upstream",
+    "name": "Hardware (upstream)",
     "desc": "Compromise design, manufacture, and/or distribution of information system components (including hardware, software, and firmware).",
     "source_category": 4
   }
@@ -817,6 +817,158 @@
     "name": "Outside/inside/supply vectors",
     "desc": "Coordinate cyber attacks using external (outsider), internal (insider), and supply chain (supplier) attack vectors.",
     "source_category": 8
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 1,
+  "fields": {
+    "name": "Spill sensitive info",
+    "desc": null
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 2,
+  "fields": {
+    "name": "Authorized data mishandling",
+    "desc": "Mishandling of critical and/or sensitive information by authorized users."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 3,
+  "fields": {
+    "name": "Incorrect privilege settings",
+    "desc": null
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 4,
+  "fields": {
+    "name": "Comm contention",
+    "desc": "Degraded Communications performance due to contention."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 5,
+  "fields": {
+    "name": "Unreadable display",
+    "desc": "Display unreadable due to aging equipment"
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 6,
+  "fields": {
+    "name": "Primary facil earthquake",
+    "desc": "Earthquake at primary facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 7,
+  "fields": {
+    "name": "Primary facil fire",
+    "desc": "Fire at primary facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 8,
+  "fields": {
+    "name": "Backup facil fire",
+    "desc": "Fire at backup facility"
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 9,
+  "fields": {
+    "name": "Primary facil flood",
+    "desc": "Flood at primary facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 10,
+  "fields": {
+    "name": "Backup facil flood",
+    "desc": "Flood at backup facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 11,
+  "fields": {
+    "name": "Primary facil hurricane",
+    "desc": "Hurricane at primary facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 12,
+  "fields": {
+    "name": "Backup facil hurricane",
+    "desc": "Hurricane at backup facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 13,
+  "fields": {
+    "name": "Resource depletion",
+    "desc": "Degraded processing performance due to resource depletion."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 14,
+  "fields": {
+    "name": "Vulnerability intro",
+    "desc": "Introduction of vulnerabilities into software products."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 15,
+  "fields": {
+    "name": "Disk error",
+    "desc": "Corrupted storage due to a disk error."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 16,
+  "fields": {
+    "name": "Pervasive disk error",
+    "desc": "Multiple disk errors due to aging a set of devices all acquired at the same time, from the same supplier."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 17,
+  "fields": {
+    "name": "Primary facil windstorm",
+    "desc": "Windstorm/tornado at primary facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 18,
+  "fields": {
+    "name": "Backup facil windstorm",
+    "desc": "Windstorm/tornado at backup facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 19,
+  "fields": {
+    "name": "Backup facil earthquake",
+    "desc": "Earthquake at backup facility."
   }
 }
 ]
