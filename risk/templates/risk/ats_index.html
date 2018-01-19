@@ -6,7 +6,7 @@
 
 {% if ats_list %}
     <ul>
-        {% for ate in ats_list %}
+        {% for ats in ats_list %}
             <li><a href="{% url 'risk:ats_detail' ats.id %}">
                     {{ ats }}</a></li>
         {% endfor %}
