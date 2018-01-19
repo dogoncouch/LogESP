@@ -1,0 +1,822 @@
+[
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 1,
+  "fields": {
+    "name": "Perform recon",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 2,
+  "fields": {
+    "name": "Create attack tools",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 3,
+  "fields": {
+    "name": "Deliver malicious capabilitie",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 4,
+  "fields": {
+    "name": "Exploit and compromise",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 5,
+  "fields": {
+    "name": "Conduct an attack",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 6,
+  "fields": {
+    "name": "Achieve results",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 7,
+  "fields": {
+    "name": "Maintain a presence",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventcategory",
+  "pk": 8,
+  "fields": {
+    "name": "Coordinate a campaign",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 1,
+  "fields": {
+    "name": "Perimeter network recon",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 2,
+  "fields": {
+    "name": "Sniff exposed networks",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 3,
+  "fields": {
+    "name": "Open source discovery",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 4,
+  "fields": {
+    "name": "Targeted recon",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 5,
+  "fields": {
+    "name": "Malware-focused internal recon",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 6,
+  "fields": {
+    "name": "Phishing attacks",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 7,
+  "fields": {
+    "name": "Spear phishing attacks",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 8,
+  "fields": {
+    "name": "Deployed IT env attacks",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 9,
+  "fields": {
+    "name": "Counterfeit/spoof website",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 10,
+  "fields": {
+    "name": "Counterfeit certificates",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 11,
+  "fields": {
+    "name": "Create false organization",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 12,
+  "fields": {
+    "name": "Known malware",
+    "desc": "Deliver known malware to internal organizational systems (e.g. virus via email).",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 13,
+  "fields": {
+    "name": "Modified malware",
+    "desc": "Deliver modified malware to internal organizational information systems.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 14,
+  "fields": {
+    "name": "Targeted control malware",
+    "desc": "Deliver targeted malware for control of internal systems and exfiltration of data.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 15,
+  "fields": {
+    "name": "Malware via removable media",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 16,
+  "fields": {
+    "name": "Downloadable untarget malware",
+    "desc": "Insert untargeted malware into downloadable software and/or into commercial information technology products.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 17,
+  "fields": {
+    "name": "Targeted malware",
+    "desc": "Insert targeted malware into organizational information systems and information system components.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 18,
+  "fields": {
+    "name": "Specialized malware",
+    "desc": "Insert specialized malware into organizational information systems based on system configurations.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 19,
+  "fields": {
+    "name": "Counterfeit hardware",
+    "desc": "Insert counterfeit or tampered hardware into the supply chain",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 20,
+  "fields": {
+    "name": "Tampered critical hardware",
+    "desc": "Insert tampered critical components into organizational systems.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 21,
+  "fields": {
+    "name": "General-purpose sniffers",
+    "desc": "Install general-purpose sniffers on organization-controlled information sniffers or networks",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 22,
+  "fields": {
+    "name": "Targeted sniffers",
+    "desc": "Install persistent and targeted sniffers on organization-controlled information systems and networks.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 23,
+  "fields": {
+    "name": "Malicious scanning devices",
+    "desc": "Insert malicious scanning devices (e.g. wireless sniffers) inside facilities.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 24,
+  "fields": {
+    "name": "Subverted individuals",
+    "desc": "Insert subverted individuals into organizations.",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 25,
+  "fields": {
+    "name": "Subverted privileged individua",
+    "desc": "Insert subverted individuals into privileged positions in organizations",
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 26,
+  "fields": {
+    "name": "Exploit staff physical access",
+    "desc": null,
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 27,
+  "fields": {
+    "name": "Exploit exposed IT mistakes",
+    "desc": "Exploit poorly configured or unauthorized information systems exposed to the internet.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 28,
+  "fields": {
+    "name": "Exploit split tunneling",
+    "desc": null,
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 29,
+  "fields": {
+    "name": "Exploit multi-tenancy env",
+    "desc": "Exploit multi-tenancy in a cloud environment.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 30,
+  "fields": {
+    "name": "Known mobile vulns",
+    "desc": "Exploit known vulnerabilities in mobile systems (e.g. laptops, PDSs, smart phones).",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 31,
+  "fields": {
+    "name": "Recent vulns",
+    "desc": "Exploit recently discovered vulnerabilities",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 32,
+  "fields": {
+    "name": "Internal IT vulns",
+    "desc": "Exploit vulnerabilities on internal organizational information systems.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 33,
+  "fields": {
+    "name": "Zero day attacks",
+    "desc": "Exploit vulnerabilities using zero-day attacks",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 34,
+  "fields": {
+    "name": "Timed IT exploit",
+    "desc": "Exploit vulnerabilities in information systems timed with organizational/business operations tempo.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 35,
+  "fields": {
+    "name": "Multi-tenant data deletion",
+    "desc": "Exploit insecure or incomplete data deletion in multi-tenant environment.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 36,
+  "fields": {
+    "name": "Multi-tenant isolation",
+    "desc": "Violate isolation in multi-tenant environment.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 37,
+  "fields": {
+    "name": "Physical IT compromise",
+    "desc": "Compromise critical information systems via physical access.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 38,
+  "fields": {
+    "name": "Compromise reintroduced system",
+    "desc": "Compromise information systems or devices used externally and reintroduced into the enterprise.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 39,
+  "fields": {
+    "name": "Compromise critical software",
+    "desc": "Compromise software of organizational critical information systems.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 40,
+  "fields": {
+    "name": "Data exfil compromise",
+    "desc": "Compromise organizational information systems to facilitate exfiltration of data/information.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 41,
+  "fields": {
+    "name": "Compromise critical info",
+    "desc": "Compromise mission-critical information.",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 42,
+  "fields": {
+    "name": "Compromise hardware upstream",
+    "desc": "Compromise design, manufacture, and/or distribution of information system components (including hardware, software, and firmware).",
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 43,
+  "fields": {
+    "name": "Comm interception attacks",
+    "desc": "Conduct communications interception attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 44,
+  "fields": {
+    "name": "Wireless jamming attacks",
+    "desc": "Conduct wireless jamming attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 45,
+  "fields": {
+    "name": "Unauthorized protocol attacks",
+    "desc": "Conduct attacks using unauthorized ports, protocols, and services.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 46,
+  "fields": {
+    "name": "Data transit attacks",
+    "desc": "Conduct attacks leveraging traffic/data movement allowed across perimeter.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 47,
+  "fields": {
+    "name": "DoS attacks",
+    "desc": "Conduct simple Denial of Service (DoS) attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 48,
+  "fields": {
+    "name": "DDoS attacks",
+    "desc": "Conduct Distributed Denial of Service (DDoS) attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 49,
+  "fields": {
+    "name": "Targeted DoS attacks",
+    "desc": "Conduct targeted Denial of Service (DoS) attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 50,
+  "fields": {
+    "name": "Physical attacks",
+    "desc": "Conduct physical attacks on organizational facilities.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 51,
+  "fields": {
+    "name": "Infrastructure physical attack",
+    "desc": "Conduct physical attacks on infrastructures supporting organizational facilities.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 52,
+  "fields": {
+    "name": "Cyber-physical attacks",
+    "desc": "Conduct cyber-physical attacks on organizational facilities (e.g. remotely change HVAC settings).",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 53,
+  "fields": {
+    "name": "Cloud data scavenging",
+    "desc": "Conduct data scavenging attacks in a cloud environment.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 54,
+  "fields": {
+    "name": "Brute force attacks",
+    "desc": "Conduct brute force login attempts/password guessing attempts",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 55,
+  "fields": {
+    "name": "Nontargeted zero-day",
+    "desc": "Conduct nontargeted zero-day attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 56,
+  "fields": {
+    "name": "External session hijacking",
+    "desc": "Conduct externally-based session hijacking.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 57,
+  "fields": {
+    "name": "Internal session hijacking",
+    "desc": "Conduct internally-based session hijacking.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 58,
+  "fields": {
+    "name": "External MitM modification",
+    "desc": "Conduct externally-based network traffic modification (man in the middle) attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 59,
+  "fields": {
+    "name": "Internal MitM modification",
+    "desc": "Conduct internally-based network traffic modification (man in the middle) attacks.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 60,
+  "fields": {
+    "name": "Outsider social eng",
+    "desc": "Conduct outsider-based social engineering to obtain information.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 61,
+  "fields": {
+    "name": "Insider social eng",
+    "desc": "Conduct insider-based social engineering to obtain information.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 62,
+  "fields": {
+    "name": "Critical personal devices",
+    "desc": "Conduct attacks targeting and compromising personal devices of critical employees.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 63,
+  "fields": {
+    "name": "Supply chain attacks",
+    "desc": "Conduct supply chain attacks targeting and exploiting critical hardware, software, or firmware.",
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 64,
+  "fields": {
+    "name": "External sensitive info sniff",
+    "desc": "Obtain sensitive information through network sniffing of internal networks.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 65,
+  "fields": {
+    "name": "Exfil sensitive info",
+    "desc": "Obtain sensitive information via exfiltration.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 66,
+  "fields": {
+    "name": "Degradation of services",
+    "desc": "Cause degradation or denial of attacker-selected services or capabilities.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 67,
+  "fields": {
+    "name": "Deterioration of systems",
+    "desc": "Cause deterioration/destruction of critical information system components and functions.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 68,
+  "fields": {
+    "name": "Public data integrity loss",
+    "desc": "Cause integrity loss by creating, deleting, and/or modifying data on publicly accessible information systems (e.g. web defacement).",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 69,
+  "fields": {
+    "name": "Critical data integrity loss",
+    "desc": "Cause integrity loss by polluting or corrupting critical data.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 70,
+  "fields": {
+    "name": "False data injection",
+    "desc": "Cause integrity loss by injecting false but believable data into organizational information systems.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 71,
+  "fields": {
+    "name": "Cause authorized disclusure",
+    "desc": "Cause disclosure of critical and/or sensitive information by authorized users.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 72,
+  "fields": {
+    "name": "Cause unauthorized disclosure",
+    "desc": "Cause unauthorized disclosure and/or unavailability by spilling sensitive information",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 73,
+  "fields": {
+    "name": "External wireless interception",
+    "desc": "Obtain information by externally located interception of wireless network traffic.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 74,
+  "fields": {
+    "name": "Unauthorized access",
+    "desc": "Obtain unauthorized access.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 75,
+  "fields": {
+    "name": "Obtain public sensitive data",
+    "desc": "Obtain sensitive data/information from publicly accessible information systems.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 76,
+  "fields": {
+    "name": "Scavenge sensitive data",
+    "desc": "Obtain information by opportunistically stealing or scavenging information systems/components.",
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 77,
+  "fields": {
+    "name": "Obfuscate actions",
+    "desc": "Obfuscate adversary actions.",
+    "source_category": 7
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 78,
+  "fields": {
+    "name": "Surveil and adapt",
+    "desc": "Adapt cyber attacks based on detailed surveillance.",
+    "source_category": 7
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 79,
+  "fields": {
+    "name": "Multi-staged attack campaign",
+    "desc": "Coordinate a campaign of multi-staged attacks (e.g. hopping)",
+    "source_category": 8
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 80,
+  "fields": {
+    "name": "Internal/external campaign",
+    "desc": "Coordinate a campaign that combines internal and external attacks across multiple information systems and information technologies.",
+    "source_category": 8
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 81,
+  "fields": {
+    "name": "Multi-org campaign",
+    "desc": "Coordinate campaigns across multiple organizations to acquire specific information or achieve desired outcome.",
+    "source_category": 8
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 82,
+  "fields": {
+    "name": "Presence spreading campaign",
+    "desc": "Coordinate a campaign that spreads attacks across organizational systems from existing presence.",
+    "source_category": 8
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 83,
+  "fields": {
+    "name": "Surveil and adapt campaign",
+    "desc": "Coordinate a campaign of continuous, adaptive, and changing cyber attacks based on detailed surveillance.",
+    "source_category": 8
+  }
+},
+{
+  "model": "risk.advthreateventtype",
+  "pk": 84,
+  "fields": {
+    "name": "Outside/inside/supply vectors",
+    "desc": "Coordinate cyber attacks using external (outsider), internal (insider), and supply chain (supplier) attack vectors.",
+    "source_category": 8
+  }
+}
+]
