@@ -1,0 +1,445 @@
+[
+{
+  "model": "risk.advthreatsrccategory",
+  "pk": 1,
+  "fields": {
+    "name": "Individual",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreatsrccategory",
+  "pk": 2,
+  "fields": {
+    "name": "Group",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreatsrccategory",
+  "pk": 3,
+  "fields": {
+    "name": "Organization",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreatsrccategory",
+  "pk": 4,
+  "fields": {
+    "name": "Nation-State",
+    "desc": null
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 1,
+  "fields": {
+    "name": "Outsider",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 2,
+  "fields": {
+    "name": "Insider",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 3,
+  "fields": {
+    "name": "Trusted Insider",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 4,
+  "fields": {
+    "name": "Privileged Insider",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 5,
+  "fields": {
+    "name": "Ad hoc",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 6,
+  "fields": {
+    "name": "Established",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 7,
+  "fields": {
+    "name": "Competitor",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 8,
+  "fields": {
+    "name": "Supplier",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 9,
+  "fields": {
+    "name": "Partner",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 10,
+  "fields": {
+    "name": "Customer",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.advthreatsrctype",
+  "pk": 11,
+  "fields": {
+    "name": "Established Nation-State",
+    "desc": null,
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.nonadvthreatsrcclass",
+  "pk": 1,
+  "fields": {
+    "name": "Accidental",
+    "desc": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsrcclass",
+  "pk": 2,
+  "fields": {
+    "name": "Structural",
+    "desc": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsrcclass",
+  "pk": 3,
+  "fields": {
+    "name": "Environmental",
+    "desc": null
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 1,
+  "fields": {
+    "name": "User",
+    "desc": null,
+    "source_class": 1
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 2,
+  "fields": {
+    "name": "Privileged User/Administrator",
+    "desc": null,
+    "source_class": 1
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 3,
+  "fields": {
+    "name": "IT Equipment",
+    "desc": null,
+    "source_class": 2
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 4,
+  "fields": {
+    "name": "Environmental Controls",
+    "desc": null,
+    "source_class": 2
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 5,
+  "fields": {
+    "name": "Software",
+    "desc": null,
+    "source_class": 2
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 6,
+  "fields": {
+    "name": "Natural/man-made disaster",
+    "desc": null,
+    "source_class": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 7,
+  "fields": {
+    "name": "Unusual Natural Event",
+    "desc": "(e.g. sunspots)",
+    "source_class": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrccategory",
+  "pk": 8,
+  "fields": {
+    "name": "Infrastructure Failure/Outage",
+    "desc": null,
+    "source_class": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 1,
+  "fields": {
+    "name": "Unprivileged User",
+    "desc": null,
+    "source_category": 1
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 2,
+  "fields": {
+    "name": "Administrator",
+    "desc": null,
+    "source_category": 2
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 3,
+  "fields": {
+    "name": "Storage",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 4,
+  "fields": {
+    "name": "Processing",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 5,
+  "fields": {
+    "name": "Communications",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 6,
+  "fields": {
+    "name": "Display",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 7,
+  "fields": {
+    "name": "Sensor",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 8,
+  "fields": {
+    "name": "Controller",
+    "desc": null,
+    "source_category": 3
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 9,
+  "fields": {
+    "name": "Temperature/Humidity Controls",
+    "desc": null,
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 10,
+  "fields": {
+    "name": "Power Supply",
+    "desc": null,
+    "source_category": 4
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 11,
+  "fields": {
+    "name": "Operating System",
+    "desc": null,
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 12,
+  "fields": {
+    "name": "Networking",
+    "desc": null,
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 13,
+  "fields": {
+    "name": "General-Purpose Application",
+    "desc": null,
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 14,
+  "fields": {
+    "name": "Mission-Specific Application",
+    "desc": null,
+    "source_category": 5
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 15,
+  "fields": {
+    "name": "Fire",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 16,
+  "fields": {
+    "name": "Flood/Tsunami",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 17,
+  "fields": {
+    "name": "Windstorm/Tornado",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 18,
+  "fields": {
+    "name": "Hurricane",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 19,
+  "fields": {
+    "name": "Earthquake",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 20,
+  "fields": {
+    "name": "Bombing",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 21,
+  "fields": {
+    "name": "Overrun",
+    "desc": null,
+    "source_category": 6
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 22,
+  "fields": {
+    "name": "Sunspots",
+    "desc": null,
+    "source_category": 7
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 23,
+  "fields": {
+    "name": "Telecommunications",
+    "desc": null,
+    "source_category": 8
+  }
+},
+{
+  "model": "risk.nonadvthreatsrctype",
+  "pk": 24,
+  "fields": {
+    "name": "Electrical Power",
+    "desc": null,
+    "source_category": 8
+  }
+}
+]
