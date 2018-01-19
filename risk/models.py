@@ -82,11 +82,20 @@ class NonAdvThreatSource(models.Model):
     def __str__(self):
         return self.name
 
-class AdvThreatEventType(models.Model):
+class AdvThreatEventCategory(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     def __str__(self):
         return self.name
+
+class AdvThreatEventType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    source_category = models.ForeignKey(AdvThreatEventCategory,
+            related_name='event_types',
+            on_delete=models.CASCADE)
+    def __str__(self):
+        return ':'.join((self.source_category.name, self.name))
 
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
