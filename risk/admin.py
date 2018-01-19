@@ -5,7 +5,8 @@ from .models import AdvThreatSrcCategory, AdvThreatSrcType
 from .models import AdvThreatSource
 from .models import NonAdvThreatSrcClass, NonAdvThreatSrcCategory
 from .models import NonAdvThreatSrcType, NonAdvThreatSource
-from .models import AdvThreatEventType, NonAdvThreatEventType
+from .models import AdvThreatEventCategory, AdvThreatEventType
+from .models import NonAdvThreatEventType
 from .models import AdvThreatEvent, NonAdvThreatEvent
 from .models import VulnerabilityClass, VulnerabilityCategory, VulnerabilityType
 from .models import ConditionClass, ConditionCategory, ConditionType
@@ -20,17 +21,18 @@ from .models import ImpactType, Impact
 #    list_display = ['name', 'desc']
 #    fields = ['name', 'desc']
 
+admin.site.register(AdvThreatEventCategory)
+admin.site.register(AdvThreatEventType)
 admin.site.register(AdvThreatEvent)
+admin.site.register(NonAdvThreatEventType)
 admin.site.register(NonAdvThreatEvent)
 admin.site.register(AdvThreatSrcCategory)
 admin.site.register(AdvThreatSrcType)
+admin.site.register(AdvThreatSource)
 admin.site.register(NonAdvThreatSrcClass)
 admin.site.register(NonAdvThreatSrcCategory)
 admin.site.register(NonAdvThreatSrcType)
-admin.site.register(AdvThreatSource)
 admin.site.register(NonAdvThreatSource)
-admin.site.register(AdvThreatEventType)
-admin.site.register(NonAdvThreatEventType)
 admin.site.register(VulnerabilityClass)
 admin.site.register(VulnerabilityCategory)
 admin.site.register(VulnerabilityType)
