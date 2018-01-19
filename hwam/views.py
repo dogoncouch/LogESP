@@ -72,7 +72,7 @@ class OUCreateView(CreateView):
 
 class HWCreateView(CreateView):
     model = HardwareAsset
-    fields = ['asset_name', 'asset_desc', 'org_unit',
+    fields = ['name', 'desc', 'org_unit',
             'asset_owner', 'asset_custodian',
             'parent_hardware',
             'hardware_type', 'property_id',
@@ -86,7 +86,7 @@ class HWCreateView(CreateView):
 class SWCreateView(CreateView):
     model = SoftwareAsset
     fields = [
-            'asset_name', 'asset_desc', 'org_unit',
+            'name', 'desc', 'org_unit',
             'custodian_swam', 'custodian_csm', 'custodian_vul',
             'parent_hardware', 'parent_software',
             'software_type', 'sw_property_id',
@@ -105,7 +105,7 @@ class OUUpdateView(UpdateView):
 
 class HWUpdateView(UpdateView):
     model = HardwareAsset
-    fields = ['asset_name', 'asset_desc', 'org_unit',
+    fields = ['name', 'desc', 'org_unit',
             'asset_owner', 'asset_custodian',
             'parent_hardware',
             'hardware_type', 'property_id',
@@ -119,7 +119,7 @@ class HWUpdateView(UpdateView):
 class SWUpdateView(UpdateView):
     model = SoftwareAsset
     fields = [
-            'asset_name', 'asset_desc', 'org_unit',
+            'name', 'desc', 'org_unit',
             'custodian_swam', 'custodian_csm', 'custodian_vul',
             'parent_hardware', 'parent_software',
             'software_type', 'sw_property_id',

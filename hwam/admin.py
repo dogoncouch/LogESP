@@ -22,10 +22,10 @@ class HardwareTypeAdmin(admin.ModelAdmin):
     fields = ['name', 'desc', 'hardware_category']
 
 class HardwareAssetAdmin(admin.ModelAdmin):
-    list_display = ['asset_name', 'org_unit', 'location',
+    list_display = ['name', 'org_unit', 'location',
             'hardware_type', 'is_active']
     fieldsets = [
-            (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
+            (None, {'fields': ['name', 'desc', 'org_unit']}),
             ('Contacts', {'fields': ['asset_owner', 'asset_custodian']}),
             ('Parent Hardware', {'fields': ['parent_hardware']}),
             ('Device Information', {'fields': [
@@ -34,7 +34,7 @@ class HardwareAssetAdmin(admin.ModelAdmin):
             ('Status Information', {'fields': ['location', 'status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
             ]
-    list_filter = ['asset_name', 'org_unit', 'hardware_type', 'date_added',
+    list_filter = ['name', 'org_unit', 'hardware_type', 'date_added',
             'status', 'asset_owner', 'asset_custodian']
 
 class SoftwareCategoryAdmin(admin.ModelAdmin):
@@ -46,9 +46,9 @@ class SoftwareTypeAdmin(admin.ModelAdmin):
     fields = ['name', 'desc', 'software_category']
 
 class SoftwareAssetAdmin(admin.ModelAdmin):
-    list_display = ['asset_name', 'org_unit', 'software_type', 'is_active']
+    list_display = ['name', 'org_unit', 'software_type', 'is_active']
     fieldsets = [
-            (None, {'fields': ['asset_name', 'asset_desc', 'org_unit']}),
+            (None, {'fields': ['name', 'desc', 'org_unit']}),
             ('Contacts', {'fields': [
                 'custodian_swam', 'custodian_csm', 'custodian_vul']}),
             ('Parent Systems', {'fields': ['parent_hardware', 'parent_software']}),
@@ -58,7 +58,7 @@ class SoftwareAssetAdmin(admin.ModelAdmin):
             ('Status Information', {'fields': ['status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
             ]
-    list_filter = ['asset_name', 'org_unit', 'software_type', 'date_added',
+    list_filter = ['name', 'org_unit', 'software_type', 'date_added',
             'status', 'custodian_swam', 'custodian_csm', 'custodian_vul']
 
 admin.site.register(OrganizationalUnit, OrganizationalUnitAdmin)

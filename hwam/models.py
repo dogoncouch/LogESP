@@ -63,8 +63,8 @@ class HardwareAsset(models.Model):
     parent_hardware = models.ForeignKey('self',
             related_name='child_hardware',
             null=True, blank=True, on_delete=models.SET_NULL)
-    asset_name = models.CharField(max_length=30)
-    asset_desc = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
             related_name='hardware_assets',
             on_delete=models.PROTECT)
@@ -87,7 +87,7 @@ class HardwareAsset(models.Model):
             null=True, blank=True)
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
-        return self.asset_name
+        return self.name
     def is_active(self):
         return self.status == 1
     is_active.admin_order_field = 'status'
@@ -115,8 +115,8 @@ class SoftwareAsset(models.Model):
     parent_software = models.ManyToManyField('self',
             related_name='child_software', blank=True,
             symmetrical=False)
-    asset_name = models.CharField(max_length=30)
-    asset_desc = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
     org_unit = models.ForeignKey(OrganizationalUnit,
             related_name='software_assets',
             on_delete=models.PROTECT)
@@ -141,7 +141,7 @@ class SoftwareAsset(models.Model):
             null=True, blank=True)
     date_eol = models.DateField('end of life', null=True, blank=True)
     def __str__(self):
-        return self.asset_name
+        return self.name
     def is_active(self):
         return self.status == 1
     is_active.admin_order_field = 'status'

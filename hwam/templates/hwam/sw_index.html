@@ -10,14 +10,14 @@
         <ul>
             {% for a in sw_list.0 %}
                 <li><a href="{% url 'hwam:sw_detail' a.id %}">
-                        {{ a.asset_name }}</a></li>
+                        {{ a }}</a></li>
             {% endfor %}
         </ul></li>
         <li>Running on software:
         <ul>
             {% for a in sw_list.1 %}
                 <li><a href="{% url 'hwam:sw_detail' a.id %}">
-                        {{ a.asset_name }}</a></li>
+                        {{ a }}</a></li>
             {% endfor %}
         </ul></li>
     </ul>
