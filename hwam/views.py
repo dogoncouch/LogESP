@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse
+from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 
@@ -67,6 +67,9 @@ class SWDetailView(DetailView):
 class OUCreateView(CreateView):
     model = OrganizationalUnit
     fields = ['unit_name', 'unit_desc', 'unit_contact', 'parent_ou']
+    #success_url = 
+    def get_success_url(self):
+        return reverse_lazy('hwam:ou_detail', args=(self.object.id,))
 
 class HWCreateView(CreateView):
     model = HardwareAsset
@@ -78,6 +81,8 @@ class HWCreateView(CreateView):
             'location', 'status',
             'date_added', 'date_eol',
             ]
+    def get_success_url(self):
+        return reverse_lazy('hwam:hw_detail', args=(self.object.id,))
 
 class SWCreateView(CreateView):
     model = SoftwareAsset
@@ -90,4 +95,6 @@ class SWCreateView(CreateView):
             'status',
             'date_added', 'date_eol',
             ]
+    def get_success_url(self):
+        return reverse_lazy('hwam:sw_detail', args=(self.object.id,))
 
