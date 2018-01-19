@@ -1,6 +1,6 @@
 {% include "hwam/base.html" %}
 
-<h1>{{ ou.unit_name }} (Organizational Unit)</h1>
+<h1>{{ ou }} (Organizational Unit)</h1>
 <a href="{% url 'admin:hwam_organizationalunit_change' ou.id %}">Edit</a>
 <p>{{ ou.unit_desc }}</p>
 <ul>
@@ -11,26 +11,26 @@
     {% if ou.parent_ou %}
         <li>Parent OU:
             <a href="{% url 'hwam:ou_detail' ou.parent_ou.id %}">
-                {{ ou.parent_ou.unit_name }}</a></li>
+                {{ ou.parent_ou }}</a></li>
     {% endif %}
     {% if ou.child_ous.all %}
         <li>Child OUs:<ul>
         {% for u in ou.child_ous.all %}
             <li><a href="{% url 'hwam:ou_detail' u.id %}">
-                {{ u.unit_name }}</a></li>
+                {{ u }}</a></li>
         {% endfor %}
         </ul></li>
     {% endif %}
     <li>Hardware Assets:<ul>
         {% for a in ou.hardware_assets.all %}
             <li><a href="{% url 'hwam:hw_detail' a.id %}">
-                    {{ a.asset_name }}</a></li>
+                    {{ a }}</a></li>
         {% endfor %}
         </ul></li>
     <li>Software Assets:<ul>
         {% for a in ou.software_assets.all %}
             <li><a href="{% url 'hwam:sw_detail' a.id %}">
-                    {{ a.asset_name }}</a></li>
+                    {{ a }}</a></li>
         {% endfor %}
         </ul></li>
 </ul>
