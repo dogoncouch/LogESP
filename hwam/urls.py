@@ -19,5 +19,11 @@ urlpatterns = [
         name='hw_create'),
     path('sw/add/', login_required(views.SWCreateView.as_view()),
         name='sw_create'),
+    path('ou/<int:pk>/update/', login_required(views.OUUpdateView.as_view()),
+        name='ou_update'),
+    path('hw/<int:pk>/update/', login_required(views.HWUpdateView.as_view()),
+        name='hw_update'),
+    path('sw/<int:pk>/update/', login_required(views.SWUpdateView.as_view()),
+        name='sw_update'),
 ]
 
