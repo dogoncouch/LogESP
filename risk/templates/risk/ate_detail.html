@@ -1,7 +1,7 @@
 {% include "risk/base.html" %}
 
 <h1>{{ ate.name }} (Adversarial Threat Event)</h1>
-<a href="{% url 'admin:risk_advthreatevent_change' ate.id %}">Edit</a>
+<a href="{% url 'risk:ate_update' ate.id %}">Edit</a>
 
 <p>{{ ate.desc }}</p>
 <ul>

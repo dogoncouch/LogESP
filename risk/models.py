@@ -78,7 +78,8 @@ class NonAdvThreatSource(models.Model):
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     in_scope = models.BooleanField(default=True)
-    range_of_effect = models.IntegerField(validators=[validate_scale_range])
+    range_of_effect = models.IntegerField(
+            validators=[validate_scale_range])
     def __str__(self):
         return self.name
 
@@ -108,8 +109,10 @@ class AdvThreatEvent(models.Model):
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
-    likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
-    likelihood_impact = models.IntegerField(validators=[validate_scale_range])
+    likelihood_initiation = models.IntegerField(
+            validators=[validate_scale_range])
+    likelihood_impact = models.IntegerField(
+            validators=[validate_scale_range])
     def __str__(self):
         return self.name
     def calc_likelihood(self):
@@ -132,8 +135,10 @@ class NonAdvThreatEvent(models.Model):
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
-    likelihood_initiation = models.IntegerField(validators=[validate_scale_range])
-    likelihood_impact = models.IntegerField(validators=[validate_scale_range])
+    likelihood_initiation = models.IntegerField(
+            validators=[validate_scale_range])
+    likelihood_impact = models.IntegerField(
+            validators=[validate_scale_range])
     def __str__(self):
         return self.name
     def calc_likelihood(self):
