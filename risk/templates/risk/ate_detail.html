@@ -7,7 +7,7 @@
 <ul>
     <li>Type: {{ ate.event_type }}</li>
     <li>Sources:<ul>
-            {% for s in ate.sources %}
+            {% for s in ate.sources.all %}
                 <li>{{ s }}</li>
             {% endfor %}
         </ul></li>
@@ -20,12 +20,12 @@
             <li>Calculated Likelihood: {{ ate.calc_likelihood }}</li>
         </ul></li>
     <li>Impacts:<ul>
-            {% for i in ate.impacts %}
+            {% for i in ate.impacts.all %}
                 <li>{{ i }}</li>
             {% endfor %}
         </ul></li>
     <li>Vulnerabilities:<ul>
-            {% for v in ate.vulnerabilities %}
+            {% for v in ate.vulnerabilities.all %}
                 <li>{{ v }}</li>
             {% endfor %}
         </ul></li>

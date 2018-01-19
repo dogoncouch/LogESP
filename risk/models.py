@@ -43,7 +43,9 @@ class AdvThreatSource(models.Model):
     targeting = models.IntegerField(validators=[validate_scale_range],
             null=True, blank=True)
     def __str__(self):
-        return self.name
+        val = (self.source_type.source_category.name,
+                self.source_type.name, self.name)
+        return '.'.join(val)
 
 class NonAdvThreatSrcClass(models.Model):
     name = models.CharField(max_length=30)
@@ -83,7 +85,10 @@ class NonAdvThreatSource(models.Model):
             validators=[validate_scale_range],
             null=True, blank=True)
     def __str__(self):
-        return self.name
+        val = (self.source_type.source_category.source_class.name,
+                self.source_type.source_category.name,
+                self.source_type.name, self.name)
+        return '.'.join(val)
 
 class AdvThreatEventCategory(models.Model):
     name = models.CharField(max_length=30)
@@ -121,7 +126,11 @@ class AdvThreatEvent(models.Model):
                 self.event_type.name, self.name)
         return '.'.join(val)
     def calc_likelihood(self):
-        return self.likelihood_initiation * self.likelihood_impact // 100
+        if self.likelihood_initiation and self.likelihood_impact:
+            return self.likelihood_initiation * \
+                    self.likelihood_impact // 100
+        else:
+            return None
 
 class NonAdvThreatEventType(models.Model):
     name = models.CharField(max_length=30)
@@ -148,7 +157,11 @@ class NonAdvThreatEvent(models.Model):
     def __str__(self):
         return self.name
     def calc_likelihood(self):
-        return self.likelihood_initiation * self.likelihood_impact // 100
+        if self.likelihood_initiation and self.likelihood_impact:
+            return self.likelihood_initiation * \
+                    self.likelihood_impact // 100
+        else:
+            return None
 
 class VulnerabilityClass(models.Model):
     name = models.CharField(max_length=30)
