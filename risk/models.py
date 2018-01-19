@@ -32,12 +32,12 @@ class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     source_type = models.ForeignKey(AdvThreatSrcType,
-            related_name='adv_sources',
-            null=True, blank=True, on_delete = models.SET_NULL)
+            related_name='adv_sources', on_delete = models.CASCADE)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     in_scope = models.BooleanField(default=True)
-    capability = models.IntegerField(validators=[validate_scale_range])
+    capability = models.IntegerField(validators=[validate_scale_range],
+            null=True, blank=True)
     intent = models.IntegerField(validators=[validate_scale_range])
     targeting = models.IntegerField(validators=[validate_scale_range])
     def __str__(self):
@@ -73,13 +73,13 @@ class NonAdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     source_type = models.ForeignKey(NonAdvThreatSrcType,
-            related_name='nonadv_sources',
-            null=True, blank=True, on_delete = models.SET_NULL)
+            related_name='nonadv_sources', on_delete = models.CASCADE)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     in_scope = models.BooleanField(default=True)
     range_of_effect = models.IntegerField(
-            validators=[validate_scale_range])
+            validators=[validate_scale_range],
+            null=True, blank=True)
     def __str__(self):
         return self.name
 
@@ -102,19 +102,22 @@ class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     event_type = models.ForeignKey(AdvThreatEventType,
-            related_name='adv_events',
-            null=True, blank=True, on_delete=models.SET_NULL)
+            related_name='adv_events', on_delete=models.CASCADE)
     sources = models.ManyToManyField(AdvThreatSource,
             related_name='threat_events', blank=True)
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     likelihood_initiation = models.IntegerField(
-            validators=[validate_scale_range])
+            validators=[validate_scale_range],
+            null=True, blank=True)
     likelihood_impact = models.IntegerField(
-            validators=[validate_scale_range])
+            validators=[validate_scale_range],
+            null=True, blank=True)
     def __str__(self):
-        return self.name
+        val = (self.event_type.source_category.name,
+                self.event_type.name, self.name)
+        return '.'.join(val)
     def calc_likelihood(self):
         return self.likelihood_initiation * self.likelihood_impact // 100
 
@@ -128,17 +131,18 @@ class NonAdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)
     event_type = models.ForeignKey(NonAdvThreatEventType,
-            related_name='nonadv_events',
-            null=True, blank=True, on_delete=models.SET_NULL)
+            related_name='nonadv_events', on_delete=models.CASCADE)
     sources = models.ManyToManyField(NonAdvThreatSource,
             related_name='threat_events', blank=True)
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     likelihood_initiation = models.IntegerField(
-            validators=[validate_scale_range])
+            validators=[validate_scale_range],
+            null=True, blank=True)
     likelihood_impact = models.IntegerField(
-            validators=[validate_scale_range])
+            validators=[validate_scale_range],
+            null=True, blank=True)
     def __str__(self):
         return self.name
     def calc_likelihood(self):
