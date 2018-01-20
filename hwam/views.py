@@ -33,6 +33,26 @@ class HWIndexView(ListView):
         return HardwareAsset.objects.filter(
                 parent_hardware=None).order_by('org_unit')
 
+class HWSearchView(ListView):
+    model = HardwareAsset
+    template_name = "hwam/hw_search.html"
+    paginate_by = 20
+    def get_queryset(self):
+        filter_val = self.request.GET.get('filter', '')
+        #order = self.request.GET.get('orderby', 'name')
+        #new_context = HardwareAsset.objects.filter(
+        #    name=filter_val,
+        #).order_by(order)
+        new_context = HardwareAsset.objects.filter(
+            name=filter_val,
+        )
+        return new_context
+    def get_context_data(self, **kwargs):
+        context = super(HWSearchView, self).get_context_data(**kwargs)
+        context['filter'] = self.request.GET.get('filter', '')
+        #context['orderby'] = self.request.GET.get('orderby', 'org_unit')
+        return context
+
 class SWIndexView(ListView):
     model = SoftwareAsset
     template_name = 'hwam/sw_index.html'

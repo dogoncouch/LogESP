@@ -1,0 +1,18 @@
+{% include "hwam/base.html" %}
+
+<h1>Hardware Assets</h1>
+<a href="{% url 'admin:hwam_hardwareasset_changelist' %}">Admin</a>
+<a href="{% url 'hwam:hw_create' %}">Add</a>
+
+<form method="get" action="{% url 'hwam:hw_search' %}">
+    <p>Filter: <input type="text" value={{filter}} name="name"/></p>
+    <p><input type="submit" name="submit" value="submit"/></p>
+</form>
+
+{% if hw_list %}
+    <ul>
+        <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a }}</a></li>
+    </ul>
+{% else %}
+    <p>No assets.</p>
+{% endif %}
