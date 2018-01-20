@@ -38,16 +38,18 @@ python manage.py createsuperuser
 (provide username, password)
 ```
 
-- Step 5: Start the server:
+- Step 5: (Optional) Add NIST standard threat information:
+```
+python manage.py loaddata risk.fixtures.nist_threat_event_types.json risk.fixtures.nist_threat_src_types.json
+python manage.py loaddata risk.fixtures.generic_nist_threat_events.json risk.fixtures.generic_nist_threat_sources.json
+```
+
+- Step 6: Start the server:
 ```
 python manage.py runserver
 ```
 
-- Step 6: Create some objects:
-
-Navigate to http://localhost:8000/admin and log in as the superuser account you just created. First create an organizational unit, then some hardware and software assets. You can also create users and groups.
-
-- Step 7: View your assets: http://localhost:8000
+- Step 7: Try it: http://localhost:8000
 
 ## Notes
 LDSI is still in early development. Database changes that break backwards compatibility are still being made on a regular basis.
