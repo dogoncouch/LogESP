@@ -12,6 +12,12 @@ from .models import Vulnerability, RiskCondition, Impact
 def index(request):
     return render(request, 'risk/index.html')
 
+def at_index(request):
+    return render(request, 'risk/at_index.html')
+
+def nt_index(request):
+    return render(request, 'risk/nt_index.html')
+
 class ATEIndexView(ListView):
     model = AdvThreatEvent
     template_name = 'risk/ate_index.html'

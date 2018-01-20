@@ -1,0 +1,17 @@
+{% include "risk/base.html" %}
+
+<h1>Adversarial Threats</h1>
+
+<p>Based on <a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final">NIST SP 800-30r1</a>.</p>
+
+<ul>
+    <li>Adversarial Threats:<ul>
+            <li><a href="{% url 'risk:ats_index' %}">
+                    Adversarial Threat Sources</a></li>
+            <li><a href="{% url 'risk:ate_index' %}">
+                    Adversarial Threat Events</a></li>
+            <li><a href="{% url 'risk:vuln_index' %}">
+                    Vulnerabilities</a></li>
+        </ul></li>
+    <li><a href="{% url 'risk:impact_index' %}">Impacts</a></li>
+</ul>

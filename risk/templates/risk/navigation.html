@@ -4,15 +4,17 @@
         <div class="navbar-content">
             <b>Risk</b>
             &middot
-            <a class="navbar" href="{% url 'risk:index' %}">Home</a>
+            <a class="navbar" href="{% url 'risk:index' %}">
+                Home</a>
             &middot
-            <a class="navbar" href="{% url 'risk:ate_index' %}">Adv. Events</a>
+            <a class="navbar" href="{% url 'risk:at_index' %}">
+                Adv. Threats</a>
             &middot
-            <a class="navbar" href="{% url 'risk:ats_index' %}">Adv. Sources</a>
+            <a class="navbar" href="{% url 'risk:nt_index' %}">
+                Non-Adv. Threats</a>
             &middot
-            <a class="navbar" href="{% url 'risk:nte_index' %}">NonAdv. Events</a>
-            &middot
-            <a class="navbar" href="{% url 'risk:nts_index' %}">NonAdv. Sources</a>
+            <a class="navbar" href="{% url 'risk:impact_index' %}">
+                Impacts</a>
         </div>
     </div>
 </div>

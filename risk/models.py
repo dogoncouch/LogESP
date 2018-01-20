@@ -258,7 +258,8 @@ class NonAdvThreatEvent(models.Model):
     impacts = models.ManyToManyField(Impact,
             related_name='nonadv_threat_events', blank=True)
     def __str__(self):
-        return self.name
+        val = (self.event_type.name, self.name)
+        return '.'.join(val)
     def calc_likelihood(self):
         if self.likelihood_initiation and self.likelihood_impact:
             return self.likelihood_initiation * \
