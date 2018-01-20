@@ -32,16 +32,16 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-- Step 4: Create a superuser:
-```
-python manage.py createsuperuser
-(provide username, password)
-```
-
-- Step 5: (Optional) Add NIST standard threat information:
+- Step 4: (Optional) Add NIST standard threat information:
 ```
 python manage.py loaddata risk.fixtures.nist_threat_event_types.json risk.fixtures.nist_threat_src_types.json
 python manage.py loaddata risk.fixtures.generic_nist_threat_events.json risk.fixtures.generic_nist_threat_sources.json
+```
+
+- Step 5: Create a superuser:
+```
+python manage.py createsuperuser
+(provide username, password)
 ```
 
 - Step 6: Start the server:
