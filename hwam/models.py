@@ -20,7 +20,7 @@ class OrganizationalUnit(models.Model):
         return self.absolute_name()
     def absolute_name(self):
         if self.parent_ou:
-            return '.'.join((self.parent_ou.name, self.name))
+            return '.'.join((self.parent_ou.absolute_name(), self.name))
         else:
             return self.name
     absolute_name.admin_order_field = 'name'
