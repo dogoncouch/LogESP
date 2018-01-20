@@ -4,3 +4,8 @@
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
 
 {% include "navigation.html" %}
+
+<div class="main">
+    {% block content %}
+    {% endblock %}
+</div>
