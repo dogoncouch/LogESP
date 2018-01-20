@@ -6,14 +6,19 @@
 <p>{{ ate.desc }}</p>
 <ul>
     <li>Type: {{ ate.event_type }}</li>
+    <li>Info Source: {{ ate.info_source }}</li>
+    <li>Tier: {{ate.tier }}</li>
     <li>Sources:<ul>
             {% for s in ate.sources.all %}
                 <li>{{ s }}</li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ ate.relevance }}</li>
-    <li>Info Source: {{ ate.info_source }}</li>
-    <li>Tier: {{ate.tier }}</li>
+    <li>Vulnerabilities:<ul>
+            {% for v in ate.vulnerabilities.all %}
+                <li>{{ v }}</li>
+            {% endfor %}
+        </ul></li>
     <li>Likelihoods:<ul>
             <li>Likelihood of initiation: {{ ate.likelihood_initiation }}</li>
             <li>Likelihood of adverse impact: {{ ate.likelihood_impact }}</li>
@@ -22,11 +27,6 @@
     <li>Impacts:<ul>
             {% for i in ate.impacts.all %}
                 <li>{{ i }}</li>
-            {% endfor %}
-        </ul></li>
-    <li>Vulnerabilities:<ul>
-            {% for v in ate.vulnerabilities.all %}
-                <li>{{ v }}</li>
             {% endfor %}
         </ul></li>
 </ul>

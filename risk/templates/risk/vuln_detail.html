@@ -1,0 +1,13 @@
+{% include "risk/base.html" %}
+
+<h1>{{ vuln.name }} (Vulnerability)</h1>
+<a href="{% url 'risk:vuln_update' vuln.id %}">Edit</a>
+
+<p>{{ vuln.desc }}</p>
+
+<ul>
+    <li>Vulnerability Type: {{ vuln.vuln_type }}</li>
+    <li>Severity (1-100): {{ vuln.severity }}</li>
+    <li>Information Source: {{ vuln.info_source }}</li>
+    <li>Info Source Tier: {{ vuln.tier }}</li>
+</ul>

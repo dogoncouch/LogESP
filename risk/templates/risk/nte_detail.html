@@ -6,14 +6,19 @@
 <p>{{ nte.desc }}</p>
 <ul>
     <li>Type: {{ nte.type }}</li>
+    <li>Info Source: {{ nte.info_source }}</li>
+    <li>Tier: {{nte.tier }}</li>
     <li>Sources:<ul>
             {% for s in nte.sources.all %}
                 <li>{{ s }}</li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ nte.relevance }}</li>
-    <li>Info Source: {{ nte.info_source }}</li>
-    <li>Tier: {{nte.tier }}</li>
+    <li>Predisposing Conditions:<ul>
+            {% for v in nte.risk_conditions.all %}
+                <li>{{ v }}</li>
+            {% endfor %}
+        </ul></li>
     <li>Likelihoods:<ul>
             <li>Likelihood of initiation: {{ nte.likelihood_initiation }}</li>
             <li>Likelihood of adverse impact: {{ nte.likelihood_impact }}</li>
@@ -22,11 +27,6 @@
     <li>Impacts:<ul>
             {% for i in nte.impacts.all %}
                 <li>{{ i }}</li>
-            {% endfor %}
-        </ul></li>
-    <li>Vulnerabilities:<ul>
-            {% for v in nte.risk_conditions.all %}
-                <li>{{ v }}</li>
             {% endfor %}
         </ul></li>
 </ul>

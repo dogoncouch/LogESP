@@ -67,11 +67,26 @@ class NTSDetailView(DetailView):
     template_name = 'risk/nts_detail.html'
     context_object_name = 'nts'
 
+class VulnDetailView(DetailView):
+    model = Vulnerability
+    template_name = 'risk/vuln_detail.html'
+    context_object_name = 'vuln'
+
+class CondDetailView(DetailView):
+    model = RiskCondition
+    template_name = 'risk/cond_detail.html'
+    context_object_name = 'cond'
+
+class ImpactDetailView(DetailView):
+    model = Impact
+    template_name = 'risk/impact_detail.html'
+    context_object_name = 'impact'
+
 class ATECreateView(CreateView):
     model = AdvThreatEvent
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact']
+            'likelihood_impact', 'vulnerabilities', 'impacts']
     def get_success_url(self):
         return reverse_lazy('risk:ate_detail', args=(self.object.id,))
 
@@ -79,7 +94,7 @@ class NTECreateView(CreateView):
     model = NonAdvThreatEvent
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact']
+            'likelihood_impact', 'risk_conditions', 'impacts']
     def get_success_url(self):
         return reverse_lazy('risk:nte_detail', args=(self.object.id,))
 
@@ -97,11 +112,32 @@ class NTSCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('risk:nts_detail', args=(self.object.id,))
 
+class VulnCreateView(CreateView):
+    model = Vulnerability
+    fields = ['name', 'desc', 'vuln_type', 'severity',
+            'info_source', 'tier']
+    def get_success_url(self):
+        return reverse_lazy('risk:vuln_detail', args=(self.object.id,))
+
+class CondCreateView(CreateView):
+    model = RiskCondition
+    fields = ['name', 'desc', 'condition_type', 'pervasiveness',
+            'info_source', 'tier']
+    def get_success_url(self):
+        return reverse_lazy('risk:cond_detail', args=(self.object.id,))
+
+class ImpactCreateView(CreateView):
+    model = Impact
+    fields = ['name', 'desc', 'impact_type', 'info_source', 'tier',
+            'severity', 'impact_tier']
+    def get_success_url(self):
+        return reverse_lazy('risk:ate_detail', args=(self.object.id,))
+
 class ATEUpdateView(UpdateView):
     model = AdvThreatEvent
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact']
+            'likelihood_impact', 'vulnerabilities', 'impacts']
     def get_success_url(self):
         return reverse_lazy('risk:ate_detail', args=(self.object.id,))
 
@@ -127,4 +163,24 @@ class NTSUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('risk:nts_detail', args=(self.object.id,))
 
+class VulnUpdateView(UpdateView):
+    model = Vulnerability
+    fields = ['name', 'desc', 'vuln_type', 'severity',
+            'info_source', 'tier']
+    def get_success_url(self):
+        return reverse_lazy('risk:vuln_detail', args=(self.object.id,))
+
+class CondUpdateView(UpdateView):
+    model = RiskCondition
+    fields = ['name', 'desc', 'condition_type', 'pervasiveness',
+            'info_source', 'tier']
+    def get_success_url(self):
+        return reverse_lazy('risk:cond_detail', args=(self.object.id,))
+
+class ImpactUpdateView(UpdateView):
+    model = Impact
+    fields = ['name', 'desc', 'impact_type', 'info_source', 'tier',
+            'severity', 'impact_tier']
+    def get_success_url(self):
+        return reverse_lazy('risk:impact_detail', args=(self.object.id,))
 

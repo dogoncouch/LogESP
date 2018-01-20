@@ -1,0 +1,13 @@
+{% include "risk/base.html" %}
+
+<h1>{{ cond.name }} (Predisposint Condition)</h1>
+<a href="{% url 'risk:cond_update' cond.id %}">Edit</a>
+
+<p>{{ cond.desc }}</p>
+
+<ul>
+    <li>Condition Type: {{ cond.cond_type }}</li>
+    <li>Pervasiveness (1-100): {{ cond.pervasiveness }}</li>
+    <li>Information Source: {{ cond.info_source }}</li>
+    <li>Info Source Tier: {{ cond.tier }}</li>
+</ul>
