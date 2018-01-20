@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 
 from .models import AdvThreatEvent, NonAdvThreatEvent
 from .models import AdvThreatSource, NonAdvThreatSource
+from .models import Vulnerability, RiskCondition, Impact
 
 # Create your views here.
 
