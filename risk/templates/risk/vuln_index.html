@@ -1,0 +1,16 @@
+{% include "risk/base.html" %}
+
+<h1>Vulnerabilities</h1>
+<a href="{% url 'admin:risk_vulnerability_changelist' %}">Admin</a>
+<a href="{% url 'risk:vuln_create' %}">Add</a>
+
+{% if vuln_list %}
+    <ul>
+        {% for vuln in vuln_list %}
+            <li><a href="{% url 'risk:vuln_detail' vuln.id %}">
+                    {{ vuln }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No vulnerabilities.</p>
+{% endif %}

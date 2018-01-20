@@ -31,6 +31,21 @@ class NTSIndexView(ListView):
     template_name = 'risk/nts_index.html'
     context_object_name = 'nts_list'
 
+class VulnIndexView(ListView):
+    model = Vulnerability
+    template_name = 'risk/vuln_index.html'
+    context_object_name = 'vuln_list'
+
+class CondIndexView(ListView):
+    model = RiskCondition
+    template_name = 'risk/cond_index.html'
+    context_object_name = 'cond_list'
+
+class ImpactIndexView(ListView):
+    model = Impact
+    template_name = 'risk/impact_index.html'
+    context_object_name = 'impact_list'
+
 class ATEDetailView(DetailView):
     model = AdvThreatEvent
     template_name = 'risk/ate_detail.html'
