@@ -49,7 +49,10 @@ class Vulnerability(models.Model):
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     def __str__(self):
-        return self.name
+        val = (self.vuln_type.vuln_category.vuln_class.name,
+                self.vuln_type.vuln_category.name,
+                self.vuln_type.name, self.name)
+        return '.'.join(val)
 
 class ConditionClass(models.Model):
     name = models.CharField(max_length=30)
@@ -87,7 +90,10 @@ class RiskCondition(models.Model):
     info_source = models.CharField(max_length=50, null=True, blank=True)
     tier = models.IntegerField(validators=[validate_tier_range])
     def __str__(self):
-        return self.name
+        val = (self.condition_type.condition_category.condition_class.name,
+                self.condition_type.condition_category.name,
+                self.condition_type.name, self.name)
+        return '.'.join(val)
 
 class ImpactType(models.Model):
     name = models.CharField(max_length=30)
@@ -106,7 +112,7 @@ class Impact(models.Model):
     severity = models.IntegerField(validators=[validate_scale_range])
     impact_tier = models.IntegerField(validators=[validate_tier_range])
     def __str__(self):
-        return self.name
+        return '.'.join(self.impact_type.name, self.name)
 
 class AdvThreatSrcCategory(models.Model):
     name = models.CharField(max_length=30)

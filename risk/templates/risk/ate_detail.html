@@ -7,16 +7,17 @@
 <ul>
     <li>Type: {{ ate.event_type }}</li>
     <li>Info Source: {{ ate.info_source }}</li>
-    <li>Tier: {{ate.tier }}</li>
-    <li>Sources:<ul>
+    <li>Info Tier: {{ate.tier }}</li>
+    <li>Sources (capability/intent/targeting):<ul>
             {% for s in ate.sources.all %}
-                <li>{{ s }}</li>
+                <li>{{ s }}
+                    ({{ s.capability }}/{{ s.intent }}/{{ s.targeting }})</li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ ate.relevance }}</li>
-    <li>Vulnerabilities:<ul>
+    <li>Vulnerabilities (severity):<ul>
             {% for v in ate.vulnerabilities.all %}
-                <li>{{ v }}</li>
+                <li>{{ v }} ({{ v.severity }})</li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
@@ -24,9 +25,9 @@
             <li>Likelihood of adverse impact: {{ ate.likelihood_impact }}</li>
             <li>Calculated Likelihood: {{ ate.calc_likelihood }}</li>
         </ul></li>
-    <li>Impacts:<ul>
+    <li>Impacts (severity/impact tier):<ul>
             {% for i in ate.impacts.all %}
-                <li>{{ i }}</li>
+                <li>{{ i }} ({{ i.severity }}/{{ i.impact_tier }})</li>
             {% endfor %}
         </ul></li>
 </ul>

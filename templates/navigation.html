@@ -15,9 +15,11 @@
             {% endif %}
             &middot
             {% if user.is_authenticated %}
-                <a class="navbar" href="{% url 'logout' %}">Logout</a>
+                <a class="navbar" href="{% url 'logout' %}?next={% url 'index' %}">
+                    Logout</a>
             {% else %}
-                <a class="navbar" href="{% url 'login' %}">Login</a>
+                <a class="navbar" href="{% url 'login' %}?next={% url 'index' %}">
+                    Login</a>
             {% endif %}
         </div>
     </div>

@@ -7,10 +7,10 @@
 <ul>
     <li>Type: {{ nte.type }}</li>
     <li>Info Source: {{ nte.info_source }}</li>
-    <li>Tier: {{nte.tier }}</li>
-    <li>Sources:<ul>
+    <li>Info Tier: {{nte.tier }}</li>
+    <li>Sources (pervasiveness):<ul>
             {% for s in nte.sources.all %}
-                <li>{{ s }}</li>
+                <li>{{ s }} ({{ s.pervasiveness }})</li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ nte.relevance }}</li>
@@ -24,9 +24,9 @@
             <li>Likelihood of adverse impact: {{ nte.likelihood_impact }}</li>
             <li>Calculated Likelihood: {{ nte.calc_likelihood }}</li>
         </ul></li>
-    <li>Impacts:<ul>
+    <li>Impacts (severity/impact tier):<ul>
             {% for i in nte.impacts.all %}
-                <li>{{ i }}</li>
+                <li>{{ i }} ({{ i.severity }}/{{ i.impact_tier }})</li>
             {% endfor %}
         </ul></li>
 </ul>
