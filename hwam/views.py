@@ -36,9 +36,10 @@ class HWIndexView(ListView):
 class HWSearchView(ListView):
     model = HardwareAsset
     template_name = "hwam/hw_search.html"
+    context_object_name = 'hw_list'
     paginate_by = 20
     def get_queryset(self):
-        filter_val = self.request.GET.get('filter', '')
+        filter_val = self.request.GET.get('filter')
         #order = self.request.GET.get('orderby', 'name')
         #new_context = HardwareAsset.objects.filter(
         #    name=filter_val,

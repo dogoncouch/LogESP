@@ -5,14 +5,16 @@
 <a href="{% url 'hwam:hw_create' %}">Add</a>
 
 <form method="get" action="{% url 'hwam:hw_search' %}">
-    <p>Filter: <input type="text" value={{filter}} name="name"/></p>
-    <p><input type="submit" name="submit" value="submit"/></p>
+    <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>
+    <p><input type="submit" name="submit" value="Submit"/></p>
 </form>
 
 {% if hw_list %}
-    <ul>
-        <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a }}</a></li>
-    </ul>
+    {% for a in hw_list %}
+        <ul>
+            <li><a href="{% url 'hwam:hw_detail' a.id %}">{{ a }}</a></li>
+        </ul>
+    {% endfor %}
 {% else %}
     <p>No assets.</p>
 {% endif %}
