@@ -1,26 +1,20 @@
 {% include "hwam/base.html" %}
 
-<h1>Software Assets</h1>
-<a href="{% url 'admin:hwam_softwareasset_changelist' %}">Admin</a>
+<h1>Software Asset Search</h1>
+<a href="{% url 'admin:hwam_hardwareasset_changelist' %}">Admin</a>
 <a href="{% url 'hwam:sw_create' %}">Add</a>
 
+<form method="get" action="{% url 'hwam:sw_search' %}">
+    <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>
+    <p><input type="submit" name="submit" value="Submit"/></p>
+</form>
+
 {% if sw_list %}
-    <ul>
-        <li>Running on hardware:
+    {% for a in sw_list %}
         <ul>
-            {% for a in sw_list.0 %}
-                <li><a href="{% url 'hwam:sw_detail' a.id %}">
-                        {{ a }}</a></li>
-            {% endfor %}
-        </ul></li>
-        <li>Running on software:
-        <ul>
-            {% for a in sw_list.1 %}
-                <li><a href="{% url 'hwam:sw_detail' a.id %}">
-                        {{ a }}</a></li>
-            {% endfor %}
-        </ul></li>
-    </ul>
+            <li><a href="{% url 'hwam:sw_detail' a.id %}">{{ a }}</a></li>
+        </ul>
+    {% endfor %}
 {% else %}
     <p>No assets.</p>
 {% endif %}

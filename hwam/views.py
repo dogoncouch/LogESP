@@ -40,14 +40,13 @@ class HWSearchView(ListView):
     paginate_by = 20
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
-        #order = self.request.GET.get('orderby', 'name')
-        #new_context = HardwareAsset.objects.filter(
-        #    name=filter_val,
-        #).order_by(order)
-        new_context = HardwareAsset.objects.filter(
-            name=filter_val,
-        )
-        return new_context
+        if filter_val and filter_val != '':
+            new_context = HardwareAsset.objects.filter(
+                name=filter_val,
+            )
+            return new_context
+        else:
+            return SoftwareAsset.objects.all()
     def get_context_data(self, **kwargs):
         context = super(HWSearchView, self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
@@ -69,6 +68,25 @@ class SWIndexView(ListView):
             return (p, c)
         else:
             return None
+
+class SWSearchView(ListView):
+    model = SoftwareAsset
+    template_name = "hwam/sw_search.html"
+    context_object_name = 'sw_list'
+    paginate_by = 20
+    def get_queryset(self):
+        filter_val = self.request.GET.get('filter')
+        if filter_val and filter_val != '':
+            new_context = SoftwareAsset.objects.filter(
+                name=filter_val,
+            )
+            return new_context
+        else:
+            return SoftwareAsset.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super(SWSearchView, self).get_context_data(**kwargs)
+        context['filter'] = self.request.GET.get('filter', '')
+        return context
 
 class OUDetailView(DetailView):
     model = OrganizationalUnit

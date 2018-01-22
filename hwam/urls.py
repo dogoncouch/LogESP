@@ -11,6 +11,7 @@ urlpatterns = [
     path('hw/', views.HWIndexView.as_view(), name='hw_index'),
     path('sw/', views.SWIndexView.as_view(), name='sw_index'),
     path('hw/search/', views.HWSearchView.as_view(), name='hw_search'),
+    path('sw/search/', views.SWSearchView.as_view(), name='sw_search'),
     path('ou/<int:pk>/', views.OUDetailView.as_view(), name='ou_detail'),
     path('hw/<int:pk>/', views.HWDetailView.as_view(), name='hw_detail'),
     path('sw/<int:pk>/', views.SWDetailView.as_view(), name='sw_detail'),
