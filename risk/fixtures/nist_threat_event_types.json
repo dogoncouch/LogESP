@@ -871,13 +871,21 @@
   "model": "risk.nonadvthreateventtype",
   "pk": 7,
   "fields": {
+    "name": "Backup facil earthquake",
+    "desc": "Earthquake at backup facility."
+  }
+},
+{
+  "model": "risk.nonadvthreateventtype",
+  "pk": 8,
+  "fields": {
     "name": "Primary facil fire",
     "desc": "Fire at primary facility."
   }
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 8,
+  "pk": 9,
   "fields": {
     "name": "Backup facil fire",
     "desc": "Fire at backup facility"
@@ -885,7 +893,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 9,
+  "pk": 10,
   "fields": {
     "name": "Primary facil flood",
     "desc": "Flood at primary facility."
@@ -893,7 +901,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 10,
+  "pk": 11,
   "fields": {
     "name": "Backup facil flood",
     "desc": "Flood at backup facility."
@@ -901,7 +909,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 11,
+  "pk": 12,
   "fields": {
     "name": "Primary facil hurricane",
     "desc": "Hurricane at primary facility."
@@ -909,7 +917,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 12,
+  "pk": 13,
   "fields": {
     "name": "Backup facil hurricane",
     "desc": "Hurricane at backup facility."
@@ -917,7 +925,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 13,
+  "pk": 14,
   "fields": {
     "name": "Resource depletion",
     "desc": "Degraded processing performance due to resource depletion."
@@ -925,7 +933,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 14,
+  "pk": 15,
   "fields": {
     "name": "Vulnerability intro",
     "desc": "Introduction of vulnerabilities into software products."
@@ -933,7 +941,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 15,
+  "pk": 16,
   "fields": {
     "name": "Disk error",
     "desc": "Corrupted storage due to a disk error."
@@ -941,7 +949,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 16,
+  "pk": 17,
   "fields": {
     "name": "Pervasive disk error",
     "desc": "Multiple disk errors due to aging a set of devices all acquired at the same time, from the same supplier."
@@ -949,7 +957,7 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 17,
+  "pk": 18,
   "fields": {
     "name": "Primary facil windstorm",
     "desc": "Windstorm/tornado at primary facility."
@@ -957,18 +965,10 @@
 },
 {
   "model": "risk.nonadvthreateventtype",
-  "pk": 18,
+  "pk": 19,
   "fields": {
     "name": "Backup facil windstorm",
     "desc": "Windstorm/tornado at backup facility."
-  }
-},
-{
-  "model": "risk.nonadvthreateventtype",
-  "pk": 19,
-  "fields": {
-    "name": "Backup facil earthquake",
-    "desc": "Earthquake at backup facility."
   }
 }
 ]
