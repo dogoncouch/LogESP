@@ -1,8 +1,6 @@
 {% include "hwam/base.html" %}
 
 <h1>Hardware Asset Search</h1>
-<a href="{% url 'admin:hwam_hardwareasset_changelist' %}">Admin</a>
-<a href="{% url 'hwam:hw_create' %}">Add</a>
 
 <form method="get" action="{% url 'hwam:hw_search' %}">
     <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>
