@@ -2,6 +2,8 @@
 
 <h1>{{ hw.asset_name }} (Hardware Asset)</h1>
 <a href="{% url 'hwam:hw_update' hw.id %}">Edit</a>
+&middot
+<a href="{% url 'hwam:hw_delete' hw.id %}">Delete</a>
 <p>{{ hw.desc }}</p>
 <ul>
     <li>Organizational Unit:

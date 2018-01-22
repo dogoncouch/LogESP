@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Delete Hardware Asset</h1>
+
+<p>Are you sure you want to delete {{ hw }}?</p>
+
+<form action="{% url 'hwam:hw_delete' hw.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'hwam:hw_detail' hw.id %}">Cancel</a>
+</form>
+
+{% endblock %}

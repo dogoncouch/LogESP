@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
 
 from .models import OrganizationalUnit
@@ -168,5 +168,12 @@ class SWUpdateView(UpdateView):
             ]
     def get_success_url(self):
         return reverse_lazy('hwam:sw_detail', args=(self.object.id,))
+
+class HWDeleteView(DeleteView):
+    model = HardwareAsset
+    template_name = 'hwam/hw_delete.html'
+    context_object_name = 'hw'
+    def get_success_url(self):
+        return reverse('hwam:hw_index')
 
 
