@@ -3,12 +3,19 @@ BODY {
     color: #EAE9E7;
 }
 
+DIV.topbar {
+    float:top;
+}
+
 DIV.navbar-content {
     border: 3px solid;
     border-color: #444444;
     padding: 0.25%;
     font-size: 1.2em;
-    float: top;
+}
+
+DIV.main {
+    padding: 0.5%;
 }
 
 A.navbar:link, A.navbar:visited {

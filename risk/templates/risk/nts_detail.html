@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ nts.name }} (Non-Adversarial Threat Source)</h1>
 <a href="{% url 'risk:nts_update' nts.id %}">Edit</a>
@@ -14,3 +16,5 @@
         </ul></li>
     <li>Range of Effect: {{ nts.range_of_effect }}</li>
 </ul>
+
+{% endblock %}

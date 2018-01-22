@@ -1,7 +1,10 @@
 
-{% include "base.html" %}
+{% extends "base.html" %}
 
-{% include "risk/navigation.html" %}
+{% block navbar %}
+    {% include "risk/navigation.html" %}
+{% endblock %}
 
 {% block content %}
+    {% block content-main %}
 {% endblock %}

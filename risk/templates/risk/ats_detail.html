@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ ats.name }} (Adversarial Threat Source)</h1>
 <a href="{% url 'risk:ats_update' ats.id %}">Edit</a>

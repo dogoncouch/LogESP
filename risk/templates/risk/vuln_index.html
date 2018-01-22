@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>Vulnerabilities</h1>
 {% if user.is_staff %}
@@ -16,3 +18,5 @@
 {% else %}
     <p>No vulnerabilities.</p>
 {% endif %}
+
+{% endblock %}

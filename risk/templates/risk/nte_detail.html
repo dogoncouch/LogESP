@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ nte.name }} (Non-Adversarial Threat Event)</h1>
 <a href="{% url 'risk:nte_update' nte.id %}">Edit</a>
@@ -30,3 +32,5 @@
             {% endfor %}
         </ul></li>
 </ul>
+
+{% endblock %}

@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>Non-Adversarial Threats</h1>
 
@@ -15,3 +17,5 @@
         </ul></li>
     <li><a href="{% url 'risk:impact_index' %}">Impacts</a></li>
 </ul>
+
+{% endblock %}

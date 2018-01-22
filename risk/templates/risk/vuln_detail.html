@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ vuln.name }} (Vulnerability)</h1>
 <a href="{% url 'risk:vuln_update' vuln.id %}">Edit</a>
@@ -11,3 +13,5 @@
     <li>Information Source: {{ vuln.info_source }}</li>
     <li>Info Source Tier: {{ vuln.tier }}</li>
 </ul>
+
+{% endblock %}

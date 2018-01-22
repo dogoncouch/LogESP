@@ -1,4 +1,6 @@
-{% include "risk/base.html" %}
+{% extends "risk/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ impact.name }} (Impact)</h1>
 <a href="{% url 'risk:impact_update' impact.id %}">Edit</a>
@@ -12,3 +14,5 @@
     <li>Severity (1-100): {{ impact.severity }}</li>
     <li>Impact Tier: {{ impact.impact_tier }}</li>
 </ul>
+
+{% endblock %}

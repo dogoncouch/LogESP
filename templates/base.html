@@ -3,9 +3,11 @@
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
 
-{% include "navigation.html" %}
-{% block navbar %}
-{% endblock %}
+<div class="topbar">
+    {% include "navigation.html" %}
+    {% block navbar %}
+    {% endblock %}
+</div>
 
 <div class="main">
     {% block content %}
