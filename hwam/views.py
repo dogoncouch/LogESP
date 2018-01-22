@@ -176,4 +176,9 @@ class HWDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('hwam:hw_index')
 
-
+class SWDeleteView(DeleteView):
+    model = SoftwareAsset
+    template_name = 'hwam/sw_delete.html'
+    context_object_name = 'sw'
+    def get_success_url(self):
+        return reverse('hwam:sw_index')

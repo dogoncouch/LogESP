@@ -1,4 +1,6 @@
-{% include "hwam/base.html" %}
+{% extends "hwam/base.html" %}
+
+{% block content-main %}
 
 <h1>Hardware Asset Search</h1>
 
@@ -16,3 +18,5 @@
 {% else %}
     <p>No assets.</p>
 {% endif %}
+
+{% endblock %}

@@ -1,7 +1,11 @@
-{% include "hwam/base.html" %}
+{% extends "hwam/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ sw.asset_name }} (Software Asset)</h1>
 <a href="{% url 'hwam:sw_update' sw.id %}">Edit</a>
+&middot
+<a href="{% url 'hwam:sw_delete' sw.id %}">Delete</a>
 <p>{{ sw.desc }}</p>
 <ul>
     <li>Organizational Unit:
@@ -76,3 +80,5 @@
         <li>Date Added: {{ sw.date_added }}</li>
         <li>EOL Date: {{ sw.date_eol }}</li></ul></li>
 </ul>
+
+{% endblock %}

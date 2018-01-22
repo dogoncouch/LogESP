@@ -29,5 +29,7 @@ urlpatterns = [
         name='sw_update'),
     path('hw/<int:pk>/delete/', login_required(
         views.HWDeleteView.as_view()), name='hw_delete'),
+    path('sw/<int:pk>/delete/', login_required(
+        views.SWDeleteView.as_view()), name='sw_delete'),
 ]
 

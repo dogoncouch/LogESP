@@ -1,4 +1,6 @@
-{% include "hwam/base.html" %}
+{% extends "hwam/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ hw.asset_name }} (Hardware Asset)</h1>
 <a href="{% url 'hwam:hw_update' hw.id %}">Edit</a>
@@ -63,3 +65,5 @@
     <li>Date Added: {{ hw.date_added }}</li>
     <li>EOL Date: {{ hw.date_eol }}</li></ul></li>
 </ul>
+
+{% endblock %}

@@ -1,4 +1,6 @@
-{% include "hwam/base.html" %}
+{% extends "hwam/base.html" %}
+
+{% block content-main %}
 
 <h1>Hardware Assets</h1>
 {% if user.is_staff %}
@@ -16,3 +18,5 @@
 {% else %}
     <p>No assets.</p>
 {% endif %}
+
+{% endblock %}

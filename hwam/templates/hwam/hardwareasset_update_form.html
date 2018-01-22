@@ -1,7 +1,11 @@
-{% include "hwam/base.html" %}
+{% extends "hwam/base.html" %}
 
-<h1>Update Hardware Asset</h1>
+{% block content-main %}
+
+<h1>UpdateHardware Asset</h1>
 <form action="" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save" />
 </form>
+
+{% endblock %}

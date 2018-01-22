@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content-main %}
+
+<h1>Delete Software Asset</h1>
+
+<p>Are you sure you want to delete {{ sw }}?</p>
+
+<form action="{% url 'hwam:sw_delete' sw.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'hwam:sw_detail' sw.id %}">Cancel</a>
+</form>
+
+{% endblock %}

@@ -1,4 +1,6 @@
-{% include "base.html" %}
+{% extends "base.html" %}
+
+{% block content %}
 
 <h1>LogDissect Security Intelligence</h1>
 
@@ -6,3 +8,5 @@
     &middot Hardware Asset Management</li>
 <li><a href="{% url 'risk:index' %}">Risk</a>
     &middot Risk Management</li>
+
+{% endblock %}

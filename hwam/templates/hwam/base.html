@@ -1,7 +1,11 @@
 
-{% include "base.html" %}
+{% extends "base.html" %}
 
-{% include "hwam/navigation.html" %}
+{% block navbar %}
+    {% include "hwam/navigation.html" %}
+{% endblock %}
 
 {% block content %}
+    {% block content-main %}
+    {% endblock %}
 {% endblock %}

@@ -1,4 +1,6 @@
-{% include "hwam/base.html" %}
+{% extends "hwam/base.html" %}
+
+{% block content-main %}
 
 <h1>{{ ou }} (Organizational Unit)</h1>
 <a href="{% url 'hwam:ou_update' ou.id %}">Edit</a>
@@ -34,3 +36,5 @@
         {% endfor %}
         </ul></li>
 </ul>
+
+{% endblock %}
