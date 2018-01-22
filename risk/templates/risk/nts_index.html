@@ -1,7 +1,9 @@
 {% include "risk/base.html" %}
 
 <h1>Non-Adversarial Threat Sources</h1>
-<a href="{% url 'admin:risk_nonadvthreatsource_changelist' %}">Admin</a>
+{% if user.is_staff %}
+    <a href="{% url 'admin:risk_nonadvthreatsource_changelist' %}">Admin</a>
+{% endif %}
 <a href="{% url 'risk:nts_create' %}">Add</a>
 
 {% if nts_list %}
