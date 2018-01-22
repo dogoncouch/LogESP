@@ -46,7 +46,7 @@ class HWSearchView(ListView):
             )
             return new_context
         else:
-            return SoftwareAsset.objects.all()
+            return HardwareAsset.objects.all()
     def get_context_data(self, **kwargs):
         context = super(HWSearchView, self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
