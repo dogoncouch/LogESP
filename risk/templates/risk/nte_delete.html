@@ -1,0 +1,16 @@
+{% extends "risk/base.html" %}
+
+{% block content-main %}
+
+<h1>Delete Non-Adversarial Threat Event</h1>
+
+<p>Are you sure you want to delete {{ nte }}?</p>
+
+<form action="{% url 'risk:ate_delete' nte.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'risk:nte_detail' nte.id %}">Cancel</a>
+</form>
+
+{% endblock %}

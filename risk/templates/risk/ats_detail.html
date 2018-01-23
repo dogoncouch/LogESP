@@ -4,6 +4,8 @@
 
 <h1>{{ ats.name }} (Adversarial Threat Source)</h1>
 <a href="{% url 'risk:ats_update' ats.id %}">Edit</a>
+&middot
+<a href="{% url 'risk:ats_delete' ats.id %}">Delete</a>
 
 <p>{{ ats.desc }}</p>
 
@@ -20,3 +22,5 @@
             <li>Targeting: {{ ats.targeting }}</li>
         </ul></li>
 </ul>
+
+{% endblock %}

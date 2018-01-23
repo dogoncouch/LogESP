@@ -4,6 +4,8 @@
 
 <h1>{{ nts.name }} (Non-Adversarial Threat Source)</h1>
 <a href="{% url 'risk:nts_update' nts.id %}">Edit</a>
+&middot
+<a href="{% url 'risk:nts_delete' nts.id %}">Delete</a>
 
 <p>{{ nts.desc }}</p>
 

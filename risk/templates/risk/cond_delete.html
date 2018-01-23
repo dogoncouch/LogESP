@@ -1,0 +1,16 @@
+{% extends "risk/base.html" %}
+
+{% block content-main %}
+
+<h1>Delete Condition</h1>
+
+<p>Are you sure you want to delete {{ cond }}?</p>
+
+<form action="{% url 'cond:cond_delete' cond.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'cond:cond_detail' cond.id %}">Cancel</a>
+</form>
+
+{% endblock %}

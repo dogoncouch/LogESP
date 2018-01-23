@@ -4,6 +4,8 @@
 
 <h1>{{ impact.name }} (Impact)</h1>
 <a href="{% url 'risk:impact_update' impact.id %}">Edit</a>
+&middot
+<a href="{% url 'risk:impact_delete' impact.id %}">Delete</a>
 
 <p>{{ impact.desc }}</p>
 

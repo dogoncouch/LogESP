@@ -1,0 +1,16 @@
+{% extends "risk/base.html" %}
+
+{% block content-main %}
+
+<h1>Delete Vulnerability</h1>
+
+<p>Are you sure you want to delete {{ vuln }}?</p>
+
+<form action="{% url 'risk:vuln_delete' vuln.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'risk:vuln_detail' vuln.id %}">Cancel</a>
+</form>
+
+{% endblock %}

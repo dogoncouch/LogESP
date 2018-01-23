@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
 
 from .models import AdvThreatEvent, NonAdvThreatEvent
@@ -190,3 +190,51 @@ class ImpactUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('risk:impact_detail', args=(self.object.id,))
 
+class ATEDeleteView(DeleteView):
+    model = AdvThreatEvent
+    template_name = 'risk/ate_delete.html'
+    context_object_name = 'ate'
+    def get_success_url(self):
+        return reverse('risk:ate_index')
+
+class NTEDeleteView(DeleteView):
+    model = NonAdvThreatEvent
+    template_name = 'risk/nte_delete.html'
+    context_object_name = 'nte'
+    def get_success_url(self):
+        return reverse('risk:nte_index')
+
+class ATSDeleteView(DeleteView):
+    model = AdvThreatSource
+    template_name = 'risk/ats_delete.html'
+    context_object_name = 'ats'
+    def get_success_url(self):
+        return reverse('risk:ats_index')
+
+class NTSDeleteView(DeleteView):
+    model = NonAdvThreatSource
+    template_name = 'risk/nts_delete.html'
+    context_object_name = 'nts'
+    def get_success_url(self):
+        return reverse('risk:nts_index')
+
+class VulnDeleteView(DeleteView):
+    model = Vulnerability
+    template_name = 'risk/vuln_delete.html'
+    context_object_name = 'vuln'
+    def get_success_url(self):
+        return reverse('risk:vuln_index')
+
+class CondDeleteView(DeleteView):
+    model = RiskCondition
+    template_name = 'risk/cond_delete.html'
+    context_object_name = 'cond'
+    def get_success_url(self):
+        return reverse('risk:cond_index')
+
+class ImpactDeleteView(DeleteView):
+    model = Impact
+    template_name = 'risk/impact_delete.html'
+    context_object_name = 'impact'
+    def get_success_url(self):
+        return reverse('risk:impact_index')

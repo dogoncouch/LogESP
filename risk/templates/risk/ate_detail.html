@@ -4,6 +4,8 @@
 
 <h1>{{ ate.name }} (Adversarial Threat Event)</h1>
 <a href="{% url 'risk:ate_update' ate.id %}">Edit</a>
+&middot
+<a href="{% url 'risk:ate_delete' ate.id %}">Delete</a>
 
 <p>{{ ate.desc }}</p>
 <ul>
@@ -33,3 +35,5 @@
             {% endfor %}
         </ul></li>
 </ul>
+
+{% endblock %}
