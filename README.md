@@ -1,7 +1,7 @@
 # LogDissect Security Intelligence
 A web application for managing security information. Still in early development; use at your own risk.
 
-## Functions
+## Applications
 LDSI applications:
 - HWAM - Asset Management
 - Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
@@ -9,10 +9,10 @@ LDSI applications:
 
 ## Design Principles
 ### [NIST](https://www.nist.gov/) guidelines
-The LDSI risk management system based on NIST guidelines, and the SIEM and forensics apps are based on the NIST incident response and forensics guidelines.
+The LDSI risk management system is based on NIST [risk management](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
 
 ### Simplicity
-LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
+LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend. Each app is designed to be easy to repurpose for other projects.
 
 ### Accessibility
 LDSI's target audience for UX design is blind people, and others who use screen readers, or other non-standard input and output devices.
