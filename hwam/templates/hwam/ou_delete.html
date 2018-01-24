@@ -1,0 +1,16 @@
+{% extends "hwam/base.html" %}
+
+{% block content-main %}
+
+<h1>Delete Organizational Unit</h1>
+
+<p>Are you sure you want to delete {{ ou }}?</p>
+
+<form action="{% url 'hwam:ou_delete' ou.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'hwam:ou_detail' ou.id %}">Cancel</a>
+</form>
+
+{% endblock %}

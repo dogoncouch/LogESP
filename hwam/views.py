@@ -105,12 +105,14 @@ class SWDetailView(DetailView):
 
 class OUCreateView(CreateView):
     model = OrganizationalUnit
+    permission_required = 'hwam.add_organizationalunit'
     fields = ['name', 'desc', 'unit_contact', 'parent_ou']
     def get_success_url(self):
         return reverse_lazy('hwam:ou_detail', args=(self.object.id,))
 
 class HWCreateView(CreateView):
     model = HardwareAsset
+    permission_required = 'hwam.add_hardwareasset'
     fields = ['name', 'desc', 'org_unit',
             'asset_owner', 'asset_custodian',
             'parent_hardware',
@@ -124,6 +126,7 @@ class HWCreateView(CreateView):
 
 class SWCreateView(CreateView):
     model = SoftwareAsset
+    permission_required = 'hwam.add_softwareasset'
     fields = [
             'name', 'desc', 'org_unit',
             'custodian_swam', 'custodian_csm', 'custodian_vul',
@@ -138,12 +141,14 @@ class SWCreateView(CreateView):
 
 class OUUpdateView(UpdateView):
     model = OrganizationalUnit
+    permission_required = 'hwam.change_organizationalunit'
     fields = ['name', 'desc', 'unit_contact', 'parent_ou']
     def get_success_url(self):
         return reverse_lazy('hwam:ou_detail', args=(self.object.id,))
 
 class HWUpdateView(UpdateView):
     model = HardwareAsset
+    permission_required = 'hwam.change_hardwareasset'
     fields = ['name', 'desc', 'org_unit',
             'asset_owner', 'asset_custodian',
             'parent_hardware',
@@ -157,6 +162,7 @@ class HWUpdateView(UpdateView):
 
 class SWUpdateView(UpdateView):
     model = SoftwareAsset
+    permission_required = 'hwam.change_softwareasset'
     fields = [
             'name', 'desc', 'org_unit',
             'custodian_swam', 'custodian_csm', 'custodian_vul',
@@ -169,8 +175,17 @@ class SWUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('hwam:sw_detail', args=(self.object.id,))
 
+class OUDeleteView(DeleteView):
+    model = OrganizationalUnit
+    permission_required = 'hwam.delete_organizationalunit'
+    template_name = 'hwam/ou_delete.html'
+    context_object_name = 'ou'
+    def get_success_url(self):
+        return reverse('hwam:ou_index')
+
 class HWDeleteView(DeleteView):
     model = HardwareAsset
+    permission_required = 'hwam.delete_hardwareasset'
     template_name = 'hwam/hw_delete.html'
     context_object_name = 'hw'
     def get_success_url(self):
@@ -178,6 +193,7 @@ class HWDeleteView(DeleteView):
 
 class SWDeleteView(DeleteView):
     model = SoftwareAsset
+    permission_required = 'hwam.delete_softwareasset'
     template_name = 'hwam/sw_delete.html'
     context_object_name = 'sw'
     def get_success_url(self):
