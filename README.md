@@ -9,7 +9,7 @@ LDSI applications:
 
 ## Design Principles
 ### [NIST](https://www.nist.gov/) guidelines
-The LDIS risk management system based on NIST guidelines, and the SIEM and forensics apps are based on the NIST incident response and forensics guidelines.
+The LDSI risk management system based on NIST guidelines, and the SIEM and forensics apps are based on the NIST incident response and forensics guidelines.
 
 ### Simplicity
 LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
