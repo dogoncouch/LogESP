@@ -53,5 +53,6 @@ python manage.py runserver
 
 ## Near Future
 
+- Finish SIEM app
 - Switch default database to MariaDB
 - Dockerize
