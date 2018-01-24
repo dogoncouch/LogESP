@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import OrganizationalUnit
 from .models import HardwareAsset
@@ -103,14 +104,14 @@ class SWDetailView(DetailView):
     template_name = 'hwam/sw_detail.html'
     context_object_name = 'sw'
 
-class OUCreateView(CreateView):
+class OUCreateView(PermissionRequiredMixin, CreateView):
     model = OrganizationalUnit
     permission_required = 'hwam.add_organizationalunit'
     fields = ['name', 'desc', 'unit_contact', 'parent_ou']
     def get_success_url(self):
         return reverse_lazy('hwam:ou_detail', args=(self.object.id,))
 
-class HWCreateView(CreateView):
+class HWCreateView(PermissionRequiredMixin, CreateView):
     model = HardwareAsset
     permission_required = 'hwam.add_hardwareasset'
     fields = ['name', 'desc', 'org_unit',
@@ -124,7 +125,7 @@ class HWCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('hwam:hw_detail', args=(self.object.id,))
 
-class SWCreateView(CreateView):
+class SWCreateView(PermissionRequiredMixin, CreateView):
     model = SoftwareAsset
     permission_required = 'hwam.add_softwareasset'
     fields = [
@@ -139,14 +140,14 @@ class SWCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('hwam:sw_detail', args=(self.object.id,))
 
-class OUUpdateView(UpdateView):
+class OUUpdateView(PermissionRequiredMixin, UpdateView):
     model = OrganizationalUnit
     permission_required = 'hwam.change_organizationalunit'
     fields = ['name', 'desc', 'unit_contact', 'parent_ou']
     def get_success_url(self):
         return reverse_lazy('hwam:ou_detail', args=(self.object.id,))
 
-class HWUpdateView(UpdateView):
+class HWUpdateView(PermissionRequiredMixin, UpdateView):
     model = HardwareAsset
     permission_required = 'hwam.change_hardwareasset'
     fields = ['name', 'desc', 'org_unit',
@@ -160,7 +161,7 @@ class HWUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('hwam:hw_detail', args=(self.object.id,))
 
-class SWUpdateView(UpdateView):
+class SWUpdateView(PermissionRequiredMixin, UpdateView):
     model = SoftwareAsset
     permission_required = 'hwam.change_softwareasset'
     fields = [
@@ -175,7 +176,7 @@ class SWUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('hwam:sw_detail', args=(self.object.id,))
 
-class OUDeleteView(DeleteView):
+class OUDeleteView(PermissionRequiredMixin, DeleteView):
     model = OrganizationalUnit
     permission_required = 'hwam.delete_organizationalunit'
     template_name = 'hwam/ou_delete.html'
@@ -183,7 +184,7 @@ class OUDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('hwam:ou_index')
 
-class HWDeleteView(DeleteView):
+class HWDeleteView(PermissionRequiredMixin, DeleteView):
     model = HardwareAsset
     permission_required = 'hwam.delete_hardwareasset'
     template_name = 'hwam/hw_delete.html'
@@ -191,7 +192,7 @@ class HWDeleteView(DeleteView):
     def get_success_url(self):
         return reverse('hwam:hw_index')
 
-class SWDeleteView(DeleteView):
+class SWDeleteView(PermissionRequiredMixin, DeleteView):
     model = SoftwareAsset
     permission_required = 'hwam.delete_softwareasset'
     template_name = 'hwam/sw_delete.html'

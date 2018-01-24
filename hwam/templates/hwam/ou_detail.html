@@ -5,7 +5,7 @@
 <h1>{{ ou }} (Organizational Unit)</h1>
 <a href="{% url 'hwam:ou_update' ou.id %}">Edit</a>
 &middot
-<a href="{% url 'hwam:hw_delete' hw.id %}">Delete</a>
+<a href="{% url 'hwam:ou_delete' ou.id %}">Delete</a>
 <p>{{ ou.desc }}</p>
 <ul>
     <li>Contact: {{ ou.unit_contact.username }}

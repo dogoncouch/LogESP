@@ -27,6 +27,8 @@ urlpatterns = [
         name='hw_update'),
     path('sw/<int:pk>/update/', login_required(views.SWUpdateView.as_view()),
         name='sw_update'),
+    path('ou/<int:pk>/delete/', login_required(
+        views.OUDeleteView.as_view()), name='ou_delete'),
     path('hw/<int:pk>/delete/', login_required(
         views.HWDeleteView.as_view()), name='hw_delete'),
     path('sw/<int:pk>/delete/', login_required(
