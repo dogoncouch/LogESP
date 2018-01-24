@@ -51,5 +51,7 @@ python manage.py runserver
 
 - Step 7: Try it: http://localhost:8000
 
-## Notes
-LDSI is still in early development. Database changes that break backwards compatibility are still being made on a regular basis.
+## Near Future
+
+- Switch default database to MariaDB
+- Dockerize
