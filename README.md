@@ -7,6 +7,16 @@ LDSI applications:
 - Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
 - SIEM - Security Information and Event Management
 
+## Design Principles
+### [NIST](https://www.nist.gov/) guidelines
+The LDIS risk management system based on NIST guidelines, and the SIEM and forensics apps are based on the NIST incident response and forensics guidelines.
+
+### Simplicity
+LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
+
+### Accessibility
+LDSI's target audience for UX design is blind people, and others who use screen readers, or other non-standard input and output devices.
+
 ## Installing
 Requirements: python 3.x, django >=2.0, git, pip.
 
