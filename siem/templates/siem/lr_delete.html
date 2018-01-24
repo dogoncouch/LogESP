@@ -1,0 +1,16 @@
+{% extends "siem/base.html" %}
+
+{% block content-main %}
+
+<h1>Delete Limit Rule</h1>
+
+<p>Are you sure you want to delete limit rule {{ lr }}?</p>
+
+<form action="{% url 'siem:lr_delete' lr.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'siem:lr_detail' lr.id %}">Cancel</a>
+</form>
+
+{% endblock %}

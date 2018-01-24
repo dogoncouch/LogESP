@@ -1,0 +1,12 @@
+{% extends "siem/base.html" %}
+
+{% block content-main %}
+
+<h1>Security Information and Event Management</h1>
+
+<li><a href="{% url 'siem:defaultevent_index' %}">
+        Events (default)</a></li>
+<li><a href="{% url 'siem:lr_index' %}">Limit Rules</a></li>
+<li><a href="{% url 'siem:ph_index' %}">Parse Helpers</a></li>
+
+{% endblock %}

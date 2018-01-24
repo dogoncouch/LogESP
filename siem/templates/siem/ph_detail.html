@@ -1,0 +1,14 @@
+{% extends "siem/base.html" %}
+
+{% block content-main %}
+
+<h1>{{ ph }} (Parse Helper)</h1>
+<a href="{% url 'siem:ph_update' ph.id %}">Edit</a>
+&middot
+<a href="{% url 'siem:ph_delete' ph.id %}">Delete</a>
+<ul>
+    <li>Variable Name: {{ ph.var_name }}</li>
+    <li>Regular Expression: {{ ph.reg_exp }}</li>
+</ul>
+
+{% endblock %}

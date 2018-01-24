@@ -38,6 +38,8 @@ class DefaultEvent(models.Model):
             null=True, blank=True)
     source_path = models.CharField(max_length=200,
             null=True, blank=True)
+    class Meta:
+        permissions = (('view_defaultevent', 'Can view default events'))
 
 class AuthEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp',
@@ -73,6 +75,8 @@ class AuthEvent(models.Model):
             null=True, blank=True)
     source_path = models.CharField(max_length=200,
             null=True, blank=True)
+    class Meta:
+        permissions = (('view_authevent', 'Can view auth events'))
 
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp')
@@ -94,6 +98,8 @@ class RuleEvent(models.Model):
     source_ids_rule = models.ManyToManyField('self',
             related_name='rules_triggered',
             blank=True, symmetrical=False)
+    class Meta:
+        permissions = (('view_ruleevent', 'Can view rule events'))
 
     
 class LimitRule(models.Model):
@@ -106,8 +112,17 @@ class LimitRule(models.Model):
     source_table = models.CharField(max_length=32) # To Do: point to table
     out_table = models.CharField(max_length=32) # To Do:
     message = models.CharField(max_length=1024)
+    def __str__(self):
+        return self.name
+    class Meta:
+        permissions = (('view_limitrule', 'Can view limit rules'))
 
 class ParseHelper(models.Model):
     name = charField(max_length=32)
     var_name = CharField(max_length=24)
-    reg_ext = CharField(max_length=200)
+    reg_exp = CharField(max_length=200)
+    def __str__(self):
+        return self.name
+    class Meta:
+        permissions = (('view_parsehelper', 'Can view parse helpers'))
+

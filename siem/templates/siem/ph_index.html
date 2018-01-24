@@ -1,0 +1,20 @@
+{% extends "siem/base.html" %}
+
+{% block content-main %}
+
+<h1>Parse Helpers</h1>
+<a href="{% url 'siem:ph_create' %}">Add</a>
+<a href="{% url 'siem:ph_search' %}">Search</a>
+
+{% if ph_list %}
+    <ul>
+        {% for ph in ph_list %}
+            <li><a href="{% url 'siem:ph_detail' ph.id %}">
+                    {{ ph }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No parse helpers.</p>
+{% endif %}
+
+{% endblock %}

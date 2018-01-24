@@ -1,0 +1,20 @@
+{% extends "siem/base.html" %}
+
+{% block content-main %}
+
+<h1>{{ lr }} (Limit Rule)</h1>
+<a href="{% url 'siem:lr_update' lr.id %}">Edit</a>
+&middot
+<a href="{% url 'siem:lr_delete' lr.id %}">Delete</a>
+<ul>
+    <li>Enabled?: {{ lr.is_enabled }}</li>
+    <li>Severity: {{ lr.severity }}</li>
+    <li>Time Interval: {{ lr.time_int }}</li>
+    <li>Event Limit: {{ lr.event_limit }}</li>
+    <li>SQL Query: {{ lr.sql_query }}</li>
+    <li>Source Table: {{ lr.source_table }}</li>
+    <li>Output Table: {{ lr.out_table }}</li>
+    <li>Message: {{ lr.message }}</li>
+</ul>
+
+{% endblock %}
