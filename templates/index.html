@@ -4,9 +4,13 @@
 
 <h1>LogDissect Security Intelligence</h1>
 
-<li><a href="{% url 'hwam:index' %}">HWAM</a>
-    &middot Hardware Asset Management</li>
-<li><a href="{% url 'risk:index' %}">Risk</a>
-    &middot Risk Management</li>
+<ul>
+    <li><a href="{% url 'hwam:index' %}">HWAM</a>
+        &middot Hardware Asset Management</li>
+    <li><a href="{% url 'risk:index' %}">Risk</a>
+        &middot Risk Management</li>
+    <li><a href="{% url 'siem:index' %}">SIEM</a>
+        &middot Security Information and Event Management</li>
+</ul>
 
 {% endblock %}
