@@ -20,13 +20,13 @@ class DefaultEvent(models.Model):
             null=True, blank=True)
     source_host = models.CharField(max_length=32,
             null=True, blank=True)
-    source_port = models.IntegerField(
+    source_port = models.CharField(max_length=8,
             null=True, blank=True)
     dest_host = models.CharField(max_length=32,
             null=True, blank=True)
-    dest_port = models.IntegerField(
+    dest_port = models.CharField(max_length=8,
             null=True, blank=True)
-    source_process = models.IntegerField(
+    source_process = models.CharField(max_length=24,
             null=True, blank=True)
     source_pid = models.IntegerField(
             null=True, blank=True)
@@ -34,7 +34,7 @@ class DefaultEvent(models.Model):
             null=True, blank=True)
     message = models.CharField(max_length=1024,
             null=True, blank=True)
-    extended = models.CharField(max_length=1000,
+    extended = models.CharField(max_length=1024,
             null=True, blank=True)
     parsed_on = models.CharField(max_length=32,
             null=True, blank=True)
@@ -59,13 +59,13 @@ class AuthEvent(models.Model):
             null=True, blank=True)
     source_host = models.CharField(max_length=32,
             null=True, blank=True)
-    source_port = models.IntegerField(
+    source_port = models.CharField(max_length=8,
             null=True, blank=True)
     dest_host = models.CharField(max_length=32,
             null=True, blank=True)
-    dest_port = models.IntegerField(
+    dest_port = models.CharField(max_length=8,
             null=True, blank=True)
-    source_process = models.IntegerField(
+    source_process = models.CharField(max_length=24,
             null=True, blank=True)
     source_pid = models.IntegerField(
             null=True, blank=True)
@@ -73,7 +73,7 @@ class AuthEvent(models.Model):
             null=True, blank=True)
     message = models.CharField(max_length=1024,
             null=True, blank=True)
-    extended = models.CharField(max_length=1000,
+    extended = models.CharField(max_length=1024,
             null=True, blank=True)
     parsed_on = models.CharField(max_length=32,
             null=True, blank=True)
@@ -108,6 +108,7 @@ class RuleEvent(models.Model):
     
 class LimitRule(models.Model):
     name = models.CharField(max_length=32)
+    desc = models.CharField(max_length=200)
     is_enabled = models.BooleanField(default=True)
     severity = models.IntegerField(choices=severity_choices)
     time_int = models.IntegerField()
