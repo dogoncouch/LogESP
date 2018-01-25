@@ -78,11 +78,13 @@ WSGI_APPLICATION = 'ldsi.wsgi.application'
 
 #DATABASES = {
 #    'default': {
-#        'NAME': 'ldsi_data',
+#        'NAME': 'siem_data',
 #        'ENGINE': 'mysql.connector.django',
-#        'USER': 'siemstress',
+#        'USER': 'ldsictrl',
 #        # Note: Change this!!!
 #        'PASSWORD': 'siems2bfine',
+#        #'HOST': '127.0.0.1',
+#        #'PORT': '3306',
 #        'OPTIONS': {
 #            'autocommit': True,
 #        }

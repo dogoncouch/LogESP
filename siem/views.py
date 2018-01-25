@@ -29,9 +29,8 @@ class DefaultEventSearchView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
-            filter_reg = r'*' + filter_val + '*'
             new_context = DefaultEvent.objects.filter(
-                raw_text=filter_reg,
+                raw_text__contains=filter_val,
             ).reverse()
             return new_context
         else:
@@ -50,9 +49,8 @@ class AuthEventSearchView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
-            filter_reg = r'*' + filter_val + '*'
             new_context = AuthEvent.objects.filter(
-                raw_text=filter_reg,
+                raw_text__contains=filter_val,
             ).reverse()
             return new_context
         else:
@@ -71,9 +69,8 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
-            filter_reg = r'*' + filter_val + '*'
             new_context = RuleEvent.objects.filter(
-                raw_text=filter_reg,
+                raw_text__contains=filter_val,
             ).reverse()
             return new_context
         else:
