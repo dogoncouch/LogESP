@@ -5,6 +5,8 @@ from siem.choices import *
 # Create your models here.
 
 class DefaultEvent(models.Model):
+    parsed_at = models.DateTimeField('date stamp',
+            null=True, blank=True)
     date_stamp = models.DateTimeField('date stamp',
             null=True, blank=True)
     date_stamp_utc = models.DateTimeField('utc date stamp',
@@ -42,6 +44,8 @@ class DefaultEvent(models.Model):
         permissions = (('view_defaultevent', 'Can view default events'),)
 
 class AuthEvent(models.Model):
+    parsed_at = models.DateTimeField('date stamp',
+            null=True, blank=True)
     date_stamp = models.DateTimeField('date stamp',
             null=True, blank=True)
     date_stamp_utc = models.DateTimeField('utc date stamp',
