@@ -1,8 +1,10 @@
 {% extends "hwam/base.html" %}
 
+{% block sub-title %} | Hardware Asset - {{ hw }}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ hw.asset_name }} (Hardware Asset)</h1>
+<h1>{{ hw }} (Hardware Asset)</h1>
 <a href="{% url 'hwam:hw_update' hw.id %}">Edit</a>
 &middot
 <a href="{% url 'hwam:hw_delete' hw.id %}">Delete</a>
@@ -36,7 +38,7 @@
     {% if hw.parent_hardware %}
     <li>Parent Hardware:<ul>
         <li><a href="{% url 'hwam:hw_detail' hw.parent_hardware.id %}">
-                {{ hw.parent_hardware.asset_name }}</a></li>
+                {{ hw.parent_hardware }}</a></li>
         </ul></li>
     {% endif %}
     {% if hw.child_hardware.all %}

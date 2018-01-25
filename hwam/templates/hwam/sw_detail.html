@@ -1,8 +1,10 @@
 {% extends "hwam/base.html" %}
 
+{% block sub-title %} | Software Asset - {{ sw }}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ sw.asset_name }} (Software Asset)</h1>
+<h1>{{ sw }} (Software Asset)</h1>
 <a href="{% url 'hwam:sw_update' sw.id %}">Edit</a>
 &middot
 <a href="{% url 'hwam:sw_delete' sw.id %}">Delete</a>
