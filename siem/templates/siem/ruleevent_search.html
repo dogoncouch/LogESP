@@ -1,8 +1,10 @@
 {% extends "siem/base.html" %}
 
+{% block sub-title %} | Events - Rule-Based{% endblock %}
+
 {% block content-main %}
 
-<h1>Events (rule-based)</h1>
+<h1>Events (Rule-Based)</h1>
 
 <form method="get" action="{% url 'siem:ruleevent_search' %}">
     <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>

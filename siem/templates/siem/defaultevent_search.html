@@ -1,8 +1,10 @@
 {% extends "siem/base.html" %}
 
+{% block sub-title %} | Events - Default{% endblock %}
+
 {% block content-main %}
 
-<h1>Events (default)</h1>
+<h1>Events (Default)</h1>
 
 <form method="get" action="{% url 'siem:defaultevent_search' %}">
     <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>

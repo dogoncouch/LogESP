@@ -1,8 +1,10 @@
 {% extends "siem/base.html" %}
 
+{% block sub-title %} | Events - Auth{% endblock %}
+
 {% block content-main %}
 
-<h1>Events (auth)</h1>
+<h1>Events (Auth)</h1>
 
 <form method="get" action="{% url 'siem:authevent_search' %}">
     <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>
