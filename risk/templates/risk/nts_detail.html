@@ -1,8 +1,10 @@
 {% extends "risk/base.html" %}
 
+{% block sub-title %} | Non-Adversarial Threat Source - {{ nts ]}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ nts.name }} (Non-Adversarial Threat Source)</h1>
+<h1>{{ nts }} (Non-Adversarial Threat Source)</h1>
 <a href="{% url 'risk:nts_update' nts.id %}">Edit</a>
 &middot
 <a href="{% url 'risk:nts_delete' nts.id %}">Delete</a>

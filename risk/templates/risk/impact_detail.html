@@ -1,8 +1,10 @@
 {% extends "risk/base.html" %}
 
+{% block sub-title %} | Impact - {{ impact }}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ impact.name }} (Impact)</h1>
+<h1>{{ impact }} (Impact)</h1>
 <a href="{% url 'risk:impact_update' impact.id %}">Edit</a>
 &middot
 <a href="{% url 'risk:impact_delete' impact.id %}">Delete</a>

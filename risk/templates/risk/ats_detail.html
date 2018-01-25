@@ -1,8 +1,10 @@
 {% extends "risk/base.html" %}
 
+{% block sub-title %} | Adversarial Threat Source - {{ ats }}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ ats.name }} (Adversarial Threat Source)</h1>
+<h1>{{ ats }} (Adversarial Threat Source)</h1>
 <a href="{% url 'risk:ats_update' ats.id %}">Edit</a>
 &middot
 <a href="{% url 'risk:ats_delete' ats.id %}">Delete</a>

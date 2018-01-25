@@ -1,8 +1,10 @@
 {% extends "risk/base.html" %}
 
+{% block sub-title %} | Non-Adversarial Threat Event - {{ nte }}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ nte.name }} (Non-Adversarial Threat Event)</h1>
+<h1>{{ nte }} (Non-Adversarial Threat Event)</h1>
 <a href="{% url 'risk:nte_update' nte.id %}">Edit</a>
 &middot
 <a href="{% url 'risk:nte_delete' nte.id %}">Delete</a>

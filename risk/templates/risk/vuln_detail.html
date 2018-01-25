@@ -1,8 +1,10 @@
 {% extends "risk/base.html" %}
 
+{% block sub-title %} | Vulnerability - {{ vuln }}{% endblock %}
+
 {% block content-main %}
 
-<h1>{{ vuln.name }} (Vulnerability)</h1>
+<h1>{{ vuln }} (Vulnerability)</h1>
 <a href="{% url 'risk:vuln_update' vuln.id %}">Edit</a>
 &middot
 <a href="{% url 'risk:vuln_delete' cond.id %}">Delete</a>
