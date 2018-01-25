@@ -2,9 +2,9 @@
 
 {% block content-main %}
 
-<h1>Events (default)</h1>
+<h1>Events (auth)</h1>
 
-<form method="get" action="{% url 'siem:defaultevent_search' %}">
+<form method="get" action="{% url 'siem:authevent_search' %}">
     <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>
     <p><input type="submit" name="submit" value="Submit"/></p>
 </form>
@@ -12,7 +12,7 @@
 {% if event_list %}
     <ul>
         {% for e in event_list %}
-            <li><a href="{% url 'siem:defaultevent_detail' e.id %}">
+            <li><a href="{% url 'siem:authevent_detail' e.id %}">
                     &middot</a> {{ e.raw_text }}</li>
         {% endfor %}
     </ul>

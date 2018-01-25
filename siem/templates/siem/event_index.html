@@ -1,0 +1,12 @@
+{% extends "siem/base.html" %}
+
+{% block content-main %}
+
+<h1>SIEM Events</h1>
+<ul>
+    <li><a href="{% url 'siem:defaultevent_search' %}">Default</a></li>
+    <li><a href="{% url 'siem:authevent_search' %}">Auth</a></li>
+    <li><a href="{% url 'siem:ruleevent_search' %}">Rule-Based</a></li>
+</ul>
+
+{% endblock %}

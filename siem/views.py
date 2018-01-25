@@ -17,6 +17,9 @@ from .models import ParseHelper
 def index(request):
     return render(request, 'siem/index.html')
 
+def event_index(request):
+    return render(request, 'siem/event_index.html')
+
 class DefaultEventSearchView(PermissionRequiredMixin, ListView):
     model = DefaultEvent
     permission_required = 'siem.view_defaultevent'
@@ -25,16 +28,58 @@ class DefaultEventSearchView(PermissionRequiredMixin, ListView):
     paginate_by = 50
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
-        filter_reg = r'*' + filter_val + '*'
-        if filter_reg and filter_reg != '':
+        if filter_val and filter_val != '':
+            filter_reg = r'*' + filter_val + '*'
             new_context = DefaultEvent.objects.filter(
                 raw_text=filter_reg,
             ).reverse()
             return new_context
         else:
-            return DefaultEvent.objects.all()
+            return DefaultEvent.objects.all().reverse()
     def get_context_data(self, **kwargs):
         context = super(DefaultEventSearchView,self).get_context_data(**kwargs)
+        context['filter'] = self.request.GET.get('filter', '')
+        return context
+
+class AuthEventSearchView(PermissionRequiredMixin, ListView):
+    model = AuthEvent
+    permission_required = 'siem.view_authevent'
+    template_name = 'siem/authevent_search.html'
+    context_object_name = 'event_list'
+    paginate_by = 50
+    def get_queryset(self):
+        filter_val = self.request.GET.get('filter')
+        if filter_val and filter_val != '':
+            filter_reg = r'*' + filter_val + '*'
+            new_context = AuthEvent.objects.filter(
+                raw_text=filter_reg,
+            ).reverse()
+            return new_context
+        else:
+            return AuthEvent.objects.all().reverse()
+    def get_context_data(self, **kwargs):
+        context = super(AuthEventSearchView,self).get_context_data(**kwargs)
+        context['filter'] = self.request.GET.get('filter', '')
+        return context
+
+class RuleEventSearchView(PermissionRequiredMixin, ListView):
+    model = RuleEvent
+    permission_required = 'siem.view_ruleevent'
+    template_name = 'siem/ruleevent_search.html'
+    context_object_name = 'event_list'
+    paginate_by = 50
+    def get_queryset(self):
+        filter_val = self.request.GET.get('filter')
+        if filter_val and filter_val != '':
+            filter_reg = r'*' + filter_val + '*'
+            new_context = RuleEvent.objects.filter(
+                raw_text=filter_reg,
+            ).reverse()
+            return new_context
+        else:
+            return RuleEvent.objects.all().reverse()
+    def get_context_data(self, **kwargs):
+        context = super(RuleEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
         return context
 

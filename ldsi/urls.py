@@ -23,6 +23,7 @@ urlpatterns = [
         name='index'),
     path('hwam/', include('hwam.urls')),
     path('risk/', include('risk.urls')),
+    path('siem/', include('siem.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -39,7 +39,7 @@ class DefaultEvent(models.Model):
     source_path = models.CharField(max_length=200,
             null=True, blank=True)
     class Meta:
-        permissions = (('view_defaultevent', 'Can view default events'))
+        permissions = (('view_defaultevent', 'Can view default events'),)
 
 class AuthEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp',
@@ -76,7 +76,7 @@ class AuthEvent(models.Model):
     source_path = models.CharField(max_length=200,
             null=True, blank=True)
     class Meta:
-        permissions = (('view_authevent', 'Can view auth events'))
+        permissions = (('view_authevent', 'Can view auth events'),)
 
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp')
@@ -99,7 +99,7 @@ class RuleEvent(models.Model):
             related_name='rules_triggered',
             blank=True, symmetrical=False)
     class Meta:
-        permissions = (('view_ruleevent', 'Can view rule events'))
+        permissions = (('view_ruleevent', 'Can view rule events'),)
 
     
 class LimitRule(models.Model):
@@ -115,14 +115,14 @@ class LimitRule(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        permissions = (('view_limitrule', 'Can view limit rules'))
+        permissions = (('view_limitrule', 'Can view limit rules'),)
 
 class ParseHelper(models.Model):
-    name = charField(max_length=32)
-    var_name = CharField(max_length=24)
-    reg_exp = CharField(max_length=200)
+    name = models.CharField(max_length=32)
+    var_name = models.CharField(max_length=24)
+    reg_exp = models.CharField(max_length=200)
     def __str__(self):
         return self.name
     class Meta:
-        permissions = (('view_parsehelper', 'Can view parse helpers'))
+        permissions = (('view_parsehelper', 'Can view parse helpers'),)
 

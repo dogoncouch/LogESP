@@ -4,9 +4,14 @@
 
 <h1>Security Information and Event Management</h1>
 
-<li><a href="{% url 'siem:defaultevent_index' %}">
-        Events (default)</a></li>
-<li><a href="{% url 'siem:lr_index' %}">Limit Rules</a></li>
-<li><a href="{% url 'siem:ph_index' %}">Parse Helpers</a></li>
+<ul>
+    <li>Events:<ul>
+        <li><a href="{% url 'siem:defaultevent_search' %}">Default</a></li>
+        <li><a href="{% url 'siem:authevent_search' %}">Auth</a></li>
+        <li><a href="{% url 'siem:ruleevent_search' %}">Rule-Based</a></li>
+        </ul>
+    <li><a href="{% url 'siem:lr_index' %}">Limit Rules</a></li>
+    <li><a href="{% url 'siem:ph_index' %}">Parse Helpers</a></li>
+</ul>
 
 {% endblock %}

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'hwam.apps.HwamConfig',
     'risk.apps.RiskConfig',
+    'siem.apps.SiemConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

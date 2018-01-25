@@ -8,6 +8,8 @@
             <a class="navbar" href="{% url 'hwam:index' %}">HWAM</a>
             &middot
             <a class="navbar" href="{% url 'risk:index' %}">Risk</a>
+            &middot
+            <a class="navbar" href="{% url 'siem:index' %}">SIEM</a>
             {% if user.is_staff %}
                 &middot
                 <a class="navbar" href="{% url 'admin:index' %}">Admin</a>

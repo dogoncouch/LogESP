@@ -6,9 +6,14 @@ from . import views
 
 app_name = 'siem'
 urlpatterns = [
-    path('', views.index, name='index')
-    path('events/default', login_required(
+    path('', views.index, name='index'),
+    path('events/', views.event_index, name='event_index'),
+    path('events/default/', login_required(
         views.DefaultEventSearchView.as_view()), name='defaultevent_search'),
+    path('events/auth/', login_required(
+        views.AuthEventSearchView.as_view()), name='authevent_search'),
+    path('events/rule/', login_required(
+        views.RuleEventSearchView.as_view()), name='ruleevent_search'),
     path('lr/', login_required(
         views.LRIndexView.as_view()), name='lr_index'),
     path('ph/', login_required(
