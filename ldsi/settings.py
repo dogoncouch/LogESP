@@ -76,6 +76,19 @@ WSGI_APPLICATION = 'ldsi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'NAME': 'ldsi_data',
+#        'ENGINE': 'mysql.connector.django',
+#        'USER': 'siemstress',
+#        # Note: Change this!!!
+#        'PASSWORD': 'siems2bfine',
+#        'OPTIONS': {
+#            'autocommit': True,
+#        }
+#    }
+#}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
