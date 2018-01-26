@@ -61,6 +61,15 @@ python manage.py runserver
 
 - Step 7: Try it: http://localhost:8000
 
+## Notes
+To start the parser engine:
+
+1. Edit the config file at `config/parser.conf`.
+2. Run the parser inside a django shell:
+```
+python manage.py shell -c "import ldsiparser.parsecore ; ldsiparser.parsecore.parse()"
+```
+
 ## Near Future
 
 - Finish SIEM app
