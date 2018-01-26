@@ -73,5 +73,6 @@ python manage.py shell -c "import ldsiparser.parsecore ; ldsiparser.parsecore.pa
 ## Near Future
 
 - Finish SIEM app
-- Switch default database to MariaDB
+    - Add more event search criteria
+    - Implement rules
 - Dockerize
