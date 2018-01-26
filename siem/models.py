@@ -7,9 +7,7 @@ from siem.choices import *
 class DefaultEvent(models.Model):
     parsed_at = models.DateTimeField('date stamp',
             null=True, blank=True)
-    date_stamp = models.DateTimeField('date stamp',
-            null=True, blank=True)
-    date_stamp_utc = models.DateTimeField('utc date stamp',
+    date_stamp = models.CharField(max_length=32,
             null=True, blank=True)
     time_zone = models.CharField(max_length=5,
             null=True, blank=True)
@@ -46,9 +44,7 @@ class DefaultEvent(models.Model):
 class AuthEvent(models.Model):
     parsed_at = models.DateTimeField('date stamp',
             null=True, blank=True)
-    date_stamp = models.DateTimeField('date stamp',
-            null=True, blank=True)
-    date_stamp_utc = models.DateTimeField('utc date stamp',
+    date_stamp = models.CharField(max_length=32,
             null=True, blank=True)
     time_zone = models.CharField(max_length=5,
             null=True, blank=True)
@@ -108,7 +104,8 @@ class RuleEvent(models.Model):
     
 class LimitRule(models.Model):
     name = models.CharField(max_length=32)
-    desc = models.CharField(max_length=200)
+    desc = models.CharField(max_length=200,
+            null=True, blank=True)
     is_enabled = models.BooleanField(default=True)
     severity = models.IntegerField(choices=severity_choices)
     time_int = models.IntegerField()
