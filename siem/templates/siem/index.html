@@ -6,9 +6,8 @@
 
 <ul>
     <li>Events:<ul>
-        <li><a href="{% url 'siem:defaultevent_search' %}">Default</a></li>
-        <li><a href="{% url 'siem:authevent_search' %}">Auth</a></li>
-        <li><a href="{% url 'siem:ruleevent_search' %}">Rule-Based</a></li>
+        <li><a href="{% url 'siem:logevent_search' %}">Log Events</a></li>
+        <li><a href="{% url 'siem:ruleevent_search' %}">Rule-Based Events</a></li>
         </ul>
     <li><a href="{% url 'siem:lr_index' %}">Limit Rules</a></li>
     <li><a href="{% url 'siem:ph_index' %}">Parse Helpers</a></li>

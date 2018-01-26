@@ -22,7 +22,6 @@
 
 import re
 from datetime import datetime
-import time.timezone, time.altzone
 
 class ParseModule:
     def __init__(self):
@@ -31,23 +30,7 @@ class ParseModule:
         self.desc = 'syslog (without host) parsing module'
         self.date_format = \
                 re.compile(r"^([A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+\S+\[?\d*\]?):")
-        self.tzone = None
 
-        # Set our timezone
-        if not self.tzone:
-            if time.localtime().tm_isdst:
-                self.tzone = \
-                        str(int(float(time.altzone) / 60 // 60)).rjust(2,
-                                '0') + \
-                        str(int(float(time.altzone) / 60 % 60)).ljust(2, '0')
-            else:
-                self.tzone = \
-                        str(int(float(time.timezone) / 60 // 60)).rjust(2,
-                                '0') + \
-                        str(int(float(time.timezone) / 60 % 60)).ljust(2, '0')
-            if not '-' in self.tzone and not '+' in self.tzone:
-                self.tzone = '+' + self.tzone
-                        
     def parse_line(self, line):
         """Parse a syslog line (with standard BSD timestamp) into a dictionary"""
         match = re.findall(self.date_format, line)
@@ -71,7 +54,6 @@ class ParseModule:
 
 
             entry['date_stamp'] = datestamp
-            entry['time_zone'] = self.tzone
             entry['facility'] = None
             entry['severity'] = None
             entry['source_host'] = None

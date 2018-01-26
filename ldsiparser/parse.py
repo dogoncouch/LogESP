@@ -22,14 +22,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import ldsiparser.parsers
-import time.sleep
+from time import sleep
 from datetime import datetime
+import socket
 import re
-import sqlite3 as mydb
 import json
 
-
+from django.utils import timezone
+import ldsiparser.parsers
+from siem.models import LogEvent
+from ldsi.settings import TIME_ZONE
 
 class LiveParser:
 
@@ -39,15 +41,14 @@ class LiveParser:
 
         self.parser = None
         self.db = db
-        self.table = table
         #self.helpers = helpers
 
 
     def get_parser(self, parsername):
         """Load the parser"""
 
-        if parsername == 'syslogbsd':
-            self.parser = ldsiparser.parsers.syslogbsd.ParseModule()
+        if parsername == 'syslog':
+            self.parser = ldsiparser.parsers.syslog.ParseModule()
         elif parsername == 'syslogiso':
             self.parser = ldsiparser.parsers.syslogiso.ParseModule()
         elif parsername == 'nohost':
@@ -60,19 +61,10 @@ class LiveParser:
         # Get hostname, file name, tzone:
         parsepath = os.path.abspath(inputfile.name)
         parsehost = socket.getfqdn()
+        timezone.activate(TIME_ZONE)
 
         # Read to the end of the file:
         inputfile.read()
-        
-        self.sqlstatement = 'INSERT INTO ' + self.db['table'] + \
-                ' (parsed_at, date_stamp,' + \
-                'time_zone, raw_text, facility, severity, source_host, ' + \
-                'source_port, dest_host, dest_port, source_process, ' + \
-                'source_pid, protocol, ' + \
-                #'message, extended, parsed_on, source_path) VALUES ' + \
-                'message, parsed_on, source_path) VALUES ' + \
-                '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, ' + \
-                '%s, %s, %s, %s, %s, %s)'
         
         #rehelpers = []
         #for h in helpers:
@@ -81,8 +73,6 @@ class LiveParser:
         #    reh['reg_exp'] = re.compile(h['reg_exp'])
         #    rehelpers.append(reh)
 
-        is_connected = False
-        
         while True:
 
             # Check for a new line:
@@ -95,7 +85,7 @@ class LiveParser:
                 entry = self.parser.parse_line(ourline)
 
                 if entry:
-                    parsedat = datetime.now()
+                    
                     # Parse extended attributes from helpers:
                     #extattrs = {}
                     #
@@ -110,37 +100,36 @@ class LiveParser:
                     #extattrs = json.dumps(extattrs)
 
                     # To Do: switch to django models
-
-                    if not is_connected:
-                        con = mydb.connect(self.db['dbfile'])
-                    # Put our attributes in our table:
-                    with con:
-                        cur = con.cursor()
-                        cur.execute(self.sqlstatement,
-                                (parsedat, datestamp,
-                                    entry['time_zone'], ourline, 
-                                    entry['facility'], entry['severity'],
-                                    entry['source_host'], entry['source_port'],
-                                    entry['dest_host'], entry['dest_port'],
-                                    entry['source_process'],
-                                    entry['source_pid'],
-                                    entry['protocol'], entry['message'],
-                                    parsehost, parsepath))
-                                    #extattrs, parsehost, parsepath))
-                        con.commit()
-                        cur.close()
-                    #con.close()
-
+                    e = LogEvent()
+                    e.parsed_at = timezone.localtime(timezone.now())
+                    e.time_zone = TIME_ZONE
+                    e.datestamp = entry['date_stamp']
+                    e.raw_text = ourline
+                    e.facility = entry['facility']
+                    e.severity = entry['severity']
+                    e.source_host = entry['source_host']
+                    e.source_port = entry['source_port']
+                    e.dest_host = entry['dest_host']
+                    e.dest_port = entry['dest_port']
+                    e.source_process = entry['source_process']
+                    e.source_pid = entry['source_pid']
+                    e.protocol = entry['protocol']
+                    e.message = entry['message']
+                    e.parsed_on = parsehost
+                    e.source_path = parsepath
+                    e.save()
 
                 else:
-                    # No match!?
-                    # To Do: raise an error here.
-                    print('No Match: ' + ourline)
+                    # No match
+                    e = LogEvent()
+                    e.parsed_at = timezone.localtime(timezone.now())
+                    e.time_zone = TIME_ZONE
+                    e.raw_text = ourline
+                    e.parsed_on = parsehost
+                    e.source_path = parsepath
 
             else:
-                con.close()
-                is_connected = False
-                time.sleep(0.1)
+                sleep(0.1)
 
 
     def parse_file(self, filename, parser):
@@ -157,14 +146,4 @@ class LiveParser:
 def start_parse(db, parseinfo):
     #parser = LiveParser(db, parseinfo['helpers'])
     parser = LiveParser(db)
-    parser.parse_file(parseinfo['filename'], parseinfo['parser']
-    
-    
-#def main():
-#    parser = LiveParser()
-#    parser.run_parse()
-
-
-#if __name__ == "__main__":
-#    parser = LiveParser()
-#    parser.run_parse()
+    parser.parse_file(parseinfo['filename'], parseinfo['parser'])

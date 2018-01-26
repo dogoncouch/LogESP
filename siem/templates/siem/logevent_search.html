@@ -1,12 +1,12 @@
 {% extends "siem/base.html" %}
 
-{% block sub-title %} | Events - Auth{% endblock %}
+{% block sub-title %} | Log Events{% endblock %}
 
 {% block content-main %}
 
-<h1>Events (Auth)</h1>
+<h1>Log Events</h1>
 
-<form method="get" action="{% url 'siem:authevent_search' %}">
+<form method="get" action="{% url 'siem:logevent_search' %}">
     <p>Filter: <input type="text" value="{{filter}}" name="filter"/></p>
     <p><input type="submit" name="submit" value="Submit"/></p>
 </form>
@@ -14,7 +14,7 @@
 {% if event_list %}
     <ul>
         {% for e in event_list %}
-            <li><a href="{% url 'siem:authevent_detail' e.id %}">
+            <li><a href="{% url 'siem:logevent_detail' e.id %}">
                     &middot</a> {{ e.raw_text }}</li>
         {% endfor %}
     </ul>

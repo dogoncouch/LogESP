@@ -27,20 +27,22 @@ import ldsiparser.parse
 import sys
 import os.path
 from argparse import ArgumentParser
-import ConfigParser
+from configparser import ConfigParser
+from threading import Thread
 
 
 class ParseCore:
 
-    def __init__(self):
+    def __init__(self, standalone=True, conf=None):
         """Initialize live parser"""
 
+        self.standalone = standalone
+        self.conf = conf
         self.args = None
         self.arg_parser = ArgumentParser()
 
         self.db = {}
         self.threads = []
-
 
 
     def get_args(self):
@@ -56,23 +58,27 @@ class ParseCore:
         self.args = self.arg_parser.parse_args()
 
 
-
     def get_config(self):
         """Read the config file"""
 
-        config = ConfigParser.ConfigParser()
-        if os.path.isfile(self.args.config):
-            myconf = self.args.config
-        else: myconf = 'config/parser.conf'
+        config = ConfigParser()
+        if self.standalone:
+            if os.path.isfile(self.args.config):
+                myconf = self.args.config
+            else: myconf = 'config/parser.conf'
+        else:
+            if os.path.isfile(self.conf):
+                myconf = self.conf
+            else: myconf = 'config/parser.conf'
         config.read(myconf)
 
         self.plist = []
 
         self.db['dbfile'] = config.get('database', 'dbfile')
-        selfl.db['table'] = config.get(sec, 'table')
         
         for sec in config.sections():
             if sec != 'database':
+                p = {}
                 p['filename'] = config.get(sec, 'filename')
                 try:
                     p['parser'] = config.get(sec, 'parser')
@@ -82,17 +88,21 @@ class ParseCore:
                 self.plist.append(p)
 
 
-    def run_parse(self):
+    def run_parse(self, conf=None):
         try:
-            self.get_args()
+            if self.standalone:
+                self.get_args()
             self.get_config()
             for entry in self.plist:
-                thread = threading.Thread(name=parse,
+                thread = Thread(name=parse,
                         target=ldsiparser.parse.start_parse,
                         args=(self.db, entry))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)
+
+                while True:
+                    sleep(3600)
 
         except KeyboardInterrupt:
             pass
@@ -101,11 +111,6 @@ class ParseCore:
 
 
     
-def main():
-    parser = ParseCore()
-    parser.run_parse()
-
-
-if __name__ == "__main__":
-    parser = ParseCore()
+def parse(conffile='config/parser.conf'):
+    parser = ParseCore(standalone=False, conf=conffile)
     parser.run_parse()

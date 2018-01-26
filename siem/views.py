@@ -6,8 +6,7 @@ from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
-from .models import DefaultEvent
-from .models import AuthEvent
+from .models import LogEvent
 from .models import RuleEvent
 from .models import LimitRule
 from .models import ParseHelper
@@ -20,43 +19,23 @@ def index(request):
 def event_index(request):
     return render(request, 'siem/event_index.html')
 
-class DefaultEventSearchView(PermissionRequiredMixin, ListView):
-    model = DefaultEvent
-    permission_required = 'siem.view_defaultevent'
-    template_name = 'siem/defaultevent_search.html'
+class LogEventSearchView(PermissionRequiredMixin, ListView):
+    model = LogEvent
+    permission_required = 'siem.view_logevent'
+    template_name = 'siem/logevent_search.html'
     context_object_name = 'event_list'
     paginate_by = 50
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
-            new_context = DefaultEvent.objects.filter(
+            new_context = LogEvent.objects.filter(
                 raw_text__contains=filter_val,
             ).reverse()
             return new_context
         else:
-            return DefaultEvent.objects.all().reverse()
+            return LogEvent.objects.all().reverse()
     def get_context_data(self, **kwargs):
-        context = super(DefaultEventSearchView,self).get_context_data(**kwargs)
-        context['filter'] = self.request.GET.get('filter', '')
-        return context
-
-class AuthEventSearchView(PermissionRequiredMixin, ListView):
-    model = AuthEvent
-    permission_required = 'siem.view_authevent'
-    template_name = 'siem/authevent_search.html'
-    context_object_name = 'event_list'
-    paginate_by = 50
-    def get_queryset(self):
-        filter_val = self.request.GET.get('filter')
-        if filter_val and filter_val != '':
-            new_context = AuthEvent.objects.filter(
-                raw_text__contains=filter_val,
-            ).reverse()
-            return new_context
-        else:
-            return AuthEvent.objects.all().reverse()
-    def get_context_data(self, **kwargs):
-        context = super(AuthEventSearchView,self).get_context_data(**kwargs)
+        context = super(LogEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
         return context
 

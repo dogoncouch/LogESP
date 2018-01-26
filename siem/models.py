@@ -4,12 +4,12 @@ from siem.choices import *
 
 # Create your models here.
 
-class DefaultEvent(models.Model):
+class LogEvent(models.Model):
     parsed_at = models.DateTimeField('date stamp',
             null=True, blank=True)
     date_stamp = models.CharField(max_length=32,
             null=True, blank=True)
-    time_zone = models.CharField(max_length=5,
+    time_zone = models.CharField(max_length=32,
             null=True, blank=True)
     raw_text = models.CharField(max_length=1280)
     facility = models.IntegerField(choices=facility_choices,
@@ -39,44 +39,7 @@ class DefaultEvent(models.Model):
     source_path = models.CharField(max_length=200,
             null=True, blank=True)
     class Meta:
-        permissions = (('view_defaultevent', 'Can view default events'),)
-
-class AuthEvent(models.Model):
-    parsed_at = models.DateTimeField('date stamp',
-            null=True, blank=True)
-    date_stamp = models.CharField(max_length=32,
-            null=True, blank=True)
-    time_zone = models.CharField(max_length=5,
-            null=True, blank=True)
-    raw_text = models.CharField(max_length=1280)
-    facility = models.IntegerField(choices=facility_choices,
-            null=True, blank=True)
-    severity = models.IntegerField(choices=severity_choices,
-            null=True, blank=True)
-    source_host = models.CharField(max_length=32,
-            null=True, blank=True)
-    source_port = models.CharField(max_length=8,
-            null=True, blank=True)
-    dest_host = models.CharField(max_length=32,
-            null=True, blank=True)
-    dest_port = models.CharField(max_length=8,
-            null=True, blank=True)
-    source_process = models.CharField(max_length=24,
-            null=True, blank=True)
-    source_pid = models.IntegerField(
-            null=True, blank=True)
-    protocol = models.CharField(max_length=12,
-            null=True, blank=True)
-    message = models.CharField(max_length=1024,
-            null=True, blank=True)
-    extended = models.CharField(max_length=1024,
-            null=True, blank=True)
-    parsed_on = models.CharField(max_length=32,
-            null=True, blank=True)
-    source_path = models.CharField(max_length=200,
-            null=True, blank=True)
-    class Meta:
-        permissions = (('view_authevent', 'Can view auth events'),)
+        permissions = (('view_logevent', 'Can view default events'),)
 
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp')
@@ -89,10 +52,7 @@ class RuleEvent(models.Model):
     magnitude = models.IntegerField()
     time_int = models.IntegerField()
     message = models.CharField(max_length=1024)
-    source_ids_def = models.ManyToManyField(DefaultEvent,
-            related_name='rules_triggered',
-            blank=True, symmetrical=False)
-    source_ids_auth = models.ManyToManyField(AuthEvent,
+    source_ids_def = models.ManyToManyField(LogEvent,
             related_name='rules_triggered',
             blank=True, symmetrical=False)
     source_ids_rule = models.ManyToManyField('self',

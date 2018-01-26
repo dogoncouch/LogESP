@@ -29,7 +29,6 @@ class ParseModule:
         self.desc = 'syslog ISODATE parsing module'
         self.date_format = \
                 re.compile(r"^(\d\d\d\d-\d\d-\d\dT\d\d:\d\d:\d\d\.?\d+?[+-]\d\d:?\d\d\s+\S+\s+\S+\[?\d*?\]?):")
-        self.tzone = None
 
     def parse_line(self, line):
         """Parse a syslog line (with ISO 8601 timestamp) into a dictionary"""
@@ -43,10 +42,6 @@ class ParseModule:
             
             # Set our attributes:
             datestamp = attr_list[0]
-            if attr_list[0][-1] == 'Z':
-                tzone = '+0000'
-            else:
-                tzone = attr_list[0][-5:].strip(':')
             
             sourceproclist = attr_list[2].split('[')
             if len(sourceproclist) > 1:
@@ -55,7 +50,6 @@ class ParseModule:
             
             entry = {}
             entry['date_stamp'] = datestamp
-            entry['time_zone'] = tzone
             entry['facility'] = None
             entry['severity'] = None
             entry['source_host'] = attr_list[1]

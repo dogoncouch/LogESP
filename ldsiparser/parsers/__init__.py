@@ -20,8 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-__all__ = ['syslogbsd', 'syslogiso', 'nohost']
+__all__ = ['syslog', 'syslogiso', 'nohost']
 
-import ldsiparser.parsers.syslogbsd
+import ldsiparser.parsers.syslog
 import ldsiparser.parsers.syslogiso
 import ldsiparser.parsers.nohost
