@@ -29,7 +29,7 @@ git clone https://github.com/dogoncouch/ldsi.git
 
 - Step 2: (Optional) Create a virtual environment and install django:
 ```
-virtualenv ldsi_env
+virtualenv -p python3 ldsi_env
 source ldsi_env/bin/activate
 pip install django
 ```
