@@ -104,7 +104,7 @@ class LiveParser:
                     e = LogEvent()
                     e.parsed_at = timezone.localtime(timezone.now())
                     e.time_zone = TIME_ZONE
-                    e.datestamp = entry['date_stamp']
+                    e.date_stamp = entry['date_stamp']
                     e.raw_text = ourline
                     e.facility = entry['facility']
                     e.severity = entry['severity']
