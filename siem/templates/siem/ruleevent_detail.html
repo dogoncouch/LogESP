@@ -1,0 +1,23 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Rule-Based Event{% endblock %}
+
+{% block content-main %}
+
+<h1>Rule-Based Event</h1>
+
+<ul>
+    <li>Date Stamp: {{ event.date_stamp }}</li>
+    <li>Time Zone: {{ event.time_zone }}</li>
+    <li>Source Rule: {{ event.source_rule }}</li>
+    <li>Severity: {{ event.severity }}</li>
+    <li>Event Limit: {{ event.event_limit }}</li>
+    <li>Event Count: {{ event.event_count }}</li>
+    <li>Magnitude: {{ event.magnitude }}</li>
+    <li>Time Interval: {{ event.time_int }}</li>
+    <li>Message: {{ event.message }}</li>
+    <li>Source Log Events: {{ event.source_ids_log }}</li>
+    <li>Source Rule Events: {{ event.source_ids_rule }}</li>
+</ul>
+
+{% endblock %}

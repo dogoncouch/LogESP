@@ -42,7 +42,7 @@ class ParseModule:
                 pass
 
             # Put the date stamp back together
-            datestamp = ' '.join(attr_list[0], attr_list[1], attr_list[2])
+            datestamp = ' '.join((attr_list[0], attr_list[1], attr_list[2]))
 
             # Set our attributes:
             sourceproclist = attr_list[3].split('[')

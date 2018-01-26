@@ -29,6 +29,7 @@ import os.path
 from argparse import ArgumentParser
 from configparser import ConfigParser
 from threading import Thread
+from time import sleep
 
 
 class ParseCore:

@@ -39,6 +39,12 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         context['filter'] = self.request.GET.get('filter', '')
         return context
 
+class LogEventDetailView(PermissionRequiredMixin, DetailView):
+    model = LogEvent
+    permission_required = 'siem.view_logeventrule'
+    template_name = 'siem/logevent_detail.html'
+    context_object_name = 'event'
+
 class RuleEventSearchView(PermissionRequiredMixin, ListView):
     model = RuleEvent
     permission_required = 'siem.view_ruleevent'
@@ -58,6 +64,12 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
         context = super(RuleEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
         return context
+
+class RuleEventDetailView(PermissionRequiredMixin, DetailView):
+    model = RuleEvent
+    permission_required = 'siem.view_ruleeventrule'
+    template_name = 'siem/ruleevent_detail.html'
+    context_object_name = 'event'
 
 class LRIndexView(PermissionRequiredMixin, ListView):
     model = LimitRule

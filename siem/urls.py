@@ -8,10 +8,14 @@ app_name = 'siem'
 urlpatterns = [
     path('', views.index, name='index'),
     path('events/', views.event_index, name='event_index'),
+    path('events/log/<int:pk>/', login_required(
+        views.LogEventDetailView.as_view()), name='logevent_detail'),
     path('events/log/', login_required(
         views.LogEventSearchView.as_view()), name='logevent_search'),
     path('events/rule/', login_required(
         views.RuleEventSearchView.as_view()), name='ruleevent_search'),
+    path('events/rule/<int:pk>/', login_required(
+        views.RuleEventDetailView.as_view()), name='ruleevent_detail'),
     path('lr/', login_required(
         views.LRIndexView.as_view()), name='lr_index'),
     path('ph/', login_required(

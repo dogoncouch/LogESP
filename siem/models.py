@@ -5,7 +5,7 @@ from siem.choices import *
 # Create your models here.
 
 class LogEvent(models.Model):
-    parsed_at = models.DateTimeField('date stamp',
+    parsed_at = models.DateTimeField(6,
             null=True, blank=True)
     date_stamp = models.CharField(max_length=32,
             null=True, blank=True)
@@ -32,8 +32,8 @@ class LogEvent(models.Model):
             null=True, blank=True)
     message = models.CharField(max_length=1024,
             null=True, blank=True)
-    extended = models.CharField(max_length=1024,
-            null=True, blank=True)
+    #extended = models.CharField(max_length=1024,
+    #        null=True, blank=True)
     parsed_on = models.CharField(max_length=32,
             null=True, blank=True)
     source_path = models.CharField(max_length=200,
@@ -43,8 +43,7 @@ class LogEvent(models.Model):
 
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp')
-    date_stamp_utc = models.DateTimeField('utc date stamp')
-    time_zone = models.CharField(max_length=5)
+    time_zone = models.CharField(max_length=32)
     source_rule = models.CharField(max_length=32)
     severity = models.IntegerField(choices=severity_choices)
     event_limit = models.IntegerField()
@@ -52,7 +51,7 @@ class RuleEvent(models.Model):
     magnitude = models.IntegerField()
     time_int = models.IntegerField()
     message = models.CharField(max_length=1024)
-    source_ids_def = models.ManyToManyField(LogEvent,
+    source_ids_log = models.ManyToManyField(LogEvent,
             related_name='rules_triggered',
             blank=True, symmetrical=False)
     source_ids_rule = models.ManyToManyField('self',

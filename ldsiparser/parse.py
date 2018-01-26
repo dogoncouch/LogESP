@@ -26,6 +26,7 @@ from time import sleep
 from datetime import datetime
 import socket
 import re
+import os.path
 import json
 
 from django.utils import timezone
@@ -134,8 +135,9 @@ class LiveParser:
 
     def parse_file(self, filename, parser):
         try:
-            self.get_parser(parser)
-            self.parse_entries(filename)
+            with open(filename, 'r') as inputfile:
+                self.get_parser(parser)
+                self.parse_entries(inputfile)
 
         except KeyboardInterrupt:
             pass

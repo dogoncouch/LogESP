@@ -1,0 +1,26 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Log Event{% endblock %}
+
+{% block content-main %}
+
+<h1>Log Event</h1>
+
+<ul>
+    <li>Parsed At: {{ event.parsed_at }}</li>
+    <li>Time Zone: {{ event.time_zone }}</li>
+    <li>Parsed On: {{ event.parsed_on }}</li>
+    <li>Source Path: {{ event.source_path }}</li>
+    <li>Facility: {{ event.facility }}</li>
+    <li>Severity: {{ event.severity }}</li>
+    <li>Source Host: {{ event.source_host }}</li>
+    <li>Source Port: {{ event.source_port }}</li>
+    <li>Dest Host: {{ event.dest_host }}</li>
+    <li>Dest Port: {{ event.dest_port }}</li>
+    <li>Protocol: {{ event.protocol }}</li>
+    <li>Source Process: {{ event.source_process }}</li>
+    <li>Source PID: {{ event.source_pid }}</li>
+    <li>Message: {{ event.message }}</li>
+</ul>
+
+{% endblock %}
