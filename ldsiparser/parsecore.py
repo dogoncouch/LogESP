@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 from ldsiparser import __version__
-from ldsiparser.parse import LiveParser
+import ldsiparser.parse
 import sys
 import os.path
 from argparse import ArgumentParser
@@ -32,17 +32,14 @@ import ConfigParser
 
 class ParseCore:
 
-    def __init__(self, section='default'):
+    def __init__(self):
         """Initialize live parser"""
 
         self.args = None
         self.arg_parser = ArgumentParser()
-        self.config = None
 
-        self.parser = None
-        self.parsername = None
         self.db = {}
-        self.table = None
+        self.threads = []
 
 
 
@@ -72,20 +69,17 @@ class ParseCore:
         self.plist = []
 
         self.db['dbfile'] = config.get('database', 'dbfile')
+        selfl.db['table'] = config.get(sec, 'table')
         
         for sec in config.sections():
             if sec != 'database':
-                f = config.get(sec, 'filename')
-                p = config.get(sec, 'parser')
-                t = config.get(sec, 'table')
-                h = config.get(sec, 'helpers')
-                self.plist.append([f, p, t, h])
-
-        try:
-            self.parsername = config.get(self.args.section, 'parser')
-        except Exception:
-            # To Do: narrow down exception
-            self.parsername = 'syslogbsd'
+                p['filename'] = config.get(sec, 'filename')
+                try:
+                    p['parser'] = config.get(sec, 'parser')
+                except Exception:
+                    p['parser'] = 'syslogbsd'
+                #p['helpers'] = config.get(sec, 'helpers')
+                self.plist.append(p)
 
 
     def run_parse(self):
@@ -93,16 +87,19 @@ class ParseCore:
             self.get_args()
             self.get_config()
             for entry in self.plist:
-                # To Do: Start background daemon processes
-                parser = LiveParser(self.db, entry[2], entry[3])
-                parser.parse_file(entry[0], entry[1])
+                thread = threading.Thread(name=parse,
+                        target=ldsiparser.parse.start_parse,
+                        args=(self.db, entry))
+                thread.daemon = True
+                thread.start()
+                self.threads.append(thread)
 
         except KeyboardInterrupt:
             pass
         # except Exception as err:
         #     print('Error: ' + str(err))
 
-    
+
     
 def main():
     parser = ParseCore()

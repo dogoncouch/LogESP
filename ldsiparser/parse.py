@@ -33,13 +33,14 @@ import json
 
 class LiveParser:
 
-    def __init__(self, db, table, helpers):
+    #def __init__(self, db, helpers):
+    def __init__(self, db):
         """Initialize live parser"""
 
         self.parser = None
         self.db = db
         self.table = table
-        self.helpers = helpers
+        #self.helpers = helpers
 
 
     def get_parser(self, parsername):
@@ -63,21 +64,22 @@ class LiveParser:
         # Read to the end of the file:
         inputfile.read()
         
-        self.sqlstatement = 'INSERT INTO ' + self.table + \
+        self.sqlstatement = 'INSERT INTO ' + self.db['table'] + \
                 ' (parsed_at, date_stamp,' + \
                 'time_zone, raw_text, facility, severity, source_host, ' + \
                 'source_port, dest_host, dest_port, source_process, ' + \
                 'source_pid, protocol, ' + \
-                'message, extended, parsed_on, source_path) VALUES ' + \
+                #'message, extended, parsed_on, source_path) VALUES ' + \
+                'message, parsed_on, source_path) VALUES ' + \
                 '(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, ' + \
-                '%s, %s, %s, %s, %s, %s, %s)'
+                '%s, %s, %s, %s, %s, %s)'
         
-        rehelpers = []
-        for h in helpers:
-            reh = {}
-            reh['var_name'] = h['var_name']
-            reh['reg_exp'] = re.compile(h['reg_exp'])
-            rehelpers.append(reh)
+        #rehelpers = []
+        #for h in helpers:
+        #    reh = {}
+        #    reh['var_name'] = h['var_name']
+        #    reh['reg_exp'] = re.compile(h['reg_exp'])
+        #    rehelpers.append(reh)
 
         is_connected = False
         
@@ -95,17 +97,19 @@ class LiveParser:
                 if entry:
                     parsedat = datetime.now()
                     # Parse extended attributes from helpers:
-                    extattrs = {}
+                    #extattrs = {}
+                    #
+                    #for h in rehelpers:
+                    #    mlist = h['reg_exp'].findall(entry['message'])
+                    #
+                    #    try:
+                    #        extattrs[h['var_name']] += mlist
+                    #    except KeyError:
+                    #        extattrs[h['var_name']] = mlist
+                    #
+                    #extattrs = json.dumps(extattrs)
 
-                    for h in rehelpers:
-                        mlist = h['reg_exp'].findall(entry['message'])
-
-                        try:
-                            extattrs[h['var_name']] += mlist
-                        except KeyError:
-                            extattrs[h['var_name']] = mlist
-
-                    extattrs = json.dumps(extattrs)
+                    # To Do: switch to django models
 
                     if not is_connected:
                         con = mydb.connect(self.db['dbfile'])
@@ -121,7 +125,8 @@ class LiveParser:
                                     entry['source_process'],
                                     entry['source_pid'],
                                     entry['protocol'], entry['message'],
-                                    extattrs, parsehost, parsepath))
+                                    parsehost, parsepath))
+                                    #extattrs, parsehost, parsepath))
                         con.commit()
                         cur.close()
                     #con.close()
@@ -150,7 +155,8 @@ class LiveParser:
 
 
 def start_parse(db, parseinfo):
-    parser = LiveParser(db, parseinfo['table'], parseinfo['helpers'])
+    #parser = LiveParser(db, parseinfo['helpers'])
+    parser = LiveParser(db)
     parser.parse_file(parseinfo['filename'], parseinfo['parser']
     
     
