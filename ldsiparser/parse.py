@@ -45,7 +45,7 @@ class LiveParser:
         """Load parser modules"""
         parsers = {}
         for p in sorted(ldsiparser.parsers.__all__):
-            parsers[parser] = \
+            parsers[p] = \
                     __import__('ldsiparser.parsers.' + p, globals(),
                             locals(), [ldsiparser]).ParseModule()
         
@@ -57,7 +57,6 @@ class LiveParser:
         # Get hostname, file name, tzone:
         parsepath = os.path.abspath(inputfile.name)
         parsehost = socket.getfqdn()
-        timezone.activate(TIME_ZONE)
 
         # Read to the end of the file:
         inputfile.read()
