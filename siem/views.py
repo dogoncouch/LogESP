@@ -2,7 +2,6 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.core import paginator
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -30,16 +29,13 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if filter_val and filter_val != '':
             new_context = LogEvent.objects.filter(
                 raw_text__contains=filter_val,
-            ).reverse()
+            )
             return new_context
         else:
             return LogEvent.objects.all().reverse()
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
-        page = self.request.GET.get('page')
-        if not page:
-            page = paginator.num_pages
         return context
 
 class LogEventDetailView(PermissionRequiredMixin, DetailView):
