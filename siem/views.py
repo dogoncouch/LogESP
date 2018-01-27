@@ -37,7 +37,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
-        page = self.request.GET('page')
+        page = self.request.GET.get('page')
         if not page:
             page = paginator.num_pages
         return context
