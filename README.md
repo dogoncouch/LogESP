@@ -27,7 +27,7 @@ Note: replace `python` with `python3` if Python 2 is your default version (or if
 git clone https://github.com/dogoncouch/ldsi.git
 ```
 
-- Step 2: (Optional) Create a virtual environment and install django:
+- Step 2: Create a virtual environment and install django:
 ```
 virtualenv -p python3 ldsi_env
 source ldsi_env/bin/activate
@@ -62,6 +62,7 @@ python manage.py runserver
 - Step 7: Try it: http://localhost:8000
 
 ## Notes
+### Parser Engine
 To start the parser engine:
 
 1. Edit the config file at `config/parser.conf`.
@@ -70,9 +71,17 @@ To start the parser engine:
 python manage.py shell -c "import ldsiparser.parsecore ; ldsiparser.parsecore.parse()"
 ```
 
+### Sentry Engine
+The rule engine has not been tested. To start it:
+
+1. Add LimitRule objects using the admin page
+2. Run the sentry engine inside a django shell:
+```
+python manage.py shell -c "import ldsisentry.sentrycore ; ldsisentry.sentrycore.sentry()"
+```
+
 ## Near Future
 
 - Finish SIEM app
     - Add more event search criteria
-    - Implement rules
 - Dockerize
