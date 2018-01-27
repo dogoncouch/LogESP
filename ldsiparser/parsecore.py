@@ -57,6 +57,7 @@ class ParseCore:
         for sec in config.sections():
             p = {}
             p['filename'] = config.get(sec, 'filename')
+            p['event_type'] = config.get(sec, 'event_type')
             try:
                 p['parser'] = config.get(sec, 'parser')
             except Exception:
@@ -71,7 +72,7 @@ class ParseCore:
             for entry in self.plist:
                 thread = Thread(name=parse,
                         target=ldsiparser.parse.start_parse,
-                        args=(self.db, entry))
+                        args=(entry))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)

@@ -49,7 +49,7 @@ class LiveParser:
                             locals(), [ldsiparser]).ParseModule()
 
 
-    def parse_entries(self, inputfile, parser):
+    def parse_entries(self, inputfile, parser, eventtype):
         """Parse log entries from a file like object"""
         # Get hostname, file name, tzone:
         parsepath = os.path.abspath(inputfile.name)
@@ -73,6 +73,7 @@ class LiveParser:
                     e = LogEvent()
                     e.parsed_at = timezone.localtime(timezone.now())
                     e.time_zone = TIME_ZONE
+                    e.event_type = eventtype
                     e.date_stamp = entry['date_stamp']
                     e.raw_text = ourline
                     e.facility = entry['facility']
@@ -116,7 +117,7 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(db, parseinfo):
+def start_parse(parseinfo):
     """Start a parser"""
     parser = LiveParser()
     parser.parse_file(parseinfo['filename'], parseinfo['parser'])
