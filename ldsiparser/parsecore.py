@@ -26,6 +26,7 @@ from ldsiparser import __version__
 import ldsiparser.parse
 import sys
 import os.path
+import signal
 from configparser import ConfigParser
 from threading import Thread
 from time import sleep
