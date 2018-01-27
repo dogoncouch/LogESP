@@ -107,11 +107,11 @@ class LiveParser:
                 sleep(0.1)
 
 
-    def parse_file(self, inputfile, parser, eventtype):
+    def parse_file(self, filename, parser, eventtype):
         """Parse a file into ldsi"""
         self.get_parser(parser)
         try:
-            with open(parseinfo['filename'], 'r') as inputfile:
+            with open(filename, 'r') as inputfile:
                 self.parse_entries(inputfile, eventtype)
 
         except KeyboardInterrupt:
@@ -120,7 +120,7 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(inputfile, parser, eventtype):
+def start_parse(filename, parser, eventtype):
     """Start a parser"""
     parseengine = LiveParser()
-    parseengine.parse_file(inputfile, parser, eventtype)
+    parseengine.parse_file(filename, parser, eventtype)
