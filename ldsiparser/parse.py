@@ -49,7 +49,7 @@ class LiveParser:
                             locals(), [ldsiparser]).ParseModule()
 
 
-    def parse_entries(self, inputfile, parser, eventtype):
+    def parse_entries(self, inputfile, eventtype):
         """Parse log entries from a file like object"""
         # Get hostname, file name, tzone:
         parsepath = os.path.abspath(inputfile.name)
@@ -104,12 +104,13 @@ class LiveParser:
                 sleep(0.1)
 
 
-    def parse_file(self, filename, parser):
+    def parse_file(self, parseinfo):
         """Parse a file into ldsi"""
+        self.get_parsers(parser)
+        self.parser = self.parsers['parser']
         try:
-            with open(filename, 'r') as inputfile:
-                p = self.get_parser(parser)
-                self.parse_entries(inputfile, p)
+            with open(parseinfo['filename'], 'r') as inputfile:
+                self.parse_entries(inputfile, eventtype)
 
         except KeyboardInterrupt:
             pass
@@ -120,4 +121,4 @@ class LiveParser:
 def start_parse(parseinfo):
     """Start a parser"""
     parser = LiveParser()
-    parser.parse_file(parseinfo['filename'], parseinfo['parser'])
+    parser.parse_file(parseinfo)
