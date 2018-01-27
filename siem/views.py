@@ -24,21 +24,19 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
     template_name = 'siem/logevent_search.html'
     context_object_name = 'event_list'
     paginate_by = 50
-    ordering = 'logevent_id_internal'
-    def get_ordering(self):
-        selected_ordering = '-' + selected_ordering
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
             new_context = LogEvent.objects.filter(
                 raw_text__contains=filter_val,
-            ).order_by(-parsed_at)
+            ).order_by(-)
             return new_context
         else:
             return LogEvent.objects.all().reverse()
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
+        context['order'] = 'desc'
         return context
 
 class LogEventDetailView(PermissionRequiredMixin, DetailView):
