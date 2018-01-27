@@ -28,11 +28,10 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
             new_context = LogEvent.objects.filter(
-                raw_text__contains=filter_val,
-            )
+                raw_text__contains=filter_val).order_by('-id')
             return new_context
         else:
-            return LogEvent.objects.all().order_by('-parsed_at')
+            return LogEvent.objects.all().order_by('-id')
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
@@ -55,11 +54,10 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
             new_context = RuleEvent.objects.filter(
-                raw_text__contains=filter_val,
-            ).reverse()
+                raw_text__contains=filter_val).order_by('-id')
             return new_context
         else:
-            return RuleEvent.objects.all().reverse()
+            return RuleEvent.objects.all().order_by('-id')
     def get_context_data(self, **kwargs):
         context = super(RuleEventSearchView,self).get_context_data(**kwargs)
         context['filter'] = self.request.GET.get('filter', '')
