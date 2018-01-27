@@ -29,7 +29,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if filter_val and filter_val != '':
             new_context = LogEvent.objects.filter(
                 raw_text__contains=filter_val,
-            ).order_by(-)
+            )
             return new_context
         else:
             return LogEvent.objects.all().reverse()
