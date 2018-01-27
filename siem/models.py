@@ -84,13 +84,3 @@ class LimitRule(models.Model):
         return self.name
     class Meta:
         permissions = (('view_limitrule', 'Can view limit rules'),)
-
-class ParseHelper(models.Model):
-    name = models.CharField(max_length=32)
-    var_name = models.CharField(max_length=24)
-    reg_exp = models.CharField(max_length=200)
-    def __str__(self):
-        return self.name
-    class Meta:
-        permissions = (('view_parsehelper', 'Can view parse helpers'),)
-

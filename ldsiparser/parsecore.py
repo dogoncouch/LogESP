@@ -61,7 +61,6 @@ class ParseCore:
                 p['parser'] = config.get(sec, 'parser')
             except Exception:
                 p['parser'] = 'syslog'
-            #p['helpers'] = config.get(sec, 'helpers')
             self.plist.append(p)
 
     

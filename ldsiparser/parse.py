@@ -36,12 +36,9 @@ from ldsi.settings import TIME_ZONE
 
 class LiveParser:
 
-    #def __init__(self, db, helpers):
     def __init__(self):
         """Initialize live parser"""
-
         self.parser = None
-        #self.helpers = helpers
 
 
     def get_parsers(self):
@@ -50,10 +47,10 @@ class LiveParser:
             self.parsers[parser] = \
                     __import__('ldsiparser.parsers.' + parser, globals(),
                             locals(), [ldsiparser]).ParseModule()
-    
+
+
     def parse_entries(self, inputfile, parser):
         """Parse log entries from a file like object"""
-
         # Get hostname, file name, tzone:
         parsepath = os.path.abspath(inputfile.name)
         parsehost = socket.getfqdn()
@@ -62,15 +59,7 @@ class LiveParser:
         # Read to the end of the file:
         inputfile.read()
         
-        #rehelpers = []
-        #for h in helpers:
-        #    reh = {}
-        #    reh['var_name'] = h['var_name']
-        #    reh['reg_exp'] = re.compile(h['reg_exp'])
-        #    rehelpers.append(reh)
-
         while True:
-
             # Check for a new line:
             line = inputfile.readline()
 
@@ -80,21 +69,7 @@ class LiveParser:
                 
                 entry = self.parser.parse_line(ourline)
 
-                if entry:
-                    
-                    # Parse extended attributes from helpers:
-                    #extattrs = {}
-                    #
-                    #for h in rehelpers:
-                    #    mlist = h['reg_exp'].findall(entry['message'])
-                    #
-                    #    try:
-                    #        extattrs[h['var_name']] += mlist
-                    #    except KeyError:
-                    #        extattrs[h['var_name']] = mlist
-                    #
-                    #extattrs = json.dumps(extattrs)
-
+                if entry: 
                     e = LogEvent()
                     e.parsed_at = timezone.localtime(timezone.now())
                     e.time_zone = TIME_ZONE
@@ -129,6 +104,7 @@ class LiveParser:
 
 
     def parse_file(self, filename, parser):
+        """Parse a file into ldsi"""
         try:
             with open(filename, 'r') as inputfile:
                 p = self.get_parser(parser)
@@ -141,6 +117,6 @@ class LiveParser:
 
 
 def start_parse(db, parseinfo):
-    #parser = LiveParser(db, parseinfo['helpers'])
+    """Start a parser"""
     parser = LiveParser()
     parser.parse_file(parseinfo['filename'], parseinfo['parser'])
