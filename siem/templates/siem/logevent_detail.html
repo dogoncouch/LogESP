@@ -11,6 +11,7 @@
     <li>Time Zone: {{ event.time_zone }}</li>
     <li>Parsed On: {{ event.parsed_on }}</li>
     <li>Source Path: {{ event.source_path }}</li>
+    <li>Event Type: {{ event.event_type }}</li>
     <li>Facility: {{ event.facility }}</li>
     <li>Severity: {{ event.severity }}</li>
     <li>Date Stamp: {{ event.date_stamp }}</li>
@@ -22,6 +23,8 @@
     <li>Source Process: {{ event.source_process }}</li>
     <li>Source PID: {{ event.source_pid }}</li>
     <li>Message: {{ event.message }}</li>
+    <li>Extended: {{ event.extended }}</li>
+    <li>Raw Text: {{ event.raw_text }}</li>
 </ul>
 
 {% endblock %}

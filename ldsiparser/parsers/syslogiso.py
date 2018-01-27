@@ -60,6 +60,7 @@ class ParseModule:
             entry['source_process'] = sourceproclist[0]
             entry['source_pid'] = sourcepid
             entry['message'] = line[len(match[0]) + 2:]
+            entry['extended'] = None
 
             return entry
         

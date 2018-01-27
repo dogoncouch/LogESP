@@ -110,6 +110,7 @@ class LiveParser:
                     e.source_pid = entry['source_pid']
                     e.protocol = entry['protocol']
                     e.message = entry['message']
+                    e.extended = entry['extended']
                     e.parsed_on = parsehost
                     e.source_path = parsepath
                     e.save()

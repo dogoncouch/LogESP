@@ -64,6 +64,7 @@ class ParseModule:
             entry['dest_port'] = None
             entry['protocol'] = None
             entry['message'] = line[len(match[0]) + 2:]
+            entry['extended'] = None
 
             return entry
         
