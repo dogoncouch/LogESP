@@ -26,7 +26,6 @@ from ldsiparser import __version__
 import ldsiparser.parse
 import sys
 import os.path
-from argparse import ArgumentParser
 from configparser import ConfigParser
 from threading import Thread
 from time import sleep
@@ -34,65 +33,41 @@ from time import sleep
 
 class ParseCore:
 
-    def __init__(self, standalone=True, conf=None):
+    def __init__(self, config='config/parser.conf'):
         """Initialize live parser"""
-
-        self.standalone = standalone
-        self.conf = conf
-        self.args = None
-        self.arg_parser = ArgumentParser()
-
-        self.db = {}
+        self.conf = config
         self.threads = []
+        signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
-    def get_args(self):
-        """Set argument options"""
-
-        self.arg_parser.add_argument('--version', action = 'version',
-                version = '%(prog)s ' + str(__version__))
-        self.arg_parser.add_argument('-c',
-                action = 'store', dest = 'config',
-                default = 'config/parser.conf',
-                help = ('set the config file'))
-
-        self.args = self.arg_parser.parse_args()
+    def sigterm_handler(self, signal, frame):
+        """Exit cleanly on sigterm"""
+        exit(0)
 
 
     def get_config(self):
         """Read the config file"""
 
         config = ConfigParser()
-        if self.standalone:
-            if os.path.isfile(self.args.config):
-                myconf = self.args.config
-            else: myconf = 'config/parser.conf'
-        else:
-            if os.path.isfile(self.conf):
-                myconf = self.conf
-            else: myconf = 'config/parser.conf'
+        myconf = self.conf
         config.read(myconf)
 
         self.plist = []
 
-        self.db['dbfile'] = config.get('database', 'dbfile')
-        
         for sec in config.sections():
-            if sec != 'database':
-                p = {}
-                p['filename'] = config.get(sec, 'filename')
-                try:
-                    p['parser'] = config.get(sec, 'parser')
-                except Exception:
-                    p['parser'] = 'syslogbsd'
-                #p['helpers'] = config.get(sec, 'helpers')
-                self.plist.append(p)
+            p = {}
+            p['filename'] = config.get(sec, 'filename')
+            try:
+                p['parser'] = config.get(sec, 'parser')
+            except Exception:
+                p['parser'] = 'syslog'
+            #p['helpers'] = config.get(sec, 'helpers')
+            self.plist.append(p)
 
-
+    
     def run_parse(self, conf=None):
+        """Run the parser"""
         try:
-            if self.standalone:
-                self.get_args()
             self.get_config()
             for entry in self.plist:
                 thread = Thread(name=parse,
@@ -103,7 +78,12 @@ class ParseCore:
                 self.threads.append(thread)
 
                 while True:
-                    sleep(3600)
+                    isAlive = False
+                    for thread in self.threads:
+                        if thread.isAlive():
+                            isAlive=True
+                    if not isAlive: exit(0)
+                    sleep(10)
 
         except KeyboardInterrupt:
             pass
@@ -112,6 +92,6 @@ class ParseCore:
 
 
     
-def parse(conffile='config/parser.conf'):
-    parser = ParseCore(standalone=False, conf=conffile)
+def parse(conf='config/parser.conf'):
+    parser = ParseCore(config=conf)
     parser.run_parse()

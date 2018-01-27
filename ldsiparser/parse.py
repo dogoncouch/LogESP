@@ -37,26 +37,21 @@ from ldsi.settings import TIME_ZONE
 class LiveParser:
 
     #def __init__(self, db, helpers):
-    def __init__(self, db):
+    def __init__(self):
         """Initialize live parser"""
 
         self.parser = None
-        self.db = db
         #self.helpers = helpers
 
 
-    def get_parser(self, parsername):
-        """Load the parser"""
-
-        if parsername == 'syslog':
-            self.parser = ldsiparser.parsers.syslog.ParseModule()
-        elif parsername == 'syslogiso':
-            self.parser = ldsiparser.parsers.syslogiso.ParseModule()
-        elif parsername == 'nohost':
-            self.parser = ldsiparser.parsers.nohost.ParseModule()
-
-
-    def parse_entries(self, inputfile):
+    def get_parsers(self):
+        """Load parser modules"""
+        for parser in sorted(ldsiparser.parsers.__all__):
+            self.parsers[parser] = \
+                    __import__('ldsiparser.parsers.' + parser, globals(),
+                            locals(), [ldsiparser]).ParseModule()
+    
+    def parse_entries(self, inputfile, parser):
         """Parse log entries from a file like object"""
 
         # Get hostname, file name, tzone:
@@ -100,7 +95,6 @@ class LiveParser:
                     #
                     #extattrs = json.dumps(extattrs)
 
-                    # To Do: switch to django models
                     e = LogEvent()
                     e.parsed_at = timezone.localtime(timezone.now())
                     e.time_zone = TIME_ZONE
@@ -136,8 +130,8 @@ class LiveParser:
     def parse_file(self, filename, parser):
         try:
             with open(filename, 'r') as inputfile:
-                self.get_parser(parser)
-                self.parse_entries(inputfile)
+                p = self.get_parser(parser)
+                self.parse_entries(inputfile, p)
 
         except KeyboardInterrupt:
             pass
@@ -147,5 +141,5 @@ class LiveParser:
 
 def start_parse(db, parseinfo):
     #parser = LiveParser(db, parseinfo['helpers'])
-    parser = LiveParser(db)
+    parser = LiveParser()
     parser.parse_file(parseinfo['filename'], parseinfo['parser'])

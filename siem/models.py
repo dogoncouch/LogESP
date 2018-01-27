@@ -11,6 +11,7 @@ class LogEvent(models.Model):
             null=True, blank=True)
     time_zone = models.CharField(max_length=32,
             null=True, blank=True)
+    event_type = models.CharField(max_length=24, default='default')
     raw_text = models.CharField(max_length=1280)
     facility = models.IntegerField(choices=facility_choices,
             null=True, blank=True)
@@ -32,8 +33,8 @@ class LogEvent(models.Model):
             null=True, blank=True)
     message = models.CharField(max_length=1024,
             null=True, blank=True)
-    #extended = models.CharField(max_length=1024,
-    #        null=True, blank=True)
+    extended = models.CharField(max_length=1024,
+            null=True, blank=True)
     parsed_on = models.CharField(max_length=32,
             null=True, blank=True)
     source_path = models.CharField(max_length=200,
@@ -44,8 +45,11 @@ class LogEvent(models.Model):
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp')
     time_zone = models.CharField(max_length=32)
+    event_type = models.CharField(max_length=24, default='default')
     source_rule = models.CharField(max_length=32)
     severity = models.IntegerField(choices=severity_choices)
+    source_host = models.CharField(max_length=32,
+            null=True, blank=True)
     event_limit = models.IntegerField()
     event_count = models.IntegerField()
     magnitude = models.IntegerField()
@@ -53,7 +57,7 @@ class RuleEvent(models.Model):
     message = models.CharField(max_length=1024)
     source_ids_log = models.ManyToManyField(LogEvent,
             related_name='rules_triggered',
-            blank=True, symmetrical=False)
+            blank=True)
     source_ids_rule = models.ManyToManyField('self',
             related_name='rules_triggered',
             blank=True, symmetrical=False)
@@ -66,12 +70,17 @@ class LimitRule(models.Model):
     desc = models.CharField(max_length=200,
             null=True, blank=True)
     is_enabled = models.BooleanField(default=True)
+    rule_events = models.BooleanField(default=False)
+    event_type = models.CharField(max_length=24, default='default')
     severity = models.IntegerField(choices=severity_choices)
     time_int = models.IntegerField()
     event_limit = models.IntegerField()
-    sql_query = models.CharField(max_length=1024)
-    source_table = models.CharField(max_length=32) # To Do: point to table
-    out_table = models.CharField(max_length=32) # To Do:
+    message_filter = models.CharField(max_length=1024,
+            null=True, blank=True)
+    host_filter = models.CharField(max_length=32,
+            null=True, blank=True)
+    rulename_filter = models.CharField(max_length=32,
+            null=True, blank=True)
     message = models.CharField(max_length=1024)
     def __str__(self):
         return self.name
