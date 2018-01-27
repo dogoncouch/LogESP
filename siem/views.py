@@ -25,9 +25,6 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
     template_name = 'siem/logevent_search.html'
     context_object_name = 'event_list'
     paginate_by = 50
-    page = request.GET('page')
-    if not page:
-        page = paginator.num_pages
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
