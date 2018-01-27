@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
+from django.core import paginator
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -24,6 +25,9 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
     template_name = 'siem/logevent_search.html'
     context_object_name = 'event_list'
     paginate_by = 50
+    page = request.GET('page')
+    if not page:
+        page = paginator.num_pages
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
