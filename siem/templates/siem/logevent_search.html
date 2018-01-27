@@ -13,7 +13,7 @@
 
 {% if event_list %}
     <ul>
-        {% for e in event_list %}
+        {% for e in event_list.reverse %}
             <li><a href="{% url 'siem:logevent_detail' e.id %}">
                     &middot</a> {{ e.raw_text }}</li>
         {% endfor %}
