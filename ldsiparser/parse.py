@@ -41,12 +41,15 @@ class LiveParser:
         self.parser = None
 
 
-    def get_parsers(self):
+    def get_parser(self, parser):
         """Load parser modules"""
-        for parser in sorted(ldsiparser.parsers.__all__):
-            self.parsers[parser] = \
-                    __import__('ldsiparser.parsers.' + parser, globals(),
+        parsers = {}
+        for p in sorted(ldsiparser.parsers.__all__):
+            parsers[parser] = \
+                    __import__('ldsiparser.parsers.' + p, globals(),
                             locals(), [ldsiparser]).ParseModule()
+        
+        self.parser = parsers[parser]
 
 
     def parse_entries(self, inputfile, eventtype):
@@ -106,8 +109,7 @@ class LiveParser:
 
     def parse_file(self, inputfile, parser, eventtype):
         """Parse a file into ldsi"""
-        self.get_parsers()
-        self.parser = self.parsers[parser]
+        self.get_parser(parser)
         try:
             with open(parseinfo['filename'], 'r') as inputfile:
                 self.parse_entries(inputfile, eventtype)
