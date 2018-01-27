@@ -73,8 +73,7 @@ class ParseCore:
             for entry in self.plist:
                 thread = Thread(name=parse,
                         target=ldsiparser.parse.start_parse,
-                        args=(entry['filename', entry['parser'],
-                            entry['event_type']))
+                        args=(entry['filename', entry['parser'], entry['event_type']))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)
