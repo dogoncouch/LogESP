@@ -48,8 +48,6 @@ class RuleEvent(models.Model):
     event_type = models.CharField(max_length=24, default='default')
     source_rule = models.CharField(max_length=32)
     severity = models.IntegerField(choices=severity_choices)
-    source_host = models.CharField(max_length=32,
-            null=True, blank=True)
     event_limit = models.IntegerField()
     event_count = models.IntegerField()
     magnitude = models.IntegerField()
