@@ -20,18 +20,18 @@
     </ul>
     <div class="pagination">
         <span class="step-links">
-            {% if contacts.has_previous %}
+            {% if events.has_previous %}
                 <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ contacts.previous_page_number }}">previous</a>
+                <a href="?page={{ events.previous_page_number }}">previous</a>
             {% endif %}
 
             <span class="current">
-                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+                Page {{ events.number }} of {{ events.paginator.num_pages }}.
             </span>
 
-            {% if contacts.has_next %}
-                <a href="?page={{ contacts.next_page_number }}">next</a>
-                <a href="?page={{ contacts.paginator.num_pages }}">last &raquo;</a>
+            {% if events.has_next %}
+                <a href="?page={{ events.next_page_number }}">next</a>
+                <a href="?page={{ events.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>
