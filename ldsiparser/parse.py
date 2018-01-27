@@ -104,10 +104,10 @@ class LiveParser:
                 sleep(0.1)
 
 
-    def parse_file(self, parseinfo):
+    def parse_file(self, inputfile, parser, eventtype):
         """Parse a file into ldsi"""
-        self.get_parsers(parser)
-        self.parser = self.parsers['parser']
+        self.get_parsers()
+        self.parser = self.parsers[parser]
         try:
             with open(parseinfo['filename'], 'r') as inputfile:
                 self.parse_entries(inputfile, eventtype)
@@ -118,7 +118,7 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(parseinfo):
+def start_parse(inputfile, parser, eventtype):
     """Start a parser"""
-    parser = LiveParser()
-    parser.parse_file(parseinfo)
+    parseengine = LiveParser()
+    parseengine.parse_file(inputfile, parser, eventtype)
