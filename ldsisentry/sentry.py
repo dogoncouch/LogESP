@@ -29,6 +29,7 @@ import json
 import threading
 import os
 from sys import exit
+from django.utils import timezone
 from ldsi.settings import TIME_ZONE
 from siem.models import LogEvent
 from siem.models import RuleEvent
