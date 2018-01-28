@@ -43,46 +43,82 @@ class SiemSentry:
         
         self.rule = rule
         self.tzone = TIME_ZONE
+        self.lasteventid = None
+
+
+    def get_first_logevent(self):
+        """Get the starting log event"""
+        e = LogEvent.objects.all()
+        if len(e) == 0:
+            self.lasteventid = 0
+        else:
+            timeint = timedelta(minutes=self.rule.time_int)
+            erange = LogEvent.objects.filter(
+                    parsed_at__gt=timezone.localtime(
+                        timezone.now()) - timeint)
+            if len(erange) == 0:
+                self.lasteventid = LogEvent.objects.latest('id')
+            else:
+                self.lasteventid = erange.first().id - 1
+
+    def get_last_logevent(self):
+        """Set the last event id"""
+        e = LogEvent.objects.all()
+        if len(e) == 0:
+            self.lasteventid = 0
+        else:
+            self.lasteventid = e.latest('id').id
+
+    def get_first_ruleevent(self):
+        """Get the starting log event"""
+        e = RuleEvent.objects.all()
+        if len(e) == 0:
+            self.lasteventid = 0
+        else:
+            timeint = timedelta(minutes=self.rule.time_int)
+            erange = LogEvent.objects.filter(
+                    parsed_at__gt=timezone.localtime(
+                        timezone.now()) - timeint)
+            if len(erange) == 0:
+                self.lasteventid = LogEvent.objects.latest('id')
+            else:
+                self.lasteventid = erange.first().id - 1
+
+    def get_last_ruleevent(self):
+        """Set the last event id"""
+        e = RuleEvent.objects.all()
+        if len(e) == 0:
+            self.lasteventid = 0
+        else:
+            self.lasteventid = e.latest('id').id
 
 
     def watch_logevents(self):
         """Watch log events based on a rule"""
-
-        timeint = timedelta(minutes=self.rule.time_int)
-        erange = LogEvent.objects.filter(
-                parsed_at__gt=timezone.localtime(
-                    timezone.now()) - timeint)
-        if len(erange) == 0:
-            lasteventid = 0
-        else:
-            lasteventid = erange.first().id
-        del(erange)
-
+        self.get_first_logevent()
         while True:
             
             # Check the rule:
-            lasteventid = self.check_logevent(lasteventid)
+            self.check_logevent()
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
 
-    def check_logevent(self, lasteventid):
+    def check_logevent(self):
         """Check log events based on a rule"""
         
         if self.rule.host_filter:
-            e = LogEvent.objects.filter(id__gt=lasteventid,
+            e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     host=self.rule.host_filter,
                     message__contains=self.rule.message_filter)
         else:
-            e = LogEvent.objects.filter(id__gt=lasteventid,
+            e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
-        if len(e) == 0:
-            return lasteventid
-        elif len(e) > self.rule.event_limit:
+        if len(e) > self.rule.event_limit:
             event = RuleEvent()
             event.date_stamp = timezone.localtime(timezone.now())
             event.time_zone = TIME_ZONE
@@ -101,48 +137,35 @@ class SiemSentry:
             event.save()
             event.source_ids_log.set(list(e))
             event.save()
-            return e.latest('id').id
-        else:
-            return e.latest('id').id
+
+        self.get_last_logevent()
 
     def watch_ruleevents(self):
         """Watch rule events based on a rule"""
-
-        timeint = timedelta(minutes=self.rule.time_int)
-        erange = RuleEvent.objects.filter(
-                parsed_at__gt=timezone.localtime(
-                    timezone.now()) - timeint)
-        if len(erange) == 0:
-            lasteventid = 0
-        else:
-            lasteventid = erange.first().id
-        del(erange)
-
+        self.get_first_ruleevent()
         while True:
 
             # Check the rule:
-            lasteventid = self.check_ruleevent(lasteventid)
+            self.check_ruleevent()
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
 
-    def check_ruleevent(self, lasteventid):
+    def check_ruleevent(self):
         """Check rule events based on a rule"""
 
         if self.rule.rulename_filter:
-            e = RuleEvent.objects.filter(id__gt=lasteventid,
+            e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     source_rule=self.rule.rulename_filter,
                     message__contains=self.rule.message_filter)
         else:
-            e = RuleEvent.objects.filter(id__gt=lasteventid,
+            e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
-        if len(e) == 0:
-            return lasteventid
-        elif len(e) > self.rule.event_limit:
+        if len(e) > self.rule.event_limit:
             event = RuleEvent()
             event.date_stamp = timezone.localtime(timezone.now())
             event.time_zone = TIME_ZONE
@@ -159,9 +182,8 @@ class SiemSentry:
             event.save()
             event.source_ids_rule.set(list(e))
             event.save()
-            return e.latest('id').id
-        else:
-            return e.latest('id').id
+
+        self.get_last_ruleevent()
 
 
 def start_rule(rule):
