@@ -97,6 +97,7 @@ class SiemSentry:
                     (self.rule.event_limit + 1) // 2) + 5) * \
                     ( 7 - self.rule.severity)
             event.message = self.rule.message
+            event.save()
             event.source_ids_log.set(e)
             event.save()
             return e.latest('id').id
@@ -154,6 +155,7 @@ class SiemSentry:
                     (self.rule.event_limit + 1) // 2) + 5) * \
                     ( 7 - self.rule.severity)
             event.message = self.rule.message
+            event.save()
             event.source_ids_rule.set(e)
             event.save()
             return e.latest('id').id
