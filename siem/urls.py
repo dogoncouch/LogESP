@@ -16,14 +16,14 @@ urlpatterns = [
         views.RuleEventSearchView.as_view()), name='ruleevent_search'),
     path('events/rule/<int:pk>/', login_required(
         views.RuleEventDetailView.as_view()), name='ruleevent_detail'),
-    path('lr/', login_required(
+    path('rules/limit/', login_required(
         views.LRIndexView.as_view()), name='lr_index'),
-    path('lr/<int:pk>/', login_required(
+    path('rules/limit/<int:pk>/', login_required(
         views.LRDetailView.as_view()), name='lr_detail'),
-    path('lr/add/', login_required(
+    path('rules/limit/add/', login_required(
         views.LRCreateView.as_view()), name='lr_create'),
-    path('lr/<int:pk>/update/', login_required(
+    path('rules/limit/<int:pk>/update/', login_required(
         views.LRUpdateView.as_view()), name='lr_update'),
-    path('lr/<int:pk>/delete/', login_required(
+    path('rules/limit/<int:pk>/delete/', login_required(
         views.LRDeleteView.as_view()), name='lr_delete'),
 ]
