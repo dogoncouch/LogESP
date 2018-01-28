@@ -75,7 +75,6 @@ class SentryCore:
     def run_sentry(self):
         """Start trigger engine"""
         try:
-            self.get_config()
             self.get_rules()
             self.start_triggers()
 
