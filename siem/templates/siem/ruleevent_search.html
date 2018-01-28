@@ -17,12 +17,12 @@
             <th>Magnitude</th><th>Message</th></th>
         {% for e in event_list %}
         <tr>
-            <td><a href="{% url 'siem:ruleevent_detail' e.id %}">
-                    &middot</a></td>
-            <td>{{ e.date_stamp }}</td>
-            <td>{{ e.event_type }}</td>
-            <td>{{ e.magnitude }}</td>
-            <td>{{ e.message }}</td>
+            <a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
+                <td>{{ e.date_stamp }}</td>
+                <td>{{ e.event_type }}</td>
+                <td>{{ e.magnitude }}</td>
+                <td>{{ e.message }}</td>
+            </a>
         </tr>
         {% endfor %}
     </table>

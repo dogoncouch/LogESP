@@ -32,6 +32,15 @@ A.navbar:hover {
     text-decoration: underline;
 }
 
+A.event:link, A.navbar:visited {
+    color: #444444;
+    text-decoration: none;
+}
+
+A.event:hover {
+    text-decoration: underline;
+}
+
 A:visited {
     color: #995CDD;
 }
