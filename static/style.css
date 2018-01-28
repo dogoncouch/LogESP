@@ -18,6 +18,11 @@ DIV.main {
     padding: 0.5%;
 }
 
+TABLE, TH, TD {
+    border: 2px solid;
+    border-color: #444444;
+}
+
 A.navbar:link, A.navbar:visited {
     color: #4444FF;
     text-decoration: none;
