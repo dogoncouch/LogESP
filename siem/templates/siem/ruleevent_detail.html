@@ -20,12 +20,12 @@
     <li>Message: {{ event.message }}</li>
     <li>Source Log Events:
         {%for s in event.source_ids_log.all %}
-            <a href="{% url 'logevent_detail' s.id %}">{{ s.id }}</a>
+            <a href="{% url 'siem:logevent_detail' s.id %}">{{ s.id }}</a>
         {% endfor %}
     </li>
     <li>Source Rule Events:
         {%for s in event.source_ids_rule.all %}
-            <a href="{% url 'ruleevent_detail' s.id %}">{{ s.id }}</a>
+            <a href="{% url 'siem:ruleevent_detail' s.id %}">{{ s.id }}</a>
         {% endfor %}
     </li>
 </ul>
