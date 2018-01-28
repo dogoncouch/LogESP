@@ -13,8 +13,8 @@
 
 {% if event_list %}
     <table>
-        <tr><th>&middot</th><th>Date Stamp</th><th>Event Type</th>
-            <th>Magnitude</th><th>Message</th></th>
+        <tr><th>Date Stamp</th><th>Event<br>Type</th>
+            <th>Magni-<br>tude</th><th>Message</th></th>
         {% for e in event_list %}
         <tr>
             <a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
