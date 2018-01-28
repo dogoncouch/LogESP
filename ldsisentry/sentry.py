@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 from time import sleep
+from datetime import timedelta
 from random import randrange
 import json
 import threading
@@ -46,18 +47,22 @@ class SiemSentry:
     def watch_logevent(self):
         """Watch log events based on a rule"""
 
-        lastevent = LogEvent.objects.latest('id')
+        timeint = timedelta(seconds=self.rule.time_int)
+        erange = LogEvent.objects.filter(parsed_at__gt= \
+                timezone.localtime(timezone.now()) - timeint)
+        lasteventid = erange.first()
+        del(erange)
 
         while True:
             
             # Check the rule:
-            self.check_logevent(lastevent)
+            lasteventid = self.check_logevent(lasteventid)
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
 
-    def check_logevent(self, lastevent):
+    def check_logevent(self, lasteventid):
         """Check log events based on a rule"""
         
         if self.rule.host_filter:
@@ -88,31 +93,38 @@ class SiemSentry:
             event.source_ids_log = [e]
             event.save()
 
+        lasteventid = e.latest('id').id
+        return lasteventid
+
 
     def watch_ruleevent(self:
         """Watch rule events based on a rule"""
 
-        lastevent = RuleEvent.objects.latest('id')
+        timeint = timedelta(seconds=self.rule.time_int)
+        erange = RuleEvent.objects.filter(parsed_at__gt= \
+                timezone.localtime(timezone.now()) - timeint)
+        lasteventid = erange.first()
+        del(erange)
 
         while True:
 
             # Check the rule:
-            self.check_ruleevent(lastevent)
+            lasteventid = self.check_ruleevent(lasteventid)
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
 
-    def check_ruleevent(self, lastevent):
+    def check_ruleevent(self, lasteventid):
         """Check rule events based on a rule"""
-        
+
         if self.rule.rulename_filter:
-            e = RuleEvent.objects.filter(id__gt=lastevent,
+            e = RuleEvent.objects.filter(id__gt=lasteventid,
                     event_type=self.rule.event_type,
                     source_rule=self.rule.rulename_filter,
                     message__contains=self.rule.message_filter)
         else:
-            e = RuleEvent.objects.filter(id__gt=lastevent,
+            e = RuleEvent.objects.filter(id__gt=lasteventid,
                     event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
@@ -132,6 +144,9 @@ class SiemSentry:
             event.message = self.rule.message
             event.source_ids_rule = [e]
             event.save()
+        
+        lasteventid = e.latest('id').id
+        return lasteventid
 
 
 def start_rule(rule):
