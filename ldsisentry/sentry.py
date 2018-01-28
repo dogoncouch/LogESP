@@ -46,24 +46,28 @@ class SiemSentry:
     def watch_logevent(self):
         """Watch log events based on a rule"""
 
-        while True:
+        lastevent = LogEvent.objects.latest('id')
 
+        while True:
+            
             # Check the rule:
-            self.check_logevent()
+            self.check_logevent(lastevent)
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
 
-    def check_logevent(self):
+    def check_logevent(self, lastevent):
         """Check log events based on a rule"""
         
         if self.rule.host_filter:
-            e = LogEvent.objects.filter(event_type=self.rule.event_type,
+            e = LogEvent.objects.filter(id__gt=lastevent,
+                    event_type=self.rule.event_type,
                     host=self.rule.host_filter,
                     message__contains=self.rule.message_filter)
         else:
-            e = LogEvent.objects.filter(event_type=self.rule.event_type,
+            e = LogEvent.objects.filter(id__gt=lastevent,
+                    event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
         if len(e) > self.rule.event_limit:
@@ -85,27 +89,31 @@ class SiemSentry:
             event.save()
 
 
-    def watch_ruleevent(self):
+    def watch_ruleevent(self:
         """Watch rule events based on a rule"""
+
+        lastevent = RuleEvent.objects.latest('id')
 
         while True:
 
             # Check the rule:
-            self.check_ruleevent()
+            self.check_ruleevent(lastevent)
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
 
-    def check_ruleevent(self):
+    def check_ruleevent(self, lastevent):
         """Check rule events based on a rule"""
         
         if self.rule.rulename_filter:
-            e = RuleEvent.objects.filter(event_type=self.rule.event_type,
+            e = RuleEvent.objects.filter(id__gt=lastevent,
+                    event_type=self.rule.event_type,
                     source_rule=self.rule.rulename_filter,
                     message__contains=self.rule.message_filter)
         else:
-            e = RuleEvent.objects.filter(event_type=self.rule.event_type,
+            e = RuleEvent.objects.filter(id__gt=lastevent,
+                    event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
         if len(e) > self.rule.event_limit:
