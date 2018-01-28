@@ -88,7 +88,7 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'severity', 'time_int', 'event_limit',
             'message_filter', 'host_filter', 'rulename_filter', 'message']
     def get_success_url(self):
-        return reverse_lazy('siem/lr_detail', args=(self.object.id,))
+        return reverse_lazy('siem:lr_detail', args=(self.object.id,))
 
 class LRUpdateView(PermissionRequiredMixin, UpdateView):
     model = LimitRule
@@ -97,7 +97,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'severity', 'time_int', 'event_limit',
             'message_filter', 'host_filter', 'rulename_filter', 'message']
     def get_success_url(self):
-        return reverse_lazy('siem/lr_detail', args=(self.object.id,))
+        return reverse_lazy('siem:lr_detail', args=(self.object.id,))
 
 class LRDeleteView(PermissionRequiredMixin, DeleteView):
     model = LimitRule
