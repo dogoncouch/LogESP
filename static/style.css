@@ -32,7 +32,7 @@ A.navbar:hover {
     text-decoration: underline;
 }
 
-A.event:link, A.event:visited {
+A.event:link {
     color: #4444FF;
 }
 
