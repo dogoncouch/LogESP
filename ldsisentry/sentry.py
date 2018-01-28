@@ -97,7 +97,7 @@ class SiemSentry:
         return lasteventid
 
 
-    def watch_ruleevent(self:
+    def watch_ruleevent(self):
         """Watch rule events based on a rule"""
 
         timeint = timedelta(seconds=self.rule.time_int)
