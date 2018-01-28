@@ -44,7 +44,7 @@ class SiemSentry:
         self.tzone = TIME_ZONE
 
 
-    def watch_logevent(self):
+    def watch_logevents(self):
         """Watch log events based on a rule"""
 
         timeint = timedelta(minutes=self.rule.time_int)
@@ -100,7 +100,7 @@ class SiemSentry:
         else:
             return e.latest('id').id
 
-    def watch_ruleevent(self):
+    def watch_ruleevents(self):
         """Watch rule events based on a rule"""
 
         timeint = timedelta(minutes=self.rule.time_int)
