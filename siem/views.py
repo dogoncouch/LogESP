@@ -49,7 +49,7 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
     permission_required = 'siem.view_ruleevent'
     template_name = 'siem/ruleevent_search.html'
     context_object_name = 'event_list'
-    paginate_by = 50
+    paginate_by = 20
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
         if filter_val and filter_val != '':
