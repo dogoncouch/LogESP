@@ -1,9 +1,9 @@
 # LogDissect Security Intelligence
-A web application for managing security information. Still in early development; use at your own risk.
+A web application for managing security information. Still in early development.
 
 ## Applications
 LDSI applications:
-- HWAM - Asset Management
+- Assets - Asset Management
 - Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
 - SIEM - Security Information and Event Management
 
@@ -12,10 +12,7 @@ LDSI applications:
 The LDSI risk management system is based on NIST [risk management](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
 
 ### Simplicity
-LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend. Each app is designed to be easy to repurpose for other projects.
-
-### Accessibility
-LDSI's target audience for UX design is blind people, and others who use screen readers, or other non-standard input and output devices.
+LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
 
 ## Installing
 Requirements: python 3.x, django >=2.0, git, pip.
@@ -74,7 +71,7 @@ python manage.py shell -c "import ldsiparser.parsecore ; ldsiparser.parsecore.pa
 ### Sentry Engine
 The rule engine has not been tested. To start it:
 
-1. Add LimitRule objects using the admin page
+1. Add Limit Rules (in the SIEM section)
 2. Run the sentry engine inside a django shell:
 ```
 python manage.py shell -c "import ldsisentry.sentrycore ; ldsisentry.sentrycore.sentry()"
