@@ -12,12 +12,20 @@
 </form>
 
 {% if event_list %}
-    <ul>
+    <table>
+        <tr><td>&middot</td><td>Date Stamp</td><td>Event Type</td>
+            <td>Magnitude</td><td>Message</td></tr>
         {% for e in event_list %}
-            <li><a href="{% url 'siem:ruleevent_detail' e.id %}">
-                    &middot</a> {{ e.message }}</li>
+        <tr>
+            <td><a href="{% url 'siem:ruleevent_detail' e.id %}">
+                    &middot</a></td>
+            <td>{{ e.date_stamp }}</td>
+            <td>{{ e.event_type }}</td>
+            <td>{{ e.magnitude }}</td>
+            <td>{{ e.message }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No events.</p>
 {% endif %}
