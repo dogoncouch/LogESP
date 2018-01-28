@@ -65,7 +65,7 @@ class SentryCore:
         for r in self.rules:
             thread = threading.Thread(name=r,
                     target=ldsisentry.sentry.start_rule,
-                    args=(r))
+                    args=(r,))
             thread.daemon = True
             thread.start()
 
