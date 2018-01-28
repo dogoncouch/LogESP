@@ -84,16 +84,18 @@ class LRDetailView(PermissionRequiredMixin, DetailView):
 class LRCreateView(PermissionRequiredMixin, CreateView):
     model = LimitRule
     permission_required = 'siem.add_limitrule'
-    fields = ['name', 'is_enabled', 'severity', 'time_int', 'event_limit',
-            'sql_query', 'source_table', 'out_table', 'message']
+    fields = ['name', 'desc', 'is_enabled', 'rule_events', 'event_type',
+            'severity', 'time_int', 'event_limit',
+            'message_filter', 'host_filter', 'rulename_filter', 'message']
     def get_success_url(self):
         return reverse_lazy('siem/lr_detail', args=(self.object.id,))
 
 class LRUpdateView(PermissionRequiredMixin, UpdateView):
     model = LimitRule
     permission_required = 'siem.change_limitrule'
-    fields = ['name', 'is_enabled', 'severity', 'time_int', 'event_limit',
-            'sql_query', 'source_table', 'out_table', 'message']
+    fields = ['name', 'desc', 'is_enabled', 'rule_events', 'event_type',
+            'severity', 'time_int', 'event_limit',
+            'message_filter', 'host_filter', 'rulename_filter', 'message']
     def get_success_url(self):
         return reverse_lazy('siem/lr_detail', args=(self.object.id,))
 
