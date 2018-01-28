@@ -158,7 +158,7 @@ def start_rule(rule):
     # database use:
     sleep(randrange(0, int(rule.time_int) * 60))
 
-    if self.rule.rule_events = True:
+    if self.rule.rule_events:
         sentry.watch_ruleevents()
     else:
         sentry.watch_logevents()
