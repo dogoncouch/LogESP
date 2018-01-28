@@ -86,6 +86,7 @@ class SiemSentry:
             event = RuleEvent()
             event.date_stamp = timezone.localtime(timezone.now())
             event.time_zone = TIME_ZONE
+            event.rule_category = self.rule.rule_category
             event.event_type = self.rule.event_type
             event.source_rule = self.rule.name
             event.source_host = self.rule.host_filter

@@ -45,6 +45,7 @@ class LogEvent(models.Model):
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField('date stamp')
     time_zone = models.CharField(max_length=32)
+    rule_category = models.CharField(max_length=24, default='default')
     event_type = models.CharField(max_length=24, default='default')
     source_rule = models.CharField(max_length=32)
     severity = models.IntegerField(choices=severity_choices)
@@ -69,6 +70,7 @@ class LimitRule(models.Model):
             null=True, blank=True)
     is_enabled = models.BooleanField(default=True)
     rule_events = models.BooleanField(default=False)
+    rule_category = models.CharField(max_length=24, default='default')
     event_type = models.CharField(max_length=24, default='default')
     severity = models.IntegerField(choices=severity_choices)
     time_int = models.IntegerField()

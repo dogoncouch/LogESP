@@ -13,15 +13,20 @@
 
 {% if event_list %}
     <table>
-        <tr><th>Date Stamp</th><th>Event<br>Type</th>
+        <tr><th>Category</th><th>Date Stamp</th><th>Event<br>Type</th>
             <th>Magni-<br>tude</th><th>Message</th></th>
         {% for e in event_list %}
         <tr>
-            <a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
-                <td>{{ e.date_stamp }}</td>
-                <td>{{ e.event_type }}</td>
-                <td>{{ e.magnitude }}</td>
-                <td>{{ e.message }}</td>
+            <td><a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
+                {{ e.rule_category }}</td>
+            <td><a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
+                {{ e.date_stamp }}</a></td>
+            <td><a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
+                {{ e.event_type }}</td>
+            <td><a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
+                {{ e.magnitude }}</td>
+            <td><a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
+                {{ e.message }}</td>
             </a>
         </tr>
         {% endfor %}
