@@ -8,15 +8,36 @@
 
 <form method="get" action="{% url 'siem:ruleevent_search' %}">{% csrf_token %}
     <p>Rule Category:
-    <input type="text" value="{{category_filter}}" name="category_filter"/></p>
-    <p>Event Type:
-    <input type="text" value="{{type_filter}}" name="type_filter"/></p>
-    <p>Message:
+    <input type="text" value="{{category_filter}}" name="category_filter"/>
+    Event Type:
+    <input type="text" value="{{type_filter}}" name="type_filter"/>
+    Message:
     <input type="text" value="{{message_filter}}" name="message_filter"/></p>
+    <p>End Date/Time:
+    <input type="datetime-local" value="{{ time_filter }}" name="time_filter"</a>
+    (YYYY-M-D H:M:S)</p>
     <p><input type="submit" name="submit" value="Submit"/></p>
 </form>
 
 {% if event_list %}
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    &middot;
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    &middot;
+                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
     <table>
         <tr><th>ID</th><th>Category</th><th>Date Stamp</th>
             <th>Event<br>Type</th><th>Magni-<br>tude</th>
@@ -35,24 +56,6 @@
         {% endfor %}
     </table>
     
-    {% if is_paginated %}
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
-                    &middot;
-                {% endif %}
-                <span class="page-current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                </span>
-                {% if page_obj.has_next %}
-                    &middot;
-                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&page={{ page_obj.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-        </div>
-    {% endif %}
-
 {% else %}
     <p>No events.</p>
 {% endif %}

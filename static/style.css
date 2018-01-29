@@ -29,6 +29,11 @@ DIV.license {
     display: inline-block;
 }
 
+DIV.pagination {
+    padding-top: 8px;
+    padding-bottom: 16px;
+}
+
 TABLE, TH, TD {
     border: 1px solid;
     border-color: #444444;
