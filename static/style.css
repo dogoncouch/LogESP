@@ -24,6 +24,7 @@ DIV.footer {
 
 DIV.license {
     text-align: left;
+    display: inline-block;
 }
 
 TABLE, TH, TD {
