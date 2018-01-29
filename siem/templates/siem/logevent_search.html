@@ -30,17 +30,21 @@
         {% endfor %}
     </table>
 
-        {% if is_paginated %}
+    {% if is_paginated %}
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                <a href="{{ siem.processors.get_pageless_path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="{{ siem.processors.get_pageless_path }}?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
                 <span class="page-current">
-                    &middot Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} &middot
+                    &middot; Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} &middot;
                 </span>
                 {% if page_obj.has_next %}
+                {% if page_obj.has_previous %}
                     <a href="{{ siem.processors.get_pageless_path }}?page={{ page_obj.next_page_number }}">next</a>
+                {% else %}
+                    <a href="{{ siem.processors.get_full_path }}?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
                 {% endif %}
             </span>
         </div>

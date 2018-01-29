@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
-TEMPLATE_CONTEXT_PROCESSORS = \
-    global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
+TEMPLATE_CONTEXT_PROCESSORS = (
     "siem.processors.get_pageless_path",
 )
 
