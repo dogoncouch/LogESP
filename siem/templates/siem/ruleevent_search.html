@@ -21,7 +21,7 @@
             <td><a class="event" href="{% url 'siem:ruleevent_detail' e.id %}">
                     {{ e.id }}</td>
             <td>{{ e.rule_category }}</td>
-            <td>{{ e.date_stamp|date:"Y M d H:m:s" }}</a></td>
+            <td>{{ e.date_stamp|date:"Y M d H:i:s" }}</a></td>
             <td>{{ e.event_type }}</td>
             <td>{{ e.magnitude }}</td>
             <td>{{ e.message }}</td>

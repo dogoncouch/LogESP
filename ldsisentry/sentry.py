@@ -118,27 +118,30 @@ class SiemSentry:
                     event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
-        if len(e) > self.rule.event_limit:
-            event = RuleEvent()
-            event.date_stamp = timezone.localtime(timezone.now())
-            event.time_zone = TIME_ZONE
-            event.rule_category = self.rule.rule_category
-            event.event_type = self.rule.event_type
-            event.source_rule = self.rule.name
-            event.source_host = self.rule.host_filter
-            event.event_limit = self.rule.event_limit
-            event.event_count = len(e)
-            event.time_int = self.rule.time_int
-            event.severity = self.rule.severity
-            event.magnitude = (((len(e) // 2) // \
-                    (self.rule.event_limit + 1) // 2) + 5) * \
-                    ( 7 - self.rule.severity)
-            event.message = self.rule.message
-            event.save()
-            event.source_ids_log.set(list(e))
-            event.save()
+        if len(e) == 0:
+            self.get_last_logevent()
+        else:
+            if len(e) > self.rule.event_limit:
+                event = RuleEvent()
+                event.date_stamp = timezone.localtime(timezone.now())
+                event.time_zone = TIME_ZONE
+                event.rule_category = self.rule.rule_category
+                event.event_type = self.rule.event_type
+                event.source_rule = self.rule.name
+                event.source_host = self.rule.host_filter
+                event.event_limit = self.rule.event_limit
+                event.event_count = len(e)
+                event.time_int = self.rule.time_int
+                event.severity = self.rule.severity
+                event.magnitude = (((len(e) // 2) // \
+                        (self.rule.event_limit + 1) // 2) + 5) * \
+                        ( 7 - self.rule.severity)
+                event.message = self.rule.message
+                event.save()
+                event.source_ids_log.set(list(e))
+                event.save()
+            self.lasteventid = e.latest('id').id
 
-        self.get_last_logevent()
 
     def watch_ruleevents(self):
         """Watch rule events based on a rule"""
@@ -165,25 +168,28 @@ class SiemSentry:
                     event_type=self.rule.event_type,
                     message__contains=self.rule.message_filter)
 
-        if len(e) > self.rule.event_limit:
-            event = RuleEvent()
-            event.date_stamp = timezone.localtime(timezone.now())
-            event.time_zone = TIME_ZONE
-            event.event_type = self.rule.event_type
-            event.source_rule = self.rule.name
-            event.event_limit = self.rule.event_limit
-            event.event_count = len(e)
-            event.time_int = self.rule.time_int
-            event.severity = self.rule.severity
-            event.magnitude = (((len(e) // 2) // \
-                    (self.rule.event_limit + 1) // 2) + 5) * \
-                    ( 7 - self.rule.severity)
-            event.message = self.rule.message
-            event.save()
-            event.source_ids_rule.set(list(e))
-            event.save()
-
-        self.get_last_ruleevent()
+        if len(e) == 0:
+            self.get_last_ruleevent()
+        else:
+            if len(e) > self.rule.event_limit:
+            if len(e) > self.rule.event_limit:
+                event = RuleEvent()
+                event.date_stamp = timezone.localtime(timezone.now())
+                event.time_zone = TIME_ZONE
+                event.event_type = self.rule.event_type
+                event.source_rule = self.rule.name
+                event.event_limit = self.rule.event_limit
+                event.event_count = len(e)
+                event.time_int = self.rule.time_int
+                event.severity = self.rule.severity
+                event.magnitude = (((len(e) // 2) // \
+                        (self.rule.event_limit + 1) // 2) + 5) * \
+                        ( 7 - self.rule.severity)
+                event.message = self.rule.message
+                event.save()
+                event.source_ids_rule.set(list(e))
+                event.save()
+            self.lasteventid = e.latest('id').id
 
 
 def start_rule(rule):
