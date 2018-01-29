@@ -24,7 +24,7 @@
             <td>{{ e.event_type }}</td>
             <td>{{ e.source_host }}</td>
             <td>{{ e.source_process }}[{{ e.source_pid }}]</td>
-            <td>{{ e.message|truncatechars:50 }}</td>
+            <td>{{ e.message|truncatechars:65 }}</td>
             </a>
         </tr>
         {% endfor %}
