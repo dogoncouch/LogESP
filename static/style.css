@@ -18,6 +18,10 @@ DIV.main {
     padding: 0.5%;
 }
 
+DIV.footer {
+    text-size: 0.8em;
+}
+
 TABLE, TH, TD {
     border: 1px solid;
     border-color: #444444;
