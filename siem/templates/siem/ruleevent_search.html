@@ -43,7 +43,7 @@
                 {% if page_obj.has_previous %}
                     <a href="{{ siem.processors.get_pageless_path }}?page={{ page_obj.next_page_number }}">next</a>
                 {% else %}
-                    <a href="{{ siem.processors.get_full_path }}?page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_full_path }}?page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
                 {% endif %}
             </span>
