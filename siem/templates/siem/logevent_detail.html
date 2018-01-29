@@ -8,7 +8,7 @@
 
 <ul>
     <li>ID: {{ event.id }}</li>
-    <li>Parsed At: {{ event.parsed_at }}</li>
+    <li>Parsed At: {{ event.parsed_at|date:"Y M d H:m:s" }}</li>
     <li>Time Zone: {{ event.time_zone }}</li>
     <li>Parsed On: {{ event.parsed_on }}</li>
     <li>Source Path: {{ event.source_path }}</li>
