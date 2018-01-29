@@ -108,14 +108,18 @@ class SiemSentry:
     def check_logevent(self):
         """Check log events based on a rule"""
         
-        if self.rule.host_filter:
+        if self.rule.host_filter: hostfilter = self.rule.host_filter
+        else: hostfilter = ''
+        if self.rule.message_filter: messagefilter = self.rule.message_filter
+        else: messagefilter = ''
+        if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
-                    host=self.rule.host_filter,
-                    message__contains=self.rule.message_filter)
+                    source_host__contains=hostfilter,
+                    message__contains=messagefilter)
         else:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                    event_type=self.rule.event_type,
+                    source_host__contains=self.rule.host_filter,
                     message__contains=self.rule.message_filter)
 
         if len(e) == 0:
@@ -158,15 +162,19 @@ class SiemSentry:
     def check_ruleevent(self):
         """Check rule events based on a rule"""
 
-        if self.rule.rulename_filter:
+        if self.rule.rulename_filter: rulenamefilter = self.rule.rulename_filter
+        else: rulenamefilter = ''
+        if self.rule.message_filter: messagefilter = self.rule.message_filter
+        else: messagefilter = ''
+        if self.rule.event_type:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
-                    source_rule=self.rule.rulename_filter,
-                    message__contains=self.rule.message_filter)
+                    source_rule__contains=rulenamefilter,
+                    message__contains=messagefilter)
         else:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                    event_type=self.rule.event_type,
-                    message__contains=self.rule.message_filter)
+                    source_rule__contains=rulenamefilter,
+                    message__contains=messagefilter)
 
         if len(e) == 0:
             self.get_last_ruleevent()
