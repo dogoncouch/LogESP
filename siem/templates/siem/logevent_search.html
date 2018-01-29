@@ -12,12 +12,23 @@
 </form>
 
 {% if event_list %}
-    <ul>
+    <table>
+        <tr><th>ID</th><th>Date Stamp</th>
+            <th>Event<br>Type</th><th>Source<br>Host</th>
+            <th>Source<br>Process</th><th>Message</th></th>
         {% for e in event_list %}
-            <li><a href="{% url 'siem:logevent_detail' e.id %}">
-                    &middot</a> {{ e.raw_text }}</li>
+        <tr>
+            <td><a class="event" href="{% url 'siem:logevent_detail' e.id %}">
+                    {{ e.id }}</td>
+            <td>{{ e.date_stamp }}</a></td>
+            <td>{{ e.event_type }}</td>
+            <td>{{ e.source_host }}</td>
+            <td>{{ e.source_process }}[{{ e.source_pid }}]</td>
+            <td>{{ e.message|truncatechars:50 }}</td>
+            </a>
+        </tr>
         {% endfor %}
-    </ul>
+    </table>
 
         {% if is_paginated %}
         <div class="pagination">
