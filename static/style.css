@@ -22,6 +22,10 @@ DIV.footer {
     font-size: 0.75em;
 }
 
+DIV.license {
+    text-align: left;
+}
+
 TABLE, TH, TD {
     border: 1px solid;
     border-color: #444444;
