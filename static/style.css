@@ -20,6 +20,8 @@ DIV.main {
 
 DIV.footer {
     font-size: 0.7em;
+    padding-top: 12px;
+    padding-bottom: 8px;
 }
 
 DIV.license {
