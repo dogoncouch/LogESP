@@ -140,7 +140,7 @@ class SiemSentry:
                 event.save()
                 event.source_ids_log.set(list(e))
                 event.save()
-            self.lasteventid = e.latest('id').id
+                self.lasteventid = e.latest('id').id
 
 
     def watch_ruleevents(self):
@@ -172,7 +172,6 @@ class SiemSentry:
             self.get_last_ruleevent()
         else:
             if len(e) > self.rule.event_limit:
-            if len(e) > self.rule.event_limit:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
@@ -189,7 +188,7 @@ class SiemSentry:
                 event.save()
                 event.source_ids_rule.set(list(e))
                 event.save()
-            self.lasteventid = e.latest('id').id
+                self.lasteventid = e.latest('id').id
 
 
 def start_rule(rule):
