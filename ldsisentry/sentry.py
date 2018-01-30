@@ -103,6 +103,11 @@ class SiemSentry:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
             except siem.models.DoesNotExist:
                 break
+            # Set EOL time delta:
+            if self.rule.event_lifespan:
+                self.lifespandelta = timedelta(days=self.rule.event_lifespan)
+            else:
+                self.lifespandelta = None
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
@@ -136,6 +141,9 @@ class SiemSentry:
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
+                if self.lifespan_delta:
+                    event.eol_date = timezone.localtime(timezone.now()).date() + \
+                        self.lifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
                 event.source_host = self.rule.host_filter
@@ -164,6 +172,9 @@ class SiemSentry:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
             except siem.models.DoesNotExist:
                 break
+            # Set EOL time delta:
+            if self.rule.event_lifespan:
+                self.lifespandelta = timedelta(days=self.rule.event_lifespan)
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
@@ -196,6 +207,10 @@ class SiemSentry:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
+                event.rule_category = self.rule.rule_category
+                if self.lifespan_delta:
+                    event.eol_date = timezone.localtime(timezone.now()).date() + \
+                        self.lifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
                 event.event_limit = self.rule.event_limit
