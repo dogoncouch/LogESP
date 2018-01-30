@@ -6,7 +6,7 @@
 
 <h1>Events (Rule-Based)</h1>
 
-<form method="get" action="{% url 'siem:ruleevent_search' %}">{% csrf_token %}
+<form method="get" action="{% url 'siem:ruleevent_search' %}">
     <p>Rule Category:
     <input type="text" value="{{category_filter}}" name="category_filter"/>
     Event Type:

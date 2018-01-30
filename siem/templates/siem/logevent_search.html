@@ -6,7 +6,7 @@
 
 <h1>Log Events</h1>
 
-<form method="get" action="{% url 'siem:logevent_search' %}">{% csrf_token %}
+<form method="get" action="{% url 'siem:logevent_search' %}">
     <p>Event Type:
     <input type="text" value="{{ type_filter }}" name="type_filter"/>
     Host:

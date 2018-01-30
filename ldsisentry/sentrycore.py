@@ -54,9 +54,9 @@ class SentryCore:
         """Get rules from tables"""
         rules = LimitRule.objects.all()
         for r in rules:
-            if not r in self.rules:
+            if not r.id in self.rules:
                 self.newrules.append(r)
-        self.rules = rules
+        self.rules = [r.id for r in rules]
         
 
     def start_triggers(self):
