@@ -104,8 +104,8 @@ class SiemSentry:
             except siem.models.DoesNotExist:
                 break
             # Set EOL time delta:
-            if self.rule.event_lifespan:
-                self.lifespandelta = timedelta(days=self.rule.event_lifespan)
+            if self.rule.lifespan_days:
+                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
             else:
                 self.lifespandelta = None
             # Wait until the next interval
@@ -173,8 +173,8 @@ class SiemSentry:
             except siem.models.DoesNotExist:
                 break
             # Set EOL time delta:
-            if self.rule.event_lifespan:
-                self.lifespandelta = timedelta(days=self.rule.event_lifespan)
+            if self.rule.lifespan_days:
+                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
