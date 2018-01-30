@@ -112,7 +112,7 @@ class SiemSentry:
         else: hostfilter = ''
         if self.rule.message_filter: messagefilter = self.rule.message_filter
         else: messagefilter = ''
-        if self.rule.raw_text_filter: rawfilter = self.rule.raw_text_filter
+        if self.rule.raw_text_filter: rawtextfilter = self.rule.raw_text_filter
         else: rawtextfilter = ''
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
