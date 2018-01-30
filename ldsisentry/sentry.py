@@ -96,11 +96,13 @@ class SiemSentry:
         """Watch log events based on a rule"""
         self.get_first_logevent()
         while True:
-            
             # Check the rule:
             if self.rule.is_enabled: self.check_logevent()
-            self.rule = LimitRule.objects.get(pk=self.rule.id)
-        
+            # Refresh the rule:
+            try:
+                self.rule = LimitRule.objects.get(pk=self.rule.id)
+            except siem.models.DoesNotExist:
+                break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
@@ -155,10 +157,13 @@ class SiemSentry:
         """Watch rule events based on a rule"""
         self.get_first_ruleevent()
         while True:
-
             # Check the rule:
             if self.rule.is_enabled: self.check_ruleevent()
-        
+            # Refresh the rule:
+            try:
+                self.rule = LimitRule.objects.get(pk=self.rule.id)
+            except siem.models.DoesNotExist:
+                break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
