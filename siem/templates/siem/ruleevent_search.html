@@ -9,11 +9,11 @@
 <form method="get" action="{% url 'siem:ruleevent_search' %}">{% csrf_token %}
     <p>Rule Category:
     <input type="text" value="{{category_filter}}" name="category_filter"/>
-    <p>Event Type:
+    Event Type:
     <input type="text" value="{{type_filter}}" name="type_filter"/></p>
     <p>Message:
     <input type="text" value="{{message_filter}}" name="message_filter"/>
-    Lowest Magnitude:
+    Min. Magnitude:
     <input type="number" value="{{mag_filter}}" name="mag_filter"/></p>
     <p>End Date/Time:
     <input type="datetime-local" value="{{ time_filter }}" name="time_filter"</a>
