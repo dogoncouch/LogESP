@@ -135,7 +135,7 @@ class SiemSentry:
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
                 event.event_type = self.rule.event_type
-                event.source_rule.set(self.rule)
+                event.source_rule = self.rule
                 event.source_host = self.rule.host_filter
                 event.event_limit = self.rule.event_limit
                 event.event_count = len(e)
@@ -192,7 +192,7 @@ class SiemSentry:
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
                 event.event_type = self.rule.event_type
-                event.source_rule.set(self.rule)
+                event.source_rule = self.rule
                 event.event_limit = self.rule.event_limit
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
