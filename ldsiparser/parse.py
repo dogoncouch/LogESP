@@ -52,66 +52,72 @@ class LiveParser:
         self.parser = parsers[parser]
 
 
-    def parse_entries(self, inputfile, eventtype):
+    def parse_entries(self, filename, eventtype):
         """Parse log entries from a file like object"""
         # Get hostname, file name, tzone:
-        parsepath = os.path.abspath(inputfile.name)
-        parsehost = socket.getfqdn()
-
-        # Read to the end of the file:
-        inputfile.read()
         
-        while True:
-            # Check for a new line:
-            line = inputfile.readline()
-
-            if line:
-                # Do the parsing
-                ourline = line.rstrip()
-                
-                entry = self.parser.parse_line(ourline)
-
-                if entry: 
-                    e = LogEvent()
-                    e.parsed_at = timezone.localtime(timezone.now())
-                    e.time_zone = TIME_ZONE
-                    e.event_type = eventtype
-                    e.date_stamp = entry['date_stamp']
-                    e.raw_text = ourline
-                    e.facility = entry['facility']
-                    e.severity = entry['severity']
-                    e.source_host = entry['source_host']
-                    e.source_port = entry['source_port']
-                    e.dest_host = entry['dest_host']
-                    e.dest_port = entry['dest_port']
-                    e.source_process = entry['source_process']
-                    e.source_pid = entry['source_pid']
-                    e.protocol = entry['protocol']
-                    e.message = entry['message']
-                    e.extended = entry['extended']
-                    e.parsed_on = parsehost
-                    e.source_path = parsepath
-                    e.save()
-
+        with open(filename, 'r') as inputfile:
+            filectime = os.path.getctime(filename)
+        
+            # Read to the end of the file:
+            inputfile.read()
+            
+            while True:
+                # Check for a new line:
+                line = inputfile.readline()
+        
+                if line:
+                    # Do the parsing
+                    ourline = line.rstrip()
+                    
+                    entry = self.parser.parse_line(ourline)
+        
+                    if entry: 
+                        e = LogEvent()
+                        e.parsed_at = timezone.localtime(timezone.now())
+                        e.time_zone = TIME_ZONE
+                        e.event_type = eventtype
+                        e.date_stamp = entry['date_stamp']
+                        e.raw_text = ourline
+                        e.facility = entry['facility']
+                        e.severity = entry['severity']
+                        e.source_host = entry['source_host']
+                        e.source_port = entry['source_port']
+                        e.dest_host = entry['dest_host']
+                        e.dest_port = entry['dest_port']
+                        e.source_process = entry['source_process']
+                        e.source_pid = entry['source_pid']
+                        e.protocol = entry['protocol']
+                        e.message = entry['message']
+                        e.extended = entry['extended']
+                        e.parsed_on = self.parsehost
+                        e.source_path = self.parsepath
+                        e.save()
+        
+                    else:
+                        # No match
+                        e = LogEvent()
+                        e.parsed_at = timezone.localtime(timezone.now())
+                        e.time_zone = TIME_ZONE
+                        e.raw_text = ourline
+                        e.parsed_on = self.parsehost
+                        e.source_path = self.parsepath
+        
                 else:
-                    # No match
-                    e = LogEvent()
-                    e.parsed_at = timezone.localtime(timezone.now())
-                    e.time_zone = TIME_ZONE
-                    e.raw_text = ourline
-                    e.parsed_on = parsehost
-                    e.source_path = parsepath
-
-            else:
-                sleep(0.1)
+                    # Check if file has been rotated:
+                    if os.path.getctime(filename) != filectime:
+                        break
+                    sleep(0.1)
 
 
     def parse_file(self, filename, parser, eventtype):
         """Parse a file into ldsi"""
         self.get_parser(parser)
+        self.parsepath = os.path.abspath(filename)
+        self.parsehost = socket.getfqdn()
         try:
-            with open(filename, 'r') as inputfile:
-                self.parse_entries(inputfile, eventtype)
+            while True:
+                self.parse_entries(filename, eventtype)
 
         except KeyboardInterrupt:
             pass
