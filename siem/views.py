@@ -32,23 +32,27 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not type_val: type_val = ''
         if not host_val: host_val = ''
         if not message_val: message_val = ''
+        if not raw_filter: raw_val = ''
         if time_val:
             new_context = LogEvent.objects.filter(
-                parsed_at__lte=time_val).filter(
-                    event_type__contains=type_val).filter(
-                        source_host__contains=host_val).filter(
-                            message__contains=message_val).order_by('-id')
+                parsed_at__lte=time_val,
+                event_type__contains=type_val,
+                source_host__contains=host_val,
+                message__contains=message_val,
+                raw_text__contains=raw_val).order_by('-id')
         else:
             new_context = LogEvent.objects.filter(
-                event_type__contains=type_val).filter(
-                    source_host__contains=host_val).filter(
-                        message__contains=message_val).order_by('-id')
+                event_type__contains=type_val,
+                source_host__contains=host_val,
+                message__contains=message_val,
+                raw_text__contains=raw_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
         context['host_filter'] = self.request.GET.get('host_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
         context['message_filter'] = self.request.GET.get('message_filter', '')
+        context['raw_filter'] = self.request.GET.get('raw_filter', '')
         context['time_filter'] = self.request.GET.get('time_filter', '')
         context['order'] = 'desc'
         return context
@@ -68,22 +72,26 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         category_val = self.request.GET.get('category_filter')
         type_val = self.request.GET.get('type_filter')
+        mag_val = self.request.GET.get('mag_filter')
         message_val = self.request.GET.get('message_filter')
         time_val = self.request.GET.get('time_filter')
         if not category_val: category_val = ''
         if not type_val: type_val = ''
+        if not mag_val: mag_val = 0
         if not message_val: message_val = ''
         if time_val:
             new_context = RuleEvent.objects.filter(
-                date_stamp__lte=time_val,
-                    rule_category__contains=category_val).filter(
-                        event_type__contains=type_val).filter(
-                            message__contains=message_val).order_by('-id')
+            date_stamp__lte=time_val,
+            rule_category__contains=category_val,
+            event_type__contains=type_val,
+            magnitude__gte=mag_val,
+            message__contains=message_val).order_by('-id')
         else:
             new_context = RuleEvent.objects.filter(
-                rule_category__contains=category_val).filter(
-                    event_type__contains=type_val).filter(
-                        message__contains=message_val).order_by('-id')
+            rule_category__contains=category_val,
+            event_type__contains=type_val,
+            magnitude__gte=mag_val,
+            message__contains=message_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(RuleEventSearchView,self).get_context_data(**kwargs)

@@ -232,8 +232,8 @@ class AdvThreatEvent(models.Model):
         return '.'.join(val)
     def calc_likelihood(self):
         if self.likelihood_initiation and self.likelihood_impact:
-            return self.likelihood_initiation * \
-                    self.likelihood_impact // 100
+            return (self.likelihood_initiation + \
+                    self.likelihood_impact) // 2
         else:
             return None
 

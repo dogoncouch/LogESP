@@ -112,15 +112,19 @@ class SiemSentry:
         else: hostfilter = ''
         if self.rule.message_filter: messagefilter = self.rule.message_filter
         else: messagefilter = ''
+        if self.rule.raw_text_filter: rawfilter = self.rule.raw_text_filter
+        else: rawtextfilter = ''
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     source_host__contains=hostfilter,
-                    message__contains=messagefilter)
+                    message__contains=messagefilter,
+                    raw_text__contains=rawtextfilter)
         else:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     source_host__contains=self.rule.host_filter,
-                    message__contains=self.rule.message_filter)
+                    message__contains=self.rule.message_filter,
+                    raw_text__contains=rawtextfilter)
 
         if len(e) == 0:
             self.get_last_logevent()
@@ -131,7 +135,6 @@ class SiemSentry:
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
                 event.event_type = self.rule.event_type
-                event.source_rule = self.rule.name
                 event.source_host = self.rule.host_filter
                 event.event_limit = self.rule.event_limit
                 event.event_count = len(e)
@@ -142,6 +145,7 @@ class SiemSentry:
                         ( 7 - self.rule.severity)
                 event.message = self.rule.message
                 event.save()
+                event.source_rule.set(self.rule)
                 event.source_ids_log.set(list(e))
                 event.save()
                 self.lasteventid = e.latest('id').id
@@ -166,14 +170,18 @@ class SiemSentry:
         else: rulenamefilter = ''
         if self.rule.message_filter: messagefilter = self.rule.message_filter
         else: messagefilter = ''
+        if self.rule.mag_filter: magnitudefilter = self.rule.magnitude_filter
+        else: magfilter = 0
         if self.rule.event_type:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     source_rule__contains=rulenamefilter,
+                    magnitude__gte=magnitudefilter,
                     message__contains=messagefilter)
         else:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     source_rule__contains=rulenamefilter,
+                    magnitude__gte=magnitudefilter,
                     message__contains=messagefilter)
 
         if len(e) == 0:

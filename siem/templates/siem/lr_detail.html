@@ -19,9 +19,13 @@
     <li>Severity: {{ lr.severity }}</li>
     <li>Time Interval: {{ lr.time_int }}</li>
     <li>Event Limit: {{ lr.event_limit }}</li>
-    <li>Host Filter: {{ lr.host_filter }}</li>
-    <li>Message Filter: {{ lr.message_filter }}</li>
-    <li>Rule Name Filter: {{ lr.rulename_filter }}</li>
+    <li>Message Filter: {{ lr.message_filter }}</li></ul>
+    <li>Log Event Filters:<ul>
+        <li>Host Filter: {{ lr.host_filter }}</li>
+        <li>Raw Text Filter: {{ lr.raw_text_filter }}</li></ul>
+    <li>Rule Event Filters:<ul>
+        <li>Rule Name Filter: {{ lr.rulename_filter }}</li>
+        <li>Magnitude: {{ lr.magnitude_filter }}</li></ul>
     <li>Message: {{ lr.message }}</li>
 </ul>
 

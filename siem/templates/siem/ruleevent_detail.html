@@ -12,7 +12,8 @@
     <li>Time Zone: {{ event.time_zone }}</li>
     <li>Rule Category: {{ event.rule_category }}</li>
     <li>Event Type: {{ event.event_type }}</li>
-    <li>Source Rule: {{ event.source_rule }}</li>
+    <li>Source Rule:
+        <a href="{% url 'siem:lr_detail' event.source_rule.id %}">{{ event.source_rule }}</li>
     <li>Magnitude: {{ event.magnitude }}</li>
     <li>Event Count: {{ event.event_count }}</li>
     <li>Event Limit: {{ event.event_limit }}</li>
