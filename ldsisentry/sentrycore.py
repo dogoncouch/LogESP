@@ -63,7 +63,7 @@ class SentryCore:
         """Start siemstress event triggers"""
         # Start one thread per rule:
         for r in self.newrules:
-            thread = threading.Thread(name=r,
+            thread = threading.Thread(name=r.id,
                     target=ldsisentry.sentry.start_rule,
                     args=(r,))
             thread.daemon = True
