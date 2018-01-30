@@ -141,7 +141,7 @@ class SiemSentry:
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
-                if self.lifespan_delta:
+                if self.lifespandelta:
                     event.eol_date = timezone.localtime(timezone.now()).date() + \
                         self.lifespandelta
                 event.event_type = self.rule.event_type
@@ -208,7 +208,7 @@ class SiemSentry:
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
-                if self.lifespan_delta:
+                if self.lifespandelta:
                     event.eol_date = timezone.localtime(timezone.now()).date() + \
                         self.lifespandelta
                 event.event_type = self.rule.event_type
