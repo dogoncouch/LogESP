@@ -97,6 +97,7 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
         context = super(RuleEventSearchView,self).get_context_data(**kwargs)
         context['category_filter'] = self.request.GET.get('category_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
+        context['mag_filter'] = self.request.GET.get('mag_filter', '')
         context['message_filter'] = self.request.GET.get('message_filter', '')
         context['time_filter'] = self.request.GET.get('time_filter', '')
         return context

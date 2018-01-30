@@ -9,7 +9,9 @@
 <form method="get" action="{% url 'siem:ruleevent_search' %}">{% csrf_token %}
     <p>Rule Category:
     <input type="text" value="{{category_filter}}" name="category_filter"/>
-    Event Type:
+    Lowest Magnitude:
+    <input type="number" value="{{mag_filter}}" name="mag_filter"/></p>
+    <p>Event Type:
     <input type="text" value="{{type_filter}}" name="type_filter"/>
     Message:
     <input type="text" value="{{message_filter}}" name="message_filter"/></p>
@@ -24,7 +26,7 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&mag_filter={{ mag_filter }}&message_filter={{ message_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
                     &middot;
                 {% endif %}
                 <span class="page-current">
@@ -32,7 +34,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?category_filter={{ category_filter }}&type_filter={{ type_filter }}&mag_filter={{ mag_filter }}&message_filter={{ message_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
