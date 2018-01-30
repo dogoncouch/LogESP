@@ -56,7 +56,7 @@ class SiemSentry:
                     parsed_at__gt=timezone.localtime(
                         timezone.now()) - timeint)
             if len(erange) == 0:
-                self.lasteventid = LogEvent.objects.latest('id')
+                self.lasteventid = LogEvent.objects.latest('id').id
             else:
                 self.lasteventid = erange.first().id - 1
 
@@ -79,7 +79,7 @@ class SiemSentry:
                     parsed_at__gt=timezone.localtime(
                         timezone.now()) - timeint)
             if len(erange) == 0:
-                self.lasteventid = LogEvent.objects.latest('id')
+                self.lasteventid = LogEvent.objects.latest('id').id
             else:
                 self.lasteventid = erange.first().id - 1
 
