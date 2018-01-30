@@ -6,7 +6,7 @@
 
 <h1>{{ lr }} (Limit Rule)</h1>
 <a href="{% url 'siem:lr_update' lr.id %}">Edit</a>
-&middot
+&middot;
 <a href="{% url 'siem:lr_delete' lr.id %}">Delete</a>
 <ul>
     <li>ID: {{ lr.id }}</li>
@@ -19,7 +19,7 @@
     <li>Severity: {{ lr.severity }}</li>
     <li>Time Interval: {{ lr.time_int }}</li>
     <li>Event Limit: {{ lr.event_limit }}</li>
-    <li>Message Filter: {{ lr.message_filter }}</li></ul>
+    <li>Message Filter: {{ lr.message_filter }}</li>
     <li>Log Event Filters:<ul>
         <li>Host Filter: {{ lr.host_filter }}</li>
         <li>Raw Text Filter: {{ lr.raw_text_filter }}</li></ul>
