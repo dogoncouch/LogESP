@@ -37,12 +37,11 @@ class SentryCore:
 
     def __init__(self, config='ldsisentry/sentry'):
         """Initialize trigger engine"""
-
         self.conf = config
         self.rlist = []
         self.rules = []
-        self.threads = []
-
+        self.newrules = []
+        self.threads = {}
         signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
@@ -53,38 +52,34 @@ class SentryCore:
 
     def get_rules(self):
         """Get rules from tables"""
-
-        self.rules = LimitRule.objects.filter(is_enabled=True)
+        rules = LimitRule.objects.all()
+        for r in rules:
+            if not r in self.rules:
+                self.newrules.append(r)
+        self.rules = rules
         
 
     def start_triggers(self):
         """Start siemstress event triggers"""
-
         # Start one thread per rule:
-        self.threads = []
-        for r in self.rules:
+        for r in self.newrules:
             thread = threading.Thread(name=r,
                     target=ldsisentry.sentry.start_rule,
                     args=(r,))
             thread.daemon = True
             thread.start()
 
-            self.threads.append(thread)
+            self.thread[r.id] = thread)
+        self.newrules = []
 
 
     def run_sentry(self):
         """Start trigger engine"""
         try:
-            self.get_rules()
-            self.start_triggers()
-
             while True:
-                isAlive = False
-                for thread in self.threads:
-                    if thread.isAlive():
-                        isAlive = True
-                if not isAlive: exit(0)
-                sleep(10)
+                self.get_rules()
+                self.start_triggers()
+                sleep(600)
 
         except KeyboardInterrupt:
             exit(0)

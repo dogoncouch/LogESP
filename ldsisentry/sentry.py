@@ -31,8 +31,7 @@ import os
 from sys import exit
 from django.utils import timezone
 from ldsi.settings import TIME_ZONE
-from siem.models import LogEvent
-from siem.models import RuleEvent
+from siem.models import LogEvent, RuleEvent, LimitRule
 #import signal
 
 
@@ -99,7 +98,8 @@ class SiemSentry:
         while True:
             
             # Check the rule:
-            self.check_logevent()
+            if self.rule.is_enabled: self.check_logevent()
+            self.rule = LimitRule.objects.get(pk=self.rule.id)
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
@@ -157,7 +157,7 @@ class SiemSentry:
         while True:
 
             # Check the rule:
-            self.check_ruleevent()
+            if self.rule.is_enabled: self.check_ruleevent()
         
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
