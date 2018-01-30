@@ -7,6 +7,7 @@ from siem.choices import *
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6,
             null=True, blank=True)
+    eol_date = models.DateField(null=True, blank=True)
     date_stamp = models.CharField(max_length=32,
             null=True, blank=True)
     time_zone = models.CharField(max_length=32,
@@ -34,6 +35,12 @@ class LogEvent(models.Model):
     message = models.CharField(max_length=1024,
             null=True, blank=True)
     extended = models.CharField(max_length=1024,
+            null=True, blank=True)
+    ext_user = models.CharField(max_length=32,
+            null=True, blank=True)
+    ext_ip = models.CharField(max_length=32,
+            null=True, blank=True)
+    ext_session = models.CharField(max_length=24,
             null=True, blank=True)
     parsed_on = models.CharField(max_length=32,
             null=True, blank=True)

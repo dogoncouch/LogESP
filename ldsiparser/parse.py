@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 from time import sleep
-from datetime import datetime
+from datetime import timedelta
 import socket
 import re
 import os.path
@@ -72,9 +72,13 @@ class LiveParser:
                     
                     entry = self.parser.parse_line(ourline)
         
-                    if entry: 
+                    if entry:
                         e = LogEvent()
                         e.parsed_at = timezone.localtime(timezone.now())
+                        if self.lifespandelta:
+                            e.eol_date = timezone.localtime(
+                                    timezone.now()).date() + \
+                                            self.lifespandelta
                         e.time_zone = TIME_ZONE
                         e.event_type = eventtype
                         e.date_stamp = entry['date_stamp']
@@ -110,8 +114,12 @@ class LiveParser:
                     sleep(0.1)
 
 
-    def parse_file(self, filename, parser, eventtype):
+    def parse_file(self, filename, parser, eventtype, lifespan):
         """Parse a file into ldsi"""
+        if lifespan == 0:
+            self.lifespandelta = None
+        else:
+            self.lifespandelta = timedelta(days=lifespan)
         self.get_parser(parser)
         self.parsepath = os.path.abspath(filename)
         self.parsehost = socket.getfqdn()
@@ -125,7 +133,7 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(filename, parser, eventtype):
+def start_parse(filename, parser, eventtype, lifespan):
     """Start a parser"""
     parseengine = LiveParser()
-    parseengine.parse_file(filename, parser, eventtype)
+    parseengine.parse_file(filename, parser, eventtype, lifespan)
