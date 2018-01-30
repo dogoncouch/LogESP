@@ -96,6 +96,11 @@ class SiemSentry:
         """Watch log events based on a rule"""
         self.get_first_logevent()
         while True:
+            # Set EOL time delta:
+            if self.rule.lifespan_days:
+                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
+            else:
+                self.lifespandelta = None
             # Check the rule:
             if self.rule.is_enabled: self.check_logevent()
             # Refresh the rule:
@@ -103,11 +108,6 @@ class SiemSentry:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
             except siem.models.DoesNotExist:
                 break
-            # Set EOL time delta:
-            if self.rule.lifespan_days:
-                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
-            else:
-                self.lifespandelta = None
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
@@ -165,6 +165,11 @@ class SiemSentry:
         """Watch rule events based on a rule"""
         self.get_first_ruleevent()
         while True:
+            # Set EOL time delta:
+            if self.rule.lifespan_days:
+                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
+            else:
+                self.lifespandelta = None
             # Check the rule:
             if self.rule.is_enabled: self.check_ruleevent()
             # Refresh the rule:
@@ -172,9 +177,6 @@ class SiemSentry:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
             except siem.models.DoesNotExist:
                 break
-            # Set EOL time delta:
-            if self.rule.lifespan_days:
-                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
