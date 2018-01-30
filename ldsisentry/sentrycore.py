@@ -69,7 +69,7 @@ class SentryCore:
             thread.daemon = True
             thread.start()
 
-            self.thread[r.id] = thread
+            self.threads[r.id] = thread
         self.newrules = []
 
 
