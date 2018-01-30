@@ -29,7 +29,7 @@ from configparser import ConfigParser
 import json
 import signal
 from time import sleep
-import daemonssentry.sentry
+import daemons.sentry.sentry
 from siem.models import LimitRule
 
 
