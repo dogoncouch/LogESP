@@ -65,20 +65,15 @@ To start the parser engine:
 1. Edit the config file at `config/parser.conf`.
 2. Run the parser inside a django shell:
 ```
-python manage.py shell -c "import ldsiparser.parsecore ; ldsiparser.parsecore.parse()"
+python manage.py shell -c "import daemons.parser.parsecore ; daemons.parser.parsecore.start()"
 ```
 
 ### Sentry Engine
-The rule engine has not been tested. To start it:
+To start the rule engine:
 
 1. Add Limit Rules (in the SIEM section)
 2. Run the sentry engine inside a django shell:
 ```
-python manage.py shell -c "import ldsisentry.sentrycore ; ldsisentry.sentrycore.sentry()"
+python manage.py shell -c "import daemons.sentry.sentrycore ; daemons.sentry.sentrycore.start()"
 ```
-
-## Near Future
-
-- Finish SIEM app
-    - Add more event search criteria
-- Dockerize
+3. Add more Limit Rules

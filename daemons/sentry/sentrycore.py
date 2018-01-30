@@ -29,15 +29,14 @@ from configparser import ConfigParser
 import json
 import signal
 from time import sleep
-import ldsisentry.sentry
+import daemonssentry.sentry
 from siem.models import LimitRule
 
 
 class SentryCore:
 
-    def __init__(self, config='ldsisentry/sentry'):
+    def __init__(self):
         """Initialize trigger engine"""
-        self.conf = config
         self.rlist = []
         self.rules = []
         self.newrules = []
@@ -64,7 +63,7 @@ class SentryCore:
         # Start one thread per rule:
         for r in self.newrules:
             thread = threading.Thread(name=r.id,
-                    target=ldsisentry.sentry.start_rule,
+                    target=daemons.sentry.sentry.start_rule,
                     args=(r,))
             thread.daemon = True
             thread.start()
@@ -88,6 +87,6 @@ class SentryCore:
         #    print('Error: ' + str(err))
 
     
-def sentry(conf='ldsisentry/sentry.conf'):
-    sentry = SentryCore(config=conf)
+def start():
+    sentry = SentryCore()
     sentry.run_sentry()

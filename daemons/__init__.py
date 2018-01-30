@@ -22,5 +22,7 @@
 
 __author__ = 'Dan Persons <dpersonsdev@gmail.com>'
 __license__ = 'MIT License'
-__version__ = '0.1'
+__all__ = ['parser', 'sentry']
 
+import daemons.parser
+import daemons.sentry

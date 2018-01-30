@@ -22,8 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from ldsiparser import __version__
-import ldsiparser.parse
+import daemons.parser.parse
 import sys
 import os.path
 import signal
@@ -73,7 +72,7 @@ class ParseCore:
             self.get_config()
             for entry in self.plist:
                 thread = Thread(name=parse,
-                        target=ldsiparser.parse.start_parse,
+                        target=daemons.parser.parse.start_parse,
                         args=(entry['filename'], entry['parser'],
                         entry['event_type'], entry['lifespan_days']))
                 thread.daemon = True
@@ -95,6 +94,6 @@ class ParseCore:
 
 
     
-def parse(conf='config/parser.conf'):
+def start(conf='config/parser.conf'):
     parser = ParseCore(config=conf)
     parser.run_parse()

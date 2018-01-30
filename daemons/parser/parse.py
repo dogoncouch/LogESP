@@ -30,7 +30,7 @@ import os.path
 import json
 
 from django.utils import timezone
-import ldsiparser.parsers
+import daemons.parser.parsers
 from siem.models import LogEvent
 from ldsi.settings import TIME_ZONE
 
@@ -44,10 +44,10 @@ class LiveParser:
     def get_parser(self, parser):
         """Load parser modules"""
         parsers = {}
-        for p in sorted(ldsiparser.parsers.__all__):
+        for p in sorted(daemons.parser.parsers.__all__):
             parsers[p] = \
-                    __import__('ldsiparser.parsers.' + p, globals(),
-                            locals(), [ldsiparser]).ParseModule()
+                    __import__('daemons.parser.parsers.' + p, globals(),
+                            locals(), [daemons.parser]).ParseModule()
         
         self.parser = parsers[parser]
 
