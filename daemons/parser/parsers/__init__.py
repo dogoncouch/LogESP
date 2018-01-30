@@ -22,6 +22,6 @@
 
 __all__ = ['syslog', 'syslogiso', 'nohost']
 
-import daemons.parsers.syslog
-import daemons.parsers.syslogiso
-import daemons.parsers.nohost
+import daemons.parser.parsers.syslog
+import daemons.parser.parsers.syslogiso
+import daemons.parser.parsers.nohost
