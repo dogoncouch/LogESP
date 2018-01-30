@@ -62,7 +62,7 @@ class LimitRule(models.Model):
             null=True, blank=True)
     rulename_filter = models.CharField(max_length=32,
             null=True, blank=True)
-    magnitude_filter = models.IntegerField()
+    magnitude_filter = models.IntegerField(null=True, blank=True)
     message = models.CharField(max_length=1024)
     def __str__(self):
         return self.name

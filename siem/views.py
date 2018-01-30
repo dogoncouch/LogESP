@@ -125,7 +125,9 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'siem.add_limitrule'
     fields = ['name', 'desc', 'is_enabled', 'rule_events', 'event_type',
             'severity', 'time_int', 'event_limit',
-            'message_filter', 'host_filter', 'rulename_filter', 'message']
+            'message_filter', 'raw_text_filter', 'host_filter',
+            'rulename_filter', 'magnitude_filter',
+            'message']
     def get_success_url(self):
         return reverse_lazy('siem:lr_detail', args=(self.object.id,))
 
@@ -134,7 +136,9 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'siem.change_limitrule'
     fields = ['name', 'desc', 'is_enabled', 'rule_events', 'event_type',
             'severity', 'time_int', 'event_limit',
-            'message_filter', 'host_filter', 'rulename_filter', 'message']
+            'message_filter', 'raw_text_filter', 'host_filter',
+            'rulename_filter', 'magnitude_filter',
+            'message']
     def get_success_url(self):
         return reverse_lazy('siem:lr_detail', args=(self.object.id,))
 
