@@ -28,11 +28,12 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         host_val = self.request.GET.get('host_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
+        raw_val = self.request.GET.get('raw_filter')
         time_val = self.request.GET.get('time_filter')
         if not type_val: type_val = ''
         if not host_val: host_val = ''
         if not message_val: message_val = ''
-        if not raw_filter: raw_val = ''
+        if not raw_val: raw_val = ''
         if time_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__lte=time_val,
