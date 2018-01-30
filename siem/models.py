@@ -57,7 +57,7 @@ class LimitRule(models.Model):
     is_enabled = models.BooleanField(default=True)
     rule_events = models.BooleanField(default=False)
     rule_category = models.CharField(max_length=24, default='default')
-    lifespan_days = models.DateField(null=True, blank=True)
+    lifespan_days = models.IntegerField(null=True, blank=True)
     event_type = models.CharField(max_length=24, default='default')
     severity = models.IntegerField(choices=severity_choices)
     time_int = models.IntegerField()
