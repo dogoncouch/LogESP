@@ -71,7 +71,7 @@ class ParseCore:
         try:
             self.get_config()
             for entry in self.plist:
-                thread = Thread(name=parse,
+                thread = Thread(name=entry['filename'],
                         target=daemons.parser.parse.start_parse,
                         args=(entry['filename'], entry['parser'],
                         entry['event_type'], entry['lifespan_days']))
