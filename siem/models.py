@@ -64,12 +64,12 @@ class LimitRule(models.Model):
     lifespan_days = models.IntegerField(null=True, blank=True)
     event_type = models.CharField(max_length=24, default='default')
     severity = models.IntegerField(choices=severity_choices)
-    overkill_modifier = models.IntegerField(
+    overkill_modifier = models.DecimalField(
             validators=[validate_modifier_range],
-            default=1)
-    severity_modifier = models.IntegerField(
+            decimal_places=1, max_digits=3, default=1)
+    severity_modifier = models.DecimalField(
             validators=[validate_modifier_range],
-            default=1)
+            decimal_places=1, max_digits=3, default=1)
     time_int = models.IntegerField()
     event_limit = models.IntegerField()
     message_filter = models.CharField(max_length=1024,
