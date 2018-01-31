@@ -97,10 +97,10 @@ class SiemSentry:
         self.get_first_logevent()
         while True:
             # Set EOL time delta:
-            if self.rule.lifespan_days:
-                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
+            if self.rule.lifespan_days == 0:
+                self.lifespandelta = timedelta(days=36524)
             else:
-                self.lifespandelta = None
+                self.lifespandelta = timedelta(days=lifespan)
             # Check the rule:
             if self.rule.is_enabled: self.check_logevent()
             # Refresh the rule:
@@ -151,9 +151,9 @@ class SiemSentry:
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
-                if self.lifespandelta:
-                    event.eol_date = timezone.localtime(timezone.now()).date() + \
-                        self.lifespandelta
+                event.eol_date = timezone.localtime(
+                        timezone.now()).date() + \
+                                self.lifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
                 event.source_host = self.rule.source_host_filter
@@ -181,10 +181,10 @@ class SiemSentry:
         self.get_first_ruleevent()
         while True:
             # Set EOL time delta:
-            if self.rule.lifespan_days:
-                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
+            if self.rule.lifespan_days == 0:
+                self.lifespandelta = timedelta(days=36524)
             else:
-                self.lifespandelta = None
+                self.lifespandelta = timedelta(days=lifespan)
             # Check the rule:
             if self.rule.is_enabled: self.check_ruleevent()
             # Refresh the rule:
@@ -227,9 +227,9 @@ class SiemSentry:
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
                 event.rule_category = self.rule.rule_category
-                if self.lifespandelta:
-                    event.eol_date = timezone.localtime(timezone.now()).date() + \
-                        self.lifespandelta
+                event.eol_date = timezone.localtime(
+                        timezone.now()).date() + \
+                                self.lifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
                 event.event_limit = self.rule.event_limit
