@@ -6,7 +6,7 @@ from siem.choices import *
 
 def validate_modifier_range(value):
     if not 0 < value <= 10:
-        raise ValidationError('%s not in 1-10 range' % value)
+        raise ValidationError('%s not in 0.1-10 range' % value)
 
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6,
