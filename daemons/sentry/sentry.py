@@ -28,6 +28,7 @@ from random import randrange
 import json
 import threading
 import os
+import re
 from sys import exit
 from django.utils import timezone
 from ldsi.settings import TIME_ZONE
@@ -117,21 +118,25 @@ class SiemSentry:
         
         if self.rule.host_filter: hostfilter = self.rule.host_filter
         else: hostfilter = ''
-        if self.rule.message_filter: messagefilter = self.rule.message_filter
-        else: messagefilter = ''
-        if self.rule.raw_text_filter: rawtextfilter = self.rule.raw_text_filter
+        if self.rule.message_filter:
+            messagefilter = re.compile(
+                    r".*({}).*".format(self.rule.message_filter))
+        else: messagefilter = '.*'
+        if self.rule.raw_text_filter:
+            rawtextfilter = re.compile(
+                    r".*({}).*".format(self.rule.raw_text_filter))
         else: rawtextfilter = ''
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
                     source_host__contains=hostfilter,
-                    message__contains=messagefilter,
-                    raw_text__contains=rawtextfilter)
+                    message__iregex=messagefilter,
+                    raw_text__iregex=rawtextfilter)
         else:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     source_host__contains=self.rule.host_filter,
-                    message__contains=self.rule.message_filter,
-                    raw_text__contains=rawtextfilter)
+                    message__iregex=self.rule.message_filter,
+                    raw_text__iregex=rawtextfilter)
 
         if len(e) == 0:
             self.get_last_logevent()
