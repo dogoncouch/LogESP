@@ -153,4 +153,5 @@ class LiveParser:
 def start_parse(filename, parser, eventtype, locallifespan, backuplifespan):
     """Start a parser"""
     parseengine = LiveParser()
-    parseengine.parse_file(filename, parser, eventtype, lifespan)
+    parseengine.parse_file(filename, parser, eventtype,
+            locallifespan, backuplifespan)
