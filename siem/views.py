@@ -25,32 +25,38 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
     context_object_name = 'event_list'
     paginate_by = 50
     def get_queryset(self):
-        host_val = self.request.GET.get('host_filter')
+        source_host_val = self.request.GET.get('source_host_filter')
+        process_val = self.request.GET.get('process_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
         raw_val = self.request.GET.get('raw_filter')
         time_val = self.request.GET.get('time_filter')
         if not type_val: type_val = ''
-        if not host_val: host_val = ''
+        if not source_host_val: source_host_val = ''
+        if not process_val: process_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
         if time_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__lte=time_val,
                 event_type__contains=type_val,
-                source_host__contains=host_val,
+                source_host__contains=source_host_val,
+                source_process__contains=process_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
         else:
             new_context = LogEvent.objects.filter(
                 event_type__contains=type_val,
-                source_host__contains=host_val,
+                source_host__contains=source_host_val,
+                source_process__contains=process_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
-        context['host_filter'] = self.request.GET.get('host_filter', '')
+        context['source_host_filter'] = self.request.GET.get(
+                'source_host_filter', '')
+        context['process_filter'] = self.request.GET.get('process_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
         context['message_filter'] = self.request.GET.get('message_filter', '')
         context['raw_filter'] = self.request.GET.get('raw_filter', '')
@@ -128,7 +134,8 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'rule_category', 'lifespan_days', 'event_type',
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit',
-            'message_filter_regex', 'raw_text_filter_regex', 'host_filter',
+            'message_filter_regex', 'raw_text_filter_regex',
+            'source_host_filter', 'process_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):
@@ -141,7 +148,8 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'rule_category', 'lifespan_days', 'event_type',
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit',
-            'message_filter_regex', 'raw_text_filter_regex', 'host_filter',
+            'message_filter_regex', 'raw_text_filter_regex',
+            'source_host_filter', 'process_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):

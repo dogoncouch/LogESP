@@ -8,9 +8,11 @@
 
 <form method="get" action="{% url 'siem:logevent_search' %}">
     <p>Event Type:
-    <input type="text" value="{{ type_filter }}" name="type_filter"/>
-    Host:
-    <input type="text" value="{{ host_filter }}" name="host_filter"/></p>
+    <input type="text" value="{{ type_filter }}" name="type_filter"/></p>
+    <p>Host:
+    <input type="text" value="{{ host_filter }}" name="host_filter"/>
+    Process:
+    <input type="text" value="{{ process_filter }}" name="process_filter"/></p>
     <p>Message:
     <input type="text" value="{{ message_filter }}" name="message_filter"/>
     Raw Text:
@@ -26,7 +28,7 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                    <a href="{{ request.get_path }}?host_filter={{ host_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="{{ request.get_path }}?host_filter={{ host_filter }}&process_filter={{ process_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
                     &middot;
                 {% endif %}
                 <span class="page-current">
@@ -34,7 +36,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?host_filter={{ host_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?host_filter={{ host_filter }}&process_filter={{ process_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
