@@ -56,15 +56,18 @@ class ParseModule:
             entry['date_stamp'] = datestamp
             entry['facility'] = None
             entry['severity'] = None
-            entry['source_host'] = None
-            entry['source_port'] = None
+            entry['source_host'] = ''
+            entry['source_port'] = ''
             entry['source_process'] = sourceproclist[0]
             entry['source_pid'] = sourcepid
-            entry['dest_host'] = None
-            entry['dest_port'] = None
-            entry['protocol'] = None
+            entry['dest_host'] = ''
+            entry['dest_port'] = ''
+            entry['protocol'] = ''
             entry['message'] = line[len(match[0]) + 2:]
-            entry['extended'] = None
+            entry['extended'] = ''
+            entry['ext_user'] = ''
+            entry['ext_ip'] = ''
+            entry['ext_session'] = ''
 
             return entry
         

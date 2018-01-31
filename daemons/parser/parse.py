@@ -71,7 +71,7 @@ class LiveParser:
                     ourline = line.rstrip()
                     
                     entry = self.parser.parse_line(ourline)
-        
+
                     if entry:
                         e = LogEvent()
                         e.parsed_at = timezone.localtime(timezone.now())
@@ -93,6 +93,9 @@ class LiveParser:
                         e.protocol = entry['protocol']
                         e.message = entry['message']
                         e.extended = entry['extended']
+                        e.ext_user = entry['ext_user']
+                        e.ext_ip = entry['ext_ip']
+                        e.ext_session = entry['ext_session']
                         e.parsed_on = self.parsehost
                         e.source_path = self.parsepath
                         e.save()

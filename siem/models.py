@@ -20,7 +20,7 @@ class LogEvent(models.Model):
     facility = models.IntegerField(choices=facility_choices,
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices,
-            default=5)
+            null=True, blank=True)
     source_host = models.CharField(max_length=32, default='')
     source_port = models.CharField(max_length=8, default='')
     dest_host = models.CharField(max_length=32, default='')
