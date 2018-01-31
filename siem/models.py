@@ -76,7 +76,9 @@ class LimitRule(models.Model):
             null=True, blank=True)
     raw_text_filter_regex = models.CharField(max_length=1024,
             null=True, blank=True)
-    host_filter = models.CharField(max_length=32,
+    source_host_filter = models.CharField(max_length=32,
+            null=True, blank=True)
+    process_filter = models.CharField(max_length=32,
             null=True, blank=True)
     rulename_filter = models.CharField(max_length=32,
             null=True, blank=True)

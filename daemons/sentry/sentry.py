@@ -115,8 +115,12 @@ class SiemSentry:
     def check_logevent(self):
         """Check log events based on a rule"""
         
-        if self.rule.host_filter: hostfilter = self.rule.host_filter
-        else: hostfilter = ''
+        if self.rule.source_host_filter:
+            sourcehostfilter = self.rule.source_host_filter
+        else: sourcehostfilter = ''
+        if self.rule.process_filter:
+            processfilter = self.rule.process_filter
+        else: processfilter = ''
         if self.rule.message_filter_regex:
             messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
@@ -128,12 +132,14 @@ class SiemSentry:
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
-                    source_host__contains=hostfilter,
+                    source_host__contains=sourcehostfilter,
+                    source_process__contains=processfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
         else:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                    source_host__contains=self.rule.host_filter,
+                    source_host__contains=sourcehostfilter,
+                    source_process__contains=processfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
 
@@ -150,7 +156,7 @@ class SiemSentry:
                         self.lifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
-                event.source_host = self.rule.host_filter
+                event.source_host = self.rule.source_host_filter
                 event.event_limit = self.rule.event_limit
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
