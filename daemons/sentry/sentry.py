@@ -151,9 +151,12 @@ class SiemSentry:
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
-                event.magnitude = (((len(e) // 2) // \
-                        (self.rule.event_limit + 1) // 2) + 5) * \
-                        ( 7 - self.rule.severity)
+                event.magnitude = ((len(e) / float(self.rule.event_limit)) * \
+                        self.rule.overkill_modifier) * \
+                        ((7 - self.rule.severity) * self.rule.severity_modifier)
+                #event.magnitude = (((len(e) // 2) // \
+                #        (self.rule.event_limit + 1) // 2) + 5) * \
+                #        (7 - self.rule.severity)
                 event.message = self.rule.message
                 event.save()
                 event.source_ids_log.set(list(e))
@@ -219,9 +222,12 @@ class SiemSentry:
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
-                event.magnitude = (((len(e) // 2) // \
-                        (self.rule.event_limit + 1) // 2) + 5) * \
-                        ( 7 - self.rule.severity)
+                event.magnitude = ((len(e) / float(self.rule.event_limit)) * \
+                        self.rule.overkill_modifier) * \
+                        ((7 - self.rule.severity) * self.rule.severity_modifier)
+                #event.magnitude = (((len(e) // 2) // \
+                #        (self.rule.event_limit + 1) // 2) + 5) * \
+                #        (7 - self.rule.severity)
                 event.message = self.rule.message
                 event.save()
                 event.source_ids_rule.set(list(e))

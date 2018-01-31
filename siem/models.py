@@ -4,6 +4,10 @@ from siem.choices import *
 
 # Create your models here.
 
+def validate_modifier_range(value):
+    if not 0 < value <= 10:
+        raise ValidationError('%s not in 1-10 range' % value)
+
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6,
             null=True, blank=True)
@@ -60,6 +64,12 @@ class LimitRule(models.Model):
     lifespan_days = models.IntegerField(null=True, blank=True)
     event_type = models.CharField(max_length=24, default='default')
     severity = models.IntegerField(choices=severity_choices)
+    overkill_modifier = models.IntegerField(
+            validators=[validate_modifier_range],
+            default=1)
+    severity_modifier = models.IntegerField(
+            validators=[validate_modifier_range],
+            default=1)
     time_int = models.IntegerField()
     event_limit = models.IntegerField()
     message_filter = models.CharField(max_length=1024,
