@@ -28,11 +28,10 @@ from random import randrange
 import json
 import threading
 import os
-import re
 from sys import exit
 from django.utils import timezone
 from ldsi.settings import TIME_ZONE
-from siem.models import LogEvent, RuleEvent, LimitRule, DoesNotExist
+from siem.models import LogEvent, RuleEvent, LimitRule
 #import signal
 
 
@@ -107,7 +106,7 @@ class SiemSentry:
             # Refresh the rule:
             try:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
-            except DoesNotExist:
+            except siem.models.DoesNotExist:
                 break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
@@ -119,17 +118,13 @@ class SiemSentry:
         if self.rule.host_filter: hostfilter = self.rule.host_filter
         else: hostfilter = ''
         if self.rule.message_filter_regex:
-            messagefilter = re.compile(
-                    r'.*{}.*'.format(self.rule.message_filter_regex))
+            messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
-            messagefilter = re.compile(
-                    r'.*{}.*'.format('.*'))
+            messagefilter = '.*{}.*'.format('.*')
         if self.rule.raw_text_filter_regex:
-            rawtextfilter = re.compile(
-                    r'.*{}.*'.format(self.rule.raw_text_filter_regex))
+            rawtextfilter = '.*{}.*'.format(self.rule.raw_text_filter_regex)
         else:
-            rawtextfilter = re.compile(
-                    r'.*{}.*'.format('.*'))
+            rawtextfilter = '.*{}.*'.format('.*')
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
@@ -189,7 +184,7 @@ class SiemSentry:
             # Refresh the rule:
             try:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
-            except DoesNotExist:
+            except siem.models.DoesNotExist:
                 break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
@@ -201,11 +196,9 @@ class SiemSentry:
         if self.rule.rulename_filter: rulenamefilter = self.rule.rulename_filter
         else: rulenamefilter = ''
         if self.rule.message_filter_regex:
-            messagefilter = re.compile(
-                    r'.*{}.*'.format(self.rule.message_filter_regex))
+            messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
-            messagefilter = re.compile(
-                    r'.*{}.*'.format('.*'))
+            messagefilter = '.*{}.*'.format('.*')
         if self.rule.mag_filter: magnitudefilter = self.rule.magnitude_filter
         else: magfilter = 0
         if self.rule.event_type:
