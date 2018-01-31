@@ -32,7 +32,7 @@ import re
 from sys import exit
 from django.utils import timezone
 from ldsi.settings import TIME_ZONE
-from siem.models import LogEvent, RuleEvent, LimitRule
+from siem.models import LogEvent, RuleEvent, LimitRule, DoesNotExist
 #import signal
 
 
@@ -107,7 +107,7 @@ class SiemSentry:
             # Refresh the rule:
             try:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
-            except siem.models.DoesNotExist:
+            except DoesNotExist:
                 break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
@@ -189,7 +189,7 @@ class SiemSentry:
             # Refresh the rule:
             try:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
-            except siem.models.DoesNotExist:
+            except DoesNotExist:
                 break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
