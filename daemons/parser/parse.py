@@ -76,9 +76,12 @@ class LiveParser:
                         e = LogEvent()
                         e.parsed_at = timezone.localtime(timezone.now())
                         e.time_zone = TIME_ZONE
-                        e.eol_date = timezone.localtime(
+                        e.eol_date_local = timezone.localtime(
                                 timezone.now()).date() + \
-                                        self.lifespandelta
+                                        self.locallifespandelta
+                        e.eol_date_backup = timezone.localtime(
+                                timezone.now()).date() + \
+                                        self.backuplifespandelta
                         e.event_type = eventtype
                         e.date_stamp = entry['date_stamp']
                         e.raw_text = ourline
@@ -120,12 +123,20 @@ class LiveParser:
                     sleep(0.1)
 
 
-    def parse_file(self, filename, parser, eventtype, lifespan):
+    def parse_file(self, filename, parser, eventtype,
+            locallifespan, backuplifespan):
         """Parse a file into ldsi"""
-        if lifespan == 0:
-            self.lifespandelta = timedelta(days=36524)
+        # Set EOL time delta:
+        if locallifespan == 0:
+            self.locallifespandelta = timedelta(days=36524)
         else:
-            self.lifespandelta = timedelta(days=lifespan)
+            self.locallifespandelta = \
+                    timedelta(days=locallifespan)
+        if backuplifespan == 0:
+            self.backuplifespandelta = timedelta(days=36524)
+        else:
+            self.backuplifespandelta = \
+                    timedelta(days=backuplifespan)
         self.get_parser(parser)
         self.parsepath = os.path.abspath(filename)
         self.parsehost = socket.getfqdn()
@@ -139,7 +150,7 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(filename, parser, eventtype, lifespan):
+def start_parse(filename, parser, eventtype, locallifespan, backuplifespan):
     """Start a parser"""
     parseengine = LiveParser()
     parseengine.parse_file(filename, parser, eventtype, lifespan)

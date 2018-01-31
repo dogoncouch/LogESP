@@ -58,7 +58,10 @@ class ParseCore:
             p = {}
             p['filename'] = config.get(sec, 'filename')
             p['event_type'] = config.get(sec, 'event_type')
-            p['lifespan_days'] = int(config.get(sec, 'lifespan_days'))
+            p['local_lifespan_days'] = int(config.get(
+                sec, 'local_lifespan_days'))
+            p['backup_lifespan_days'] = int(config.get(
+                sec, 'backup_lifespan_days'))
             try:
                 p['parser'] = config.get(sec, 'parser')
             except Exception:
@@ -74,7 +77,8 @@ class ParseCore:
                 thread = Thread(name=entry['filename'],
                         target=daemons.parser.parse.start_parse,
                         args=(entry['filename'], entry['parser'],
-                        entry['event_type'], entry['lifespan_days']))
+                        entry['event_type'], entry['local_lifespan_days'],
+                        entry['backup_lifespan_days']))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)

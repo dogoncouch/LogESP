@@ -12,7 +12,8 @@ class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6)
     time_zone = models.CharField(max_length=32,
             null=True, blank=True)
-    eol_date = models.DateField()
+    eol_date_local = models.DateField()
+    eol_date_backup = models.DateField()
     event_type = models.CharField(max_length=24, default='default')
     raw_text = models.CharField(max_length=1280)
     date_stamp = models.CharField(max_length=32,
@@ -47,7 +48,8 @@ class LimitRule(models.Model):
     is_enabled = models.BooleanField(default=True)
     rule_events = models.BooleanField(default=False)
     rule_category = models.CharField(max_length=24, default='default')
-    lifespan_days = models.IntegerField()
+    local_lifespan_days = models.IntegerField()
+    backup_lifespan_days = models.IntegerField()
     event_type = models.CharField(max_length=24, default='default')
     severity = models.IntegerField(choices=severity_choices)
     overkill_modifier = models.DecimalField(
@@ -79,7 +81,8 @@ class LimitRule(models.Model):
 class RuleEvent(models.Model):
     date_stamp = models.DateTimeField()
     time_zone = models.CharField(max_length=32)
-    eol_date = models.DateField()
+    eol_date_local = models.DateField()
+    eol_date_backup = models.DateField()
     rule_category = models.CharField(max_length=24, default='default')
     event_type = models.CharField(max_length=24, default='default')
     source_rule = models.ForeignKey(LimitRule,

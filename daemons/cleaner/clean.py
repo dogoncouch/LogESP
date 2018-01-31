@@ -25,12 +25,18 @@ from django.utils import timezone
 from siem.models import LogEvent, RuleEvent
 
 
-def clean():
+def clean(local=False):
     """Delete EOL events"""
-    logevents = LogEvent.objects.filter(
-            eol_date__lte=timezone.localtime(timezone.now()).date())
-    ruleevents = RuleEvent.objects.filter(
-            eol_date__lte=timezone.localtime(timezone.now()).date())
-
+    if local:
+        logevents = LogEvent.objects.filter(
+                eol_date_local__lte=timezone.localtime(timezone.now()).date())
+        ruleevents = RuleEvent.objects.filter(
+                eol_date_local__lte=timezone.localtime(timezone.now()).date())
+    else:
+        logevents = LogEvent.objects.filter(
+                eol_date_backup__lte=timezone.localtime(timezone.now()).date())
+        ruleevents = RuleEvent.objects.filter(
+                eol_date_backup__lte=timezone.localtime(timezone.now()).date())
+    
     for e in logevents: e.delete()
     for e in ruleevents: e.delete()
