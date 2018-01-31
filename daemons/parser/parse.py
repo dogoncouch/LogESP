@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 from time import sleep
-from datetime import timedelta, fromtimestamp
+from datetime import timedelta
 import socket
 import re
 import os.path
