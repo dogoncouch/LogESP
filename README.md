@@ -68,6 +68,8 @@ To start the parser engine:
 python manage.py shell -c "import daemons.parser.parsecore ; daemons.parser.parsecore.start()"
 ```
 
+The parser needs to be restarted on changes to the config file.
+
 ### Sentry Engine
 To start the rule engine:
 
@@ -76,4 +78,14 @@ To start the rule engine:
 ```
 python manage.py shell -c "import daemons.sentry.sentrycore ; daemons.sentry.sentrycore.start()"
 ```
-3. Add more Limit Rules
+3. Add more Limit Rules, and change or delete old ones. The sentry engine will adapt.
+
+### Cleaner
+To get rid of events that are at or past their EOL:
+
+1. Run the cleaner inside a django shell:
+```
+python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
+```
+
+Cleaning should be handled by a cron job.
