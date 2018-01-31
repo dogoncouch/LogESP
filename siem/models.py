@@ -11,13 +11,13 @@ def validate_modifier_range(value):
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6,
             null=True, blank=True)
-    eol_date = models.DateField(null=True, blank=True)
-    date_stamp = models.CharField(max_length=32,
-            null=True, blank=True)
     time_zone = models.CharField(max_length=32,
             null=True, blank=True)
+    eol_date = models.DateField()
     event_type = models.CharField(max_length=24, default='default')
     raw_text = models.CharField(max_length=1280)
+    date_stamp = models.CharField(max_length=32,
+            null=True, blank=True)
     facility = models.IntegerField(choices=facility_choices,
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices,
@@ -89,10 +89,10 @@ class LimitRule(models.Model):
 
 
 class RuleEvent(models.Model):
-    date_stamp = models.DateTimeField('date stamp')
+    date_stamp = models.DateTimeField()
     time_zone = models.CharField(max_length=32)
+    eol_date = models.DateField()
     rule_category = models.CharField(max_length=24, default='default')
-    eol_date = models.DateField(null=True, blank=True)
     event_type = models.CharField(max_length=24, default='default')
     source_rule = models.ForeignKey(LimitRule,
             related_name='triggered_events',
