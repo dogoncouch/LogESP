@@ -121,11 +121,15 @@ class SiemSentry:
         if self.rule.message_filter:
             messagefilter = re.compile(
                     r".*({}).*".format(self.rule.message_filter))
-        else: messagefilter = '.*'
+        else:
+            messagefilter = re.compile(
+                    r".*({}).*".format('.*'))
         if self.rule.raw_text_filter:
             rawtextfilter = re.compile(
                     r".*({}).*".format(self.rule.raw_text_filter))
-        else: rawtextfilter = ''
+        else:
+            rawtextfilter = re.compile(
+                    r".*({}).*".format('.*'))
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
