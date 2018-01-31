@@ -100,7 +100,7 @@ class SiemSentry:
             if self.rule.lifespan_days == 0:
                 self.lifespandelta = timedelta(days=36524)
             else:
-                self.lifespandelta = timedelta(days=lifespan)
+                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
             # Check the rule:
             if self.rule.is_enabled: self.check_logevent()
             # Refresh the rule:
@@ -184,7 +184,7 @@ class SiemSentry:
             if self.rule.lifespan_days == 0:
                 self.lifespandelta = timedelta(days=36524)
             else:
-                self.lifespandelta = timedelta(days=lifespan)
+                self.lifespandelta = timedelta(days=self.rule.lifespan_days)
             # Check the rule:
             if self.rule.is_enabled: self.check_ruleevent()
             # Refresh the rule:
