@@ -153,7 +153,7 @@ class SiemSentry:
                 event.severity = self.rule.severity
                 event.magnitude = int(((len(e) / self.rule.event_limit) * \
                         float(self.rule.overkill_modifier)) * \
-                        ((7 - self.rule.severity) * \
+                        ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 #event.magnitude = (((len(e) // 2) // \
                 #        (self.rule.event_limit + 1) // 2) + 5) * \
@@ -225,7 +225,7 @@ class SiemSentry:
                 event.severity = self.rule.severity
                 event.magnitude = int(((len(e) / self.rule.event_limit) * \
                         float(self.rule.overkill_modifier)) * \
-                        ((7 - self.rule.severity) * \
+                        ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 #event.magnitude = (((len(e) // 2) // \
                 #        (self.rule.event_limit + 1) // 2) + 5) * \
