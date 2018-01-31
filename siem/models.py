@@ -72,9 +72,9 @@ class LimitRule(models.Model):
             decimal_places=1, max_digits=3, default=1)
     time_int = models.IntegerField()
     event_limit = models.IntegerField()
-    message_filter = models.CharField(max_length=1024,
+    message_filter_regex = models.CharField(max_length=1024,
             null=True, blank=True)
-    raw_text_filter = models.CharField(max_length=1024,
+    raw_text_filter_regex = models.CharField(max_length=1024,
             null=True, blank=True)
     host_filter = models.CharField(max_length=32,
             null=True, blank=True)

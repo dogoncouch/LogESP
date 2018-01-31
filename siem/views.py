@@ -128,7 +128,7 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'rule_category', 'lifespan_days', 'event_type',
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit',
-            'message_filter', 'raw_text_filter', 'host_filter',
+            'message_filter_regex', 'raw_text_filter_regex', 'host_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):
@@ -141,7 +141,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'rule_category', 'lifespan_days', 'event_type',
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit',
-            'message_filter', 'raw_text_filter', 'host_filter',
+            'message_filter_regex', 'raw_text_filter_regex', 'host_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):
