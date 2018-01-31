@@ -9,8 +9,7 @@ def validate_modifier_range(value):
         raise ValidationError('%s not in 0.1-10 range' % value)
 
 class LogEvent(models.Model):
-    parsed_at = models.DateTimeField(6,
-            null=True, blank=True)
+    parsed_at = models.DateTimeField(6)
     time_zone = models.CharField(max_length=32,
             null=True, blank=True)
     eol_date = models.DateField()
@@ -21,35 +20,22 @@ class LogEvent(models.Model):
     facility = models.IntegerField(choices=facility_choices,
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices,
-            null=True, blank=True)
-    source_host = models.CharField(max_length=32,
-            null=True, blank=True)
-    source_port = models.CharField(max_length=8,
-            null=True, blank=True)
-    dest_host = models.CharField(max_length=32,
-            null=True, blank=True)
-    dest_port = models.CharField(max_length=8,
-            null=True, blank=True)
-    source_process = models.CharField(max_length=24,
-            null=True, blank=True)
+            default=5)
+    source_host = models.CharField(max_length=32, default='')
+    source_port = models.CharField(max_length=8, default='')
+    dest_host = models.CharField(max_length=32, default='')
+    dest_port = models.CharField(max_length=8, default='')
+    source_process = models.CharField(max_length=24, default='')
     source_pid = models.IntegerField(
             null=True, blank=True)
-    protocol = models.CharField(max_length=12,
-            null=True, blank=True)
-    message = models.CharField(max_length=1024,
-            null=True, blank=True)
-    extended = models.CharField(max_length=1024,
-            null=True, blank=True)
-    ext_user = models.CharField(max_length=32,
-            null=True, blank=True)
-    ext_ip = models.CharField(max_length=32,
-            null=True, blank=True)
-    ext_session = models.CharField(max_length=24,
-            null=True, blank=True)
-    parsed_on = models.CharField(max_length=32,
-            null=True, blank=True)
-    source_path = models.CharField(max_length=200,
-            null=True, blank=True)
+    protocol = models.CharField(max_length=12, default='')
+    message = models.CharField(max_length=1024, default='')
+    extended = models.CharField(max_length=1024, default='')
+    ext_user = models.CharField(max_length=32, default='')
+    ext_ip = models.CharField(max_length=32, default='')
+    ext_session = models.CharField(max_length=24, default='')
+    parsed_on = models.CharField(max_length=32)
+    source_path = models.CharField(max_length=200,)
     class Meta:
         permissions = (('view_logevent', 'Can view log events'),)
 
