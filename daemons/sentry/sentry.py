@@ -76,7 +76,7 @@ class SiemSentry:
         else:
             timeint = timedelta(minutes=self.rule.time_int)
             erange = RuleEvent.objects.filter(
-                    parsed_at__gt=timezone.localtime(
+                    date_stamp__gt=timezone.localtime(
                         timezone.now()) - timeint)
             if len(erange) == 0:
                 self.lasteventid = RuleEvent.objects.latest('id').id
