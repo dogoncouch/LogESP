@@ -94,8 +94,12 @@ class SiemSentry:
 
     def watch_events(self):
         """Watch log events based on a rule"""
-        if self.rule.rule_events: self.get_first_ruleevent()
-        else: self.get_first_logevent()
+        if self.rule.rule_events:
+            self.get_first_ruleevent()
+            expectrule = True
+        else:
+            self.get_first_logevent()
+            expectrule = False
         while True:
             # Set EOL time delta:
             if self.rule.local_lifespan_days == 0:
@@ -112,6 +116,15 @@ class SiemSentry:
             if self.rule.is_enabled:
                 if self.rule.rule_events: self.check_ruleevent()
                 else: self.check_logevent()
+            # Check for change in event type:
+            if expectrule:
+                if not self.rule.rule_events:
+                    self.get_last_logevent()
+                    expectrule = False
+            else:
+                if self.rule.rule_events:
+                    self.get_last_ruleevent()
+                    expectrule = True
             # Refresh the rule:
             try:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
