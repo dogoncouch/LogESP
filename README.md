@@ -81,11 +81,17 @@ python manage.py shell -c "import daemons.sentry.sentrycore ; daemons.sentry.sen
 3. Add more Limit Rules, and change or delete old ones. The sentry engine will adapt.
 
 ### Cleaner
-To get rid of events that are at or past their EOL:
+Events have two different EOL dates for local and backup copies of events. The cleaner can use either to delete old events. There are two options:
 
-1. Run the cleaner inside a django shell:
+1. Run the cleaner inside a django shell using the backup EOL date:
 ```
 python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
 ```
+2. Run the cleaner inside a django shell using the local EOL date:
+```
+python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
+```
+
+In theory, the local date should not be used unless you back up your event data for offline long-term storage.
 
 Cleaning should be handled by a cron job.
