@@ -171,8 +171,8 @@ class SiemSentry:
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
                 event.magnitude = int((1 + \
-                        (((len(e) / (self.rule.event_limit + 1)) - 1) * \
-                        float(self.rule.overkill_modifier))) * \
+                        (((len(e) / (self.rule.event_limit + 1)) * \
+                        float(self.rule.overkill_modifier))) - 1) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
@@ -218,7 +218,7 @@ class SiemSentry:
         else:
             messagefilter = '.*{}.*'.format('.*')
         if self.rule.magnitude_filter: magnitudefilter = self.rule.magnitude_filter
-        else: magfilter = 0
+        else: magnitudefilter = 0
         if self.rule.event_type:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
@@ -252,8 +252,8 @@ class SiemSentry:
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
                 event.magnitude = int((1 + \
-                        (((len(e) / (self.rule.event_limit + 1)) - 1) * \
-                        float(self.rule.overkill_modifier))) * \
+                        (((len(e) / (self.rule.event_limit + 1)) * \
+                        float(self.rule.overkill_modifier))) - 1) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
