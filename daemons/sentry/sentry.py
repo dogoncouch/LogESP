@@ -92,9 +92,10 @@ class SiemSentry:
             self.lasteventid = e.latest('id').id
 
 
-    def watch_logevents(self):
+    def watch_events(self):
         """Watch log events based on a rule"""
-        self.get_first_logevent()
+        if self.rule.rule_events: self.get_first_ruleevent()
+        else: self.get_first_logevent()
         while True:
             # Set EOL time delta:
             if self.rule.local_lifespan_days == 0:
@@ -108,7 +109,9 @@ class SiemSentry:
                 self.backuplifespandelta = \
                         timedelta(days=self.rule.backup_lifespan_days)
             # Check the rule:
-            if self.rule.is_enabled: self.check_logevent()
+            if self.rule.is_enabled:
+                if self.rule.rule_events: self.check_ruleevent()
+                else: self.check_logevent()
             # Refresh the rule:
             try:
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
@@ -229,7 +232,7 @@ class SiemSentry:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     source_rule__name__icontains=rulenamefilter,
                     magnitude__gte=magnitudefilter,
-                    message__contains=messagefilter)
+                    message__iregex=messagefilter)
 
         if len(e) == 0:
             self.get_last_ruleevent()
@@ -272,7 +275,4 @@ def start_rule(rule):
     # database use:
     sleep(randrange(0, int(rule.time_int) * 60))
 
-    if rule.rule_events:
-        sentry.watch_ruleevents()
-    else:
-        sentry.watch_logevents()
+    sentry.watch_events()
