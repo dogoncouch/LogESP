@@ -138,8 +138,8 @@ class SiemSentry:
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
-                    source_host__contains=sourcehostfilter,
-                    source_process__contains=processfilter,
+                    source_host__icontains=sourcehostfilter,
+                    source_process__icontains=processfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
         else:
@@ -222,12 +222,12 @@ class SiemSentry:
         if self.rule.event_type:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
-                    source_rule__contains=rulenamefilter,
+                    source_rule__name__icontains=rulenamefilter,
                     magnitude__gte=magnitudefilter,
                     message__iregex=messagefilter)
         else:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                    source_rule__contains=rulenamefilter,
+                    source_rule__name__icontains=rulenamefilter,
                     magnitude__gte=magnitudefilter,
                     message__contains=messagefilter)
 
