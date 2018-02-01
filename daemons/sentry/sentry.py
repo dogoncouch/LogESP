@@ -217,7 +217,7 @@ class SiemSentry:
             messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
             messagefilter = '.*{}.*'.format('.*')
-        if self.rule.mag_filter: magnitudefilter = self.rule.magnitude_filter
+        if self.rule.magnitude_filter: magnitudefilter = self.rule.magnitude_filter
         else: magfilter = 0
         if self.rule.event_type:
             e = RuleEvent.objects.filter(id__gt=self.lasteventid,
