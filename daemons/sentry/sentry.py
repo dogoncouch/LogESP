@@ -170,9 +170,9 @@ class SiemSentry:
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
-                event.magnitude = int(1 + \
+                event.magnitude = int((1 + \
                         (((len(e) / (self.rule.event_limit + 1)) - 1) * \
-                        float(self.rule.overkill_modifier)) * \
+                        float(self.rule.overkill_modifier))) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
@@ -251,9 +251,9 @@ class SiemSentry:
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
-                event.magnitude = int(1 + \
+                event.magnitude = int((1 + \
                         (((len(e) / (self.rule.event_limit + 1)) - 1) * \
-                        float(self.rule.overkill_modifier)) * \
+                        float(self.rule.overkill_modifier))) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
