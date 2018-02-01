@@ -75,11 +75,11 @@ class SiemSentry:
             self.lasteventid = 0
         else:
             timeint = timedelta(minutes=self.rule.time_int)
-            erange = LogEvent.objects.filter(
+            erange = RuleEvent.objects.filter(
                     parsed_at__gt=timezone.localtime(
                         timezone.now()) - timeint)
             if len(erange) == 0:
-                self.lasteventid = LogEvent.objects.latest('id').id
+                self.lasteventid = RuleEvent.objects.latest('id').id
             else:
                 self.lasteventid = erange.first().id - 1
 
