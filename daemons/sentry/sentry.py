@@ -116,6 +116,11 @@ class SiemSentry:
             if self.rule.is_enabled:
                 if self.rule.rule_events: self.check_ruleevent()
                 else: self.check_logevent()
+            # Refresh the rule:
+            try:
+                self.rule = LimitRule.objects.get(pk=self.rule.id)
+            except siem.models.DoesNotExist:
+                break
             # Check for change in event type:
             if expectrule:
                 if not self.rule.rule_events:
@@ -125,11 +130,6 @@ class SiemSentry:
                 if self.rule.rule_events:
                     self.get_last_ruleevent()
                     expectrule = True
-            # Refresh the rule:
-            try:
-                self.rule = LimitRule.objects.get(pk=self.rule.id)
-            except siem.models.DoesNotExist:
-                break
             # Wait until the next interval
             sleep(int(self.rule.time_int) * 60)
 
