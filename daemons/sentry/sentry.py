@@ -286,6 +286,7 @@ def start_rule(rule):
 
     # Before starting, sleep randomly up to rule interval to stagger
     # database use:
-    sleep(randrange(0, int(rule.time_int) * 60))
+    timeint = int(rule.time_int) * 60
+    sleep(randrange(timeint * 2 // 3, timeint))
 
     sentry.watch_events()
