@@ -62,12 +62,12 @@ class ParseModule:
 
 
             entry['date_stamp'] = None
-            entry['facility'] = None
-            entry['severity'] = None
+            entry['facility'] = ''
+            entry['severity'] = ''
             entry['source_host'] = ''
             entry['source_port'] = ''
             entry['source_process'] = ''
-            entry['source_pid'] = None
+            entry['source_pid'] = ''
             entry['dest_host'] = ''
             entry['dest_port'] = ''
             entry['protocol'] = ''
@@ -84,20 +84,17 @@ class ParseModule:
 
             # Convert integer fields:
             if entry['facility']:
-                if entry['facility'] == '':
-                    entry['facility'] = None
-                else:
-                    entry['facility'] = int(entry['facility'])
+                entry['facility'] = int(entry['facility'])
+            else:
+                entry['facility'] = None
             if entry['severity']:
-                if entry['severity'] == '':
-                    entry['severity'] = None
-                else:
-                    entry['severity'] = int(entry['severity'])
+                entry['severity'] = int(entry['severity'])
+            else:
+                entry['severity'] = None
             if entry['source_pid']:
-                if entry['source_pid'] == '':
-                    entry['source_pid'] = None
-                else:
-                    entry['source_pid'] = int(entry['source_pid'])
+                entry['source_pid'] = int(entry['source_pid'])
+            else:
+                entry['source_pid'] = None
 
             return entry
 
