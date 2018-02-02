@@ -53,7 +53,7 @@
             <td>{{ e.event_type }}</td>
             <td>{{ e.magnitude }}</td>
             <td>{{ e.source_host_count }}</td>
-            <td>{{ e.message }}</td>
+            <td>{{ e.message|truncatechars:50 }}</td>
             </a>
         </tr>
         {% endfor %}
