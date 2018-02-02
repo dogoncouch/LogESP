@@ -1,7 +1,6 @@
 [
 {
   "model": "siem.logeventparser",
-  "pk": 1,
   "fields": {
     "name": "syslog",
     "desc": "Standard syslog parser",
