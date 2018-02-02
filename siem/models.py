@@ -8,6 +8,16 @@ def validate_modifier_range(value):
     if not 0 < value <= 10:
         raise ValidationError('%s not in 0.1-10 range' % value)
 
+class LogEventParser(models.Model):
+    name = models.CharField(max_length=32, unique=True)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    match_regex = models.CharField(max_length=1024)
+    backup_match_regex = models.CharField(max_length=1024,
+            null=True, blank=True)
+    fields = models.CharField(max_length=512)
+    backup_fields = models.CharField(max_length=512,
+            null=True, blank=True)
+
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6)
     time_zone = models.CharField(max_length=32,
