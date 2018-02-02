@@ -1,10 +1,10 @@
 {% extends "siem/base.html" %}
 
-{% block sub-title %} | Limit Rules{% endblock %}
+{% block sub-title %} | Parsers{% endblock %}
 
 {% block content-main %}
 
-<h1>Limit Rules</h1>
+<h1>Log Event Parsers</h1>
 <a href="{% url 'siem:lp_create' %}">Add</a>
 
 {% if lp_list %}
