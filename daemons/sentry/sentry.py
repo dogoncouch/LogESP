@@ -168,7 +168,9 @@ class SiemSentry:
         if len(e) == 0:
             self.get_last_logevent()
         else:
-            if len(e) > self.rule.event_limit:
+            numhosts = {x.source_host for x in e}
+            if len(e) > self.rule.event_limit and \
+                    len(numhosts) > self.rule.allowed_source_hosts:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
@@ -192,6 +194,7 @@ class SiemSentry:
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
+                event.source_host_count = numhosts
                 event.save()
                 event.source_ids_log.set(list(e))
                 event.save()
