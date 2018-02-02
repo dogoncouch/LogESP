@@ -1,0 +1,23 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Parser - {{ lp }}{% endblock %}
+
+{% block content-main %}
+
+<h1>{{ lp }} (Parser)</h1>
+<a href="{% url 'siem:lp_update' lp.id %}">Edit</a>
+&middot;
+<a href="{% url 'siem:lp_delete' lp.id %}">Delete</a>
+<ul>
+    <li>ID: {{ lp.id }}</li>
+    <li>Name: {{ lp.name }}</li>
+    <li>Desc: {{ lp.desc }}</li>
+    <li>Primary Matching<ul>
+        <li>Match Regex: {{ lp.match_regex }}</li>
+        <li>Fields: {{ lp.fields }}</li></ul></li>
+    <li>Backup Matching:<ul>
+        <li>Backup Match Regex: {{ lp.backup_match_regex }}</li>
+        <li>Backup Fields: {{ lp.backup_fields }}</li></ul></li>
+</ul>
+
+{% endblock %}

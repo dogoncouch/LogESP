@@ -17,6 +17,8 @@ class LogEventParser(models.Model):
     fields = models.CharField(max_length=512)
     backup_fields = models.CharField(max_length=512,
             null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6)

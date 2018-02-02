@@ -1,0 +1,13 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Parser{% endblock %}
+
+{% block content-main %}
+
+<h1>Update Log Event Parser</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+{% endblock %}

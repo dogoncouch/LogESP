@@ -45,7 +45,7 @@
     <table>
         <tr><th>ID</th><th>Date Stamp</th>
             <th>Event<br>Type</th><th>Source<br>Host</th>
-            <th>Source<br>Process</th><th>Message</th></th>
+            <th>Source<br>Process</th><th>Message</th></tr>
         {% for e in event_list %}
         <tr>
             <td><a class="event" href="{% url 'siem:logevent_detail' e.id %}">

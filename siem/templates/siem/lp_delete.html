@@ -1,0 +1,18 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Delete Parser{% endblock %}
+
+{% block content-main %}
+
+<h1>Delete Parser</h1>
+
+<p>Are you sure you want to delete parser {{ lp }}?</p>
+
+<form action="{% url 'siem:lp_delete' lp.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'siem:lp_detail' lp.id %}">Cancel</a>
+</form>
+
+{% endblock %}

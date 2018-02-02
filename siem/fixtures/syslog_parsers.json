@@ -1,0 +1,35 @@
+[
+{
+  "model": "siem.logeventparser",
+  "fields": {
+    "name": "syslog",
+    "desc": "Standard syslog parser",
+    "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
+    "backup_match_regex": null,
+    "fields": "date_stamp,source_host,source_process,source_pid,message",
+    "backup_fields": null
+  }
+},
+{
+  "model": "siem.logeventparser",
+  "fields": {
+    "name": "syslognohost",
+    "desc": "Standard syslog stamp without a host.",
+    "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
+    "backup_match_regex": null,
+    "fields": "date_stamp,source_process,source_pid,message",
+    "backup_fields": null
+  }
+},
+{
+  "model": "siem.logeventparser",
+  "fields": {
+    "name": "syslogiso",
+    "desc": "Syslog with ISO 8601 timestamp.",
+    "match_regex": "^(\\d\\d\\d\\d-?\\d\\d-?\\d\\dT\\d\\d:?\\d\\d:?\\d\\d\\.?\\d*[+-:0-9Z]+)\\s+(\\S+)\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
+    "backup_match_regex": null,
+    "fields": "date_stamp,source_host,source_process,source_pid,message",
+    "backup_fields": null
+  }
+}
+]
