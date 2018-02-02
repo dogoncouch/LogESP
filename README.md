@@ -17,8 +17,6 @@ LDSI embraces the Unix design philosophy. It is designed to be as simple as poss
 ## Installing
 Requirements: python 3.x, django >=2.0, git, pip.
 
-Note: replace `python` with `python3` if Python 2 is your default version (or if you're not sure what I'm talking about).
-
 ### Step 1
 - Clone the repo:
 ```
@@ -37,46 +35,27 @@ pip install django
 - Create/migrate the database:
 ```
 cd ldsi
-python manage.py migrate
-python manage.py makemigrations
-python manage.py migrate
+make new-db
 ```
 
 ### Step 4
 - Add fixtures
+```
+make fixtures
+```
 
-#### NIST standard threat information:
+- (Optional) Add example auth rules:
 ```
-python manage.py loaddata risk/fixtures/nist_threat_event_types.json risk/fixtures/nist_threat_src_types.json
-python manage.py loaddata risk/fixtures/generic_nist_threat_events.json risk/fixtures/generic_nist_threat_sources.json
-```
-#### Asset types:
-```
-python manage.py loaddata hwam/fixtures/hardware_asset_types.json hwam/fixtures/software_asset_types.json
-```
-#### Syslog parsers:
-```
-python manage.py loaddata siem/fixtures/syslog_parsers.json
-```
-#### (Optional) Example auth rules:
-```
-python manage.py loaddata siem/fixtures/example_auth_limit_rules.json
+make example-rules
 ```
 
 ### Step 5
-- Create a superuser:
-```
-python manage.py createsuperuser
-(provide username, password)
-```
-
-### Step 6
 - Start the server:
 ```
 python manage.py runserver
 ```
 
-#### Step 7
+#### Step 6
 - Try it: http://localhost:8000
 
 ## Notes
@@ -94,12 +73,10 @@ The parser needs to be restarted on changes to the config file.
 ### Sentry Engine
 To start the rule engine:
 
-1. Add Limit Rules (in the SIEM section)
-2. Run the sentry engine inside a django shell:
+1. Run the sentry engine inside a django shell:
 ```
 python manage.py shell -c "import daemons.sentry.sentrycore ; daemons.sentry.sentrycore.start()"
 ```
-3. Add more Limit Rules, and change or delete old ones. The sentry engine will adapt.
 
 ### Cleaner
 Events have two different EOL dates for local and backup copies of events. The cleaner can use either to delete old events. There are two options:
@@ -112,7 +89,5 @@ python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.
 ```
 python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
 ```
-
-In theory, the local date should not be used unless you back up your event data for offline long-term storage.
 
 Cleaning should be handled by a cron job.
