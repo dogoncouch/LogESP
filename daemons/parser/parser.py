@@ -67,6 +67,7 @@ class ParseModule:
             entry['source_host'] = ''
             entry['source_port'] = ''
             entry['source_process'] = ''
+            entry['action'] = ''
             entry['source_pid'] = ''
             entry['dest_host'] = ''
             entry['dest_port'] = ''

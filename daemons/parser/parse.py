@@ -83,6 +83,7 @@ class LiveParser:
                         e.dest_port = entry['dest_port']
                         e.source_process = entry['source_process']
                         e.source_pid = entry['source_pid']
+                        e.action = entry['action']
                         e.protocol = entry['protocol']
                         e.message = entry['message']
                         e.extended = entry['extended']

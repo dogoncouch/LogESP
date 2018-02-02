@@ -41,6 +41,7 @@ class LogEvent(models.Model):
     source_process = models.CharField(max_length=24, default='')
     source_pid = models.IntegerField(
             null=True, blank=True)
+    action = models.CharField(max_length=48, default='')
     protocol = models.CharField(max_length=12, default='')
     message = models.CharField(max_length=1024, default='')
     extended = models.CharField(max_length=1024, default='')
