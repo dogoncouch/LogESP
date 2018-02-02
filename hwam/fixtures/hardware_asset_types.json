@@ -1,0 +1,723 @@
+[
+{
+  "model": "hwam.hardwareclass",
+  "pk": 1,
+  "fields": {
+    "name": "Computer",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 2,
+  "fields": {
+    "name": "Phone",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 3,
+  "fields": {
+    "name": "Security Device",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 4,
+  "fields": {
+    "name": "Digital Storage",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 5,
+  "fields": {
+    "name": "Office Appliance",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 6,
+  "fields": {
+    "name": "Facility",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 7,
+  "fields": {
+    "name": "Network Device",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwareclass",
+  "pk": 8,
+  "fields": {
+    "name": "Misc Electronics",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 1,
+  "fields": {
+    "name": "Server",
+    "desc": null,
+    "hardware_class": 1
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 2,
+  "fields": {
+    "name": "Personal",
+    "desc": null,
+    "hardware_class": 1
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 3,
+  "fields": {
+    "name": "Handheld",
+    "desc": null,
+    "hardware_class": 1
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 4,
+  "fields": {
+    "name": "Wired",
+    "desc": null,
+    "hardware_class": 2
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 5,
+  "fields": {
+    "name": "Wireless",
+    "desc": null,
+    "hardware_class": 2
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 6,
+  "fields": {
+    "name": "Auth",
+    "desc": null,
+    "hardware_class": 3
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 7,
+  "fields": {
+    "name": "Monitoring",
+    "desc": null,
+    "hardware_class": 3
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 8,
+  "fields": {
+    "name": "Non-Removable",
+    "desc": null,
+    "hardware_class": 4
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 9,
+  "fields": {
+    "name": "Removable",
+    "desc": null,
+    "hardware_class": 4
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 10,
+  "fields": {
+    "name": "Productivity",
+    "desc": null,
+    "hardware_class": 5
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 11,
+  "fields": {
+    "name": "Media",
+    "desc": null,
+    "hardware_class": 5
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 12,
+  "fields": {
+    "name": "Environmental Controls",
+    "desc": null,
+    "hardware_class": 6
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 13,
+  "fields": {
+    "name": "Access Controls",
+    "desc": null,
+    "hardware_class": 6
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 14,
+  "fields": {
+    "name": "Infrastructure",
+    "desc": null,
+    "hardware_class": 6
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 15,
+  "fields": {
+    "name": "Router",
+    "desc": null,
+    "hardware_class": 7
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 16,
+  "fields": {
+    "name": "Switch",
+    "desc": null,
+    "hardware_class": 7
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 17,
+  "fields": {
+    "name": "L3 Switch",
+    "desc": null,
+    "hardware_class": 7
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 18,
+  "fields": {
+    "name": "Firewall",
+    "desc": null,
+    "hardware_class": 7
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 19,
+  "fields": {
+    "name": "Application Firewall",
+    "desc": null,
+    "hardware_class": 7
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 20,
+  "fields": {
+    "name": "IDPS",
+    "desc": null,
+    "hardware_class": 7
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 21,
+  "fields": {
+    "name": "Digital Camera",
+    "desc": null,
+    "hardware_class": 8
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 22,
+  "fields": {
+    "name": "GPS",
+    "desc": null,
+    "hardware_class": 8
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 23,
+  "fields": {
+    "name": "Two-Way Radio",
+    "desc": null,
+    "hardware_class": 8
+  }
+},
+{
+  "model": "hwam.hardwarecategory",
+  "pk": 24,
+  "fields": {
+    "name": "AM/FM Radio",
+    "desc": null,
+    "hardware_class": 8
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 1,
+  "fields": {
+    "name": "Rack Server",
+    "desc": null,
+    "hardware_category": 1
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 2,
+  "fields": {
+    "name": "Tower Server",
+    "desc": null,
+    "hardware_category": 1
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 3,
+  "fields": {
+    "name": "Desktop",
+    "desc": null,
+    "hardware_category": 2
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 4,
+  "fields": {
+    "name": "Laptop",
+    "desc": null,
+    "hardware_category": 2
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 5,
+  "fields": {
+    "name": "PDA",
+    "desc": null,
+    "hardware_category": 3
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 6,
+  "fields": {
+    "name": "Tablet",
+    "desc": null,
+    "hardware_category": 3
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 7,
+  "fields": {
+    "name": "Scanner",
+    "desc": null,
+    "hardware_category": 3
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 8,
+  "fields": {
+    "name": "Other",
+    "desc": null,
+    "hardware_category": 3
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 9,
+  "fields": {
+    "name": "VoIP Phone",
+    "desc": null,
+    "hardware_category": 4
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 10,
+  "fields": {
+    "name": "Analog Phone",
+    "desc": null,
+    "hardware_category": 4
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 11,
+  "fields": {
+    "name": "Basic Cell Phone",
+    "desc": null,
+    "hardware_category": 5
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 12,
+  "fields": {
+    "name": "Smart Phone",
+    "desc": null,
+    "hardware_category": 5
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 13,
+  "fields": {
+    "name": "Magnetic Card",
+    "desc": null,
+    "hardware_category": 6
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 14,
+  "fields": {
+    "name": "RFID Card",
+    "desc": null,
+    "hardware_category": 6
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 15,
+  "fields": {
+    "name": "Auth Token",
+    "desc": null,
+    "hardware_category": 6
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 16,
+  "fields": {
+    "name": "Security Camera",
+    "desc": null,
+    "hardware_category": 7
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 17,
+  "fields": {
+    "name": "Motion Sensor",
+    "desc": null,
+    "hardware_category": 7
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 18,
+  "fields": {
+    "name": "Printer",
+    "desc": null,
+    "hardware_category": 10
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 19,
+  "fields": {
+    "name": "Copier",
+    "desc": null,
+    "hardware_category": 10
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 20,
+  "fields": {
+    "name": "HDD",
+    "desc": null,
+    "hardware_category": 8
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 21,
+  "fields": {
+    "name": "SSD",
+    "desc": null,
+    "hardware_category": 8
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 22,
+  "fields": {
+    "name": "Embedded Storage",
+    "desc": null,
+    "hardware_category": 8
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 23,
+  "fields": {
+    "name": "USB Thumb Drive",
+    "desc": null,
+    "hardware_category": 9
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 24,
+  "fields": {
+    "name": "USB HDD",
+    "desc": null,
+    "hardware_category": 9
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 25,
+  "fields": {
+    "name": "USB SSD",
+    "desc": null,
+    "hardware_category": 9
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 26,
+  "fields": {
+    "name": "SD Card",
+    "desc": null,
+    "hardware_category": 9
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 27,
+  "fields": {
+    "name": "Television",
+    "desc": null,
+    "hardware_category": 11
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 28,
+  "fields": {
+    "name": "PA",
+    "desc": null,
+    "hardware_category": 11
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 29,
+  "fields": {
+    "name": "Media Player",
+    "desc": null,
+    "hardware_category": 11
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 30,
+  "fields": {
+    "name": "HVAC Controls",
+    "desc": null,
+    "hardware_category": 12
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 31,
+  "fields": {
+    "name": "Lighting Controls",
+    "desc": null,
+    "hardware_category": 12
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 32,
+  "fields": {
+    "name": "Keyed Lock",
+    "desc": null,
+    "hardware_category": 13
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 33,
+  "fields": {
+    "name": "Combination Lock",
+    "desc": null,
+    "hardware_category": 13
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 34,
+  "fields": {
+    "name": "Electronic Lock",
+    "desc": null,
+    "hardware_category": 13
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 35,
+  "fields": {
+    "name": "Structural Infrastructure",
+    "desc": null,
+    "hardware_category": 14
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 36,
+  "fields": {
+    "name": "Electrical Infrastructure",
+    "desc": null,
+    "hardware_category": 14
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 37,
+  "fields": {
+    "name": "Network Infrastructure",
+    "desc": null,
+    "hardware_category": 14
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 38,
+  "fields": {
+    "name": "HVAC Infrastructure",
+    "desc": null,
+    "hardware_category": 14
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 39,
+  "fields": {
+    "name": "Basic Digital Camera",
+    "desc": null,
+    "hardware_category": 21
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 40,
+  "fields": {
+    "name": "Digital SLR Camera",
+    "desc": null,
+    "hardware_category": 21
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 41,
+  "fields": {
+    "name": "Digital Video Camera",
+    "desc": null,
+    "hardware_category": 21
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 42,
+  "fields": {
+    "name": "Handheld GPS",
+    "desc": null,
+    "hardware_category": 22
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 43,
+  "fields": {
+    "name": "Vehicle Mounted GPS",
+    "desc": null,
+    "hardware_category": 22
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 44,
+  "fields": {
+    "name": "Handheld Radio",
+    "desc": null,
+    "hardware_category": 23
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 45,
+  "fields": {
+    "name": "Vehicle Mounted Radio",
+    "desc": null,
+    "hardware_category": 23
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 46,
+  "fields": {
+    "name": "Stationary Radio",
+    "desc": null,
+    "hardware_category": 23
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 47,
+  "fields": {
+    "name": "Portable Radio",
+    "desc": null,
+    "hardware_category": 24
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 48,
+  "fields": {
+    "name": "Vehicle Mounted Radio",
+    "desc": null,
+    "hardware_category": 24
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 49,
+  "fields": {
+    "name": "Stationary Radio",
+    "desc": null,
+    "hardware_category": 24
+  }
+}
+]
