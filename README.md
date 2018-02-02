@@ -39,10 +39,23 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-- Step 4: (Optional) Add NIST standard threat information:
+- Step 4: Add fixtures
+    - NIST standard threat information:
 ```
 python manage.py loaddata risk/fixtures/nist_threat_event_types.json risk/fixtures/nist_threat_src_types.json
 python manage.py loaddata risk/fixtures/generic_nist_threat_events.json risk/fixtures/generic_nist_threat_sources.json
+```
+    - Asset types:
+```
+python manage.py loaddata hwam/fixtures/hardware_asset_types.json hwam/fixtures/software_asset_types.json
+```
+    - Syslog parsers:
+```
+python manage.py loaddata siem/fixtures/syslog_parsers.json
+```
+    - (Optional) Example auth rules:
+```
+python manage.py loaddata siem/fixtures/example_auth_limit_rules.json
 ```
 
 - Step 5: Create a superuser:
