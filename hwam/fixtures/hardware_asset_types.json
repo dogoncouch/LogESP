@@ -719,5 +719,113 @@
     "desc": null,
     "hardware_category": 24
   }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 50,
+  "fields": {
+    "name": "Desktop Router",
+    "desc": null,
+    "hardware_category": 15
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 51,
+  "fields": {
+    "name": "Rack Router",
+    "desc": null,
+    "hardware_category": 15
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 52,
+  "fields": {
+    "name": "Desktop Switch",
+    "desc": null,
+    "hardware_category": 16
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 53,
+  "fields": {
+    "name": "Rack Switch",
+    "desc": null,
+    "hardware_category": 16
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 54,
+  "fields": {
+    "name": "Desktop L3 Switch",
+    "desc": null,
+    "hardware_category": 17
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 55,
+  "fields": {
+    "name": "Rack L3 Switch",
+    "desc": null,
+    "hardware_category": 17
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 56,
+  "fields": {
+    "name": "Standalone Firewall",
+    "desc": null,
+    "hardware_category": 18
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 57,
+  "fields": {
+    "name": "Rack Firewall",
+    "desc": null,
+    "hardware_category": 18
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 58,
+  "fields": {
+    "name": "Standalone App Firewall",
+    "desc": null,
+    "hardware_category": 19
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 59,
+  "fields": {
+    "name": "Rack App Firewall",
+    "desc": null,
+    "hardware_category": 19
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 60,
+  "fields": {
+    "name": "Standalone IDPS",
+    "desc": null,
+    "hardware_category": 20
+  }
+},
+{
+  "model": "hwam.hardwaretype",
+  "pk": 61,
+  "fields": {
+    "name": "Rack IDPS",
+    "desc": null,
+    "hardware_category": 20
+  }
 }
 ]

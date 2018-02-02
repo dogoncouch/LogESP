@@ -1,0 +1,422 @@
+[
+{
+  "model": "hwam.softwarecategory",
+  "pk": 1,
+  "fields": {
+    "name": "OS",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.softwarecategory",
+  "pk": 2,
+  "fields": {
+    "name": "Service",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.softwarecategory",
+  "pk": 3,
+  "fields": {
+    "name": "Application",
+    "desc": null
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 1,
+  "fields": {
+    "name": "Server OS",
+    "desc": null,
+    "software_category": 1
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 2,
+  "fields": {
+    "name": "Desktop OS",
+    "desc": null,
+    "software_category": 1
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 3,
+  "fields": {
+    "name": "Mobile OS",
+    "desc": null,
+    "software_category": 1
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 4,
+  "fields": {
+    "name": "Embedded OS",
+    "desc": null,
+    "software_category": 1
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 5,
+  "fields": {
+    "name": "Networking OS",
+    "desc": null,
+    "software_category": 1
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 6,
+  "fields": {
+    "name": "Other OS",
+    "desc": null,
+    "software_category": 1
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 7,
+  "fields": {
+    "name": "DNS",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 8,
+  "fields": {
+    "name": "Certificate Authority",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 9,
+  "fields": {
+    "name": "Directory Service",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 10,
+  "fields": {
+    "name": "Network Time Protocol",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 11,
+  "fields": {
+    "name": "Syslog",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 12,
+  "fields": {
+    "name": "HTTP",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 13,
+  "fields": {
+    "name": "HTTPS",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 14,
+  "fields": {
+    "name": "SQL",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 15,
+  "fields": {
+    "name": "SSH",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 16,
+  "fields": {
+    "name": "VPN",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 17,
+  "fields": {
+    "name": "FTP",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 18,
+  "fields": {
+    "name": "Network Storage",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 19,
+  "fields": {
+    "name": "HDFS",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 20,
+  "fields": {
+    "name": "Print",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 21,
+  "fields": {
+    "name": "Application",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 22,
+  "fields": {
+    "name": "Remote Desktop",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 23,
+  "fields": {
+    "name": "SNMP",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 24,
+  "fields": {
+    "name": "Other",
+    "desc": null,
+    "software_category": 2
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 25,
+  "fields": {
+    "name": "Productivity",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 26,
+  "fields": {
+    "name": "Accounting",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 27,
+  "fields": {
+    "name": "Web Browser",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 28,
+  "fields": {
+    "name": "Email",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 29,
+  "fields": {
+    "name": "Connectivity",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 30,
+  "fields": {
+    "name": "Media",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 31,
+  "fields": {
+    "name": "Host Firewall",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 32,
+  "fields": {
+    "name": "AntiVirus",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 33,
+  "fields": {
+    "name": "Host IDPS",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 34,
+  "fields": {
+    "name": "Network Management",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 35,
+  "fields": {
+    "name": "Network IDPS",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 36,
+  "fields": {
+    "name": "Network Security Management",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 37,
+  "fields": {
+    "name": "Application Firewall",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 38,
+  "fields": {
+    "name": "Virtualization",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 39,
+  "fields": {
+    "name": "Issue Tracking",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 40,
+  "fields": {
+    "name": "Data Analysis",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 41,
+  "fields": {
+    "name": "Design",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 42,
+  "fields": {
+    "name": "Software Development",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 43,
+  "fields": {
+    "name": "Other",
+    "desc": null,
+    "software_category": 3
+  }
+},
+{
+  "model": "hwam.softwaretype",
+  "pk": 44,
+  "fields": {
+    "name": "Containerization",
+    "desc": null,
+    "software_category": 3
+  }
+}
+]
