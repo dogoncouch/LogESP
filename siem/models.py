@@ -70,7 +70,7 @@ class LimitRule(models.Model):
             decimal_places=1, max_digits=3, default=1)
     time_int = models.IntegerField()
     event_limit = models.IntegerField()
-    allowed_source_hosts_threshold = models.Integerfield(default=0)
+    allowed_source_hosts = models.IntegerField(default=0)
     message_filter_regex = models.CharField(max_length=1024,
             null=True, blank=True)
     raw_text_filter_regex = models.CharField(max_length=1024,
@@ -111,7 +111,7 @@ class RuleEvent(models.Model):
     source_ids_rule = models.ManyToManyField('self',
             related_name='rules_triggered',
             blank=True, symmetrical=False)
-    source_host_count = models.IntegerField(,
+    source_host_count = models.IntegerField(
             null=True, blank=True)
     class Meta:
         permissions = (('view_ruleevent', 'Can view rule events'),)
