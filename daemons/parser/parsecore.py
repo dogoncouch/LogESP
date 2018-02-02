@@ -83,13 +83,13 @@ class ParseCore:
                 thread.start()
                 self.threads.append(thread)
 
-                while True:
-                    isAlive = False
-                    for thread in self.threads:
-                        if thread.isAlive():
-                            isAlive=True
-                    if not isAlive: exit(0)
-                    sleep(10)
+            while True:
+                isAlive = False
+                for thread in self.threads:
+                    if thread.isAlive():
+                        isAlive=True
+                if not isAlive: exit(0)
+                sleep(10)
 
         except KeyboardInterrupt:
             pass
