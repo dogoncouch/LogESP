@@ -13,7 +13,8 @@
     <li>Name: {{ lr.name }}</li>
     <li>Desc: {{ lr.desc }}</li>
     <li>Rule Category: {{ lr.rule_category }}</li>
-    <li>Event Lifespan: {{ lr.lifespan_days }} days</li>
+    <li>SIEM Event Lifespan: {{ lr.local_lifespan_days }} days</li>
+    <li>Backup Event Lifespan: {{ lr.backup_lifespan_days }} days</li>
     <li>Enabled?: {{ lr.is_enabled }}</li>
     <li>Rule Events?: {{ lr.rule_events }}</li>
     <li>Event Type: {{ lr.event_type }}</li>
