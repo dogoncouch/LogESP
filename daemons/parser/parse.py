@@ -30,7 +30,8 @@ import os.path
 import json
 
 from django.utils import timezone
-import daemons.parser.parsers
+#import daemons.parser.parsers
+from daemons.parser.parser import ParseModule
 from siem.models import LogEvent
 from ldsi.settings import TIME_ZONE
 
@@ -39,17 +40,6 @@ class LiveParser:
     def __init__(self):
         """Initialize live parser"""
         self.parser = None
-
-
-    def get_parser(self, parser):
-        """Load parser modules"""
-        parsers = {}
-        for p in sorted(daemons.parser.parsers.__all__):
-            parsers[p] = \
-                    __import__('daemons.parser.parsers.' + p, globals(),
-                            locals(), [daemons.parser]).ParseModule()
-        
-        self.parser = parsers[parser]
 
 
     def parse_entries(self, filename, eventtype):
@@ -137,7 +127,7 @@ class LiveParser:
         else:
             self.backuplifespandelta = \
                     timedelta(days=backuplifespan)
-        self.get_parser(parser)
+        self.parser = ParseModule(parser)
         self.parsepath = os.path.abspath(filename)
         self.parsehost = socket.getfqdn()
         try:

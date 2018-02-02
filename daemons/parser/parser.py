@@ -53,7 +53,7 @@ class ParseModule:
                     self.backup_fields, line)
         return entry
 
-    def match_line(regexformat, fields, line):
+    def match_line(self, regexformat, fields, line):
         """Try matching a line with a regex format"""
         match = re.findall(regexformat, line)
         if match:
@@ -77,10 +77,27 @@ class ParseModule:
             entry['ext_ip'] = ''
             entry['ext_session'] = ''
 
-            linelist = list(zip(fields, match))
+            linelist = list(zip(fields, match[0]))
 
             for f, v in linelist:
                 entry[f] = v
+
+            # Convert integer fields:
+            if entry['facility']:
+                if entry['facility'] == '':
+                    entry['facility'] = None
+                else:
+                    entry['facility'] = int(entry['facility'])
+            if entry['severity']:
+                if entry['severity'] == '':
+                    entry['severity'] = None
+                else:
+                    entry['severity'] = int(entry['severity'])
+            if entry['source_pid']:
+                if entry['source_pid'] == '':
+                    entry['source_pid'] = None
+                else:
+                    entry['source_pid'] = int(entry['source_pid'])
 
             return entry
 
