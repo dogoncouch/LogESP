@@ -19,19 +19,22 @@ Requirements: python 3.x, django >=2.0, git, pip.
 
 Note: replace `python` with `python3` if Python 2 is your default version (or if you're not sure what I'm talking about).
 
-- Step 1: Clone the repo:
+### Step 1
+- Clone the repo:
 ```
 git clone https://github.com/dogoncouch/ldsi.git
 ```
 
-- Step 2: Create a virtual environment and install django:
+### Step 2
+- Create a virtual environment and install django:
 ```
 virtualenv -p python3 ldsi_env
 source ldsi_env/bin/activate
 pip install django
 ```
 
-- Step 3: Create/migrate the database:
+### Step 3
+- Create/migrate the database:
 ```
 cd ldsi
 python manage.py migrate
@@ -39,37 +42,42 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-- Step 4: Add fixtures
-    - NIST standard threat information:
+### Step 4
+- Add fixtures
+
+#### NIST standard threat information:
 ```
 python manage.py loaddata risk/fixtures/nist_threat_event_types.json risk/fixtures/nist_threat_src_types.json
 python manage.py loaddata risk/fixtures/generic_nist_threat_events.json risk/fixtures/generic_nist_threat_sources.json
 ```
-    - Asset types:
+#### Asset types:
 ```
 python manage.py loaddata hwam/fixtures/hardware_asset_types.json hwam/fixtures/software_asset_types.json
 ```
-    - Syslog parsers:
+#### Syslog parsers:
 ```
 python manage.py loaddata siem/fixtures/syslog_parsers.json
 ```
-    - (Optional) Example auth rules:
+#### (Optional) Example auth rules:
 ```
 python manage.py loaddata siem/fixtures/example_auth_limit_rules.json
 ```
 
-- Step 5: Create a superuser:
+### Step 5
+- Create a superuser:
 ```
 python manage.py createsuperuser
 (provide username, password)
 ```
 
-- Step 6: Start the server:
+### Step 6
+- Start the server:
 ```
 python manage.py runserver
 ```
 
-- Step 7: Try it: http://localhost:8000
+#### Step 7
+- Try it: http://localhost:8000
 
 ## Notes
 ### Parser Engine
