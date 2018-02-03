@@ -67,7 +67,7 @@ class ParseCore:
             except Exception:
                 p['parser'] = 'syslog'
             try:
-                p['facility'] = config.get(sec, 'facility')
+                p['facility'] = int(config.get(sec, 'facility'))
             except Exception:
                 p['facility'] = None
             self.plist.append(p)
