@@ -75,7 +75,10 @@ class LiveParser:
                         e.event_type = eventtype
                         e.date_stamp = entry['date_stamp']
                         e.raw_text = ourline
-                        e.facility = entry['facility']
+                        if entry['facility']:
+                            e.facility = entry['facility']
+                        else:
+                            e.facility = self.facility
                         e.severity = entry['severity']
                         e.source_host = entry['source_host']
                         e.source_port = entry['source_port']
@@ -115,8 +118,9 @@ class LiveParser:
 
 
     def parse_file(self, filename, parser, eventtype,
-            locallifespan, backuplifespan):
+            locallifespan, backuplifespan, facility):
         """Parse a file into ldsi"""
+        self.facility = facility
         # Set EOL time delta:
         if locallifespan == 0:
             self.locallifespandelta = timedelta(days=36524)
@@ -141,8 +145,9 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(filename, parser, eventtype, locallifespan, backuplifespan):
+def start_parse(filename, parser, eventtype, locallifespan, backuplifespan,
+        facility):
     """Start a parser"""
     parseengine = LiveParser()
     parseengine.parse_file(filename, parser, eventtype,
-            locallifespan, backuplifespan)
+            locallifespan, backuplifespan, facility)

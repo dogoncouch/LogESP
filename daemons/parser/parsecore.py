@@ -66,6 +66,10 @@ class ParseCore:
                 p['parser'] = config.get(sec, 'parser')
             except Exception:
                 p['parser'] = 'syslog'
+            try:
+                p['facility'] = config.get(sec, 'facility')
+            except Exception:
+                p['facility'] = None
             self.plist.append(p)
 
     
@@ -78,7 +82,7 @@ class ParseCore:
                         target=daemons.parser.parse.start_parse,
                         args=(entry['filename'], entry['parser'],
                         entry['event_type'], entry['local_lifespan_days'],
-                        entry['backup_lifespan_days']))
+                        entry['backup_lifespan_days'], entry['facility']))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)
