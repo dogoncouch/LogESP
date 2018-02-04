@@ -44,7 +44,7 @@
 
     <table>
         <tr><th>ID</th><th>Date Stamp</th>
-            <th>Event<br>Type</th><th>Source<br>Host</th>
+            <th>Event<br>Type</th><th>Log<br>Source</th>
             <th>Source<br>Process</th><th>Message</th></tr>
         {% for e in event_list %}
         <tr>
@@ -52,7 +52,7 @@
                     {{ e.id }}</td>
             <td>{{ e.date_stamp }}</a></td>
             <td>{{ e.event_type }}</td>
-            <td>{{ e.source_host }}</td>
+            <td>{{ e.log_source }}</td>
             <td>{{ e.source_process }}[{{ e.source_pid }}]</td>
             <td>{{ e.message|truncatechars:75 }}</td>
             </a>
