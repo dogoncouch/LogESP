@@ -6,7 +6,7 @@
 
 <h1>{{ ate }} (Adversarial Threat Event)</h1>
 <a href="{% url 'risk:ate_update' ate.id %}">Edit</a>
-&middot
+&middot;
 <a href="{% url 'risk:ate_delete' ate.id %}">Delete</a>
 
 <p>{{ ate.desc }}</p>
@@ -16,14 +16,15 @@
     <li>Info Tier: {{ate.tier }}</li>
     <li>Sources (capability/intent/targeting):<ul>
             {% for s in ate.sources.all %}
-                <li>{{ s }}
-                    ({{ s.capability }}/{{ s.intent }}/{{ s.targeting }})</li>
+                <li><a href="{% url 'risk:ats_detail' s.id %}">{{ s }}
+                        ({{ s.capability }}/{{ s.intent }}/{{ s.targeting }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ ate.relevance }}</li>
     <li>Vulnerabilities (severity):<ul>
             {% for v in ate.vulnerabilities.all %}
-                <li>{{ v }} ({{ v.severity }})</li>
+                <li><a href="{% url 'risk:vuln_detail' v.id %}">{{ v }}
+                        ({{ v.severity }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
@@ -33,9 +34,11 @@
         </ul></li>
     <li>Impacts (severity/impact tier):<ul>
             {% for i in ate.impacts.all %}
-                <li>{{ i }} ({{ i.severity }}/{{ i.impact_tier }})</li>
+                <li><a href="{% url 'risk:impact_detail' i.id %}">{{ i }}
+                        ({{ i.severity }}/{{ i.impact_tier }})</a></li>
             {% endfor %}
         </ul></li>
+    <li>Assigned Risk: {{ ate.assigned_risk }}</li>
 </ul>
 
 {% endblock %}

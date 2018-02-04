@@ -6,7 +6,7 @@
 
 <h1>{{ nte }} (Non-Adversarial Threat Event)</h1>
 <a href="{% url 'risk:nte_update' nte.id %}">Edit</a>
-&middot
+&middot;
 <a href="{% url 'risk:nte_delete' nte.id %}">Delete</a>
 
 <p>{{ nte.desc }}</p>
@@ -16,13 +16,15 @@
     <li>Info Tier: {{nte.tier }}</li>
     <li>Sources (range of effect):<ul>
             {% for s in nte.sources.all %}
-                <li>{{ s }} ({{ s.range_of_effect }})</li>
+                <li><a href="{% url 'risk:nts_detail' s.id %}">{{ s }}
+                        ({{ s.range_of_effect }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ nte.relevance }}</li>
     <li>Predisposing Conditions (pervasiveness):<ul>
             {% for v in nte.risk_conditions.all %}
-                <li>{{ v }} ({{ v.pervasiveness }})</li>
+                <li><a href="{% url 'risk:cond_detail' v.id %}">{{ v }}
+                        ({{ v.pervasiveness }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
@@ -32,9 +34,11 @@
         </ul></li>
     <li>Impacts (severity/impact tier):<ul>
             {% for i in nte.impacts.all %}
-                <li>{{ i }} ({{ i.severity }}/{{ i.impact_tier }})</li>
+                <li><a href="{% url 'risk:impact_detail' i.id %}">{{ i }}
+                        ({{ i.severity }}/{{ i.impact_tier }})</a></li>
             {% endfor %}
         </ul></li>
+    <li>Assigned Risk: {{ nte.assigned_risk }}</li>
 </ul>
 
 {% endblock %}

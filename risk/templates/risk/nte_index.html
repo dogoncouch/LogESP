@@ -11,12 +11,13 @@
 <a href="{% url 'risk:nte_create' %}">Add</a>
 
 {% if nte_list %}
-    <ul>
+    <table>
+        <tr><th>Threat Event</th><th>Assigned<br>Risk</th></tr>
         {% for nte in nte_list %}
-            <li><a href="{% url 'risk:nte_detail' nte.id %}">
-                    {{ nte }}</a></li>
+            <td><a href="{% url 'risk:nte_detail' nte.id %}">
+                    {{ nte }}</td></a><td>{{ nte.assigned_risk }}</td></tr>
         {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No non-adversarial threats.</p>
 {% endif %}

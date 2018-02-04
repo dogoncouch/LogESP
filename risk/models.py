@@ -232,6 +232,9 @@ class AdvThreatEvent(models.Model):
             related_name='threat_events', blank=True)
     impacts = models.ManyToManyField(Impact,
             related_name='adv_threat_events', blank=True)
+    assigned_risk = models.IntegerField(
+            validators=[validate_scale_range],
+            null=True, blank=True)
     def __str__(self):
         val = (self.event_type.source_category.name,
                 self.event_type.name, self.name)
@@ -269,6 +272,9 @@ class NonAdvThreatEvent(models.Model):
             related_name='threat_events', blank=True)
     impacts = models.ManyToManyField(Impact,
             related_name='nonadv_threat_events', blank=True)
+    assigned_risk = models.IntegerField(
+            validators=[validate_scale_range],
+            null=True, blank=True)
     def __str__(self):
         val = (self.event_type.name, self.name)
         return '.'.join(val)
