@@ -10,10 +10,11 @@
 
 {% if ate_list %}
     <table>
-        <tr><th>Threat Event</th><th>Assigned<br>Risk</th></tr>
+        <tr><th>Threat Event</th><th>Relevance</th><th>Assigned<br>Risk</th></tr>
         {% for ate in ate_list %}
             <tr><td><a href="{% url 'risk:ate_detail' ate.id %}">
-                    {{ ate }}</td></a><td>{{ ate.assigned_risk }}</td></tr>
+                    {{ ate }}</a></td>
+                <td>{{ ate.relevance }}</td><td>{{ ate.assigned_risk }}</td></tr>
         {% endfor %}
     </table>
 {% else %}

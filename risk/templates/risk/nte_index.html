@@ -12,10 +12,11 @@
 
 {% if nte_list %}
     <table>
-        <tr><th>Threat Event</th><th>Assigned<br>Risk</th></tr>
+        <tr><th>Threat Event</th><th>Relevance</th><th>Assigned<br>Risk</th></tr>
         {% for nte in nte_list %}
             <td><a href="{% url 'risk:nte_detail' nte.id %}">
-                    {{ nte }}</td></a><td>{{ nte.assigned_risk }}</td></tr>
+                    {{ nte }}</a></td>
+            <td>{{ nte.relevance }}</td><td>{{ nte.assigned_risk }}</td></tr>
         {% endfor %}
     </table>
 {% else %}
