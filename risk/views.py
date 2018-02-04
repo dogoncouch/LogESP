@@ -6,7 +6,8 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from .models import AdvThreatEvent, NonAdvThreatEvent
 from .models import AdvThreatSource, NonAdvThreatSource
-from .models import Vulnerability, RiskCondition, Impact
+from .models import Vulnerability, RiskCondition
+from .models import Impact, RiskResponse
 
 # Create your views here.
 
@@ -231,7 +232,7 @@ class ImpactUpdateView(PermissionRequiredMixin, UpdateView):
         return reverse_lazy('risk:impact_detail', args=(self.object.id,))
 
 class ResponseUpdateView(PermissionRequiredMixin, UpdateView):
-    model = Response
+    model = RiskResponse
     permission_required = 'change_riskresponse'
     fields = ['name', 'desc', 'response_type']
     def get_success_url(self):
