@@ -1,0 +1,37 @@
+[
+{
+  "model": "risk.riskresponsetype",
+  "fields": {
+    "name": "Acceptance",
+    "desc": null
+  }
+},
+{
+  "model": "risk.riskresponsetype",
+  "fields": {
+    "name": "Avoidance",
+    "desc": null
+  }
+},
+{
+  "model": "risk.riskresponsetype",
+  "fields": {
+    "name": "Mitigation",
+    "desc": null
+  }
+},
+{
+  "model": "risk.riskresponsetype",
+  "fields": {
+    "name": "Sharing",
+    "desc": null
+  }
+},
+{
+  "model": "risk.riskresponsetype",
+  "fields": {
+    "name": "Transfer",
+    "desc": null
+  }
+}
+]

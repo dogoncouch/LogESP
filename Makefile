@@ -14,10 +14,12 @@ new-db:
 	@echo Creating superuser...
 	python manage.py createsuperuser
 
-nist-fixtures:
+risk-fixtures:
 	@echo Loading NIST threat data fixtures...
 	python manage.py loaddata risk/fixtures/nist_threat_event_types.json risk/fixtures/nist_threat_src_types.json
 	python manage.py loaddata risk/fixtures/generic_nist_threat_events.json risk/fixtures/generic_nist_threat_sources.json
+	@echo Loading risk response type fixtures...
+	python manage.py loaddata risk/fixtures/risk_response_types.json
 
 asset-fixtures:
 	@echo Loading basic asset type fixtures...
