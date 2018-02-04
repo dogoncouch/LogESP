@@ -24,14 +24,14 @@ class ATEIndexView(ListView):
     template_name = 'risk/ate_index.html'
     context_object_name = 'ate_list'
     def get_queryset(self):
-        return AdvThreatEvent.objects.order_by('assigned_risk')
+        return AdvThreatEvent.objects.order_by('-assigned_risk')
 
 class NTEIndexView(ListView):
     model = NonAdvThreatEvent
     template_name = 'risk/nte_index.html'
     context_object_name = 'nte_list'
     def get_queryset(self):
-        return NonAdvThreatEvent.objects.order_by('assigned_risk')
+        return NonAdvThreatEvent.objects.order_by('-assigned_risk')
 
 class ATSIndexView(ListView):
     model = AdvThreatSource
