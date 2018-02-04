@@ -14,15 +14,15 @@
     <li>Type: {{ nte.type }}</li>
     <li>Info Source: {{ nte.info_source }}</li>
     <li>Info Tier: {{nte.tier }}</li>
-    <li>Sources (pervasiveness):<ul>
+    <li>Sources (range of effect):<ul>
             {% for s in nte.sources.all %}
-                <li>{{ s }} ({{ s.pervasiveness }})</li>
+                <li>{{ s }} ({{ s.range_of_effect }})</li>
             {% endfor %}
         </ul></li>
     <li>Relevance: {{ nte.relevance }}</li>
-    <li>Predisposing Conditions:<ul>
+    <li>Predisposing Conditions (pervasiveness):<ul>
             {% for v in nte.risk_conditions.all %}
-                <li>{{ v }}</li>
+                <li>{{ v }} ({{ v.pervasiveness }})</li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
