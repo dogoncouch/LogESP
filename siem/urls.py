@@ -6,8 +6,8 @@ from . import views
 
 app_name = 'siem'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('events/', views.event_index, name='event_index'),
+    path('', login_required(views.index), name='index'),
+    path('events/', login_required(views.event_index), name='event_index'),
     path('events/log/<int:pk>/', login_required(
         views.LogEventDetailView.as_view()), name='logevent_detail'),
     path('events/log/', login_required(
