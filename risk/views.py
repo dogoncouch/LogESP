@@ -98,7 +98,8 @@ class ATECreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'risk.add_advthreatevent'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact', 'vulnerabilities', 'impacts']
+            'likelihood_impact', 'vulnerabilities', 'impacts',
+            'assigned_risk']
     def get_success_url(self):
         return reverse_lazy('risk:ate_detail', args=(self.object.id,))
 
@@ -107,7 +108,8 @@ class NTECreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'risk.add_nonadvthreatevent'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact', 'risk_conditions', 'impacts']
+            'likelihood_impact', 'risk_conditions', 'impacts',
+            'assigned_risk']
     def get_success_url(self):
         return reverse_lazy('risk:nte_detail', args=(self.object.id,))
 
@@ -156,7 +158,8 @@ class ATEUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_advthreatevent'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact', 'vulnerabilities', 'impacts']
+            'likelihood_impact', 'vulnerabilities', 'impacts',
+            'assigned_risk']
     def get_success_url(self):
         return reverse_lazy('risk:ate_detail', args=(self.object.id,))
 
@@ -165,7 +168,8 @@ class NTEUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_nonadvthreatevent'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact', 'risk_conditions', 'impacts']
+            'likelihood_impact', 'risk_conditions', 'impacts',
+            'assigned_risk']
     def get_success_url(self):
         return reverse_lazy('risk:nte_detail', args=(self.object.id,))
 
