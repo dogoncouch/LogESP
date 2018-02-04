@@ -35,7 +35,7 @@ class LogEvent(models.Model):
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices,
             null=True, blank=True)
-    #source_host = models.CharField(max_length=32, default='')
+    source_host = models.CharField(max_length=32, default='')
     source_port = models.CharField(max_length=8, default='')
     dest_host = models.CharField(max_length=32, default='')
     dest_port = models.CharField(max_length=8, default='')
