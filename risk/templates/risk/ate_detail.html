@@ -27,6 +27,11 @@
                         ({{ v.severity }})</a></li>
             {% endfor %}
         </ul></li>
+    <li>Responses:<ul>
+            {% for r in ate.responses.all %}
+                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
+            {% endfor %}
+        </ul></li>
     <li>Likelihoods:<ul>
             <li>Likelihood of initiation: {{ ate.likelihood_initiation }}</li>
             <li>Likelihood of adverse impact: {{ ate.likelihood_impact }}</li>
@@ -36,11 +41,6 @@
             {% for i in ate.impacts.all %}
                 <li><a href="{% url 'risk:impact_detail' i.id %}">{{ i }}
                         ({{ i.severity }}/{{ i.impact_tier }})</a></li>
-            {% endfor %}
-        </ul></li>
-    <li>Responses:<ul>
-            {% for r in ate.responses.all %}
-                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
             {% endfor %}
         </ul></li>
     <li>Assigned Risk: {{ ate.assigned_risk }}</li>

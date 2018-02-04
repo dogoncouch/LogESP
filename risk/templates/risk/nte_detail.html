@@ -27,6 +27,11 @@
                         ({{ v.pervasiveness }})</a></li>
             {% endfor %}
         </ul></li>
+    <li>Responses:<ul>
+            {% for r in nte.responses.all %}
+                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
+            {% endfor %}
+        </ul></li>
     <li>Likelihoods:<ul>
             <li>Likelihood of initiation: {{ nte.likelihood_initiation }}</li>
             <li>Likelihood of adverse impact: {{ nte.likelihood_impact }}</li>
@@ -36,11 +41,6 @@
             {% for i in nte.impacts.all %}
                 <li><a href="{% url 'risk:impact_detail' i.id %}">{{ i }}
                         ({{ i.severity }}/{{ i.impact_tier }})</a></li>
-            {% endfor %}
-        </ul></li>
-    <li>Responses:<ul>
-            {% for r in nte.responses.all %}
-                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
             {% endfor %}
         </ul></li>
     <li>Assigned Risk: {{ nte.assigned_risk }}</li>
