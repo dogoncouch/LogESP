@@ -167,7 +167,7 @@ class ImpactCreateView(PermissionRequiredMixin, CreateView):
 class ResponseCreateView(PermissionRequiredMixin, CreateView):
     model = RiskResponse
     permission_required = 'risk.add_riskresponse'
-    fields = ['name', 'desc', 'response_type']
+    fields = ['name', 'desc', 'response_type', 'effectiveness', 'status']
     def get_success_url(self):
         return reverse_lazy('risk:response_detail', args=(self.object.id,))
 
@@ -234,7 +234,7 @@ class ImpactUpdateView(PermissionRequiredMixin, UpdateView):
 class ResponseUpdateView(PermissionRequiredMixin, UpdateView):
     model = RiskResponse
     permission_required = 'change_riskresponse'
-    fields = ['name', 'desc', 'response_type']
+    fields = ['name', 'desc', 'response_type', 'effectiveness', 'status']
     def get_success_url(self):
         return reverse_lazy('risk:response_detail', args=(self.object.id,))
 
