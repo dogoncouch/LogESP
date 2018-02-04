@@ -13,23 +13,24 @@
 <ul>
     <li>Type: {{ nte.type }}</li>
     <li>Info Source: {{ nte.info_source }}</li>
-    <li>Info Tier: {{nte.tier }}</li>
+    <li>Info Tier: {{nte.get_tier_display }}</li>
     <li>Sources (range of effect):<ul>
             {% for s in nte.sources.all %}
                 <li><a href="{% url 'risk:nts_detail' s.id %}">{{ s }}
                         ({{ s.range_of_effect }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Relevance: {{ nte.relevance }}</li>
+    <li>Relevance: {{ nte.get_relevance_display }}</li>
     <li>Predisposing Conditions (pervasiveness):<ul>
             {% for v in nte.risk_conditions.all %}
                 <li><a href="{% url 'risk:cond_detail' v.id %}">{{ v }}
                         ({{ v.pervasiveness }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Responses:<ul>
+    <li>Responses: (effectiveness/status)<ul>
             {% for r in nte.responses.all %}
-                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
+                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a>
+                    ( {{ r.effectiveness }}/{{ r.get_status_display }})</li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
@@ -40,7 +41,7 @@
     <li>Impacts (severity/impact tier):<ul>
             {% for i in nte.impacts.all %}
                 <li><a href="{% url 'risk:impact_detail' i.id %}">{{ i }}
-                        ({{ i.severity }}/{{ i.impact_tier }})</a></li>
+                        ({{ i.severity }}/{{ i.get_impact_tier_display }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Assigned Risk: {{ nte.assigned_risk }}</li>

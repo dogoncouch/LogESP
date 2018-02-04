@@ -16,7 +16,7 @@
     <li>Threat Source Type: {{ nts.source_type }}</li>
     <li>Info Source:<ul>
             <li>Info Source: {{ nts.info_source }}</li>
-            <li>Info Source Tier: {{ nts.tier }}</li>
+            <li>Info Source Tier: {{ nts.get_tier_display }}</li>
         </ul></li>
     <li>Range of Effect: {{ nts.range_of_effect }}</li>
 </ul>

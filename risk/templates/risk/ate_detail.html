@@ -13,23 +13,24 @@
 <ul>
     <li>Type: {{ ate.event_type }}</li>
     <li>Info Source: {{ ate.info_source }}</li>
-    <li>Info Tier: {{ate.tier }}</li>
+    <li>Info Tier: {{ate.get_tier_display }}</li>
     <li>Sources (capability/intent/targeting):<ul>
             {% for s in ate.sources.all %}
                 <li><a href="{% url 'risk:ats_detail' s.id %}">{{ s }}
                         ({{ s.capability }}/{{ s.intent }}/{{ s.targeting }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Relevance: {{ ate.relevance }}</li>
+    <li>Relevance: {{ ate.get_relevance_display }}</li>
     <li>Vulnerabilities (severity):<ul>
             {% for v in ate.vulnerabilities.all %}
                 <li><a href="{% url 'risk:vuln_detail' v.id %}">{{ v }}
                         ({{ v.severity }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Responses:<ul>
+    <li>Responses: (effectiveness/status)<ul>
             {% for r in ate.responses.all %}
-                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
+                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a>
+                    ( {{ r.effectiveness }}/{{ r.get_status_display }})</li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
@@ -40,7 +41,7 @@
     <li>Impacts (severity/impact tier):<ul>
             {% for i in ate.impacts.all %}
                 <li><a href="{% url 'risk:impact_detail' i.id %}">{{ i }}
-                        ({{ i.severity }}/{{ i.impact_tier }})</a></li>
+                        ({{ i.severity }}/{{ i.get_impact_tier_display }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Assigned Risk: {{ ate.assigned_risk }}</li>

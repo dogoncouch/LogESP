@@ -47,7 +47,7 @@ class Vulnerability(models.Model):
             null=True, blank=True, on_delete = models.SET_NULL)
     severity = models.IntegerField(validators=[validate_scale_range])
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     def __str__(self):
         return self.name
     #def __str__(self):
@@ -90,7 +90,7 @@ class RiskCondition(models.Model):
             null=True, blank=True, on_delete = models.SET_NULL)
     pervasiveness = models.IntegerField(validators=[validate_scale_range])
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     def __str__(self):
         return self.name
     #def __str__(self):
@@ -112,9 +112,9 @@ class Impact(models.Model):
             related_name='impacts',
             null=True, blank=True, on_delete=models.SET_NULL)
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     severity = models.IntegerField(validators=[validate_scale_range])
-    impact_tier = models.IntegerField(validators=[validate_tier_range])
+    impact_tier = models.IntegerField(choices=tier_choices, default=3)
     def __str__(self):
         return self.name
     #def __str__(self):
@@ -157,7 +157,7 @@ class AdvThreatSource(models.Model):
     source_type = models.ForeignKey(AdvThreatSrcType,
             related_name='adv_sources', on_delete = models.CASCADE)
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     in_scope = models.BooleanField(default=True)
     capability = models.IntegerField(validators=[validate_scale_range],
             null=True, blank=True)
@@ -202,7 +202,7 @@ class NonAdvThreatSource(models.Model):
     source_type = models.ForeignKey(NonAdvThreatSrcType,
             related_name='nonadv_sources', on_delete = models.CASCADE)
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     in_scope = models.BooleanField(default=True)
     range_of_effect = models.IntegerField(
             validators=[validate_scale_range],
@@ -237,7 +237,7 @@ class AdvThreatEvent(models.Model):
             related_name='threat_events', blank=True)
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     likelihood_initiation = models.IntegerField(
             validators=[validate_scale_range],
             null=True, blank=True)
@@ -279,7 +279,7 @@ class NonAdvThreatEvent(models.Model):
             related_name='threat_events', blank=True)
     relevance = models.IntegerField(choices=relevance_choices, default=1)
     info_source = models.CharField(max_length=50, null=True, blank=True)
-    tier = models.IntegerField(validators=[validate_tier_range])
+    tier = models.IntegerField(choices=tier_choices, default=3)
     likelihood_initiation = models.IntegerField(
             validators=[validate_scale_range],
             null=True, blank=True)
