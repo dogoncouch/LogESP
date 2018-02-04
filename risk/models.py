@@ -131,6 +131,8 @@ class RiskResponse(models.Model):
     desc = models.CharField(max_length=200, null=True, blank=True)
     response_type = models.ForeignKey(RiskResponseType,
             on_delete=models.PROTECT)
+    effectiveness = models.IntegerField(validators=[validate_scale_range])
+    status = models.IntegerField(choices=status_choices, default=4)
     def __str__(self):
         return '/'.join((self.response_type.name, self.name))
 
