@@ -116,7 +116,9 @@ class Impact(models.Model):
     severity = models.IntegerField(validators=[validate_scale_range])
     impact_tier = models.IntegerField(validators=[validate_tier_range])
     def __str__(self):
-        return '.'.join(self.impact_type.name, self.name)
+        return self.name
+    #def __str__(self):
+    #    return '.'.join(self.impact_type.name, self.name)
 
 class AdvThreatSrcCategory(models.Model):
     name = models.CharField(max_length=30)
