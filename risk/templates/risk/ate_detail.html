@@ -38,6 +38,11 @@
                         ({{ i.severity }}/{{ i.impact_tier }})</a></li>
             {% endfor %}
         </ul></li>
+    <li>Responses:<ul>
+            {% for r in ate.responses.all %}
+                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a></li>
+            {% endfor %}
+        </ul></li>
     <li>Assigned Risk: {{ ate.assigned_risk }}</li>
 </ul>
 

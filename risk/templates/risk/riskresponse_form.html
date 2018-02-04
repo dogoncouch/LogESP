@@ -1,0 +1,13 @@
+{% extends "risk/base.html" %}
+
+{% block sub-title %} | Add Risk Response{% endblock %}
+
+{% block content-main %}
+
+<h1>Add Risk Response</h1>
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save" />
+</form>
+
+{% endblock %}

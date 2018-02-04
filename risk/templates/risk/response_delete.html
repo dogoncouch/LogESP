@@ -1,0 +1,18 @@
+{% extends "risk/base.html" %}
+
+{% block sub-title %} | Delete Risk Response{% endblock %}
+
+{% block content-main %}
+
+<h1>Delete Risk Response</h1>
+
+<p>Are you sure you want to delete {{ response }}?</p>
+
+<form action="{% url 'risk:response_delete' response.id %}" method="POST">
+  {% csrf_token %}
+
+  <input type="submit" value="Delete" />
+  <a href="{% url 'risk:response_detail' response.id %}">Cancel</a>
+</form>
+
+{% endblock %}
