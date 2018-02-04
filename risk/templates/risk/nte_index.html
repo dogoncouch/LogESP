@@ -16,7 +16,8 @@
         {% for nte in nte_list %}
             <td><a href="{% url 'risk:nte_detail' nte.id %}">
                     {{ nte }}</a></td>
-            <td>{{ nte.relevance }}</td><td>{{ nte.assigned_risk }}</td></tr>
+            <td>{{ nte.get_relevance_display }}</td>
+            <td>{{ nte.assigned_risk }}</td></tr>
         {% endfor %}
     </table>
 {% else %}

@@ -14,7 +14,8 @@
         {% for ate in ate_list %}
             <tr><td><a href="{% url 'risk:ate_detail' ate.id %}">
                     {{ ate }}</a></td>
-                <td>{{ ate.relevance }}</td><td>{{ ate.assigned_risk }}</td></tr>
+                <td>{{ ate.get_relevance_display }}</td>
+                <td>{{ ate.assigned_risk }}</td></tr>
         {% endfor %}
     </table>
 {% else %}
