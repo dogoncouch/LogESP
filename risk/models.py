@@ -246,6 +246,8 @@ class AdvThreatEvent(models.Model):
             related_name='threat_events', blank=True)
     impacts = models.ManyToManyField(Impact,
             related_name='adv_threat_events', blank=True)
+    responses = models.ManyToManyField(RiskResponse,
+            related_name='adv_threat_events', blank=True)
     assigned_risk = models.IntegerField(
             validators=[validate_scale_range],
             null=True, blank=True)
@@ -285,6 +287,8 @@ class NonAdvThreatEvent(models.Model):
     risk_conditions = models.ManyToManyField(RiskCondition,
             related_name='threat_events', blank=True)
     impacts = models.ManyToManyField(Impact,
+            related_name='nonadv_threat_events', blank=True)
+    responses = models.ManyToManyField(RiskResponse,
             related_name='nonadv_threat_events', blank=True)
     assigned_risk = models.IntegerField(
             validators=[validate_scale_range],

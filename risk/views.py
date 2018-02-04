@@ -58,6 +58,11 @@ class ImpactIndexView(ListView):
     template_name = 'risk/impact_index.html'
     context_object_name = 'impact_list'
 
+class ResponseIndexView(ListView):
+    model = RiskResponse
+    template_name = 'risk/response_index.html'
+    context_object_name = 'response_list'
+
 class ATEDetailView(DetailView):
     model = AdvThreatEvent
     template_name = 'risk/ate_detail.html'
@@ -92,6 +97,11 @@ class ImpactDetailView(DetailView):
     model = Impact
     template_name = 'risk/impact_detail.html'
     context_object_name = 'impact'
+
+class ResponseDetailView(DetailView):
+    model = RiskResponse
+    template_name = 'risk/response_detail.html'
+    context_object_name = 'response'
 
 class ATECreateView(PermissionRequiredMixin, CreateView):
     model = AdvThreatEvent
@@ -151,7 +161,14 @@ class ImpactCreateView(PermissionRequiredMixin, CreateView):
     fields = ['name', 'desc', 'impact_type', 'info_source', 'tier',
             'severity', 'impact_tier']
     def get_success_url(self):
-        return reverse_lazy('risk:ate_detail', args=(self.object.id,))
+        return reverse_lazy('risk:impact_detail', args=(self.object.id,))
+
+class ResponseCreateView(PermissionRequiredMixin, CreateView):
+    model = RiskResponse
+    permission_required = 'risk.add_riskresponse'
+    fields = ['name', 'desc', 'response_type']
+    def get_success_url(self):
+        return reverse_lazy('risk:response_detail', args=(self.object.id,))
 
 class ATEUpdateView(PermissionRequiredMixin, UpdateView):
     model = AdvThreatEvent
@@ -212,6 +229,13 @@ class ImpactUpdateView(PermissionRequiredMixin, UpdateView):
             'severity', 'impact_tier']
     def get_success_url(self):
         return reverse_lazy('risk:impact_detail', args=(self.object.id,))
+
+class ResponseUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Response
+    permission_required = 'change_riskresponse'
+    fields = ['name', 'desc', 'response_type']
+    def get_success_url(self):
+        return reverse_lazy('risk:response_detail', args=(self.object.id,))
 
 class ATEDeleteView(PermissionRequiredMixin, DeleteView):
     model = AdvThreatEvent
