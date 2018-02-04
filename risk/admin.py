@@ -12,14 +12,8 @@ from .models import VulnerabilityClass, VulnerabilityCategory, VulnerabilityType
 from .models import ConditionClass, ConditionCategory, ConditionType
 from .models import Vulnerability, RiskCondition
 from .models import ImpactType, Impact
+from .models import RiskResponseType, RiskResponse
 
-#class AdvThreatEventAdmin(admin.ModelAdmin):
-#    list_display = ['name', 'desc']
-#    fields = ['name', 'desc']
-
-#class NonAdvThreatEventAdmin(admin.ModelAdmin):
-#    list_display = ['name', 'desc']
-#    fields = ['name', 'desc']
 
 admin.site.register(AdvThreatEventCategory)
 admin.site.register(AdvThreatEventType)
@@ -43,4 +37,5 @@ admin.site.register(Vulnerability)
 admin.site.register(RiskCondition)
 admin.site.register(ImpactType)
 admin.site.register(Impact)
-
+admin.site.register(RiskResponseType)
+admin.site.register(RiskResponse)
