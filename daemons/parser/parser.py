@@ -64,6 +64,7 @@ class ParseModule:
             entry['date_stamp'] = None
             entry['facility'] = ''
             entry['severity'] = ''
+            entry['log_source'] = ''
             entry['source_host'] = ''
             entry['source_port'] = ''
             entry['source_process'] = ''

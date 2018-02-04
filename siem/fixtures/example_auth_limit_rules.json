@@ -184,6 +184,32 @@
 {
   "model": "siem.limitrule",
   "fields": {
+    "name": "direct hw access",
+    "desc": "Some program might be trying to access hardware directly.",
+    "is_enabled": true,
+    "rule_events": false,
+    "rule_category": "kernel exploit",
+    "local_lifespan_days": 185,
+    "backup_lifespan_days": 366,
+    "event_type": "kernel",
+    "severity": 2,
+    "overkill_modifier": "5.0",
+    "severity_modifier": "5.0",
+    "time_int": 4,
+    "event_limit": 0,
+    "allowed_source_hosts": 0,
+    "message_filter_regex": "Some program might be trying to access hardware directly",
+    "raw_text_filter_regex": null,
+    "source_host_filter": null,
+    "process_filter": "kernel",
+    "rulename_filter": null,
+    "magnitude_filter": null,
+    "message": "Possible direct hardware access attempt"
+  }
+},
+{
+  "model": "siem.limitrule",
+  "fields": {
     "name": "gdm authfail 4m",
     "desc": "Over 4 Gnome Display Manager auth failures in 4 minutes.",
     "is_enabled": true,
@@ -204,7 +230,7 @@
     "process_filter": "gdm-session",
     "rulename_filter": null,
     "magnitude_filter": null,
-    "message": "Over 4 Gnome auth failures in 4 minutes."
+    "message": "Over 4 GDM auth failures in 4 minutes."
   }
 },
 {
@@ -283,6 +309,32 @@
     "rulename_filter": null,
     "magnitude_filter": null,
     "message": "Local terminal auth failures for root (4 min intervals)"
+  }
+},
+{
+  "model": "siem.limitrule",
+  "fields": {
+    "name": "lightdm authfail 4m",
+    "desc": "Over 4 lightdm auth failures in 4 minutes.",
+    "is_enabled": true,
+    "rule_events": false,
+    "rule_category": "local auth attack",
+    "local_lifespan_days": 185,
+    "backup_lifespan_days": 366,
+    "event_type": "auth",
+    "severity": 3,
+    "overkill_modifier": "1.0",
+    "severity_modifier": "1.0",
+    "time_int": 4,
+    "event_limit": 4,
+    "allowed_source_hosts": 0,
+    "message_filter_regex": "authentication failure",
+    "raw_text_filter_regex": null,
+    "source_host_filter": null,
+    "process_filter": "lightdm",
+    "rulename_filter": null,
+    "magnitude_filter": null,
+    "message": "Over 4 lightdm auth fail events in 4 minutes"
   }
 }
 ]

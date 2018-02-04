@@ -80,6 +80,7 @@ class LiveParser:
                         else:
                             e.facility = self.facility
                         e.severity = entry['severity']
+                        e.log_source = entry['log_source']
                         e.source_host = entry['source_host']
                         e.source_port = entry['source_port']
                         e.dest_host = entry['dest_host']

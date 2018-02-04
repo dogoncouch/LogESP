@@ -26,7 +26,7 @@ class VulnerabilityCategory(models.Model):
             related_name = 'vuln_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return '.'.join((self.vuln_class.name, self.name))
+        return '/'.join((self.vuln_class.name, self.name))
 
 class VulnerabilityType(models.Model):
     name = models.CharField(max_length=30)
@@ -37,7 +37,7 @@ class VulnerabilityType(models.Model):
     def __str__(self):
         val = (self.vuln_category.vuln_class.name,
                 self.vuln_category.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
 
 class Vulnerability(models.Model):
     name = models.CharField(max_length=30)
@@ -54,7 +54,7 @@ class Vulnerability(models.Model):
     #    val = (self.vuln_type.vuln_category.vuln_class.name,
     #            self.vuln_type.vuln_category.name,
     #            self.vuln_type.name, self.name)
-    #    return '.'.join(val)
+    #    return '/'.join(val)
 
 class ConditionClass(models.Model):
     name = models.CharField(max_length=30)
@@ -69,7 +69,7 @@ class ConditionCategory(models.Model):
             related_name = 'condition_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return '.'.join((self.condition_class.name, self.name))
+        return '/'.join((self.condition_class.name, self.name))
 
 class ConditionType(models.Model):
     name = models.CharField(max_length=30)
@@ -80,7 +80,7 @@ class ConditionType(models.Model):
     def __str__(self):
         val = (self.condition_category.condition_class.name,
                 self.condition_category.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
 
 class RiskCondition(models.Model):
     name = models.CharField(max_length=30)
@@ -97,7 +97,7 @@ class RiskCondition(models.Model):
     #    val = (self.condition_type.condition_category.condition_class.name,
     #            self.condition_type.condition_category.name,
     #            self.condition_type.name, self.name)
-    #    return '.'.join(val)
+    #    return '/'.join(val)
 
 class ImpactType(models.Model):
     name = models.CharField(max_length=30)
@@ -118,7 +118,21 @@ class Impact(models.Model):
     def __str__(self):
         return self.name
     #def __str__(self):
-    #    return '.'.join(self.impact_type.name, self.name)
+    #    return '/'.join(self.impact_type.name, self.name)
+
+class RiskResponseType(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+class RiskResponse(models.Model):
+    name = models.CharField(max_length=30)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    response_type = models.ForeignKey(RiskResponseType,
+            on_delete=models.PROTECT)
+    def __str__(self):
+        return '/'.join((self.response_type.name, self.name))
 
 class AdvThreatSrcCategory(models.Model):
     name = models.CharField(max_length=30)
@@ -133,7 +147,7 @@ class AdvThreatSrcType(models.Model):
             related_name='source_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return '.'.join((self.source_category.name, self.name))
+        return '/'.join((self.source_category.name, self.name))
 
 class AdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -152,7 +166,7 @@ class AdvThreatSource(models.Model):
     def __str__(self):
         val = (self.source_type.source_category.name,
                 self.source_type.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
 
 class NonAdvThreatSrcClass(models.Model):
     name = models.CharField(max_length=30)
@@ -167,7 +181,7 @@ class NonAdvThreatSrcCategory(models.Model):
             related_name='source_categories',
             on_delete=models.CASCADE)
     def __str__(self):
-        return '.'.join((self.source_class.name, self.name))
+        return '/'.join((self.source_class.name, self.name))
 
 class NonAdvThreatSrcType(models.Model):
     name = models.CharField(max_length=30)
@@ -178,7 +192,7 @@ class NonAdvThreatSrcType(models.Model):
     def __str__(self):
         val = (self.source_category.source_class.name,
                 self.source_category.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
 
 class NonAdvThreatSource(models.Model):
     name = models.CharField(max_length=30)
@@ -195,7 +209,7 @@ class NonAdvThreatSource(models.Model):
         val = (self.source_type.source_category.source_class.name,
                 self.source_type.source_category.name,
                 self.source_type.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
 
 class AdvThreatEventCategory(models.Model):
     name = models.CharField(max_length=30)
@@ -210,7 +224,7 @@ class AdvThreatEventType(models.Model):
             related_name='event_types',
             on_delete=models.CASCADE)
     def __str__(self):
-        return '.'.join((self.source_category.name, self.name))
+        return '/'.join((self.source_category.name, self.name))
 
 class AdvThreatEvent(models.Model):
     name = models.CharField(max_length=30)
@@ -238,7 +252,7 @@ class AdvThreatEvent(models.Model):
     def __str__(self):
         val = (self.event_type.source_category.name,
                 self.event_type.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
     def calc_likelihood(self):
         if self.likelihood_initiation and self.likelihood_impact:
             return (self.likelihood_initiation + \
@@ -277,7 +291,7 @@ class NonAdvThreatEvent(models.Model):
             null=True, blank=True)
     def __str__(self):
         val = (self.event_type.name, self.name)
-        return '.'.join(val)
+        return '/'.join(val)
     def calc_likelihood(self):
         if self.likelihood_initiation and self.likelihood_impact:
             return self.likelihood_initiation * \

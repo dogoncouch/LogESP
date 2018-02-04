@@ -30,11 +30,12 @@ class LogEvent(models.Model):
     raw_text = models.CharField(max_length=1280)
     date_stamp = models.CharField(max_length=32,
             null=True, blank=True)
+    log_source = models.CharField(max_length=32, default='')
     facility = models.IntegerField(choices=facility_choices,
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices,
             null=True, blank=True)
-    source_host = models.CharField(max_length=32, default='')
+    #source_host = models.CharField(max_length=32, default='')
     source_port = models.CharField(max_length=8, default='')
     dest_host = models.CharField(max_length=32, default='')
     dest_port = models.CharField(max_length=8, default='')
