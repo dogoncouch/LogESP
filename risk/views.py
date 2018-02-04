@@ -161,7 +161,7 @@ class NTEUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_nonadvthreatevent'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
-            'likelihood_impact']
+            'likelihood_impact', 'risk_conditions', 'impacts']
     def get_success_url(self):
         return reverse_lazy('risk:nte_detail', args=(self.object.id,))
 
