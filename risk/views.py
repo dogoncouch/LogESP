@@ -293,3 +293,11 @@ class ImpactDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'impact'
     def get_success_url(self):
         return reverse('risk:impact_index')
+
+class ResponseDeleteView(PermissionRequiredMixin, DeleteView):
+    model = RiskResponse
+    permission_required = 'delete_riskresponse'
+    template_name = 'risk/response_delete.html'
+    context_object_name = 'response'
+    def get_success_url(self):
+        return reverse('risk:response_index')
