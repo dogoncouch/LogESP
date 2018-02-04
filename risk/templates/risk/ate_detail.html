@@ -29,8 +29,8 @@
         </ul></li>
     <li>Responses: (effectiveness/status)<ul>
             {% for r in ate.responses.all %}
-                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}</a>
-                    ( {{ r.effectiveness }}/{{ r.get_status_display }})</li>
+                <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}
+                    ( {{ r.effectiveness }}/{{ r.get_status_display }})</a></li>
             {% endfor %}
         </ul></li>
     <li>Likelihoods:<ul>
