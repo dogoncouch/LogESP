@@ -67,8 +67,8 @@ class ParseCore:
             except Exception:
                 p['parser'] = 'syslog'
             try:
-                p['parse_helpers'] = config.get(
-                    sec, 'parser_helpers').split(',')
+                phelper = config.get(sec, 'parser_helpers')
+                p['parse_helpers'] = phelper.split(',')
             except Exception:
                 p['parse_helpers'] = []
             try:
