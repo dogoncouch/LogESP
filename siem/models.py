@@ -25,6 +25,8 @@ class ParseHelper(models.Model):
     desc = models.CharField(max_length=200, null=True, blank=True)
     match_regex = models.CharField(max_length=1024)
     fields = models.CharField(max_length=512)
+    def __str__(self):
+        return self.name
 
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6)
@@ -52,11 +54,9 @@ class LogEvent(models.Model):
     action = models.CharField(max_length=48, default='')
     protocol = models.CharField(max_length=12, default='')
     message = models.CharField(max_length=1024, default='')
-    extended = models.CharField(max_length=1024, default='')
     user = models.CharField(max_length=32, default='')
-    source_ip = models.CharField(max_length=45, default='')
-    dest_ip = models.CharField(max_length=45, default='')
     session = models.CharField(max_length=24, default='')
+    extended = models.CharField(max_length=1024, default='')
     parsed_on = models.CharField(max_length=32)
     source_path = models.CharField(max_length=200,)
     class Meta:

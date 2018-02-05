@@ -93,8 +93,6 @@ class LiveParser:
                         e.message = entry['message']
                         e.extended = entry['extended']
                         e.user = entry['user']
-                        e.source_ip = entry['source_ip']
-                        e.dest_ip = entry['dest_ip']
                         e.session = entry['session']
                         e.parsed_on = self.parsehost
                         e.source_path = self.parsepath

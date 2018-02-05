@@ -89,8 +89,6 @@ class ParseModule:
             entry['message'] = ''
             entry['extended'] = ''
             entry['user'] = ''
-            entry['source_ip'] = ''
-            entry['dest_ip'] = ''
             entry['session'] = ''
 
             linelist = list(zip(fields, match[0]))
