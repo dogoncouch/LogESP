@@ -134,7 +134,7 @@ class LiveParser:
                     sleep(0.1)
 
 
-    def parse_file(parseinfo)
+    def parse_file(parseinfo):
             #self, filename, parser, eventtype,
             #locallifespan, backuplifespan, facility):
         """Parse a file into ldsi"""
@@ -165,11 +165,7 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(parseinfo)
-        #filename, parser, eventtype, locallifespan, backuplifespan,
-        #facility):
+def start_parse(parseinfo):
     """Start a parser"""
     parseengine = LiveParser()
     parseengine.parse_file(parseinfo)
-            #filename, parser, eventtype,
-            #locallifespan, backuplifespan, facility)
