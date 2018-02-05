@@ -137,9 +137,9 @@ class SiemSentry:
     def check_logevent(self):
         """Check log events based on a rule"""
         
-        if self.rule.source_host_filter:
-            sourcehostfilter = self.rule.source_host_filter
-        else: sourcehostfilter = ''
+        if self.rule.log_source_filter:
+            logsourcefilter = self.rule.log_source_filter
+        else: logsourcefilter = ''
         if self.rule.process_filter:
             processfilter = self.rule.process_filter
         else: processfilter = ''
@@ -154,13 +154,13 @@ class SiemSentry:
         if self.rule.event_type:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     event_type=self.rule.event_type,
-                    source_host__icontains=sourcehostfilter,
+                    log_source__icontains=logsourcefilter,
                     source_process__icontains=processfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
         else:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                    source_host__contains=sourcehostfilter,
+                    log_source__contains=logsourcefilter,
                     source_process__contains=processfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
@@ -168,9 +168,9 @@ class SiemSentry:
         if len(e) == 0:
             self.get_last_logevent()
         else:
-            numhosts = len({x.source_host for x in e})
+            numhosts = len({x.log_source for x in e})
             if len(e) > self.rule.event_limit and \
-                    numhosts > self.rule.allowed_source_hosts:
+                    numhosts > self.rule.allowed_log_sources:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
@@ -183,7 +183,7 @@ class SiemSentry:
                                 self.backuplifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
-                event.source_host = self.rule.source_host_filter
+                event.log_source = self.rule.log_source_filter
                 event.event_limit = self.rule.event_limit
                 event.event_count = len(e)
                 event.time_int = self.rule.time_int
@@ -194,37 +194,11 @@ class SiemSentry:
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
-                event.source_host_count = numhosts
+                event.log_source_count = numhosts
                 event.save()
                 event.source_ids_log.set(list(e))
                 event.save()
                 self.lasteventid = e.latest('id').id
-
-
-    def watch_ruleevents(self):
-        """Watch rule events based on a rule"""
-        self.get_first_ruleevent()
-        while True:
-            # Set EOL time delta:
-            if self.rule.local_lifespan_days == 0:
-                self.locallifespandelta = timedelta(days=36524)
-            else:
-                self.locallifespandelta = \
-                        timedelta(days=self.rule.local_lifespan_days)
-            if self.rule.backup_lifespan_days == 0:
-                self.backuplifespandelta = timedelta(days=36524)
-            else:
-                self.backuplifespandelta = \
-                        timedelta(days=self.rule.backup_lifespan_days)
-            # Check the rule:
-            if self.rule.is_enabled: self.check_ruleevent()
-            # Refresh the rule:
-            try:
-                self.rule = LimitRule.objects.get(pk=self.rule.id)
-            except siem.models.DoesNotExist:
-                break
-            # Wait until the next interval
-            sleep(int(self.rule.time_int) * 60)
 
 
     def check_ruleevent(self):
