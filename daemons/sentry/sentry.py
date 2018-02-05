@@ -164,12 +164,13 @@ class SiemSentry:
                     source_process__contains=processfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
-
+        
         if len(e) == 0:
             self.get_last_logevent()
         else:
+            totalevents = sum([x.aggregated_events for x in e])
             numhosts = len({x.log_source for x in e})
-            if len(e) > self.rule.event_limit and \
+            if len(totalevents) > self.rule.event_limit and \
                     numhosts > self.rule.allowed_log_sources:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
@@ -185,11 +186,11 @@ class SiemSentry:
                 event.source_rule = self.rule
                 event.log_source = self.rule.log_source_filter
                 event.event_limit = self.rule.event_limit
-                event.event_count = len(e)
+                event.event_count = totalevents
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
                 event.magnitude = int((1 + \
-                        (((len(e) / (self.rule.event_limit + 1)) * \
+                        (((totalevents / (self.rule.event_limit + 1)) * \
                         float(self.rule.overkill_modifier))) - 1) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
