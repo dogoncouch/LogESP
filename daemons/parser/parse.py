@@ -157,7 +157,7 @@ class LiveParser:
         try:
             while True:
                 self.parse_entries(parseinfo['filename'],
-                        parseinfo['eventtype'])
+                        parseinfo['event_type'])
 
         except KeyboardInterrupt:
             pass
