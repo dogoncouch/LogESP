@@ -1,0 +1,25 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Parser Helpers{% endblock %}
+
+{% block content-main %}
+
+<h1>Parse Helpers</h1>
+<a href="{% url 'siem:ph_create' %}">Add</a>
+
+{% if ph_list %}
+    <table>
+        <tr><th>Name</th><th>Fields</th></tr>
+        {% for ph in ph_list %}
+            <tr>
+                <td><a href="{% url 'siem:ph_detail' ph.id %}">
+                        {{ ph }}</a></td>
+                <td>{{ ph.fields }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No parse helpers.</p>
+{% endif %}
+
+{% endblock %}

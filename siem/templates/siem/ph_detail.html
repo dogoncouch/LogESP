@@ -1,0 +1,20 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Parse Helper - {{ ph }}{% endblock %}
+
+{% block content-main %}
+
+<h1>{{ ph }} (Parse Helper)</h1>
+<a href="{% url 'siem:ph_update' ph.id %}">Edit</a>
+&middot;
+<a href="{% url 'siem:ph_delete' ph.id %}">Delete</a>
+<ul>
+    <li>ID: {{ ph.id }}</li>
+    <li>Name: {{ ph.name }}</li>
+    <li>Desc: {{ ph.desc }}</li>
+    <li>Matching<ul>
+        <li>Match Regex: {{ ph.match_regex }}</li>
+        <li>Fields: {{ ph.fields }}</li></ul></li>
+</ul>
+
+{% endblock %}

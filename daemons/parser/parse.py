@@ -81,6 +81,7 @@ class LiveParser:
                             e.facility = self.facility
                         e.severity = entry['severity']
                         e.log_source = entry['log_source']
+                        e.aggregated_events = entry['aggregated_events']
                         e.source_host = entry['source_host']
                         e.source_port = entry['source_port']
                         e.dest_host = entry['dest_host']
@@ -91,9 +92,10 @@ class LiveParser:
                         e.protocol = entry['protocol']
                         e.message = entry['message']
                         e.extended = entry['extended']
-                        e.ext_user = entry['ext_user']
-                        e.ext_ip = entry['ext_ip']
-                        e.ext_session = entry['ext_session']
+                        e.user = entry['user']
+                        e.source_ip = entry['source_ip']
+                        e.dest_ip = entry['dest_ip']
+                        e.session = entry['session']
                         e.parsed_on = self.parsehost
                         e.source_path = self.parsepath
                         e.save()
@@ -103,13 +105,27 @@ class LiveParser:
                         e = LogEvent()
                         e.parsed_at = timezone.localtime(timezone.now())
                         e.time_zone = TIME_ZONE
-                        e.eol_date = timezone.localtime(
+                        e.eol_date_local = timezone.localtime(
                                 timezone.now()).date() + \
-                                        self.lifespandelta
+                                        self.locallifespandelta
+                        e.eol_date_backup = timezone.localtime(
+                                timezone.now()).date() + \
+                                        self.backuplifespandelta
                         e.event_type = eventtype
                         e.raw_text = ourline
                         e.parsed_on = self.parsehost
+                        e.aggregated_events = 1
                         e.source_path = self.parsepath
+                        e.source_host = ''
+                        e.source_port = ''
+                        e.dest_host = ''
+                        e.dest_port = ''
+                        e.source_process = ''
+                        e.action = ''
+                        e.protocol = ''
+                        e.message = ''
+                        e.user = ''
+                        e.session = ''
         
                 else:
                     # Check if file has been rotated:
@@ -118,27 +134,30 @@ class LiveParser:
                     sleep(0.1)
 
 
-    def parse_file(self, filename, parser, eventtype,
-            locallifespan, backuplifespan, facility):
+    def parse_file(parseinfo)
+            #self, filename, parser, eventtype,
+            #locallifespan, backuplifespan, facility):
         """Parse a file into ldsi"""
-        self.facility = facility
+        self.facility = parseinfo['facility']
         # Set EOL time delta:
         if locallifespan == 0:
             self.locallifespandelta = timedelta(days=36524)
         else:
             self.locallifespandelta = \
-                    timedelta(days=locallifespan)
+                    timedelta(days=parseinfo['locallifespan'])
         if backuplifespan == 0:
             self.backuplifespandelta = timedelta(days=36524)
         else:
             self.backuplifespandelta = \
-                    timedelta(days=backuplifespan)
-        self.parser = ParseModule(parser)
-        self.parsepath = os.path.abspath(filename)
+                    timedelta(days=parseinfo['backuplifespan'])
+        self.parser = ParseModule(parseinfo['parser'],
+                parsehelpers=parseinfo['parsehelpers'])
+        self.parsepath = os.path.abspath(parseinfo['filename'])
         self.parsehost = socket.getfqdn()
         try:
             while True:
-                self.parse_entries(filename, eventtype)
+                self.parse_entries(parseinfo['filename'],
+                        parseinfo['eventtype'])
 
         except KeyboardInterrupt:
             pass
@@ -146,9 +165,11 @@ class LiveParser:
         #     print('Error: ' + str(err))
 
 
-def start_parse(filename, parser, eventtype, locallifespan, backuplifespan,
-        facility):
+def start_parse(parseinfo)
+        #filename, parser, eventtype, locallifespan, backuplifespan,
+        #facility):
     """Start a parser"""
     parseengine = LiveParser()
-    parseengine.parse_file(filename, parser, eventtype,
-            locallifespan, backuplifespan, facility)
+    parseengine.parse_file(parseinfo)
+            #filename, parser, eventtype,
+            #locallifespan, backuplifespan, facility)

@@ -28,7 +28,7 @@ match_regex = '^([A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+(\S+)\s+(\S+)\[?
 
 
 class ParseModule:
-    def __init__(self, parser):
+    def __init__(self, parser, parsehelpers=[]):
         """Initialize a parsing module"""
         self.parser = LogEventParser.objects.get(name=parser)
         self.regex_format = re.compile(r'{}'.format(self.parser.match_regex))
@@ -43,7 +43,19 @@ class ParseModule:
         else:
             self.backup_fields = None
 
-                        
+        # Get parse helpers:
+        helperobjects = [ParseHelper.objects.get(
+            name=n) for n in parsehelpers]
+        self.parsehelpers = []
+        for h in helperobjects:
+            helper = {}
+            helper['name'] = h.name
+            helper['regex_format'] = re.compile(
+                    r'{}'.format(h.match_regex))
+            helper['fields'] = h.fields
+            self.parsehelpers.append(helper)
+
+
     def parse_line(self, line):
         """Parse a line into a dictionary"""
         entry = self.match_line(self.regex_format,
@@ -65,6 +77,7 @@ class ParseModule:
             entry['facility'] = ''
             entry['severity'] = ''
             entry['log_source'] = ''
+            entry['aggregated_events'] = 1
             entry['source_host'] = ''
             entry['source_port'] = ''
             entry['source_process'] = ''
@@ -75,16 +88,28 @@ class ParseModule:
             entry['protocol'] = ''
             entry['message'] = ''
             entry['extended'] = ''
-            entry['ext_user'] = ''
-            entry['ext_ip'] = ''
-            entry['ext_session'] = ''
+            entry['user'] = ''
+            entry['source_ip'] = ''
+            entry['dest_ip'] = ''
+            entry['session'] = ''
 
             linelist = list(zip(fields, match[0]))
 
             for f, v in linelist:
                 entry[f] = v
 
+            # Parse helpers:
+            for h in self.parsehelpers:
+                ext = re.findall(h['regex_format'], line)
+                extlist = list(zip(fields, match[0]))
+                for f, v in extlist:
+                    entry[f] = v
+
             # Convert integer fields:
+            if entry['aggregated_events']:
+                entry['aggregated_events'] = int(entry['aggregated_events'])
+            else:
+                entry['aggregated_events'] = 1
             if entry['facility']:
                 entry['facility'] = int(entry['facility'])
             else:

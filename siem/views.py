@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import LogEvent
 from .models import RuleEvent
 from .models import LimitRule
-from .models import LogEventParser
+from .models import LogEventParser, ParseHelper
 
 # Create your views here.
 
@@ -201,4 +201,38 @@ class LPDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'lp'
     def get_success_url(self):
         return reverse('siem:lp_index')
+
+class PHIndexView(PermissionRequiredMixin, ListView):
+    model = ParseHelper
+    permission_required = 'siem.view_logeventparser'
+    template_name = 'siem/ph_index.html'
+    context_object_name = 'ph_list'
+
+class PHDetailView(PermissionRequiredMixin, DetailView):
+    model = ParseHelper
+    permission_required = 'siem.view_logeventparser'
+    template_name = 'siem/ph_detail.html'
+    context_object_name = 'ph'
+
+class PHCreateView(PermissionRequiredMixin, CreateView):
+    model = ParseHelper
+    permission_required = 'siem.add_logeventparser'
+    fields = ['name', 'desc', 'match_regex', 'fields']
+    def get_success_url(self):
+        return reverse_lazy('siem:ph_detail', args=(self.object.id,))
+
+class PHUpdateView(PermissionRequiredMixin, UpdateView):
+    model = ParseHelper
+    permission_required = 'siem.change_logeventparser'
+    fields = ['name', 'desc', 'match_regex', 'fields']
+    def get_success_url(self):
+        return reverse_lazy('siem:ph_detail', args=(self.object.id,))
+
+class PHDeleteView(PermissionRequiredMixin, DeleteView):
+    model = ParseHelper
+    permission_required = 'siem.delete_logeventparser'
+    template_name = 'siem/ph_delete.html'
+    context_object_name = 'ph'
+    def get_success_url(self):
+        return reverse('siem:ph_index')
 

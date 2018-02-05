@@ -36,4 +36,14 @@ urlpatterns = [
         views.LPUpdateView.as_view()), name='lp_update'),
     path('parsers/log/<int:pk>/delete/', login_required(
         views.LPDeleteView.as_view()), name='lp_delete'),
+    path('parsers/helpers/', login_required(
+        views.PHIndexView.as_view()), name='ph_index'),
+    path('parsers/helpers/<int:pk>/', login_required(
+        views.PHDetailView.as_view()), name='ph_detail'),
+    path('parsers/helpers/add/', login_required(
+        views.PHCreateView.as_view()), name='ph_create'),
+    path('parsers/helpers/<int:pk>/update/', login_required(
+        views.PHUpdateView.as_view()), name='ph_update'),
+    path('parsers/helpers/<int:pk>/delete/', login_required(
+        views.PHDeleteView.as_view()), name='ph_delete'),
 ]

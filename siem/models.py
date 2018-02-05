@@ -20,6 +20,12 @@ class LogEventParser(models.Model):
     def __str__(self):
         return self.name
 
+class ParseHelper(models.Model):
+    name = models.CharField(max_length=32, unique=True)
+    desc = models.CharField(max_length=200, null=True, blank=True)
+    match_regex = models.CharField(max_length=1024)
+    fields = models.CharField(max_length=512)
+
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6)
     time_zone = models.CharField(max_length=32,
@@ -35,6 +41,7 @@ class LogEvent(models.Model):
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices,
             null=True, blank=True)
+    aggregated_events = models.IntegerField(default=1)
     source_host = models.CharField(max_length=32, default='')
     source_port = models.CharField(max_length=8, default='')
     dest_host = models.CharField(max_length=32, default='')
@@ -46,9 +53,10 @@ class LogEvent(models.Model):
     protocol = models.CharField(max_length=12, default='')
     message = models.CharField(max_length=1024, default='')
     extended = models.CharField(max_length=1024, default='')
-    ext_user = models.CharField(max_length=32, default='')
-    ext_ip = models.CharField(max_length=32, default='')
-    ext_session = models.CharField(max_length=24, default='')
+    user = models.CharField(max_length=32, default='')
+    source_ip = models.CharField(max_length=45, default='')
+    dest_ip = models.CharField(max_length=45, default='')
+    session = models.CharField(max_length=24, default='')
     parsed_on = models.CharField(max_length=32)
     source_path = models.CharField(max_length=200,)
     class Meta:
