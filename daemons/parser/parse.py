@@ -140,16 +140,16 @@ class LiveParser:
         """Parse a file into ldsi"""
         self.facility = parseinfo['facility']
         # Set EOL time delta:
-        if parseinfo['locallifespan'] == 0:
+        if parseinfo['local_lifespan_days'] == 0:
             self.locallifespandelta = timedelta(days=36524)
         else:
             self.locallifespandelta = \
-                    timedelta(days=parseinfo['locallifespan'])
-        if parseinfo['backuplifespan'] == 0:
+                    timedelta(days=parseinfo['local_lifespan_days'])
+        if parseinfo['backup_lifespan_days'] == 0:
             self.backuplifespandelta = timedelta(days=36524)
         else:
             self.backuplifespandelta = \
-                    timedelta(days=parseinfo['backuplifespan'])
+                    timedelta(days=parseinfo['backup_lifespan_days'])
         self.parser = ParseModule(parseinfo['parser'],
                 parsehelpers=parseinfo['parsehelpers'])
         self.parsepath = os.path.abspath(parseinfo['filename'])
