@@ -170,7 +170,7 @@ class SiemSentry:
         else:
             totalevents = sum([x.aggregated_events for x in e])
             numhosts = len({x.log_source for x in e})
-            if len(totalevents) > self.rule.event_limit and \
+            if totalevents > self.rule.event_limit and \
                     numhosts > self.rule.allowed_log_sources:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
