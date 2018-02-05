@@ -151,7 +151,7 @@ class LiveParser:
             self.backuplifespandelta = \
                     timedelta(days=parseinfo['backup_lifespan_days'])
         self.parser = ParseModule(parseinfo['parser'],
-                parsehelpers=parseinfo['parsehelpers'])
+                parsehelpers=parseinfo['parse_helpers'])
         self.parsepath = os.path.abspath(parseinfo['filename'])
         self.parsehost = socket.getfqdn()
         try:
