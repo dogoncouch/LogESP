@@ -28,6 +28,8 @@ asset-fixtures:
 parser-fixtures:
 	@echo Loading standard syslog parser fixtures...
 	python manage.py loaddata siem/fixtures/syslog_parsers.json
+	@echo Loading authentication parse helpers...
+	python manage.py loaddata siem/fixtures/example_auth_parse_helpers.json
 
 fixtures: nist-fixtures asset-fixtures parser-fixtures
 	@echo Run 'make example-rules' to load example rule fixtures.

@@ -1,0 +1,20 @@
+[
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "pam_aggr",
+    "desc": "PAM aggregated event count",
+    "match_regex": "PAM (\\d+) more authentication failure",
+    "fields": "aggregated_events"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "pam_auth_fields",
+    "desc": "PAM authentication message fields.",
+    "match_regex": "authentication failures?; logname=\\S* uid=\\S* euid=\\S* tty=\\S* ruser=\\S* rhost=(\\S*) user=(\\S*)",
+    "fields": "source_host,user"
+  }
+}
+]
