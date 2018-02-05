@@ -6,7 +6,7 @@
     "desc": "Standard syslog parser",
     "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
     "backup_match_regex": null,
-    "fields": "date_stamp,source_host,source_process,source_pid,message",
+    "fields": "date_stamp,log_source,source_process,source_pid,message",
     "backup_fields": null
   }
 },
@@ -28,7 +28,7 @@
     "desc": "Syslog with ISO 8601 timestamp.",
     "match_regex": "^(\\d\\d\\d\\d-?\\d\\d-?\\d\\dT\\d\\d:?\\d\\d:?\\d\\d\\.?\\d*[+-:0-9Z]+)\\s+(\\S+)\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
     "backup_match_regex": null,
-    "fields": "date_stamp,source_host,source_process,source_pid,message",
+    "fields": "date_stamp,log_source,source_process,source_pid,message",
     "backup_fields": null
   }
 },
@@ -39,7 +39,7 @@
     "desc": "Cisco log sources with host configured.",
     "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+([^\\[\\] ]+)\\s%([a-zA-Z-]+): (.*)",
     "backup_match_regex": null,
-    "fields": "date_stamp,source_host,source_process,action,message",
+    "fields": "date_stamp,log_source,source_process,action,message",
     "backup_fields": null
   }
 }
