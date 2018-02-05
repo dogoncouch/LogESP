@@ -7,7 +7,7 @@
 <h1>{{ vuln }} (Vulnerability)</h1>
 <a href="{% url 'risk:vuln_update' vuln.id %}">Edit</a>
 &middot;
-<a href="{% url 'risk:vuln_delete' cond.id %}">Delete</a>
+<a href="{% url 'risk:vuln_delete' vuln.id %}">Delete</a>
 
 <p>{{ vuln.desc }}</p>
 
