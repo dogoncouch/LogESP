@@ -15,4 +15,4 @@ The LDSI risk management system is based on NIST [risk management](https://csrc.
 LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
 
 ## Installing
-Follow the installation instructions for the [latest release](https://github.com/dogoncouch/releases/latest).
+Follow the installation instructions for the [latest release](https://github.com/dogoncouch/ldsi/releases/latest).
