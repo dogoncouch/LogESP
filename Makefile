@@ -21,7 +21,14 @@ help:
 	@echo -- Set up new DB without fixtures-
 	@echo make new-db-setup
 	@echo
+	@echo *** View help on individual fixtures
+	@echo make fixture-help
+
+fixture-help:
 	@echo *** Fixtures
+	@echo - Note- 'make new-db' installs fixtures automatically.
+	@echo - Avoid installing them twice.
+	@echo
 	@echo -- Install all fixtures-
 	@echo make fixtures
 	@echo -- Install only risk management fixtures-
@@ -32,6 +39,7 @@ help:
 	@echo make parser-fixtures
 	@echo -- Install only example siem rules-
 	@echo make example-rules
+	@echo
 
 daemon-help:
 	@echo *** Daemon help
@@ -67,7 +75,8 @@ cleaner-help:
 	@echo python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
 	@echo 2. Delete using local EOL date-
 	@echo python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
-	
+	@echo - Note- cleaning should be handled by a cron job.
+	@echo
 
 new-db: new-db-setup fixtures
 
@@ -87,7 +96,7 @@ risk-fixtures:
 asset-fixtures:
 	@echo *** Loading basic asset type fixtures...
 	python manage.py loaddata hwam/fixtures/hardware_asset_types.json hwam/fixtures/software_asset_types.json
-	
+
 parser-fixtures:
 	@echo *** Loading standard syslog parser fixtures...
 	python manage.py loaddata siem/fixtures/syslog_parsers.json
