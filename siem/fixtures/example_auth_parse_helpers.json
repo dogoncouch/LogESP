@@ -16,5 +16,23 @@
     "match_regex": "rhost=(\\S*)\\s+user=(\\S*)",
     "fields": "source_host,username"
   }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_auth_fields",
+    "desc": "Cisco auth log fields.",
+    "match_regex": "New\\s+(\\S+)\\s+connection\\s+for\\s+user\\s+(\\S+),\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
+    "fields": "protocol,username,source_host,dest_host"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_aggr",
+    "desc": "Cisco aggregated events.",
+    "match_regex": ",\\s+aggregated\\s+\\((\\d+)\\)",
+    "fields": "aggregated_events"
+  }
 }
 ]
