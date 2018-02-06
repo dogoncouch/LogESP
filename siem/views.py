@@ -147,6 +147,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
     model = LimitRule
     permission_required = 'siem.change_limitrule'
     fields = ['name', 'desc', 'is_enabled', 'rule_events',
+    template_name = 'siem/limitrule_update_form.html'
             'rule_category', 'event_type',
             'local_lifespan_days', 'backup_lifespan_days',
             'severity', 'overkill_modifier', 'severity_modifier',
@@ -189,6 +190,7 @@ class LPCreateView(PermissionRequiredMixin, CreateView):
 class LPUpdateView(PermissionRequiredMixin, UpdateView):
     model = LogEventParser
     permission_required = 'siem.change_logeventparser'
+    template_name = 'siem/logeventparser_update_form.html'
     fields = ['name', 'desc', 'match_regex', 'fields',
             'backup_match_regex', 'backup_fields']
     def get_success_url(self):
@@ -224,6 +226,7 @@ class PHCreateView(PermissionRequiredMixin, CreateView):
 class PHUpdateView(PermissionRequiredMixin, UpdateView):
     model = ParseHelper
     permission_required = 'siem.change_logeventparser'
+    template_name = 'siem/parsehelper_update_form.html'
     fields = ['name', 'desc', 'match_regex', 'fields']
     def get_success_url(self):
         return reverse_lazy('siem:ph_detail', args=(self.object.id,))

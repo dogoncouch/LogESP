@@ -174,6 +174,7 @@ class ResponseCreateView(PermissionRequiredMixin, CreateView):
 class ATEUpdateView(PermissionRequiredMixin, UpdateView):
     model = AdvThreatEvent
     permission_required = 'change_advthreatevent'
+    template_name = 'risk/advthreatevent_update_form.html'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
             'likelihood_impact', 'vulnerabilities', 'impacts',
@@ -184,6 +185,7 @@ class ATEUpdateView(PermissionRequiredMixin, UpdateView):
 class NTEUpdateView(PermissionRequiredMixin, UpdateView):
     model = NonAdvThreatEvent
     permission_required = 'change_nonadvthreatevent'
+    template_name = 'risk/nonadvthreatevent_update_form.html'
     fields = ['name', 'desc', 'event_type', 'sources', 'relevance',
             'info_source', 'tier', 'likelihood_initiation', 
             'likelihood_impact', 'risk_conditions', 'impacts',
@@ -194,6 +196,7 @@ class NTEUpdateView(PermissionRequiredMixin, UpdateView):
 class ATSUpdateView(PermissionRequiredMixin, UpdateView):
     model = AdvThreatSource
     permission_required = 'change_advthreatsource'
+    template_name = 'risk/advthreatsource_update_form.html'
     fields = ['name', 'desc', 'source_type', 'info_source', 'tier',
             'in_scope', 'capability', 'intent', 'targeting']
     def get_success_url(self):
@@ -202,6 +205,7 @@ class ATSUpdateView(PermissionRequiredMixin, UpdateView):
 class NTSUpdateView(PermissionRequiredMixin, UpdateView):
     model = NonAdvThreatSource
     permission_required = 'change_nonadvthreatsource'
+    template_name = 'risk/nonadvthreatsource_update_form.html'
     fields = ['name', 'desc', 'source_type', 'info_source', 'tier',
             'in_scope', 'range_of_effect']
     def get_success_url(self):
@@ -210,6 +214,7 @@ class NTSUpdateView(PermissionRequiredMixin, UpdateView):
 class VulnUpdateView(PermissionRequiredMixin, UpdateView):
     model = Vulnerability
     permission_required = 'change_vulnerability'
+    template_name = 'risk/vulnerability_update_form.html'
     fields = ['name', 'desc', 'vuln_type', 'severity',
             'info_source', 'tier']
     def get_success_url(self):
@@ -218,6 +223,7 @@ class VulnUpdateView(PermissionRequiredMixin, UpdateView):
 class CondUpdateView(PermissionRequiredMixin, UpdateView):
     model = RiskCondition
     permission_required = 'change_riskconditions'
+    template_name = 'risk/riskcondition_update_form.html'
     fields = ['name', 'desc', 'condition_type', 'pervasiveness',
             'info_source', 'tier']
     def get_success_url(self):
@@ -226,6 +232,7 @@ class CondUpdateView(PermissionRequiredMixin, UpdateView):
 class ImpactUpdateView(PermissionRequiredMixin, UpdateView):
     model = Impact
     permission_required = 'change_impact'
+    template_name = 'risk/impact_update_form.html'
     fields = ['name', 'desc', 'impact_type', 'info_source', 'tier',
             'severity', 'impact_tier']
     def get_success_url(self):
@@ -234,6 +241,7 @@ class ImpactUpdateView(PermissionRequiredMixin, UpdateView):
 class ResponseUpdateView(PermissionRequiredMixin, UpdateView):
     model = RiskResponse
     permission_required = 'change_riskresponse'
+    template_name = 'risk/riskresponse_update_form.html'
     fields = ['name', 'desc', 'response_type', 'effectiveness', 'status']
     def get_success_url(self):
         return reverse_lazy('risk:response_detail', args=(self.object.id,))

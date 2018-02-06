@@ -143,6 +143,7 @@ class SWCreateView(PermissionRequiredMixin, CreateView):
 class OUUpdateView(PermissionRequiredMixin, UpdateView):
     model = OrganizationalUnit
     permission_required = 'hwam.change_organizationalunit'
+    template_name = 'hwam/organizationalunit_update_form.html'
     fields = ['name', 'desc', 'unit_contact', 'parent_ou']
     def get_success_url(self):
         return reverse_lazy('hwam:ou_detail', args=(self.object.id,))
@@ -150,6 +151,7 @@ class OUUpdateView(PermissionRequiredMixin, UpdateView):
 class HWUpdateView(PermissionRequiredMixin, UpdateView):
     model = HardwareAsset
     permission_required = 'hwam.change_hardwareasset'
+    template_name = 'hwam/hardwareasset_update_form.html'
     fields = ['name', 'desc', 'org_unit',
             'asset_owner', 'asset_custodian',
             'parent_hardware',
@@ -163,6 +165,7 @@ class HWUpdateView(PermissionRequiredMixin, UpdateView):
 
 class SWUpdateView(PermissionRequiredMixin, UpdateView):
     model = SoftwareAsset
+    template_name = 'hwam/softwareasset_update_form.html'
     permission_required = 'hwam.change_softwareasset'
     fields = [
             'name', 'desc', 'org_unit',
