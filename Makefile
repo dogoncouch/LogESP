@@ -31,10 +31,10 @@ parser-fixtures:
 	@echo Loading authentication parse helpers...
 	python manage.py loaddata siem/fixtures/example_auth_parse_helpers.json
 
-fixtures: nist-fixtures asset-fixtures parser-fixtures
-	@echo Run 'make example-rules' to load example rule fixtures.
-	@echo Have a nice day!
-
 example-rules:
 	@echo Loading example rule fixtures...
 	python manage.py loaddata siem/fixtures/example_auth_limit_rules.json
+
+fixtures: nist-fixtures asset-fixtures parser-fixtures example-rules
+	@echo Run 'make example-rules' to load example rule fixtures.
+	@echo Have a nice day!

@@ -46,11 +46,6 @@ make new-db
 make fixtures
 ```
 
-- (Optional) Add example auth rules:
-```
-make example-rules
-```
-
 ### Step 5
 - Start the server:
 ```

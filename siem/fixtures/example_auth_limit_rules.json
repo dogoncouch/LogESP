@@ -4,7 +4,7 @@
   "fields": {
     "name": "sshd authfail 4m",
     "desc": "Over 7 sshd auth fail events in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
     "local_lifespan_days": 185,
@@ -30,7 +30,7 @@
   "fields": {
     "name": "sshd root authfail 4m",
     "desc": "Over 3 sshd auth fail events for root in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
     "local_lifespan_days": 185,
@@ -56,7 +56,7 @@
   "fields": {
     "name": "sshd cont authfail",
     "desc": "Continued sshd auth fail events in 20 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": true,
     "rule_category": "remote auth attack",
     "local_lifespan_days": 185,
@@ -82,7 +82,7 @@
   "fields": {
     "name": "sshd cont root authfail",
     "desc": "Continued sshd auth fail events for root in 20 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": true,
     "rule_category": "remote auth attack",
     "local_lifespan_days": 185,
@@ -108,7 +108,7 @@
   "fields": {
     "name": "sudo authorization fail",
     "desc": "Non-privileged user attempting to use sudo - 4m intervals.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -134,7 +134,7 @@
   "fields": {
     "name": "sudo authentication fail",
     "desc": "Sudo authentication failures (up to 3 tries each) in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -160,7 +160,7 @@
   "fields": {
     "name": "su auth fail",
     "desc": "su auth fail - 4m interval",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -186,7 +186,7 @@
   "fields": {
     "name": "direct hw access",
     "desc": "Some program might be trying to access hardware directly.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "kernel exploit",
     "local_lifespan_days": 185,
@@ -212,7 +212,7 @@
   "fields": {
     "name": "gdm authfail 4m",
     "desc": "Over 4 Gnome Display Manager auth failures in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -238,7 +238,7 @@
   "fields": {
     "name": "compiz authfail 4m",
     "desc": "Over 4 compiz display manager auth failures in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -264,7 +264,7 @@
   "fields": {
     "name": "terminal authfail 4m",
     "desc": "Over 4 login authentication failures from 'login' in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -290,7 +290,7 @@
   "fields": {
     "name": "terminal root authfail 4m",
     "desc": "Local terminal auth failures for root in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -316,7 +316,7 @@
   "fields": {
     "name": "lightdm authfail 4m",
     "desc": "Over 4 lightdm auth failures in 4 minutes.",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "local auth attack",
     "local_lifespan_days": 185,
@@ -342,7 +342,7 @@
   "fields": {
     "name": "cisco_authfail_4m",
     "desc": "Over 3 Cisco management plane authentication failures (4m intervals)",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
     "local_lifespan_days": 185,
@@ -368,7 +368,7 @@
   "fields": {
     "name": "cisco_cont_authfail",
     "desc": "Continued auth fail on cisco devices over 20 minutes",
-    "is_enabled": true,
+    "is_enabled": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
     "local_lifespan_days": 185,
