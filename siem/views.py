@@ -146,8 +146,8 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
 class LRUpdateView(PermissionRequiredMixin, UpdateView):
     model = LimitRule
     permission_required = 'siem.change_limitrule'
-    fields = ['name', 'desc', 'is_enabled', 'rule_events',
     template_name = 'siem/limitrule_update_form.html'
+    fields = ['name', 'desc', 'is_enabled', 'rule_events',
             'rule_category', 'event_type',
             'local_lifespan_days', 'backup_lifespan_days',
             'severity', 'overkill_modifier', 'severity_modifier',
