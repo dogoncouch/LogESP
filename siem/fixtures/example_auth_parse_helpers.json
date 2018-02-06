@@ -11,10 +11,19 @@
 {
   "model": "siem.parsehelper",
   "fields": {
-    "name": "pam_auth_fields",
-    "desc": "PAM authentication message fields.",
-    "match_regex": "authentication failures?; logname=\\S* uid=\\S* euid=\\S* tty=\\S* ruser=\\S* rhost=(\\S*) user=(\\S*)",
-    "fields": "source_host,user"
+    "name": "pam_auth_shost",
+    "desc": "PAM authentication source host field.",
+    "match_regex": ".*rhost=(\\S*)\\s.*",
+    "fields": "source_host"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "pam_auth_user",
+    "desc": "PAM authentication user field.",
+    "match_regex": "\\suser=(\\S*)",
+    "fields": "username"
   }
 }
 ]
