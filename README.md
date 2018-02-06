@@ -34,25 +34,19 @@ pip install django
 ```
 
 ### Step 3
-- Create/migrate the database:
+- Create/migrate the database, and add fixtures:
 ```
 cd ldsi
 make new-db
 ```
 
 ### Step 4
-- Add fixtures
-```
-make fixtures
-```
-
-### Step 5
 - Start the server:
 ```
 python manage.py runserver
 ```
 
-#### Step 6
+### Step 5
 - Try it: http://localhost:8000
 
 ## Notes
