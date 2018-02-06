@@ -92,8 +92,8 @@ class LiveParser:
                         e.protocol = entry['protocol']
                         e.message = entry['message']
                         e.extended = entry['extended']
-                        e.user = entry['user']
-                        e.session = entry['session']
+                        e.username = entry['username']
+                        e.session = entry['sessionid']
                         e.parsed_on = self.parsehost
                         e.source_path = self.parsepath
                         e.save()
@@ -122,8 +122,8 @@ class LiveParser:
                         e.action = ''
                         e.protocol = ''
                         e.message = ''
-                        e.user = ''
-                        e.session = ''
+                        e.username = ''
+                        e.sessionid = ''
         
                 else:
                     # Check if file has been rotated:
