@@ -98,10 +98,11 @@ class ParseModule:
 
             # Parse helpers:
             for h in self.parsehelpers:
-                ext = re.findall(h['regex_format'], line)
-                extlist = list(zip(fields, match[0]))
-                for f, v in extlist:
-                    entry[f] = v
+                extmatch = re.findall(h['regex_format'], line)
+                if extmatch:
+                    extlist = list(zip(fields, extmatch[0]))
+                    for f, v in extlist:
+                        entry[f] = v
 
             # Convert integer fields:
             if entry['aggregated_events']:
