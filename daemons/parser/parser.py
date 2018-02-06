@@ -52,7 +52,7 @@ class ParseModule:
             helper['name'] = h.name
             helper['regex_format'] = re.compile(
                     r'{}'.format(h.match_regex))
-            helper['fields'] = h.fields
+            helper['fields'] = h.fields.split(',')
             self.parsehelpers.append(helper)
 
 
