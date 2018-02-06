@@ -33,5 +33,5 @@ example-rules:
 	@echo Loading example rule fixtures...
 	python manage.py loaddata siem/fixtures/example_auth_limit_rules.json
 
-fixtures: nist-fixtures asset-fixtures parser-fixtures example-rules
+fixtures: risk-fixtures asset-fixtures parser-fixtures example-rules
 	@echo Have a nice day!
