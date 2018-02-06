@@ -91,9 +91,16 @@ class LiveParser:
                         e.action = entry['action']
                         e.protocol = entry['protocol']
                         e.message = entry['message']
-                        e.extended = entry['extended']
                         e.username = entry['username']
                         e.session = entry['sessionid']
+                        e.ext0 = entry['ext0']
+                        e.ext1 = entry['ext1']
+                        e.ext2 = entry['ext2']
+                        e.ext3 = entry['ext3']
+                        e.ext4 = entry['ext4']
+                        e.ext5 = entry['ext5']
+                        e.ext6 = entry['ext6']
+                        e.ext7 = entry['ext7']
                         e.parsed_on = self.parsehost
                         e.source_path = self.parsepath
                         e.save()

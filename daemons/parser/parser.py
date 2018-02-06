@@ -87,9 +87,16 @@ class ParseModule:
             entry['dest_port'] = ''
             entry['protocol'] = ''
             entry['message'] = ''
-            entry['extended'] = ''
             entry['username'] = ''
             entry['sessionid'] = ''
+            entry['ext0'] = ''
+            entry['ext1'] = ''
+            entry['ext2'] = ''
+            entry['ext3'] = ''
+            entry['ext4'] = ''
+            entry['ext5'] = ''
+            entry['ext6'] = ''
+            entry['ext7'] = ''
 
             linelist = list(zip(fields, match[0]))
 
