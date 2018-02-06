@@ -5,9 +5,6 @@
 {% block content-main %}
 
 <h1>Impacts</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:risk_impact_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'risk:impact_create' %}">Add</a>
 
 {% if impact_list %}

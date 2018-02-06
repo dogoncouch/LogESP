@@ -3,9 +3,6 @@
 {% block content-main %}
 
 <h1>Adversarial Threat Events</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:risk_advthreatevent_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'risk:ate_create' %}">Add</a>
 
 {% if ate_list %}

@@ -5,9 +5,6 @@
 {% block content-main %}
 
 <h1>Non-Adversarial Threat Sources</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:risk_nonadvthreatsource_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'risk:nts_create' %}">Add</a>
 
 {% if nts_list %}

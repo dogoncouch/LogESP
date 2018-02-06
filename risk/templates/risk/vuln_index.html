@@ -5,9 +5,6 @@
 {% block content-main %}
 
 <h1>Vulnerabilities</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:risk_vulnerability_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'risk:vuln_create' %}">Add</a>
 
 {% if vuln_list %}

@@ -5,9 +5,6 @@
 {% block content-main %}
 
 <h1>Predisposing Conditions</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:risk_riskcondition_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'risk:cond_create' %}">Add</a>
 
 {% if cond_list %}

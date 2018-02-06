@@ -5,9 +5,6 @@
 {% block content-main %}
 
 <h1>Adversarial Threat Sources</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:risk_advthreatsource_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'risk:ats_create' %}">Add</a>
 
 {% if ats_list %}

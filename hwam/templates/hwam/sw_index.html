@@ -5,10 +5,8 @@
 {% block content-main %}
 
 <h1>Software Assets</h1>
-{% if user.is_staff %}
-    <a href="{% url 'admin:hwam_softwareasset_changelist' %}">Admin</a>
-{% endif %}
 <a href="{% url 'hwam:sw_create' %}">Add</a>
+&middot;
 <a href="{% url 'hwam:sw_search' %}">Search</a>
 
 {% if sw_list %}
