@@ -336,5 +336,31 @@
     "magnitude_filter": null,
     "message": "Over 4 lightdm auth fail events in 4 minutes"
   }
+},
+{
+  "model": "siem.limitrule",
+  "fields": {
+    "name": "cisco_authfail_4m",
+    "desc": "Over 3 Cisco management plane authentication failures (4m intervals)",
+    "is_enabled": true,
+    "rule_events": false,
+    "rule_category": "remote auth attack",
+    "local_lifespan_days": 185,
+    "backup_lifespan_days": 366,
+    "event_type": "cisco",
+    "severity": 1,
+    "overkill_modifier": "3.5",
+    "severity_modifier": "1.0",
+    "time_int": 4,
+    "event_limit": 3,
+    "allowed_log_sources": 0,
+    "message_filter_regex": "connection.*REJECTED",
+    "raw_text_filter_regex": null,
+    "log_source_filter": null,
+    "process_filter": "AAA",
+    "rulename_filter": null,
+    "magnitude_filter": null,
+    "message": "Over 3 Cisco auth failures in 4 minutes"
+  }
 }
 ]
