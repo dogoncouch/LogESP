@@ -98,6 +98,8 @@ class ParseModule:
 
             # Parse helpers:
             for h in self.parsehelpers:
+                extmatch = None
+                extlist = []
                 extmatch = re.findall(h['regex_format'], line)
                 if extmatch:
                     extlist = list(zip(h['fields'], extmatch[0]))
