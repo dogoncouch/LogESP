@@ -4,12 +4,10 @@ all:
 
 default: all
 
-new-db:
+new-db: new-db-setup fixtures
+
+new-db-setup:
 	@echo Loading initial migrations...
-	python manage.py migrate
-	@echo Creating migration...
-	python manage.py makemigrations
-	@echo Loading migration...
 	python manage.py migrate
 	@echo Creating superuser...
 	python manage.py createsuperuser
@@ -36,5 +34,4 @@ example-rules:
 	python manage.py loaddata siem/fixtures/example_auth_limit_rules.json
 
 fixtures: nist-fixtures asset-fixtures parser-fixtures example-rules
-	@echo Run 'make example-rules' to load example rule fixtures.
 	@echo Have a nice day!
