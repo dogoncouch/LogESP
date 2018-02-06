@@ -184,32 +184,6 @@
 {
   "model": "siem.limitrule",
   "fields": {
-    "name": "direct hw access",
-    "desc": "Some program might be trying to access hardware directly.",
-    "is_enabled": false,
-    "rule_events": false,
-    "rule_category": "kernel exploit",
-    "local_lifespan_days": 185,
-    "backup_lifespan_days": 366,
-    "event_type": "kernel",
-    "severity": 2,
-    "overkill_modifier": "5.0",
-    "severity_modifier": "5.0",
-    "time_int": 4,
-    "event_limit": 0,
-    "allowed_log_sources": 0,
-    "message_filter_regex": "Some program might be trying to access hardware directly",
-    "raw_text_filter_regex": null,
-    "log_source_filter": null,
-    "process_filter": "kernel",
-    "rulename_filter": null,
-    "magnitude_filter": null,
-    "message": "Possible direct hardware access attempt"
-  }
-},
-{
-  "model": "siem.limitrule",
-  "fields": {
     "name": "gdm authfail 4m",
     "desc": "Over 4 Gnome Display Manager auth failures in 4 minutes.",
     "is_enabled": false,
