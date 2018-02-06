@@ -53,7 +53,7 @@
             <td>{{ e.date_stamp }}</a></td>
             <td>{{ e.event_type }}</td>
             <td>{{ e.log_source }}</td>
-            <td>{{ e.source_process }}[{{ e.source_pid }}]</td>
+            <td>{{ e.source_process|truncatechars:10 }}[{{ e.source_pid }}]</td>
             <td>{{ e.aggregated_events }}</td>
             <td>{{ e.message|truncatechars:75 }}</td>
             </a>
