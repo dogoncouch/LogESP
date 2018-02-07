@@ -12,9 +12,9 @@ LDSI is a SIEM (Security Information and Event Management system) written in Pyt
 
 ### Applications
 LDSI applications:
+- SIEM - Security Information and Event Management
 - Assets - Asset Management
 - Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
-- SIEM - Security Information and Event Management
 
 ### Design Principles
 #### [NIST](https://www.nist.gov/) guidelines
