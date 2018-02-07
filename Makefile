@@ -1,8 +1,8 @@
 
 all:
 	@echo
-	@echo No make target for all/default.
-	@echo Try 'make help'
+	@echo No make target for all\/default.
+	@echo Try \'make help\'
 	@echo
 
 default: all
@@ -10,7 +10,7 @@ default: all
 install:
 	@echo
 	@echo No make target for install.
-	@echo Try 'make help'
+	@echo Try \'make help\'
 	@echo
 
 help:
@@ -35,7 +35,7 @@ fixture-help:
 	@echo
 	@echo --- Fixtures
 	@echo --------------
-	@echo - Note- 'make new-db' installs fixtures automatically.
+	@echo - Note- \'make new-db\' installs fixtures automatically.
 	@echo - Avoid installing them twice.
 	@echo
 	@echo -- Install all fixtures-
@@ -70,7 +70,7 @@ parser-help:
 	@echo --------------------------------
 	@echo 1. Edit config file at 'config/parser.conf'
 	@echo 2. Run the parser inside a django shell-
-	@echo python manage.py shell -c "import daemons.parser.parsecore ; daemons.parser.parsecore.start()"
+	@echo python manage.py shell -c \"import daemons.parser.parsecore \; daemons.parser.parsecore.start\(\)\"
 	@echo 
 
 sentry-help:
@@ -78,7 +78,7 @@ sentry-help:
 	@echo --- Starting the sentry engine
 	@echo --------------------------------
 	@echo - Run the sentry engine inside of a django shell-
-	@echo python manage.py shell -c "import daemons.sentry.sentrycore ; daemons.sentry.sentrycore.start()"
+	@echo python manage.py shell -c \"import daemons.sentry.sentrycore \; daemons.sentry.sentrycore.start\(\)\"
 	@echo
 
 cleaner-help:
@@ -89,9 +89,9 @@ cleaner-help:
 	@echo - backup copies of events. The cleaner can use either to
 	@echo - delete old  events. There are two options-
 	@echo 1. Delete using the backup EOL date-
-	@echo python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
+	@echo python manage.py shell -c \"import daemons.cleaner.clean \; daemons.cleaner.clean.clean\(\)\"
 	@echo 2. Delete using local EOL date-
-	@echo python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
+	@echo python manage.py shell -c \"import daemons.cleaner.clean \; daemons.cleaner.clean.clean\(local=True\)\"
 	@echo - Note- cleaning should be handled by a cron job.
 	@echo
 
