@@ -55,7 +55,7 @@
             <td>{{ e.log_source }}</td>
             <td>{{ e.source_process|truncatechars:10 }}[{{ e.source_pid }}]</td>
             <td>{{ e.aggregated_events }}</td>
-            <td>{{ e.message|truncatechars:85 }}</td>
+            <td>{{ e.message|truncatechars:95 }}</td>
             </a>
         </tr>
         {% endfor %}
