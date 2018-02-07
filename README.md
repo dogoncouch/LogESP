@@ -120,7 +120,7 @@ Cleaning should be handled by a cron job.
 ![Adversarial threat event index screenshot](media/adv_threat_event_index_screenshot.png)
 
 #### Adversarial threat event detail:
-![Adversarial threat event detail screenshot](media/nonadv_threat_event_detail_screenshot.png)
+![Adversarial threat event detail screenshot](media/adv_threat_event_detail_screenshot.png)
 
 #### Non-adversarial threat event detail:
 ![Non-adversarial threat event index screenshot](media/nonadv_threat_event_detail_screenshot.png)
