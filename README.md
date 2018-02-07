@@ -1,17 +1,26 @@
 # LogDissect Security Intelligence
-A web application for managing security information. Still in early development.
+LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
 
-## Applications
+## Index
+
+- [Introduction](#introduction)
+- [Installing](#installing)
+- [Daemons](#daemons)
+- [Screenshots](#screenshots)
+
+## Introduction
+
+### Applications
 LDSI applications:
 - Assets - Asset Management
 - Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
 - SIEM - Security Information and Event Management
 
-## Design Principles
-### [NIST](https://www.nist.gov/) guidelines
+### Design Principles
+#### [NIST](https://www.nist.gov/) guidelines
 The LDSI risk management system is based on NIST [risk management](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
 
-### Simplicity
+#### Simplicity
 LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
 
 ## Installing
@@ -55,7 +64,7 @@ python manage.py runserver
 ### Step 6
 - Set up syslog service, clients
 
-## Notes
+## Daemons
 ### Parser Engine
 To start the parser engine:
 
@@ -88,3 +97,31 @@ python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.
 ```
 
 Cleaning should be handled by a cron job.
+
+## Screenshots
+
+### SIEM
+
+- Log event search:
+![Log event search screenshot](media/log_event_search_screenshot.png)
+
+- Log event detail view:
+![Log event detail screenshot](media/log_event_detail_screenshot.png)
+
+- Rule event search:
+![Rule event search screenshot](media/rule_event_search_screenshot.png)
+
+- Rule event detail view:
+![Rule event detail screenshot](media/rule_event_detail_screenshot.png)
+
+### Risk Management
+
+- Adversarial threat event index:
+![Adversarial threat event index screenshot](media/adv_threat_event_index_screenshot.png)
+
+- Adversarial threat event detail:
+![Adversarial threat event detail screenshot](media/nonadv_threat_event_detail_screenshot.png)
+
+- Non-adversarial threat event detail:
+![Non-adversarial threat event index screenshot](media/nonadv_threat_event_detail_screenshot.png)
+
