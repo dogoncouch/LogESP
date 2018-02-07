@@ -1,5 +1,6 @@
 
 all:
+	@echo
 	@echo No make target for all/default.
 	@echo Try 'make help'
 	@echo
@@ -7,11 +8,13 @@ all:
 default: all
 
 install:
+	@echo
 	@echo No make target for install.
 	@echo Try 'make help'
 	@echo
 
 help:
+	@echo
 	@echo --- View daemon help display
 	@echo ------------------------------
 	@echo make daemon-help
@@ -26,8 +29,10 @@ help:
 	@echo --- View help on individual fixtures
 	@echo --------------------------------------
 	@echo make fixture-help
+	@echo
 
 fixture-help:
+	@echo
 	@echo --- Fixtures
 	@echo --------------
 	@echo - Note- 'make new-db' installs fixtures automatically.
@@ -46,6 +51,7 @@ fixture-help:
 	@echo
 
 daemon-help:
+	@echo
 	@echo --- Daemon help
 	@echo -----------------
 	@echo -- Get help on parser engine-
@@ -59,6 +65,7 @@ daemon-help:
 	@echo
 
 parser-help:
+	@echo
 	@echo --- Starting the parser engine
 	@echo --------------------------------
 	@echo 1. Edit config file at 'config/parser.conf'
@@ -67,6 +74,7 @@ parser-help:
 	@echo 
 
 sentry-help:
+	@echo
 	@echo --- Starting the sentry engine
 	@echo --------------------------------
 	@echo - Run the sentry engine inside of a django shell-
@@ -74,6 +82,7 @@ sentry-help:
 	@echo
 
 cleaner-help:
+	@echo
 	@echo --- Removing old entries
 	@echo --------------------------
 	@echo - Note- events have two different EOL dates for local and
