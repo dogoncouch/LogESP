@@ -9,10 +9,6 @@ def validate_scale_range(value):
     if not 0 < value <= 100:
         raise ValidationError('%s not in 1-100 range' % value)
 
-def validate_tier_range(value):
-    if not 1 <= value <= 3:
-        raise ValidationError('%s not in 1-3 range' % value)
-
 class VulnerabilityClass(models.Model):
     name = models.CharField(max_length=30)
     desc = models.CharField(max_length=200, null=True, blank=True)

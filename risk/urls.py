@@ -7,11 +7,9 @@ from . import views
 app_name = 'risk'
 urlpatterns = [
     path('', login_required(views.index), name='index'),
-    path('at/', login_required(views.at_index), name='at_index'),
-    path('nt/', login_required(views.nt_index), name='nt_index'),
-    path('at/events/', login_required(views.ATEIndexView.as_view()),
+    path('at/', login_required(views.ATEIndexView.as_view()),
         name='ate_index'),
-    path('nt/events/', login_required(views.NTEIndexView.as_view()),
+    path('nt/', login_required(views.NTEIndexView.as_view()),
         name='nte_index'),
     path('at/sources/', login_required(views.ATSIndexView.as_view()),
         name='ats_index'),
