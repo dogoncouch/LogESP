@@ -54,10 +54,16 @@ daemon-help:
 	@echo
 	@echo --- Daemon help
 	@echo -----------------
-	@echo -- Get help on parser engine-
+	@echo -- Use start.sh to start parser and sentry daemons-
+	@echo ./start.sh -h
+	@echo
+	@echo Make sure to edit config/parser.conf
+	@echo Restart daemons with ./start.sh -r to re-read config
+	@echo
+	@echo -- For help on parser engine-
 	@echo make parser-help
 	@echo
-	@echo -- Get help on sentry engine-
+	@echo -- For help on sentry engine-
 	@echo make sentry-help
 	@echo
 	@echo -- Get help on cleaner-

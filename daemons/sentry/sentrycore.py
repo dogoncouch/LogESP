@@ -41,12 +41,12 @@ class SentryCore:
         self.rules = []
         self.newrules = []
         self.threads = {}
-        signal.signal(signal.SIGTERM, self.sigterm_handler)
+        #signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
-    def sigterm_handler(self, signal, frame):
-        """Exit cleanly on sigterm"""
-        exit(0)
+    #def sigterm_handler(self, signal, frame):
+    #    """Exit cleanly on sigterm"""
+    #    exit(0)
 
 
     def get_rules(self):
@@ -78,7 +78,12 @@ class SentryCore:
             while True:
                 self.get_rules()
                 self.start_triggers()
-                sleep(600)
+                for t in self.threads:
+                    if not self.threads[t].isAlive():
+                        msg = 'LDSI sentry thread for rule id ' + \
+                                t.name + 'has crashed'
+                        syslog.syslog(syslog.LOG_ERROR, msg)
+                sleep(120)
 
         except KeyboardInterrupt:
             exit(0)

@@ -26,6 +26,7 @@ import daemons.parser.parse
 import sys
 import os.path
 import signal
+import syslog
 from configparser import ConfigParser
 from threading import Thread
 from time import sleep
@@ -37,12 +38,12 @@ class ParseCore:
         """Initialize live parser"""
         self.conf = config
         self.threads = []
-        signal.signal(signal.SIGTERM, self.sigterm_handler)
+        #signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
-    def sigterm_handler(self, signal, frame):
-        """Exit cleanly on sigterm"""
-        exit(0)
+    #def sigterm_handler(self, signal, frame):
+    #    """Exit cleanly on sigterm"""
+    #    exit(0)
 
 
     def get_config(self):
@@ -86,9 +87,6 @@ class ParseCore:
                 thread = Thread(name=entry['filename'],
                         target=daemons.parser.parse.start_parse,
                         args=(entry,))
-                        #args=(entry['filename'], entry['parser'],
-                        #entry['event_type'], entry['local_lifespan_days'],
-                        #entry['backup_lifespan_days'], entry['facility']))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)
@@ -98,8 +96,14 @@ class ParseCore:
                 for thread in self.threads:
                     if thread.isAlive():
                         isAlive=True
-                if not isAlive: exit(0)
-                sleep(10)
+                    else:
+                        msg = 'LDSI parser thread for file ' + \
+                                thread.name + ' has crashed'
+                        syslog.syslog(syslog.LOG_CRITICAL, msg)
+                if not isAlive:
+                    msg = 'LDSI is not parsing any files'
+                    syslog.syslog(syslog.LOG_ERROR, msg)
+                sleep(120)
 
         except KeyboardInterrupt:
             pass
