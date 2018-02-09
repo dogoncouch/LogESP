@@ -32,11 +32,13 @@ usage() {
     echo "  -v                      Print the version number"
     echo "  -r                      Restart daemons"
     echo "  -k                      Stop daemons"
+    echo "  -c                      Clean old events using backup EOL date"
+    echo "  -l                      Clean old events using local EOL date"
     echo "  -b <ldsi-base>          Set the LDSI base directory"
     echo "  -e <env-base>           Set a virtual environment"
 }
 
-while getopts ":hvrkb:e:" o; do
+while getopts ":hvrkclb:e:" o; do
     case "${o}" in
         h)
             usage
@@ -50,6 +52,12 @@ while getopts ":hvrkb:e:" o; do
             ;;
         k)
             KILLING=1
+            ;;
+        c)
+            CLEANING=1
+            ;;
+        l)
+            CLEANINGLOCAL=1
             ;;
         b)
             LDSIBASE=${OPTARG}
@@ -95,6 +103,16 @@ fi
 if [ $VERSIONCHECK ]; then
     VERSION=`python manage.py shell -c "import ldsi; print(ldsi.__version__)"`
     echo "${0##*/}-$VERSION"
+    exit 0
+fi
+
+if [ $CLEANING ]; then
+    python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
+    exit 0
+fi
+
+if [ $CLEANINGLOCAL ]; then
+    python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
     exit 0
 fi
 
