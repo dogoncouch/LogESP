@@ -30,6 +30,8 @@ usage() {
     echo "Optional arguments:"
     echo "  -h                      Print this help message"
     echo "  -v                      Print the version number"
+    echo "  -r                      Restart daemons"
+    echo "  -k                      Stop daemons"
     echo "  -b <ldsi-base>          Set the LDSI base directory"
     echo "  -e <env-base>           Set a virtual environment"
 }
