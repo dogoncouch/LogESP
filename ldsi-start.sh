@@ -34,7 +34,7 @@ usage() {
     echo "  -e <env-base>           Set a virtual environment"
 }
 
-while getopts ":hvrb:e:" o; do
+while getopts ":hvrkb:e:" o; do
     case "${o}" in
         h)
             usage
@@ -45,6 +45,9 @@ while getopts ":hvrb:e:" o; do
             ;;
         r)
             RESTARTING=1
+            ;;
+        k)
+            KILLING=1
             ;;
         b)
             LDSIBASE=${OPTARG}
@@ -60,6 +63,13 @@ if [ $RESTARTING ]; then
     LDSIPROCLIST=`ps aux | grep 'daemons.core.main' | awk '{print $2}'`
     read LDSIPROC WASTE <<< ${LDSIPROCLIST}
     kill -1 ${LDSIPROC}
+    exit 0
+fi
+
+if [ $KILLING ]; then
+    LDSIPROCLIST=`ps aux | grep 'ldsi-start.sh' | awk '{print $2}'`
+    read LDSIPROC WASTE <<< ${LDSIPROCLIST}
+    kill ${LDSIPROC}
     exit 0
 fi
 
