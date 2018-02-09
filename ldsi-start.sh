@@ -69,7 +69,7 @@ if [ $RESTARTING ]; then
 fi
 
 if [ $KILLING ]; then
-    LDSIPROCLIST=`ps aux | grep 'ldsi-start.sh' | awk '{print $2}'`
+    LDSIPROCLIST=`ps aux | grep 'ldsi-start.sh' | grep '/bin/bash' | awk '{print $2}'`
     read LDSIPROC WASTE <<< ${LDSIPROCLIST}
     kill ${LDSIPROC}
     exit 0
