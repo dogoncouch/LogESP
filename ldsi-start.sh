@@ -77,7 +77,7 @@ if [ $RESTARTING ]; then
 fi
 
 if [ $KILLING ]; then
-    LDSIPROCLIST=`ps aux | grep 'ldsi-start.sh' | grep '/bin/bash' | awk '{print $2}'`
+    LDSIPROCLIST=`ps aux | grep 'daemons.core.main' | awk '{print $2}'`
     read LDSIPROC WASTE <<< ${LDSIPROCLIST}
     kill ${LDSIPROC}
     exit 0
@@ -119,5 +119,8 @@ fi
 echo Starting daemons...
 
 while :; do
-    python manage.py shell -c "import daemons.core ; daemons.core.main()"
+    `python manage.py shell -c "import daemons.core ; daemons.core.main()"`
+    if [[ $? -eq 0 ]]; then
+        exit 0
+    fi
 done

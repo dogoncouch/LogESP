@@ -44,7 +44,7 @@ class DaemonCore:
     def sigint_handler(self, signal, frame):
         """Exit cleanly so restart can happen on sigint"""
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigint, restarting')
-        exit(0)
+        exit(1)
 
     def start(self):
         """Start parser and sentry engines"""
