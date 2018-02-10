@@ -7,24 +7,28 @@
 <h1>Log Events</h1>
 
 <form method="get" action="{% url 'siem:logevent_search' %}">
-    <p>Event Type:
-    <input type="text" value="{{ type_filter }}" name="type_filter"/></p>
     <p>Log Source:
     <input type="text" value="{{ log_source_filter }}" name="log_source_filter"/>
     Process:
-    <input type="text" value="{{ process_filter }}" name="process_filter"/></p>
-    <p>Source Host:
-    <input type="text" value="{{ source_host_filter }}" name="source_host_filter"/>
-    Destination Host:
-    <input type="text" value="{{ dest_host_filter }}" name="dest_host_filter"/></p>
-    <p>Message:
+    <input type="text" value="{{ process_filter }}" name="process_filter"/>
+    Message:
     <input type="text" value="{{ message_filter }}" name="message_filter"/>
     Raw Text:
     <input type="text" value="{{ raw_filter }}" name="raw_filter"/></p>
-    <p>End Date/Time:
+    <p>Source Host:
+    <input type="text" value="{{ source_host_filter }}" name="source_host_filter"/>
+    Source Port:
+    <input type="text" value="{{ source_port_filter }}" name="source_port_filter"/>
+    Dest. Host:
+    <input type="text" value="{{ dest_host_filter }}" name="dest_host_filter"/>
+    Dest. Port:
+    <input type="text" value="{{ dest_port_filter }}" name="dest_port_filter"/></p>
+    <p>Event Type:
+    <input type="text" value="{{ type_filter }}" name="type_filter"/>
+    End Date/Time:
     <input type="datetime-local" value="{{ time_filter }}" name="time_filter"</a>
     (YYYY-M-D H:M:S)</p>
-    <p><input type="submit" name="submit" value="Submit"/>
+    <p><input type="submit" name="submit" value="Search"/>
 </form>
 
 {% if event_list %}
@@ -40,7 +44,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}source_host_filter={{ source_host_filter }}&&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
