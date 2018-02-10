@@ -60,46 +60,6 @@ daemon-help:
 	@echo Make sure to edit config/parser.conf
 	@echo Restart daemons with ./start.sh -r to re-read config
 	@echo
-	@echo -- For help on parser engine-
-	@echo make parser-help
-	@echo
-	@echo -- For help on sentry engine-
-	@echo make sentry-help
-	@echo
-	@echo -- Get help on cleaner-
-	@echo make cleaner-help
-	@echo
-
-parser-help:
-	@echo
-	@echo --- Starting the parser engine
-	@echo --------------------------------
-	@echo 1. Edit config file at 'config/parser.conf'
-	@echo 2. Run the parser inside a django shell-
-	@echo python manage.py shell -c \"import daemons.parser.parsecore \; daemons.parser.parsecore.start\(\)\"
-	@echo 
-
-sentry-help:
-	@echo
-	@echo --- Starting the sentry engine
-	@echo --------------------------------
-	@echo - Run the sentry engine inside of a django shell-
-	@echo python manage.py shell -c \"import daemons.sentry.sentrycore \; daemons.sentry.sentrycore.start\(\)\"
-	@echo
-
-cleaner-help:
-	@echo
-	@echo --- Removing old entries
-	@echo --------------------------
-	@echo - Note- events have two different EOL dates for local and
-	@echo - backup copies of events. The cleaner can use either to
-	@echo - delete old  events. There are two options-
-	@echo 1. Delete using the backup EOL date-
-	@echo python manage.py shell -c \"import daemons.cleaner.clean \; daemons.cleaner.clean.clean\(\)\"
-	@echo 2. Delete using local EOL date-
-	@echo python manage.py shell -c \"import daemons.cleaner.clean \; daemons.cleaner.clean.clean\(local=True\)\"
-	@echo - Note- cleaning should be handled by a cron job.
-	@echo
 
 new-db: new-db-setup fixtures
 
