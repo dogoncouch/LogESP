@@ -70,15 +70,16 @@ done
 shift $((OPTIND-1))
 
 if [ $RESTARTING ]; then
-    LDSIPROCLIST=`ps aux | grep 'daemons.core.main' | awk '{print $2}'`
-    read LDSIPROC WASTE <<< ${LDSIPROCLIST}
+    read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | awk '{print $2}'`
+    #read LDSIPROC WASTE <<< ${LDSIPROCLIST}
     kill -1 ${LDSIPROC}
     exit 0
 fi
 
 if [ $KILLING ]; then
-    LDSIPROCLIST=`ps aux | grep 'daemons.core.main' | awk '{print $2}'`
-    read LDSIPROC WASTE <<< ${LDSIPROCLIST}
+    read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | awk '{print $2}'`
+    #LDSIPROCLIST=`ps aux | grep 'daemons.core.main' | awk '{print $2}'`
+    #read LDSIPROC WASTE <<< ${LDSIPROCLIST}
     kill ${LDSIPROC}
     exit 0
 fi
@@ -119,7 +120,7 @@ fi
 echo Starting daemons...
 
 while :; do
-    `python manage.py shell -c "import daemons.core ; daemons.core.main()"`
+    `python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main()"`
     if [[ $? -eq 0 ]]; then
         exit 0
     fi
