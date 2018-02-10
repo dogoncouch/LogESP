@@ -39,6 +39,8 @@ TABLE, TH, TD {
     border-color: #444444;
 }
 
+TH.left { text-align: left; }
+
 TABLE.event {
     display: inline-block;
     overflow-x: auto;

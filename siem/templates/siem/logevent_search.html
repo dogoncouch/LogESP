@@ -69,7 +69,7 @@
             <th>Event<br>Type</th><th>Log<br>Source</th>
             <th>Source<br>Process</th><th>#<br>Aggr</th>
             <th>Source<br>Host</th><th>Dest.<br>Host</th>
-            <th>Message</th></tr>
+            <th class="left">Message</th></tr>
         {% for e in event_list %}
         <tr>
             <td><a class="event" href="{% url 'siem:logevent_detail' e.id %}">
