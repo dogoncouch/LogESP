@@ -28,6 +28,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         log_source_val = self.request.GET.get('log_source_filter')
         process_val = self.request.GET.get('process_filter')
+        source_host_val = self.request.GET.get('source_host_filter')
+        dest_host_val = self.request.GET.get('dest_host_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
         raw_val = self.request.GET.get('raw_filter')
@@ -43,6 +45,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 event_type__contains=type_val,
                 log_source__contains=log_source_val,
                 source_process__contains=process_val,
+                source_host__contains=source_host_val,
+                dest_host__contains=dest_host_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
         else:
@@ -50,6 +54,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 event_type__contains=type_val,
                 log_source__contains=log_source_val,
                 source_process__contains=process_val,
+                source_host__contains=source_host_val,
+                dest_host__contains=dest_host_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
         return new_context
@@ -58,6 +64,10 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         context['log_source_filter'] = self.request.GET.get(
                 'log_source_filter', '')
         context['process_filter'] = self.request.GET.get('process_filter', '')
+        context['source_host_filter'] = self.request.GET.get(
+                'source_host_filter', '')
+        context['dest_host_filter'] = self.request.GET.get(
+                'dest_host_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
         context['message_filter'] = self.request.GET.get('message_filter', '')
         context['raw_filter'] = self.request.GET.get('raw_filter', '')
@@ -138,6 +148,7 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter', 'process_filter',
+            'source_host_filter', 'dest_host_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):
@@ -154,6 +165,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter', 'process_filter',
+            'source_host_filter', 'dest_host_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):

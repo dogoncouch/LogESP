@@ -98,6 +98,10 @@ class LimitRule(models.Model):
             null=True, blank=True)
     process_filter = models.CharField(max_length=32,
             null=True, blank=True)
+    source_host_filter = models.CharField(max_length=32,
+            null=True, blank=True)
+    dest_host_filter = models.CharField(max_length=32,
+            null=True, blank=True)
     rulename_filter = models.CharField(max_length=32,
             null=True, blank=True)
     magnitude_filter = models.IntegerField(null=True, blank=True)

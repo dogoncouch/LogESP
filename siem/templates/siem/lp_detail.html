@@ -8,6 +8,8 @@
 <a href="{% url 'siem:lp_update' lp.id %}">Edit</a>
 &middot;
 <a href="{% url 'siem:lp_delete' lp.id %}">Delete</a>
+&middot;
+<a href="{% url 'siem:lp_index' %}">Index</a>
 <ul>
     <li>ID: {{ lp.id }}</li>
     <li>Name: {{ lp.name }}</li>

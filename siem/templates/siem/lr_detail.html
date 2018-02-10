@@ -8,6 +8,9 @@
 <a href="{% url 'siem:lr_update' lr.id %}">Edit</a>
 &middot;
 <a href="{% url 'siem:lr_delete' lr.id %}">Delete</a>
+&middot;
+<a href="{% url 'siem:lr_index' %}">Index</a>
+
 <ul>
     <li>ID: {{ lr.id }}</li>
     <li>Name: {{ lr.name }}</li>
@@ -28,6 +31,8 @@
     <li>Log Event Filters:<ul>
         <li>Log Source Filter: {{ lr.log_source_filter }}</li>
         <li>Process Filter: {{ lr.process_filter }}</li>
+        <li>Source Host Filter: {{ lr.source_host_filter }}</li>
+        <li>Dest Host Filter: {{ lr.dest_host_filter }}</li>
         <li>Raw Text Filter Regex: {{ lr.raw_text_filter_regex }}</li></ul>
     <li>Rule Event Filters:<ul>
         <li>Rule Name Filter: {{ lr.rulename_filter }}</li>

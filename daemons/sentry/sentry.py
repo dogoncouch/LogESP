@@ -143,6 +143,12 @@ class SiemSentry:
         if self.rule.process_filter:
             processfilter = self.rule.process_filter
         else: processfilter = ''
+        if self.rule.source_host_filter:
+            sourcehostfilter = self.rule.source_host_filter
+        else: sourcehostfilter = ''
+        if self.rule.dest_host_filter:
+            desthostfilter = self.rule.dest_host_filter
+        else: desthostfilter = ''
         if self.rule.message_filter_regex:
             messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
@@ -156,12 +162,16 @@ class SiemSentry:
                     event_type=self.rule.event_type,
                     log_source__icontains=logsourcefilter,
                     source_process__icontains=processfilter,
+                    source_host__icontains=sourcehostfilter,
+                    dest_host__icontains=desthostfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
         else:
             e = LogEvent.objects.filter(id__gt=self.lasteventid,
                     log_source__contains=logsourcefilter,
                     source_process__contains=processfilter,
+                    source_host__icontains=sourcehostfilter,
+                    dest_host__icontains=desthostfilter,
                     message__iregex=messagefilter,
                     raw_text__iregex=rawtextfilter)
         

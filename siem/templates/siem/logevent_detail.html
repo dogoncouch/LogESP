@@ -5,6 +5,7 @@
 {% block content-main %}
 
 <h1>Log Event</h1>
+<a href="{% url 'siem:logevent_search' %}">Index</a>
 
 <ul>
     <li>ID: {{ event.id }}</li>
