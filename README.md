@@ -65,42 +65,23 @@ python manage.py runserver
 - Set up syslog service, clients
 
 ## Daemons
-### ldsi-start.sh
+### start.sh
 Parser and sentry daemons can be started, restarted, and stopped with ldsi-start.sh, which includes options for setting the LDSI base directory and virtual environment base directory.
-
-### Cleaner
-Events have two different EOL dates for local and backup copies of events. The cleaner can use either to delete old events. There are two options:
-
-1. Run the cleaner inside a django shell using the backup EOL date:
 ```
-python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
-```
-2. Run the cleaner inside a django shell using the local EOL date:
-```
-python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
-```
+Usage: start.sh [-hv] <directory> <command>
 
-Cleaning should be handled by a cron job.
-
-### Starting Daemons Manually
-#### Parser Engine
-To start the parser engine:
-
-1. Edit the config file at `config/parser.conf`.
-2. Run the parser inside a django shell:
-```
-python manage.py shell -c "import daemons.parser.parsecore ; daemons.parser.parsecore.start()"
+Optional arguments:
+  -h                      Print this help message
+  -v                      Print the version number
+  -r                      Restart daemons
+  -k                      Stop daemons
+  -c                      Clean old events using backup EOL date
+  -l                      Clean old events using local EOL date
+  -b <ldsi-base>          Set the LDSI base directory
+  -e <env-base>           Set a virtual environment
 ```
 
-The parser needs to be restarted on changes to the config file.
-
-#### Sentry Engine
-To start the rule engine:
-
-1. Run the sentry engine inside a django shell:
-```
-python manage.py shell -c "import daemons.sentry.sentrycore ; daemons.sentry.sentrycore.start()"
-```
+Cleaning should be handled by a cron job. `start.sh` can be run manually, or by `etc/rc.local`.
 
 ## Screenshots
 

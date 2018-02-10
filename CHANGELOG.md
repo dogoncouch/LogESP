@@ -2,6 +2,10 @@
 Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/ldsi)
 
 ## [Unreleased]
+### Added
+- Added start.sh script for starting/restarting/stopping daemon
+- Added source and destination host filters to limit rules
+
 ### Updated
 - Improved risk management workflows
 
