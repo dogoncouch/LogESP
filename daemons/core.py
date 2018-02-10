@@ -41,10 +41,15 @@ class DaemonCore:
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigterm, exiting')
         exit(0)
 
-    def sigint_handler(self, signal, frame):
-        """Exit cleanly so restart can happen on sigint"""
-        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigint, restarting')
+    def sighup_handler(self, signal, frame):
+        """Exit cleanly so restart can happen on sighup"""
+        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sighup, restarting')
         exit(1)
+
+    def sigint_handler(self, signal, frame):
+        """Exit cleanly on sigint"""
+        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigint, exiting')
+        exit(0)
 
     def start(self):
         """Start parser and sentry engines"""
@@ -53,6 +58,7 @@ class DaemonCore:
 
         # Handle signals:
         signal.signal(signal.SIGTERM, self.sigterm_handler)
+        signal.signal(signal.SIGHUP, self.sighup_handler)
         signal.signal(signal.SIGINT, self.sigint_handler)
 
         # Start parser and sentry threads:
