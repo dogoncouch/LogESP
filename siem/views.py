@@ -37,6 +37,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not type_val: type_val = ''
         if not log_source_val: log_source_val = ''
         if not process_val: process_val = ''
+        if not source_host_val: source_host_val = ''
+        if not dest_host_val: dest_host_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
         if time_val:
