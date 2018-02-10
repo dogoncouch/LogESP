@@ -39,6 +39,12 @@ TABLE, TH, TD {
     border-color: #444444;
 }
 
+TABLE.event {
+    display: inline-block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 TABLE.searchform { border: none; }
 
 TD.searchform {
@@ -56,10 +62,6 @@ A.navbar:link, A.navbar:visited {
 
 A.navbar:hover {
     text-decoration: underline;
-}
-
-A.event:link {
-    color: #4444FF;
 }
 
 A {
