@@ -39,6 +39,16 @@ TABLE, TH, TD {
     border-color: #444444;
 }
 
+TABLE.searchform { border: none; }
+
+TD.searchform {
+    border: none;
+    text-align: right;
+}
+
+TD.searchsubmit {
+    border: none;
+}
 A.navbar:link, A.navbar:visited {
     color: #4444FF;
     text-decoration: none;

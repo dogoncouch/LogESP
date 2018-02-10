@@ -7,28 +7,42 @@
 <h1>Log Events</h1>
 
 <form method="get" action="{% url 'siem:logevent_search' %}">
-    <p>Log Source:
-    <input type="text" value="{{ log_source_filter }}" name="log_source_filter"/>
-    Process:
-    <input type="text" value="{{ process_filter }}" name="process_filter"/>
-    Message:
-    <input type="text" value="{{ message_filter }}" name="message_filter"/>
-    Raw Text:
-    <input type="text" value="{{ raw_filter }}" name="raw_filter"/></p>
-    <p>Source Host:
-    <input type="text" value="{{ source_host_filter }}" name="source_host_filter"/>
-    Source Port:
-    <input type="text" value="{{ source_port_filter }}" name="source_port_filter"/>
-    Dest. Host:
-    <input type="text" value="{{ dest_host_filter }}" name="dest_host_filter"/>
-    Dest. Port:
-    <input type="text" value="{{ dest_port_filter }}" name="dest_port_filter"/></p>
-    <p>Event Type:
-    <input type="text" value="{{ type_filter }}" name="type_filter"/>
-    End Date/Time:
-    <input type="datetime-local" value="{{ time_filter }}" name="time_filter"</a>
-    (YYYY-M-D H:M:S)</p>
-    <p><input type="submit" name="submit" value="Search"/>
+    <table class="searchform">
+        <tr>
+            <td class="searchform">Log Source:
+                <input type="text" value="{{ log_source_filter }}" name="log_source_filter"/>
+            </td>
+            <td class="searchform">Process:
+        
+                <input type="text" value="{{ process_filter }}" name="process_filter"/>
+            </td>
+            <td class="searchform">Message:
+        
+                <input type="text" value="{{ message_filter }}" name="message_filter"/>
+            </td>
+            <td class="searchform">Raw Text:
+                <input type="text" value="{{ raw_filter }}" name="raw_filter"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="searchform">Source Host:
+                <input type="text" value="{{ source_host_filter }}" name="source_host_filter"/></td>
+            <td class="searchform">Source Port:
+                <input type="text" value="{{ source_port_filter }}" name="source_port_filter"/></td>
+            <td class="searchform">Dest. Host:
+                <input type="text" value="{{ dest_host_filter }}" name="dest_host_filter"/></td>
+            <td class="searchform">Dest. Port:
+                <input type="text" value="{{ dest_port_filter }}" name="dest_port_filter"/></td>
+        </tr>
+        <tr>
+            <td class="searchform">Event Type:
+                <input type="text" value="{{ type_filter }}" name="type_filter"/></td>
+            <td class="searchform">End Date/Time:
+                <input type="datetime-local" value="{{ time_filter }}" name="time_filter"</a></td>
+            <td class="searchsubmit">(YYYY-M-D H:M:S)</td>
+        </tr>
+        <tr><td class="searchsubmit"><input type="submit" name="submit" value="Search"/></td></tr>
+    </table>
 </form>
 
 {% if event_list %}
@@ -50,7 +64,7 @@
         </div>
     {% endif %}
 
-    <table>
+    <table class="event">
         <tr><th>ID</th><th>Date Stamp</th>
             <th>Event<br>Type</th><th>Log<br>Source</th>
             <th>Source<br>Process</th><th>#<br>Aggr</th><th>Message</th></tr>
