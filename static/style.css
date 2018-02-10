@@ -43,6 +43,7 @@ TH.left { text-align: left; }
 
 TABLE.event {
     display: inline-block;
+    max-width: 100%;
     overflow-x: auto;
     white-space: nowrap;
 }
