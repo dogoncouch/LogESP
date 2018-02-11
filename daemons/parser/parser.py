@@ -107,7 +107,7 @@ class ParseModule:
             for h in self.parsehelpers:
                 extmatch = re.findall(h['regex_format'], line)
                 if extmatch:
-                    if isinstance(extmatch[0], str):
+                    if len(h['fields'] == 1:
                         entry[h['fields'][0]] = extmatch[0]
                     else:
                         extlist = list(zip(h['fields'], extmatch[0]))
