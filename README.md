@@ -11,12 +11,6 @@ LDSI is a SIEM (Security Information and Event Management system) written in Pyt
 ## Introduction
 LogDissect Security Intelligence is a Security Information and Event Management (SIEM) system. It features a web frontend, and
 
-### Applications
-LDSI applications:
-- SIEM - Security Information and Event Management
-- Assets - Asset Management
-- Risk - Risk Management (based on [NIST SP 800-30r1](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final))
-
 ### Design Principles
 #### Information Life Cycle
 LDSI is designed to promote and require a sense of awareness about security needs and posture. Security operations should be based on a solid foundation of risk management, and event rules and alerts should be tailored to mitigate relevant threats. Understanding how events, assets, and risk are related is an important part of any effective network security program.
@@ -27,6 +21,12 @@ The LDSI risk management system is based on NIST [risk management](https://csrc.
 #### Simplicity
 LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
 
+### Applications
+LDSI includes a few different applications:
+- SIEM - Security Information and Event Management
+- Assets - Asset Management
+- Risk - Risk Management
+
 ## Installing
 ### Installing the Latest Release
 Follow the installation instructions for the [latest release](https://github.com/dogoncouch/ldsi/releases/latest).
@@ -34,15 +34,15 @@ Follow the installation instructions for the [latest release](https://github.com
 ### Installing Development Source
 Requirements: python 3.x, django >=2.0, git, pip.
 
-Note: This installation is intended for development, and trying out the software. Using the built-in Python Django web server is not recommended in real security operations environments.
+Note: This installation is intended for development, and trying out the software. Using the built-in Python Django web server is not recommended in real security operations environments. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
-### Step 1
+#### Step 1
 - Download the release:
 ```
 git clone https://github.com/dogoncouch/ldsi.git
 ```
 
-### Step 2
+#### Step 2
 - Create a virtual environment and install django:
 ```
 virtualenv -p python3 ldsi_env
@@ -50,23 +50,23 @@ source ldsi_env/bin/activate
 pip install django
 ```
 
-### Step 3
+#### Step 3
 - Create/migrate the database, and add fixtures:
 ```
 cd ldsi
 make new-db
 ```
 
-### Step 4
+#### Step 4
 - Start the server:
 ```
 python manage.py runserver
 ```
 
-### Step 5
+#### Step 5
 - Try it: http://localhost:8000
 
-### Step 6
+#### Step 6
 - Set up syslog service, clients
 
 ## Daemons
