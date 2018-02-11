@@ -14,7 +14,7 @@
     "name": "pam_auth_fields",
     "desc": "PAM authentication source host field.",
     "match_regex": "rhost=(\\S*)\\s+user=(\\S*)",
-    "fields": "source_host,username"
+    "fields": "source_host,target_user"
   }
 },
 {
@@ -23,7 +23,7 @@
     "name": "cisco_auth_fields",
     "desc": "Cisco auth log fields.",
     "match_regex": "New\\s+(\\S+)\\s+connection\\s+for\\s+user\\s+(\\S+),\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
-    "fields": "protocol,username,source_host,dest_host"
+    "fields": "protocol,target_user,source_host,dest_host"
   }
 },
 {

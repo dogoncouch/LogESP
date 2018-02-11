@@ -8,6 +8,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 
 ### Updated
 - Improved risk management workflows
+- Split username field into `source_user`, `target_user`
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
