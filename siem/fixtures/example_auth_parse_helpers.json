@@ -34,5 +34,14 @@
     "match_regex": ",\\s+aggregated\\s+\\((\\d+)\\)",
     "fields": "aggregated_events"
   }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_auth_fields_2",
+    "desc": "Cisco auth log fields with no user.",
+    "match_regex": "New\\s+(\\S+)\\s+connection,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
+    "fields": "protocol,source_host,dest_host"
+  }
 }
 ]

@@ -16,13 +16,13 @@
     <li>Type: {{ nte.event_type }}</li>
     <li>Info Source: {{ nte.info_source }}</li>
     <li>Info Tier: {{nte.get_tier_display }}</li>
+    <li>Relevance: {{ nte.get_relevance_display }}</li>
     <li>Sources (range of effect):<ul>
             {% for s in nte.sources.all %}
                 <li><a href="{% url 'risk:nts_detail' s.id %}">{{ s }}
                         ({{ s.range_of_effect }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Relevance: {{ nte.get_relevance_display }}</li>
     <li>Predisposing Conditions (pervasiveness):<ul>
             {% for v in nte.risk_conditions.all %}
                 <li><a href="{% url 'risk:cond_detail' v.id %}">{{ v }}

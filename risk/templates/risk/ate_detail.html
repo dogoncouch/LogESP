@@ -16,13 +16,13 @@
     <li>Type: {{ ate.event_type }}</li>
     <li>Info Source: {{ ate.info_source }}</li>
     <li>Info Tier: {{ate.get_tier_display }}</li>
+    <li>Relevance: {{ ate.get_relevance_display }}</li>
     <li>Sources (capability/intent/targeting):<ul>
             {% for s in ate.sources.all %}
                 <li><a href="{% url 'risk:ats_detail' s.id %}">{{ s }}
                         ({{ s.capability }}/{{ s.intent }}/{{ s.targeting }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Relevance: {{ ate.get_relevance_display }}</li>
     <li>Vulnerabilities (severity):<ul>
             {% for v in ate.vulnerabilities.all %}
                 <li><a href="{% url 'risk:vuln_detail' v.id %}">{{ v }}
