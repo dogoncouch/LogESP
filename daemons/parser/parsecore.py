@@ -99,7 +99,7 @@ class ParseCore:
                     else:
                         msg = 'LDSI parser thread for file ' + \
                                 thread.name + ' has crashed'
-                        syslog.syslog(syslog.LOG_CRITICAL, msg)
+                        syslog.syslog(syslog.LOG_CRIT, msg)
                 if not isAlive:
                     msg = 'LDSI is not parsing any files'
                     syslog.syslog(syslog.LOG_ERROR, msg)
