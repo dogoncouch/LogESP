@@ -12,9 +12,6 @@ LDSI is a SIEM (Security Information and Event Management system) written in Pyt
 LogDissect Security Intelligence is a Security Information and Event Management (SIEM) system. It features a web frontend, and
 
 ### Design Principles
-#### Information Life Cycle
-LDSI is designed to promote and require a sense of awareness about security needs and posture. Security operations should be based on a solid foundation of risk management, and event rules and alerts should be tailored to mitigate relevant threats. Understanding how events, assets, and risk are related is an important part of any effective network security program.
-
 #### [NIST](https://www.nist.gov/) guidelines
 The LDSI risk management system is based on NIST [risk management](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
 
