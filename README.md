@@ -1,5 +1,4 @@
 # LogDissect Security Intelligence
-LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
 
 ## Index
 
@@ -9,7 +8,7 @@ LDSI is a SIEM (Security Information and Event Management system) written in Pyt
 - [Screenshots](#screenshots)
 
 ## Introduction
-LogDissect Security Intelligence is a Security Information and Event Management (SIEM) system. It features a web frontend, and
+LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
 
 ### Design Principles
 #### [NIST](https://www.nist.gov/) guidelines
