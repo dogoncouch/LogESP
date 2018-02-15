@@ -43,5 +43,14 @@
     "match_regex": "New\\s+(\\S+)\\s+connection,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,source_host,dest_host"
   }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_auth_fields_3",
+    "desc": "Cisco auth log fields for accepted CLI session",
+    "match_regex": "User\\s+CLI\\s+session\\s+for\\s+user\\s+(\\S+)\\s+over\\s+(\\S+)\\s*,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
+    "fields": "target_user,protocol,source_host,dest_host"
+  }
 }
 ]
