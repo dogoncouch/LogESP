@@ -169,7 +169,7 @@ class SiemSentry:
             if self.justfired:
                 sleep(int(self.rule.time_int) * 60)
             else:
-                sleep(randrange(50, 70))
+                sleep(randrange(45, 60))
 
 
     def check_logevent(self):
