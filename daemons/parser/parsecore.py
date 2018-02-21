@@ -30,6 +30,7 @@ import syslog
 from configparser import ConfigParser
 from threading import Thread
 from time import sleep
+from siem.models import ParseHelper
 
 
 class ParseCore:
@@ -68,8 +69,10 @@ class ParseCore:
             except Exception:
                 p['parser'] = 'syslog'
             try:
-                p['parse_helpers'] = config.get(sec,
-                        'parse_helpers').split(',')
+                helpertype = config.get(sec,
+                        'helper_type')
+                p['parse_helpers'] = ParseHelper.objects.get(
+                        helper_type=helpertype)
             except Exception:
                 p['parse_helpers'] = []
             try:
@@ -77,6 +80,7 @@ class ParseCore:
             except Exception:
                 p['facility'] = None
             self.plist.append(p)
+
 
     
     def run_parse(self, conf=None):

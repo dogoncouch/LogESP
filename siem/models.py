@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from siem.choices import *
 
@@ -23,6 +24,7 @@ class LogEventParser(models.Model):
 class ParseHelper(models.Model):
     name = models.CharField(max_length=32, unique=True)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    helper_type = models.CharField(max_length=32)
     match_regex = models.CharField(max_length=1024)
     fields = models.CharField(max_length=512)
     def __str__(self):
@@ -53,6 +55,13 @@ class LogEvent(models.Model):
             null=True, blank=True)
     action = models.CharField(max_length=48, default='')
     protocol = models.CharField(max_length=12, default='')
+    packet_count = models.IntegerField(null=True, blank=True)
+    byte_count = models.IntegerField(null=True, blank=True)
+    tcp_flags = models.IntegerField(null=True, blank=True)
+    class_of_service = models.IntegerField(null=True, blank=True)
+    interface = models.CharField(max_length=32, default='')
+    start_time = models.DateTimeField(null=True, blank=True)
+    duration = models.DurationField(null=True, blank=True)
     message = models.CharField(max_length=1024, default='')
     source_user = models.CharField(max_length=32, default='')
     target_user = models.CharField(max_length=32, default='')
@@ -76,6 +85,9 @@ class LimitRule(models.Model):
     desc = models.CharField(max_length=200,
             null=True, blank=True)
     is_enabled = models.BooleanField(default=True)
+    email_alerts = models.BooleanField(default=False)
+    alert_users = models.ManyToManyField(User,
+            related_name='alert_rules', blank=True)
     rule_events = models.BooleanField(default=False)
     rule_category = models.CharField(max_length=24, default='default')
     local_lifespan_days = models.IntegerField()

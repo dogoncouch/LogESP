@@ -27,6 +27,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Email settings
+#EMAIL_USE_TLS = True
+#EMAIL_HOST = 'smtp.example.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'jsmith@example.com'
+#EMAIL_HOST_PASSWORD = 'BIGSECRET'
+
 
 # Application definition
 
