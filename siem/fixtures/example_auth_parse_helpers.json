@@ -4,6 +4,7 @@
   "fields": {
     "name": "pam_aggr",
     "desc": "PAM aggregated event count",
+    "helper_type": "auth",
     "match_regex": "PAM (\\d+) more authentication failure",
     "fields": "aggregated_events"
   }
@@ -13,6 +14,7 @@
   "fields": {
     "name": "pam_auth_fields",
     "desc": "PAM authentication source host field.",
+    "helper_type": "auth",
     "match_regex": "rhost=(\\S*)\\s+user=(\\S*)",
     "fields": "source_host,target_user"
   }
@@ -22,6 +24,7 @@
   "fields": {
     "name": "cisco_auth_fields",
     "desc": "Cisco auth log fields.",
+    "helper_type": "cisco",
     "match_regex": "New\\s+(\\S+)\\s+connection\\s+for\\s+user\\s+(\\S+),\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,target_user,source_host,dest_host"
   }
@@ -31,6 +34,7 @@
   "fields": {
     "name": "cisco_aggr",
     "desc": "Cisco aggregated events.",
+    "helper_type": "cisco",
     "match_regex": ",\\s+aggregated\\s+\\((\\d+)\\)",
     "fields": "aggregated_events"
   }
@@ -40,6 +44,7 @@
   "fields": {
     "name": "cisco_auth_fields_2",
     "desc": "Cisco auth log fields with no user.",
+    "helper_type": "cisco",
     "match_regex": "New\\s+(\\S+)\\s+connection,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,source_host,dest_host"
   }
@@ -49,6 +54,7 @@
   "fields": {
     "name": "cisco_auth_fields_3",
     "desc": "Cisco auth log fields for accepted CLI session",
+    "helper_type": "cisco",
     "match_regex": "User\\s+CLI\\s+session\\s+for\\s+user\\s+(\\S+)\\s+over\\s+(\\S+)\\s*,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "target_user,protocol,source_host,dest_host"
   }
@@ -58,6 +64,7 @@
   "fields": {
     "name": "ssh_pubkey_auth",
     "desc": "Fields from ssh initiation with public key.",
+    "helper_type": "auth",
     "match_regex": "Accepted\\s+publickey\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+):",
     "fields": "target_user,source_host,source_port,protocol"
   }
@@ -67,8 +74,39 @@
   "fields": {
     "name": "sudo_fields",
     "desc": "Sudo authentication fields",
+    "helper_type": "auth",
     "match_regex": "(\\S+) : TTY=\\S+ ; PWD=\\S+ ; USER=(\\S+) ; COMMAND=(.+)$",
     "fields": "source_user,target_user,action"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "sshd_disconnect_fields",
+    "desc": "Fields from sshd disconnect events.",
+    "helper_type": "auth",
+    "match_regex": "isconnecte?d? from (\\S+) port (\\d+)",
+    "fields": "source_host,source_port"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "su_session_fields",
+    "desc": "SU/sudo auth session user fields",
+    "helper_type": "auth",
+    "match_regex": "session\\s+\\S+\\s+for\\s+user\\s+(\\S+)\\s*b?y?\\s*([^( ]*)",
+    "fields": "target_user,source_user"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "ssh_password_auth",
+    "desc": "Fields from ssh initiation with a password.",
+    "helper_type": "auth",
+    "match_regex": "Accepted\\s+password\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+)",
+    "fields": "target_user,source_host,source_port,protocol"
   }
 }
 ]
