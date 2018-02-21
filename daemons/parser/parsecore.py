@@ -72,7 +72,7 @@ class ParseCore:
             try:
                 helpertype = config.get(sec,
                         'helper_type')
-                p['parse_helpers'] = ParseHelper.objects.get(
+                p['parse_helpers'] = ParseHelper.objects.filter(
                         helper_type=helpertype)
             except Exception:
                 p['parse_helpers'] = []
