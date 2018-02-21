@@ -105,7 +105,7 @@
     "name": "ssh_password_auth",
     "desc": "Fields from ssh initiation with a password.",
     "helper_type": "auth",
-    "match_regex": "Accepted\\s+password\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+)",
+    "match_regex": "\\s+password\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+)",
     "fields": "target_user,source_host,source_port,protocol"
   }
 }
