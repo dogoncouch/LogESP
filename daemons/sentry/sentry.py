@@ -216,7 +216,7 @@ class SiemSentry:
         else:
             startdatestamp = timezone.localtime(timezone.now()) - self.timeint
             if self.rule.event_type:
-                e = LogEvent.objects.filter(date_stamp__gt=self.startdatestamp,
+                e = LogEvent.objects.filter(date_stamp__gt=startdatestamp,
                         event_type=self.rule.event_type,
                         log_source__icontains=logsourcefilter,
                         source_process__icontains=processfilter,
@@ -225,7 +225,7 @@ class SiemSentry:
                         message__iregex=messagefilter,
                         raw_text__iregex=rawtextfilter)
             else:
-                e = LogEvent.objects.filter(date_stamp__gt=self.startdatestamp,
+                e = LogEvent.objects.filter(date_stamp__gt=startdatestamp,
                         log_source__contains=logsourcefilter,
                         source_process__contains=processfilter,
                         source_host__icontains=sourcehostfilter,
