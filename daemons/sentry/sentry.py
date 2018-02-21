@@ -45,7 +45,7 @@ class SiemSentry:
         self.rule = rule
         self.tzone = TIME_ZONE
         self.lasteventid = None
-        self.justfired = False
+        #self.justfired = False
         syslog.openlog(syslog.LOG_DAEMON)
 
 
@@ -161,10 +161,10 @@ class SiemSentry:
                     self.get_last_ruleevent()
                     expectrule = True
             # Wait until next interval if firedr,; otherwise ~60 seconds:
-            if self.justfired:
-                sleep(int(self.rule.time_int) * 60)
-            else:
-                sleep(randrange(50, 70))
+            #if self.justfired:
+            #    sleep(int(self.rule.time_int) * 60)
+            #else:
+            sleep(randrange(50, 70))
 
 
     def check_logevent(self):
@@ -210,7 +210,6 @@ class SiemSentry:
         
         if len(e) == 0:
             self.get_last_logevent()
-            self.justfired = False
         else:
             totalevents = sum([x.aggregated_events for x in e])
             numhosts = len({x.log_source for x in e})
@@ -245,11 +244,8 @@ class SiemSentry:
                 event.source_ids_log.set(list(e))
                 event.save()
                 self.lasteventid = e.latest('id').id
-                self.justfired = True
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents, numhosts)
-            else:
-                self.justfired = False
 
 
     def check_ruleevent(self):
@@ -277,7 +273,6 @@ class SiemSentry:
 
         if len(e) == 0:
             self.get_last_ruleevent()
-            self.justfired = False
         else:
             if len(e) > self.rule.event_limit:
                 event = RuleEvent()
@@ -306,11 +301,8 @@ class SiemSentry:
                 event.source_ids_rule.set(list(e))
                 event.save()
                 self.lasteventid = e.latest('id').id
-                self.justfired = True
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents, numhosts)
-            else:
-                self.justfired = False
 
 
 def start_rule(rule):
