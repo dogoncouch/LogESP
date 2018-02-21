@@ -160,8 +160,10 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter', 'process_filter',
+            'action_filter', 'interface_filter',
             'source_host_filter', 'source_port_filter',
             'dest_host_filter', 'dest_port_filter',
+            'source_user_filter', 'target_user_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):
@@ -178,8 +180,10 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter', 'process_filter',
+            'action_filter', 'interface_filter',
             'source_host_filter', 'source_port_filter',
             'dest_host_filter', 'dest_port_filter',
+            'source_user_filter', 'target_user_filter',
             'rulename_filter', 'magnitude_filter',
             'message']
     def get_success_url(self):

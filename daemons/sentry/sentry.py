@@ -181,12 +181,24 @@ class SiemSentry:
         if self.rule.process_filter:
             processfilter = self.rule.process_filter
         else: processfilter = ''
+        if self.rule.action_filter:
+            actionfilter = self.rule.action_filter
+        else: actionfilter = ''
+        if self.rule.interface_filter:
+            interfacefilter = self.rule.interface_filter
+        else: interfacefilter = ''
         if self.rule.source_host_filter:
             sourcehostfilter = self.rule.source_host_filter
         else: sourcehostfilter = ''
         if self.rule.dest_host_filter:
             desthostfilter = self.rule.dest_host_filter
         else: desthostfilter = ''
+        if self.rule.source_user_filter:
+            sourceuserfilter = self.rule.source_user_filter
+        else: sourceuserfilter = ''
+        if self.rule.target_user_filter:
+            targetuserfilter = self.rule.target_user_filter
+        else: targetuserfilter = ''
         if self.rule.message_filter_regex:
             messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
@@ -201,16 +213,24 @@ class SiemSentry:
                         event_type=self.rule.event_type,
                         log_source__icontains=logsourcefilter,
                         source_process__icontains=processfilter,
+                        action__icontains=actionfilter,
+                        interface__icontains=interfacefilter,
                         source_host__icontains=sourcehostfilter,
                         dest_host__icontains=desthostfilter,
+                        source_user__icontains=sourceuserfilter,
+                        target_user__icontains=targetuserfilter,
                         message__iregex=messagefilter,
                         raw_text__iregex=rawtextfilter)
             else:
                 e = LogEvent.objects.filter(id__gt=self.lasteventid,
                         log_source__contains=logsourcefilter,
                         source_process__contains=processfilter,
+                        action__icontains=actionfilter,
+                        interface__icontains=interfacefilter,
                         source_host__icontains=sourcehostfilter,
                         dest_host__icontains=desthostfilter,
+                        source_user__icontains=sourceuserfilter,
+                        target_user__icontains=targetuserfilter,
                         message__iregex=messagefilter,
                         raw_text__iregex=rawtextfilter)
         else:
@@ -220,16 +240,24 @@ class SiemSentry:
                         event_type=self.rule.event_type,
                         log_source__icontains=logsourcefilter,
                         source_process__icontains=processfilter,
+                        action__icontains=actionfilter,
+                        interface__icontains=interfacefilter,
                         source_host__icontains=sourcehostfilter,
                         dest_host__icontains=desthostfilter,
+                        source_user__icontains=sourceuserfilter,
+                        target_user__icontains=targetuserfilter,
                         message__iregex=messagefilter,
                         raw_text__iregex=rawtextfilter)
             else:
                 e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
                         log_source__contains=logsourcefilter,
                         source_process__contains=processfilter,
+                        action__icontains=actionfilter,
+                        interface__icontains=interfacefilter,
                         source_host__icontains=sourcehostfilter,
                         dest_host__icontains=desthostfilter,
+                        source_user__icontains=sourceuserfilter,
+                        target_user__icontains=targetuserfilter,
                         message__iregex=messagefilter,
                         raw_text__iregex=rawtextfilter)
         

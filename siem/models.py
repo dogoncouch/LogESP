@@ -109,7 +109,11 @@ class LimitRule(models.Model):
             null=True, blank=True)
     log_source_filter = models.CharField(max_length=32,
             null=True, blank=True)
-    process_filter = models.CharField(max_length=32,
+    process_filter = models.CharField(max_length=24,
+            null=True, blank=True)
+    action_filter = models.CharField(max_length=48,
+            null=True, blank=True)
+    interface_filter = models.CharField(max_length=32,
             null=True, blank=True)
     source_host_filter = models.CharField(max_length=32,
             null=True, blank=True)
@@ -118,6 +122,10 @@ class LimitRule(models.Model):
     dest_host_filter = models.CharField(max_length=32,
             null=True, blank=True)
     dest_port_filter = models.CharField(max_length=8,
+            null=True, blank=True)
+    source_user_filter = models.CharField(max_length=32,
+            null=True, blank=True)
+    target_user_filter = models.CharField(max_length=32,
             null=True, blank=True)
     rulename_filter = models.CharField(max_length=32,
             null=True, blank=True)

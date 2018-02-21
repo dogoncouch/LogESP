@@ -27,25 +27,36 @@
         </ul>
     <li>Rule Events?: {{ lr.rule_events }}</li>
     <li>Event Type: {{ lr.event_type }}</li>
-    <li>Severity: {{ lr.severity }}</li>
-    <li>Overkill Modifier: {{ lr.overkill_modifier }}</li>
-    <li>Severity Modifier: {{ lr.severity_modifier }}</li>
-    <li>Time Interval: {{ lr.time_int }}</li>
-    <li>Event Limit: {{ lr.event_limit }}</li>
-    <li>Allowed Source Hosts: {{ lr.allowed_log_sources }}</li>
-    <li>Message Filter Regex: {{ lr.message_filter_regex }}</li>
-    <li>Log Event Filters:<ul>
-        <li>Log Source Filter: {{ lr.log_source_filter }}</li>
-        <li>Process Filter: {{ lr.process_filter }}</li>
-        <li>Source Host Filter: {{ lr.source_host_filter }}</li>
-        <li>Source Port Filter: {{ lr.source_port_filter }}</li>
-        <li>Dest Host Filter: {{ lr.dest_host_filter }}</li>
-        <li>Dest Port Filter: {{ lr.dest_port_filter }}</li>
-        <li>Raw Text Filter Regex: {{ lr.raw_text_filter_regex }}</li></ul>
-    <li>Rule Event Filters:<ul>
-        <li>Rule Name Filter: {{ lr.rulename_filter }}</li>
-        <li>Min. Magnitude: {{ lr.magnitude_filter }}</li></ul>
+    <li>Timing and Severity:<ul>
+            <li>Severity: {{ lr.severity }}</li>
+            <li>Overkill Modifier: {{ lr.overkill_modifier }}</li>
+            <li>Severity Modifier: {{ lr.severity_modifier }}</li>
+            <li>Time Interval: {{ lr.time_int }}</li>
+            <li>Event Limit: {{ lr.event_limit }}</li>
+        </ul></li>
+    <li>Trigger Logic:<ul>
+        <li>Allowed Source Hosts: {{ lr.allowed_log_sources }}</li>
+        <li>Message Filter Regex: {{ lr.message_filter_regex }}</li>
+        <li>Log Event Filters:<ul>
+            <li>Log Source Filter: {{ lr.log_source_filter }}</li>
+            <li>Process Filter: {{ lr.process_filter }}</li>
+            <li>Action Filter: {{ lr.action_filter }}</li>
+            <li>Interface Filter: {{ lr.interface_filter }}</li>
+            <li>Source Host Filter: {{ lr.source_host_filter }}</li>
+            <li>Source Port Filter: {{ lr.source_port_filter }}</li>
+            <li>Dest Host Filter: {{ lr.dest_host_filter }}</li>
+            <li>Dest Port Filter: {{ lr.dest_port_filter }}</li>
+            <li>Source User Filter: {{ lr.source_user_filter }}</li>
+            <li>Target User Filter: {{ lr.target_user_filter }}</li>
+            <li>Raw Text Filter Regex: {{ lr.raw_text_filter_regex }}</li>
+            </ul>
+        <li>Rule Event Filters:<ul>
+            <li>Rule Name Filter: {{ lr.rulename_filter }}</li>
+            <li>Min. Magnitude: {{ lr.magnitude_filter }}</li></ul>
+        </ul></li>
     <li>Message: {{ lr.message }}</li>
 </ul>
 
 {% endblock %}
+
+# action, interface, source/target user
