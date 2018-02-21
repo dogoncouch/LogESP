@@ -48,7 +48,8 @@ class SiemSentry:
         self.rule = rule
         self.tzone = TIME_ZONE
         self.lasteventid = None
-        #self.justfired = False
+        self.justfired = False
+        self.timeint = timedelta(minutes=self.rule.time_int)
         syslog.openlog(facility=syslog.LOG_DAEMON)
 
 
@@ -58,10 +59,9 @@ class SiemSentry:
         if len(e) == 0:
             self.lasteventid = 0
         else:
-            timeint = timedelta(minutes=self.rule.time_int)
             erange = LogEvent.objects.filter(
                     parsed_at__gt=timezone.localtime(
-                        timezone.now()) - timeint)
+                        timezone.now()) - self.timeint)
             if len(erange) == 0:
                 self.lasteventid = LogEvent.objects.latest('id').id
             else:
@@ -81,10 +81,9 @@ class SiemSentry:
         if len(e) == 0:
             self.lasteventid = 0
         else:
-            timeint = timedelta(minutes=self.rule.time_int)
             erange = RuleEvent.objects.filter(
                     date_stamp__gt=timezone.localtime(
-                        timezone.now()) - timeint)
+                        timezone.now()) - self.timeint)
             if len(erange) == 0:
                 self.lasteventid = RuleEvent.objects.latest('id').id
             else:
@@ -151,7 +150,10 @@ class SiemSentry:
                 else: self.check_logevent()
             # Refresh the rule:
             try:
+                t = self.rule.timeint
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
+                if self.rule.timeint != t:
+                    self.timeint = timedelta(minutes=self.rule.time_int)
             except siem.models.DoesNotExist:
                 break
             # Check for change in event type:
@@ -164,10 +166,10 @@ class SiemSentry:
                     self.get_last_ruleevent()
                     expectrule = True
             # Wait until next interval if firedr,; otherwise ~60 seconds:
-            #if self.justfired:
-            #    sleep(int(self.rule.time_int) * 60)
-            #else:
-            sleep(randrange(50, 70))
+            if self.justfired:
+                sleep(int(self.rule.time_int) * 60)
+            else:
+                sleep(randrange(50, 70))
 
 
     def check_logevent(self):
@@ -193,26 +195,46 @@ class SiemSentry:
             rawtextfilter = '.*{}.*'.format(self.rule.raw_text_filter_regex)
         else:
             rawtextfilter = '.*{}.*'.format('.*')
-        if self.rule.event_type:
-            e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                    event_type=self.rule.event_type,
-                    log_source__icontains=logsourcefilter,
-                    source_process__icontains=processfilter,
-                    source_host__icontains=sourcehostfilter,
-                    dest_host__icontains=desthostfilter,
-                    message__iregex=messagefilter,
-                    raw_text__iregex=rawtextfilter)
+        if self.justfired:
+            if self.rule.event_type:
+                e = LogEvent.objects.filter(id__gt=self.lasteventid,
+                        event_type=self.rule.event_type,
+                        log_source__icontains=logsourcefilter,
+                        source_process__icontains=processfilter,
+                        source_host__icontains=sourcehostfilter,
+                        dest_host__icontains=desthostfilter,
+                        message__iregex=messagefilter,
+                        raw_text__iregex=rawtextfilter)
+            else:
+                e = LogEvent.objects.filter(id__gt=self.lasteventid,
+                        log_source__contains=logsourcefilter,
+                        source_process__contains=processfilter,
+                        source_host__icontains=sourcehostfilter,
+                        dest_host__icontains=desthostfilter,
+                        message__iregex=messagefilter,
+                        raw_text__iregex=rawtextfilter)
         else:
-            e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                    log_source__contains=logsourcefilter,
-                    source_process__contains=processfilter,
-                    source_host__icontains=sourcehostfilter,
-                    dest_host__icontains=desthostfilter,
-                    message__iregex=messagefilter,
-                    raw_text__iregex=rawtextfilter)
+            startdatestamp = timezone.localtime(timezone.now()) - self.timeint
+            if self.rule.event_type:
+                e = LogEvent.objects.filter(date_stamp__gt=self.startdatestamp,
+                        event_type=self.rule.event_type,
+                        log_source__icontains=logsourcefilter,
+                        source_process__icontains=processfilter,
+                        source_host__icontains=sourcehostfilter,
+                        dest_host__icontains=desthostfilter,
+                        message__iregex=messagefilter,
+                        raw_text__iregex=rawtextfilter)
+            else:
+                e = LogEvent.objects.filter(date_stamp__gt=self.startdatestamp,
+                        log_source__contains=logsourcefilter,
+                        source_process__contains=processfilter,
+                        source_host__icontains=sourcehostfilter,
+                        dest_host__icontains=desthostfilter,
+                        message__iregex=messagefilter,
+                        raw_text__iregex=rawtextfilter)
         
         if len(e) == 0:
-            self.get_last_logevent()
+            self.justfired = False
         else:
             totalevents = sum([x.aggregated_events for x in e])
             numhosts = len({x.log_source for x in e})
@@ -249,6 +271,9 @@ class SiemSentry:
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents, numhosts)
+                self.justfired = True
+            else:
+                self.justfired = False
 
 
     def check_ruleevent(self):
@@ -262,20 +287,34 @@ class SiemSentry:
             messagefilter = '.*{}.*'.format('.*')
         if self.rule.magnitude_filter: magnitudefilter = self.rule.magnitude_filter
         else: magnitudefilter = 0
-        if self.rule.event_type:
-            e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                    event_type=self.rule.event_type,
-                    source_rule__name__icontains=rulenamefilter,
-                    magnitude__gte=magnitudefilter,
-                    message__iregex=messagefilter)
+        if self.justfired:
+            if self.rule.event_type:
+                e = RuleEvent.objects.filter(id__gt=self.lasteventid,
+                        event_type=self.rule.event_type,
+                        source_rule__name__icontains=rulenamefilter,
+                        magnitude__gte=magnitudefilter,
+                        message__iregex=messagefilter)
+            else:
+                e = RuleEvent.objects.filter(id__gt=self.lasteventid,
+                        source_rule__name__icontains=rulenamefilter,
+                        magnitude__gte=magnitudefilter,
+                        message__iregex=messagefilter)
         else:
-            e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                    source_rule__name__icontains=rulenamefilter,
-                    magnitude__gte=magnitudefilter,
-                    message__iregex=messagefilter)
+            startdatestamp = timezone.localtime(timezone.now()) - self.timeint
+            if self.rule.event_type:
+                e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
+                        event_type=self.rule.event_type,
+                        source_rule__name__icontains=rulenamefilter,
+                        magnitude__gte=magnitudefilter,
+                        message__iregex=messagefilter)
+            else:
+                e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
+                        source_rule__name__icontains=rulenamefilter,
+                        magnitude__gte=magnitudefilter,
+                        message__iregex=messagefilter)
 
         if len(e) == 0:
-            self.get_last_ruleevent()
+            self.justfired = False
         else:
             if len(e) > self.rule.event_limit:
                 event = RuleEvent()
@@ -306,6 +345,9 @@ class SiemSentry:
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents, numhosts)
+                self.justfired = True
+            else:
+                self.justfired = False
 
 
 def start_rule(rule):

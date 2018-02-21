@@ -14,6 +14,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Improved risk management workflows
 - Split username field into `source_user`, `target_user`
 - Improved event search (more fields, better formatting)
+- Limit rules only sleep ~60s after not firing
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
