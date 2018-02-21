@@ -6,8 +6,11 @@
 
 <h1>{{ sw }} (Software Asset)</h1>
 <a href="{% url 'hwam:sw_update' sw.id %}">Edit</a>
-&middot
+&middot;
 <a href="{% url 'hwam:sw_delete' sw.id %}">Delete</a>
+&middot;
+<a href="{% url 'hwam:sw_index' %}">Index</a>
+
 <p>{{ sw.desc }}</p>
 <ul>
     <li>Organizational Unit:

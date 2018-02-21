@@ -8,6 +8,9 @@
 <a href="{% url 'hwam:ou_update' ou.id %}">Edit</a>
 &middot;
 <a href="{% url 'hwam:ou_delete' ou.id %}">Delete</a>
+&middot;
+<a href="{% url 'hwam:ou_index' %}">Index</a>
+
 <p>{{ ou.desc }}</p>
 <ul>
     <li>Contact: {{ ou.unit_contact.username }}
