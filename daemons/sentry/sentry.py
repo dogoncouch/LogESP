@@ -34,7 +34,10 @@ from django.utils import timezone
 from django.core.mail import send_mass_mail
 from django.contrib.auth.models import User
 from ldsi.settings import TIME_ZONE
-from ldsi.settings import EMAIL_ALERT_FROM_ADDRESS
+try:
+    from ldsi.settings import EMAIL_ALERT_FROM_ADDRESS
+except ImportError:
+    EMAIL_ALERT_FROM_ADDRESS = 'noreply@example.com'
 from siem.models import LogEvent, RuleEvent, LimitRule
 
 
@@ -46,7 +49,7 @@ class SiemSentry:
         self.tzone = TIME_ZONE
         self.lasteventid = None
         #self.justfired = False
-        syslog.openlog(syslog.LOG_DAEMON)
+        syslog.openlog(facility=syslog.LOG_DAEMON)
 
 
     def get_first_logevent(self):
