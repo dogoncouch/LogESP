@@ -150,11 +150,11 @@ class SiemSentry:
                 else: self.check_logevent()
             # Refresh the rule:
             try:
-                t = self.rule.timeint
+                t = self.rule.time_int
                 self.rule = LimitRule.objects.get(pk=self.rule.id)
-                if self.rule.timeint != t:
+                if self.rule.time_int != t:
                     self.timeint = timedelta(minutes=self.rule.time_int)
-            except siem.models.DoesNotExist:
+            except LimitRule.DoesNotExist:
                 break
             # Check for change in event type:
             if expectrule:
