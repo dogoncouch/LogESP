@@ -112,7 +112,7 @@ class SiemSentry:
         msglist.append('Message: ' + self.rule.message)
         msg = '\n'.join(msglist)
         emaillist = []
-        for u in self.rule.alert_users:
+        for u in self.rule.alert_users.all():
             emailattrs = (msgsubject, msg, EMAIL_ALERT_FROM_ADDRESS, [u.email])
             emaillist.append(emailattrs)
         emaillist = tuple(emaillist)

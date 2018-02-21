@@ -19,6 +19,12 @@
     <li>SIEM Event Lifespan: {{ lr.local_lifespan_days }} days</li>
     <li>Backup Event Lifespan: {{ lr.backup_lifespan_days }} days</li>
     <li>Enabled?: {{ lr.is_enabled }}</li>
+    <li>Email alerts enabled?: {{ lr.email_alerts }}</li>
+    <li>Alert Users:<ul>
+            {% for u in lr.alert_users.all %}
+            <li>{{ u.name }} ({{ u.email }})</li>
+            {% endfor %}
+        </ul>
     <li>Rule Events?: {{ lr.rule_events }}</li>
     <li>Event Type: {{ lr.event_type }}</li>
     <li>Severity: {{ lr.severity }}</li>
