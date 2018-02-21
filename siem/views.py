@@ -245,7 +245,7 @@ class PHDetailView(PermissionRequiredMixin, DetailView):
 class PHCreateView(PermissionRequiredMixin, CreateView):
     model = ParseHelper
     permission_required = 'siem.add_logeventparser'
-    fields = ['name', 'desc', 'match_regex', 'fields']
+    fields = ['name', 'desc', 'helper_type', 'match_regex', 'fields']
     def get_success_url(self):
         return reverse_lazy('siem:ph_detail', args=(self.object.id,))
 
@@ -253,7 +253,7 @@ class PHUpdateView(PermissionRequiredMixin, UpdateView):
     model = ParseHelper
     permission_required = 'siem.change_logeventparser'
     template_name = 'siem/parsehelper_update_form.html'
-    fields = ['name', 'desc', 'match_regex', 'fields']
+    fields = ['name', 'desc', 'helper_type', 'match_regex', 'fields']
     def get_success_url(self):
         return reverse_lazy('siem:ph_detail', args=(self.object.id,))
 
