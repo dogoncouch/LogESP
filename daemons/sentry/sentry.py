@@ -30,7 +30,10 @@ import threading
 import os
 from sys import exit
 from django.utils import timezone
+from django.core.mail import send_mass_mail
+from django.contrib.auth.models import User
 from ldsi.settings import TIME_ZONE
+from ldsi.settings import EMAIL_ALERT_FROM_ADDRESS
 from siem.models import LogEvent, RuleEvent, LimitRule
 
 
@@ -89,6 +92,26 @@ class SiemSentry:
             self.lasteventid = 0
         else:
             self.lasteventid = e.latest('id').id
+
+
+    def send_email_alerts(self, magnitude, eventcount, logsources):
+        """Send email alerts for rule"""
+        msgsubject = 'LDSI rule broken: ' + self.rule.name
+        msglist = []
+        msglist.append(msgsubject + '\n')
+        msglist.append('Magnitude: ' + str(magnitude))
+        msglist.append('Event count: ' + str(eventcount))
+        msglist.append('Event limit: ' + str(self.rule.event_limit))
+        msglist.append('Time interval: ' + str(self.rule.time_int))
+        msglist.append('Log sources: ' + str(logsources))
+        msglist.append('Message: ' + self.rule.message)
+        msg = '\n'.join(msglist)
+        emaillist = []
+        for u in self.rule.alert_users:
+            emailattrs = (msgsubject, msg, EMAIL_ALERT_FROM_ADDRESS, [u.email])
+            emaillist.append(emailattrs)
+        emaillist = tuple(emaillist)
+        send_mass_mail(emaillist)
 
 
     def watch_events(self):
@@ -202,11 +225,12 @@ class SiemSentry:
                 event.event_count = totalevents
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
-                event.magnitude = int((1 + \
+                magnitude = int((1 + \
                         (((totalevents / (self.rule.event_limit + 1)) * \
                         float(self.rule.overkill_modifier))) - 1) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
+                event.magnitude = magnitude
                 event.message = self.rule.message
                 event.log_source_count = numhosts
                 event.save()
@@ -214,6 +238,8 @@ class SiemSentry:
                 event.save()
                 self.lasteventid = e.latest('id').id
                 self.justfired = True
+                if self.rule.email_alerts:
+                    self.send_email_alerts(magnitude, totalevents, numhosts)
             else:
                 self.justfired = False
 
@@ -273,6 +299,8 @@ class SiemSentry:
                 event.save()
                 self.lasteventid = e.latest('id').id
                 self.justfired = True
+                if self.rule.email_alerts:
+                    self.send_email_alerts(magnitude, totalevents, numhosts)
             else:
                 self.justfired = False
 

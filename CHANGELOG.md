@@ -7,7 +7,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Added source and destination host filters to limit rules
 - Added parse helper types for simpler config updates
 - Added event fields for netflow parsing
-
+- Added email alerts to rules
 
 ### Updated
 - Fixed helper logic for single-field parse helpers

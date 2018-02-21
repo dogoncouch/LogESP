@@ -28,11 +28,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Email settings
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #EMAIL_USE_TLS = True
 #EMAIL_HOST = 'smtp.example.com'
 #EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'jsmith@example.com'
+#EMAIL_HOST_USER = 'ldsiserver@example.com'
 #EMAIL_HOST_PASSWORD = 'BIGSECRET'
+#EMAIL_ALERT_FROM_ADDRESS = 'noreply@example.com'
 
 
 # Application definition
