@@ -39,7 +39,7 @@ class ParseCore:
         """Initialize live parser"""
         self.conf = config
         self.threads = []
-        syslog.openlog(syslog.LOG_DAEMON)
+        syslog.openlog(facility=syslog.LOG_DAEMON)
         #signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
