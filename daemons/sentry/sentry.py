@@ -28,6 +28,7 @@ from random import randrange
 import json
 import threading
 import os
+import syslog
 from sys import exit
 from django.utils import timezone
 from django.core.mail import send_mass_mail
@@ -45,6 +46,7 @@ class SiemSentry:
         self.tzone = TIME_ZONE
         self.lasteventid = None
         self.justfired = False
+        syslog.openlog(syslog.LOG_DAEMON)
 
 
     def get_first_logevent(self):
@@ -111,7 +113,13 @@ class SiemSentry:
             emailattrs = (msgsubject, msg, EMAIL_ALERT_FROM_ADDRESS, [u.email])
             emaillist.append(emailattrs)
         emaillist = tuple(emaillist)
-        send_mass_mail(emaillist)
+        try:
+            send_mass_mail(emaillist, fail_silently=False)
+        except smtplib.SMTPException:
+            syslog.syslog(syslog.LOG_ERR, 
+                    'LDSI sentry failed to send email for rule ' + \
+                            self.rule.name)
+
 
 
     def watch_events(self):

@@ -39,6 +39,7 @@ class ParseCore:
         """Initialize live parser"""
         self.conf = config
         self.threads = []
+        syslog.openlog(syslog.LOG_DAEMON)
         #signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
@@ -106,7 +107,7 @@ class ParseCore:
                         syslog.syslog(syslog.LOG_CRIT, msg)
                 if not isAlive:
                     msg = 'LDSI is not parsing any files'
-                    syslog.syslog(syslog.LOG_ERROR, msg)
+                    syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
 
         except KeyboardInterrupt:

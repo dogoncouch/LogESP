@@ -28,6 +28,7 @@ from sys import exit
 from configparser import ConfigParser
 import json
 import signal
+import syslog
 from time import sleep
 import daemons.sentry.sentry
 from siem.models import LimitRule
@@ -41,6 +42,7 @@ class SentryCore:
         self.rules = []
         self.newrules = []
         self.threads = {}
+        syslog.openlog(facility=syslog.LOG_DAEMON)
         #signal.signal(signal.SIGTERM, self.sigterm_handler)
 
 
@@ -82,7 +84,7 @@ class SentryCore:
                     if not self.threads[t].isAlive():
                         msg = 'LDSI sentry thread for rule id ' + \
                                 t.name + 'has crashed'
-                        syslog.syslog(syslog.LOG_ERROR, msg)
+                        syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
 
         except KeyboardInterrupt:
