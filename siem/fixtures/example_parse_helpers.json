@@ -24,7 +24,7 @@
   "fields": {
     "name": "cisco_auth_fields",
     "desc": "Cisco auth log fields.",
-    "helper_type": "cisco",
+    "helper_type": "cisco_ios",
     "match_regex": "New\\s+(\\S+)\\s+connection\\s+for\\s+user\\s+(\\S+),\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,target_user,source_host,dest_host"
   }
@@ -34,7 +34,7 @@
   "fields": {
     "name": "cisco_aggr",
     "desc": "Cisco aggregated events.",
-    "helper_type": "cisco",
+    "helper_type": "cisco_ios",
     "match_regex": ",\\s+aggregated\\s+\\((\\d+)\\)",
     "fields": "aggregated_events"
   }
@@ -44,7 +44,7 @@
   "fields": {
     "name": "cisco_auth_fields_2",
     "desc": "Cisco auth log fields with no user.",
-    "helper_type": "cisco",
+    "helper_type": "cisco_ios",
     "match_regex": "New\\s+(\\S+)\\s+connection,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,source_host,dest_host"
   }
@@ -54,7 +54,7 @@
   "fields": {
     "name": "cisco_auth_fields_3",
     "desc": "Cisco auth log fields for accepted CLI session",
-    "helper_type": "cisco",
+    "helper_type": "cisco_ios",
     "match_regex": "User\\s+CLI\\s+session\\s+for\\s+user\\s+(\\S+)\\s+over\\s+(\\S+)\\s*,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "target_user,protocol,source_host,dest_host"
   }
