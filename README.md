@@ -12,7 +12,7 @@ LDSI is a SIEM (Security Information and Event Management system) written in Pyt
 
 ### Design Principles
 #### [NIST](https://www.nist.gov/) guidelines
-The LDSI risk management system is based on NIST [risk management](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
+The LDSI risk management system is based on NIST [risk assessment](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
 
 #### Simplicity
 LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
@@ -24,10 +24,6 @@ LDSI includes a few different applications:
 - Risk - Risk Management
 
 ## Installing
-### Installing the Latest Release
-Follow the installation instructions for the [latest release](https://github.com/dogoncouch/ldsi/releases/latest).
-
-### Installing Development Source
 Requirements: python 3.x, django >=2.0, git, pip.
 
 Note: This installation is intended for development, and trying out the software. Using the built-in Python Django web server is not recommended in real security operations environments. In production environments, LDSI should be configured by a professional with experience securing production servers.
