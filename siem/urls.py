@@ -7,6 +7,17 @@ from . import views
 app_name = 'siem'
 urlpatterns = [
     path('', login_required(views.index), name='index'),
+    path('help/', login_required(views.help_index), name='help_index'),
+    path('help/parsing/', login_required(views.parse_help),
+        name='parse_help'),
+    path('help/rules/', login_required(views.rule_help),
+        name='rule_help'),
+    path('help/logevents/', login_required(views.logevent_help),
+        name='logevent_help'),
+    path('help/ruleevents/', login_required(views.ruleevent_help),
+        name='ruleevent_help'),
+    path('help/daemons/', login_required(views.daemon_help),
+        name='daemon_help'),
     path('events/', login_required(views.event_index), name='event_index'),
     path('events/log/<int:pk>/', login_required(
         views.LogEventDetailView.as_view()), name='logevent_detail'),

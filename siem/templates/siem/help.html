@@ -1,0 +1,19 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Documentation{% endblock %}
+
+{% block content-main %}
+
+<h1>Documentation</h1>
+
+<ul>
+    <li><a href="{% url 'siem:parse_help' %}">Parsing</a></li>
+    <li><a href="{% url 'siem:rule_help' %}">Rules</a></li>
+    <li>Events<ul>
+        <li><a href="{% url 'siem:logevent_help' %}">Anatomy of a Log Event</a></li>
+        <li><a href="{% url 'siem:ruleevent_help' %}">Anatomy of a Rule Event</a></li>
+        </ul></li>
+    <li><a href="{% url 'siem:daemon_help' %}">Daemons</a></li>
+</ul>
+
+{% endblock %}

@@ -19,6 +19,24 @@ def index(request):
 def event_index(request):
     return render(request, 'siem/event_index.html')
 
+def help_index(request):
+    return render(request, 'siem/help.html')
+
+def parse_help(request):
+    return render(request, 'siem/help_parse.html')
+
+def rule_help(request):
+    return render(request, 'siem/help_rules.html')
+
+def logevent_help(request):
+    return render(request, 'siem/help_logevent.html')
+
+def ruleevent_help(request):
+    return render(request, 'siem/help_ruleevent.html')
+
+def daemon_help(request):
+    return render(request, 'siem/help_daemon.html')
+
 class LogEventSearchView(PermissionRequiredMixin, ListView):
     model = LogEvent
     permission_required = 'siem.view_logevent'

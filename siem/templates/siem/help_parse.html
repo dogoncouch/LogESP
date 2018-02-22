@@ -1,0 +1,25 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Parsing Documentation{% endblock %}
+
+{% block content-main %}
+
+<h1>Parsing Documentation</h1>
+
+<h2>Parse Daemon</h2>
+<p>The parse daemon is the program that parses log files into log events in the LDSI database. The files it parses are defined in the parser configuration file, at <b>config/parser.conf</b> in the repository. This configuration file also defines which event type to assign to events, which parser to use, the lifespan of the events, and optionally which parse helper type to use, and which syslog facility to assign.</p>
+
+<p>For more on running the parse daemon, see the <a href="{% url 'siem:daemon_help' %}">daemon documentation</a>.</p>
+
+<h2>Event Parsing</h2>
+<p>The parse daemon parses events using instructions from a parser, and optionally a group of parse helpers. The parser parses basic fields that are present in all events in the file being parsed, and parse helpers can be used to parse extra fields that aren't present in every single event.</p>
+
+<h3>Parsers</h3>
+<p>Parsers provide the parse daemon with instructions for parsing fields from events. Along with a name and description, parsers contain sets of matching information. Each set consists of a regular expression, and a comma-separated list of fields pulled by that regular expression. The fields can be any log event attribute (e.g. source_host, dest_host, target_user; see <a href="{% url 'siem:logevent_help' %}">Anatomy of a Log Event</a>)</p>
+
+<p>Each parser can have two sets of regex/field pairs: a primary, and a backup. If the primary regular expression doesn't find a match, the backup will be tried.</p>
+
+<h3>Parse Helpers</h3>
+<p>Parse helpers contain a regular expression and a comma-separated list of fields, similar to a parser. After parsing the main fields, the parse daemon tries each parse helper (of the helper type defined in the config file). If it finds a match, it pulls out extra fields; if not, it just moves on. Parse helpers are useful for parsing regular expressions and fields that aren't present in every single event.</p>
+
+{% endblock %}

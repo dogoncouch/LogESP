@@ -1,0 +1,21 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Limit Rule Documentation{% endblock %}
+
+{% block content-main %}
+
+<h1>Limit Rule Documentation</h1>
+
+<h2>Sentry Daemon</h2>
+<p>The sentry daemon watches the database, checking for criteria defined by rules. If a rule's criteria are met (i.e. the rule is broken), the sentry creates a rule event (defined by the rule), and optionally emails alerts (if email has been configured).</p>
+
+<h2>Limit Rules</h2>
+<p>Limit rules define a set of event criteria, an event limit, and a time interval. If the number of events that meet the criteria in a time interval is over the event limit, a rule event is created (and email alerts can be sent, if email is configured). Rules can also have a defined number of allowable log sources, and some attributes for calculating the magnitude of rule events. A severity and some modifiers that are used to calculate magnitude, based on the ratio of event count to event limit.</p>
+
+<h3>Filters</h3>
+<p>Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken.</p>
+
+<h3>Regex Filters</h3>
+<p>Regex filters are just like normal filters, except they can use regular expressions. They are also case insensitive.</p>
+
+{% endblock %}
