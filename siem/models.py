@@ -81,7 +81,7 @@ class LogEvent(models.Model):
 
 
 class LimitRule(models.Model):
-    name = models.CharField(max_length=32)
+    name = models.CharField(max_length=32, unique=True)
     desc = models.CharField(max_length=200,
             null=True, blank=True)
     is_enabled = models.BooleanField(default=True)
