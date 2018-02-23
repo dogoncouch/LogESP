@@ -26,10 +26,9 @@
         </li>
         </ul>
     </li>
-</ul>
-    <li>Events<ul>
-        <li><a href="{% url 'siem:logevent_help' %}">Log Events</a></li>
-        <li><a href="{% url 'siem:ruleevent_help' %}">Rule Events</a></li>
+    <li><a href="{% url 'siem:event_help' %}">Events</a><ul>
+        <li><a href="{% url 'siem:event_help' %}#logevent">Anatomy of a Log Event</a></li>
+        <li><a href="{% url 'siem:event_help' %}#ruleevent">Anatomy of a Rule Event</a></li>
         </ul></li>
     <li><a href="{% url 'siem:daemon_help' %}">Daemons</a></li>
 </ul>

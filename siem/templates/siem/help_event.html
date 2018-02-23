@@ -1,11 +1,14 @@
 {% extends "siem/base.html" %}
 
-{% block sub-title %} | Log Event Documentation{% endblock %}
+{% block sub-title %} | Event Documentation{% endblock %}
 
 {% block content-main %}
 
-<h1>Log Event Documentation</h1>
+<h1>Event Documentation</h1>
 
+<hr>
+
+<a name="logevent"></a>
 <h2>Anatomy of a Log Event</h2>
 <p>Log events have the following attributes that can be parsed using parser fields:</p>
 
@@ -44,7 +47,6 @@
     <tr><td>ext6</td><td>A field meant to be defined by the user.</td></tr>
     <tr><td>ext7</td><td>A field meant to be defined by the user.</td></tr>
 </table>
-
 <br>
 <p>In addition, log events have the following fields that are not defined by the parser and parse helpers:</p>
 <table>
@@ -58,5 +60,33 @@
     <tr><td>eol_date_backup</td><td>Event end-of-life date for backup copies.</td></tr>
     <tr><td>raw_text</td><td>The entire raw text of the event.</td></tr>
 </table>
+
+<hr>
+
+<a name="ruleevent"></a>
+<h2>Anatomy of a Rule Event</h2>
+<p>Rule events have the following attributes:</p>
+
+<table>
+    <tr><th>Attribute<br>Name</th><th>Description</th></tr>
+    <tr><td>date_stamp</td><td>A datetime object representing the rule event was created.</td></tr>
+    <tr><td>time_zone</td><td>The time zone associated with the date_stamp datetime object.</td></tr>
+    <tr><td>source_rule</td><td>The rule that created the event.</td></tr>
+    <tr><td>rule_category</td><td>The rule category of the rule broken.</td></tr>
+    <tr><td>event_type</td><td>The event type being monitored by the rule.</td></tr>
+    <tr><td>severity</td><td>The severity of the rule.</td></tr>
+    <tr><td>event_limit</td><td>The event limit for the rule.</td></tr>
+    <tr><td>event_count</td><td>The number of events involved.</td></tr>
+    <tr><td>magnitude</td><td>The magnitude of the rule event.</td></tr>
+    <tr><td>time_int</td><td>The time interval at which the rule is checked.</td></tr>
+    <tr><td>source_ids_log</td><td>The source IDs of the log events involved.</td></tr>
+    <tr><td>source_ids_rule</td><td>The source IDs of the rule events involved.</td></tr>
+    <tr><td>log_source_count</td><td>The number of different log sources involved.</td></tr>
+    <tr><td>message</td><td>The message conveyed by the rule.</td></tr>
+    <tr><td>eol_date_local</td><td>Event end-of-life date in the LDSI database</td></tr>
+    <tr><td>eol_date_backup</td><td>Event end-of-life date for backup copies</td></tr>
+</table>
+
+<p>For more on how magnitude is calculated, see <a href="{% url 'siem:rule_help' %}">rule documentation</a>
 
 {% endblock %}

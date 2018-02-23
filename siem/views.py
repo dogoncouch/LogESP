@@ -28,11 +28,8 @@ def parse_help(request):
 def rule_help(request):
     return render(request, 'siem/help_rules.html')
 
-def logevent_help(request):
-    return render(request, 'siem/help_logevent.html')
-
-def ruleevent_help(request):
-    return render(request, 'siem/help_ruleevent.html')
+def event_help(request):
+    return render(request, 'siem/help_event.html')
 
 def daemon_help(request):
     return render(request, 'siem/help_daemons.html')
