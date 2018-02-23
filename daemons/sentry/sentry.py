@@ -286,8 +286,8 @@ class SiemSentry:
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
                 magnitude = int((1 + \
-                        (((totalevents / (self.rule.event_limit + 1)) * \
-                        float(self.rule.overkill_modifier))) - 1) * \
+                        ((totalevents / (self.rule.event_limit + 1)) * \
+                        float(self.rule.overkill_modifier)) - 1) * \
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.magnitude = magnitude

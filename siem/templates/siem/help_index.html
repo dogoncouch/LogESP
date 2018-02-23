@@ -7,11 +7,29 @@
 <h1>Documentation</h1>
 
 <ul>
-    <li><a href="{% url 'siem:parse_help' %}">Parsing</a></li>
-    <li><a href="{% url 'siem:rule_help' %}">Rules</a></li>
+    <li><a href="{% url 'siem:parse_help' %}">Parsing</a><ul>
+        <li><a href="{% url 'siem:parse_help' %}#daemon">Parse Daemon</a></li>
+        <li><a href="{% url 'siem:parse_help' %}#event">Event Parsing</a><ul>
+            <li><a href="{% url 'siem:parse_help' %}#parsers">Parsers</a></li>
+            <li><a href="{% url 'siem:parse_help' %}#helpers">Parse Helpers</a></li>
+            </ul>
+        </li>
+        </ul>
+    </li>
+    <li><a href="{% url 'siem:rule_help' %}">Rules</a><ul>
+        <li><a href="{% url 'siem:rule_help' %}#daemon">Sentry Daemon</a></li>
+        <li><a href="{% url 'siem:rule_help' %}#limitrules">Limit Rules</a><ul>
+            <li><a href="{% url 'siem:rule_help' %}#rulevlog">Rule vs. Log Events</a></li>
+            <li><a href="{% url 'siem:rule_help' %}#filters">Filters</a></li>
+            <li><a href="{% url 'siem:rule_help' %}#magnitude">Magnitude Calculation</a></li>
+            </ul>
+        </li>
+        </ul>
+    </li>
+</ul>
     <li>Events<ul>
-        <li><a href="{% url 'siem:logevent_help' %}">Anatomy of a Log Event</a></li>
-        <li><a href="{% url 'siem:ruleevent_help' %}">Anatomy of a Rule Event</a></li>
+        <li><a href="{% url 'siem:logevent_help' %}">Log Events</a></li>
+        <li><a href="{% url 'siem:ruleevent_help' %}">Rule Events</a></li>
         </ul></li>
     <li><a href="{% url 'siem:daemon_help' %}">Daemons</a></li>
 </ul>
