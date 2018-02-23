@@ -28,7 +28,7 @@
 
 <a name="parsers"></a>
 <h3>Parsers</h3>
-<p>Parsers provide the parse daemon with instructions for parsing fields from events. Along with a name and description, parsers contain sets of matching information. Each set consists of a regular expression, and a comma-separated list of fields pulled by that regular expression. The fields can be any log event attribute (e.g. source_host, dest_host, target_user; see <a href="{% url 'siem:logevent_help' %}">Anatomy of a Log Event</a>)</p>
+<p>Parsers provide the parse daemon with instructions for parsing fields from events. Along with a name and description, parsers contain sets of matching information. Each set consists of a regular expression, and a comma-separated list of fields pulled by that regular expression. The fields can be any log event attribute (e.g. source_host, dest_host, target_user; see <a href="{% url 'siem:event_help' %}#logevent">Anatomy of a Log Event</a>)</p>
 
 <p>Each parser can have two sets of regex/field pairs: a primary, and a backup. If the primary regular expression doesn't find a match, the backup will be tried.</p>
 
