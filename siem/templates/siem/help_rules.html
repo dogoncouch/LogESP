@@ -5,6 +5,17 @@
 {% block content-main %}
 
 <h1>Limit Rule Documentation</h1>
+
+<ul>
+    <li><a href="{% url 'siem:rule_help' %}#daemon">Sentry Daemon</a></li>
+    <li><a href="{% url 'siem:rule_help' %}#limitrules">Limit Rules</a><ul>
+        <li><a href="{% url 'siem:rule_help' %}#rulevlog">Rule vs. Log Events</a></li>
+        <li><a href="{% url 'siem:rule_help' %}#filters">Filters</a></li>
+        <li><a href="{% url 'siem:rule_help' %}#magnitude">Magnitude Calculation</a></li>
+        </ul>
+    </li>
+</ul>
+
 <hr>
 <a name="daemon"></a>
 <h2>Sentry Daemon</h2>

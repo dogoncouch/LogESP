@@ -5,6 +5,16 @@
 {% block content-main %}
 
 <h1>Parsing Documentation</h1>
+
+<ul>
+    <li><a href="{% url 'siem:parse_help' %}#daemon">Parse Daemon</a></li>
+    <li><a href="{% url 'siem:parse_help' %}#event">Event Parsing</a><ul>
+        <li><a href="{% url 'siem:parse_help' %}#parsers">Parsers</a></li>
+        <li><a href="{% url 'siem:parse_help' %}#helpers">Parse Helpers</a></li>
+        </ul>
+    </li>
+</ul>
+
 <hr>
 <a name="daemon"></a>
 <h2>Parse Daemon</h2>
