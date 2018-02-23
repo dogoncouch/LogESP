@@ -34,6 +34,12 @@ DIV.pagination {
     padding-bottom: 16px;
 }
 
+PRE {
+    background-color: #222222;
+    display: inline-block;
+    padding: 8px;
+}
+
 TABLE, TH, TD {
     border: 1px solid;
     border-color: #444444;

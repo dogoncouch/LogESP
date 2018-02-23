@@ -20,7 +20,7 @@ def event_index(request):
     return render(request, 'siem/event_index.html')
 
 def help_index(request):
-    return render(request, 'siem/help.html')
+    return render(request, 'siem/help_index.html')
 
 def parse_help(request):
     return render(request, 'siem/help_parse.html')
@@ -35,7 +35,7 @@ def ruleevent_help(request):
     return render(request, 'siem/help_ruleevent.html')
 
 def daemon_help(request):
-    return render(request, 'siem/help_daemon.html')
+    return render(request, 'siem/help_daemons.html')
 
 class LogEventSearchView(PermissionRequiredMixin, ListView):
     model = LogEvent

@@ -12,10 +12,46 @@
 <h2>Limit Rules</h2>
 <p>Limit rules define a set of event criteria, an event limit, and a time interval. If the number of events that meet the criteria in a time interval is over the event limit, a rule event is created (and email alerts can be sent, if email is configured). Rules can also have a defined number of allowable log sources, and some attributes for calculating the magnitude of rule events. A severity and some modifiers that are used to calculate magnitude, based on the ratio of event count to event limit.</p>
 
-<h3>Filters</h3>
-<p>Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken.</p>
+<h3>Rule vs. Log</h3>
+<p>If a rule's rule_events attribute is set to True, it will monitor rule events; otherwise, it will monitor log events.</p>
 
-<h3>Regex Filters</h3>
-<p>Regex filters are just like normal filters, except they can use regular expressions. They are also case insensitive.</p>
+<h3>Filters</h3>
+<p>Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken. A few fields can use regular expressions.</p>
+<p>Rules can filter on the following fields:</p>
+<table>
+    <tr><th>Field</th><th>Event<br>Type</th><th>Regex?</th></tr>
+    <tr><td>message</td><td>Any</td><td>Yes</td></tr>
+    <tr><td>raw_text</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>log_source</td><td>Log</td><td>No</td></tr>
+    <tr><td>process</td><td>Log</td><td>No</td></tr>
+    <tr><td>action</td><td>Log</td><td>No</td></tr>
+    <tr><td>interface</td><td>Log</td><td>No</td></tr>
+    <tr><td>source_host</td><td>Log</td><td>No</td></tr>
+    <tr><td>source_port</td><td>Log</td><td>No</td></tr>
+    <tr><td>dest_host</td><td>Log</td><td>No</td></tr>
+    <tr><td>dest_port</td><td>Log</td><td>No</td></tr>
+    <tr><td>source_user</td><td>Log</td><td>No</td></tr>
+    <tr><td>target_user</td><td>Log</td><td>No</td></tr>
+    <tr><td>source_rule__name</td><td>Rule</td><td>No</td></tr>
+    <tr><td>magnitude</td><td>Rule</td><td>No</td></tr>
+</table>
+<p>In addition to these filters, rule events have an optional event_type attribute. Event types must match exactly, if present.</p>
+
+<h3>Magnitude Calculation</h3>
+<p>Rule event magnitude is calculated using the following factors:</p>
+<ul>
+    <li>Rule severity (0-7; 0 is the most severe)</li>
+    <li>Event limit</li>
+    <li>Event count</li>
+    <li>Severity modifier</li>
+    <li>Overkill modifier</li>
+</ul>
+<p>The actual calculation:</p>
+<b>(1 + <br>
+    (((event_count / (event_limit + 1)) * overkill_modifier))<br>
+    -1)<br>
+    *<br>
+    ((8 - severity) * severity_modifier)</b>
+<p>(Formatting added to aid in comprehension)</p>
 
 {% endblock %}

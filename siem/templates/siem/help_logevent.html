@@ -1,0 +1,62 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Log Event Documentation{% endblock %}
+
+{% block content-main %}
+
+<h1>Log Event Documentation</h1>
+
+<h2>Anatomy of a Log Event</h2>
+<p>Log events have the following attributes that can be parsed using parser fields:</p>
+
+<table>
+    <tr><th>Attribute<br>Name</th><th>Description</th></tr>
+    <tr><td>date_stamp</td><td>A string representing the date stamp.</td></tr>
+    <tr><td>log_source</td><td>The log source from which the event originated.</td></tr>
+    <tr><td>facility</td><td>The syslog facility of the event (0-23).</td></tr>
+    <tr><td>severity</td><td>The syslog severity of the event (0-7).</td></tr>
+    <tr><td>aggregated_events</td><td>The number of aggregated events represented.</td></tr>
+    <tr><td>source_host</td><td>The source host (IP, FQDN, etc).</td></tr>
+    <tr><td>source_port</td><td>The source port (i.e. 443, https, smtp, etc).</td></tr>
+    <tr><td>dest_host</td><td>The destination host.</td></tr>
+    <tr><td>dest_port</td><td>The destination port.</td></tr>
+    <tr><td>source_process</td><td>The source process.</td></tr>
+    <tr><td>source_pid</td><td>The source process ID.</td></tr>
+    <tr><td>action</td><td>The action being taken.</td></tr>
+    <tr><td>protocol</td><td>The protocol involved in the event (ssh, https, etc).</td></tr>
+    <tr><td>packet_count</td><td>The number of packets involved (for flows).</td></tr>
+    <tr><td>byte_count</td><td>The number of bytes involved.</td></tr>
+    <tr><td>tcp_flags</td><td>The TCP flags (an integer).</td></tr>
+    <tr><td>class_of_service</td><td>The ToS (type of service) field (an integer).</td></tr>
+    <tr><td>interface</td><td>The network interface involved.</td></tr>
+    <tr><td>start_time</td><td>A string representing the start time (for flows, videos, motion sensor events).</td></tr>
+    <tr><td>duration</td><td>A string representing the duration.</td></tr>
+    <tr><td>source_user</td><td>The user who initiated the event.</td></tr>
+    <tr><td>target_user</td><td>The user targeted in the event.</td></tr>
+    <tr><td>sessionid</td><td>The session ID of the session involved in the event.</td></tr>
+    <tr><td>message</td><td>The message conveyed.</td></tr>
+    <tr><td>ext0</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext1</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext2</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext3</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext4</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext5</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext6</td><td>A field meant to be defined by the user.</td></tr>
+    <tr><td>ext7</td><td>A field meant to be defined by the user.</td></tr>
+</table>
+
+<br>
+<p>In addition, log events have the following fields that are not defined by the parser and parse helpers:</p>
+<table>
+    <tr><th>Attribute<br>Name</th><th>Description</th></tr>
+    <tr><td>parsed_at</td><td>The time the event was parsed (a datetime object, with 6 decimal places).</td></tr>
+    <tr><td>time_zone</td><td>The time zone associated with the parsed_at datetime object.</td></tr>
+    <tr><td>parsed_on</td><td>The hostname of the system on which the event was parsed.</td></tr>
+    <tr><td>source_path</td><td>The full path of the file from which the event originated.</td></tr>
+    <tr><td>event_type</td><td>The event type defined by the parser configuration.</td></tr>
+    <tr><td>eol_date_local</td><td>Event end-of-life date in the LDSI database</td></tr>
+    <tr><td>eol_date_backup</td><td>Event end-of-life date for backup copies</td></tr>
+    <tr><td>raw_text</td><td>The entire raw text of the event.</td></tr>
+</table>
+
+{% endblock %}

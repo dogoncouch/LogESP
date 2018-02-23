@@ -1,0 +1,26 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %} | Daemon Documentation{% endblock %}
+
+{% block content-main %}
+
+<h1>Daemon Documentation</h1>
+<p>LDSI includes a parse daemon to parse events, and a sentry daemon to monitor rules. In addition, it includes a cleaning utility that can be used to clean old log events. These are all managed using the <b>start.sh</b> script.</p>
+
+<pre>
+Usage: start.sh [-hv] &lt;directory&gt; &lt;command&gt;
+
+Optional arguments:
+  -h                      Print this help message
+  -v                      Print the version number
+  -r                      Restart daemons
+  -k                      Stop daemons
+  -c                      Clean old events using backup EOL date
+  -l                      Clean old events using local EOL date
+  -b &lt;ldsi-base&gt;          Set the LDSI base directory
+  -e &lt;env-base&gt;           Set a virtual environment
+</pre>
+
+<p>Daemons can be started manually, or by <b>/etc/rc.local</b>. Parser configuration is located in <b>config/parser.conf</b> inside the repository. Cleaning can be done manually, or by cron.</p>
+
+{% endblock %}
