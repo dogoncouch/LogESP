@@ -87,23 +87,14 @@ class ParseModule:
                         for f, v in extlist:
                             entry[f] = v
 
-            # Convert integer fields:
-        if entry['aggregated_events']:
-            entry['aggregated_events'] = int(entry['aggregated_events'])
-        else:
-            entry['aggregated_events'] = 1
+        # Convert integer fields:
+        entry['aggregated_events'] = int(entry['aggregated_events'])
         if entry['facility']:
             entry['facility'] = int(entry['facility'])
-        else:
-            entry['facility'] = None
         if entry['severity']:
             entry['severity'] = int(entry['severity'])
-        else:
-            entry['severity'] = None
         if entry['source_pid']:
             entry['source_pid'] = int(entry['source_pid'])
-        else:
-            entry['source_pid'] = None
         if entry['packet_count']:
             entry['packet_count'] = int(entry['packet_count'])
         if entry['byte_count']:
@@ -122,15 +113,15 @@ class ParseModule:
         entry = {}
 
         entry['date_stamp'] = None
-        entry['facility'] = ''
-        entry['severity'] = ''
+        entry['facility'] = None
+        entry['severity'] = None
         entry['log_source'] = ''
         entry['aggregated_events'] = 1
         entry['source_host'] = ''
         entry['source_port'] = ''
         entry['source_process'] = ''
         entry['action'] = ''
-        entry['source_pid'] = ''
+        entry['source_pid'] = None
         entry['dest_host'] = ''
         entry['dest_port'] = ''
         entry['protocol'] = ''
