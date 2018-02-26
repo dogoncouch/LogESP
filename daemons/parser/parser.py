@@ -68,8 +68,8 @@ class ParseModule:
     def match_line(self, regexformat, fields, line):
         """Try matching a line with a regex format"""
         match = re.findall(regexformat, line)
+        entry = self.get_blank_entry()
         if match:
-            entry = self.get_blank_entry()
 
             linelist = list(zip(fields, match[0]))
 
@@ -88,34 +88,32 @@ class ParseModule:
                             entry[f] = v
 
             # Convert integer fields:
-            if entry['aggregated_events']:
-                entry['aggregated_events'] = int(entry['aggregated_events'])
-            else:
-                entry['aggregated_events'] = 1
-            if entry['facility']:
-                entry['facility'] = int(entry['facility'])
-            else:
-                entry['facility'] = None
-            if entry['severity']:
-                entry['severity'] = int(entry['severity'])
-            else:
-                entry['severity'] = None
-            if entry['source_pid']:
-                entry['source_pid'] = int(entry['source_pid'])
-            else:
-                entry['source_pid'] = None
-            if entry['packet_count']:
-                entry['packet_count'] = int(entry['packet_count'])
-            if entry['byte_count']:
-                entry['byte_count'] = int(entry['byte_count'])
-            if entry['tcp_flags']:
-                entry['tcp_flags'] = int(entry['tcp_flags'])
-            if entry['class_of_service']:
-                entry['class_of_service'] = int(entry['class_of_service'])
+        if entry['aggregated_events']:
+            entry['aggregated_events'] = int(entry['aggregated_events'])
+        else:
+            entry['aggregated_events'] = 1
+        if entry['facility']:
+            entry['facility'] = int(entry['facility'])
+        else:
+            entry['facility'] = None
+        if entry['severity']:
+            entry['severity'] = int(entry['severity'])
+        else:
+            entry['severity'] = None
+        if entry['source_pid']:
+            entry['source_pid'] = int(entry['source_pid'])
+        else:
+            entry['source_pid'] = None
+        if entry['packet_count']:
+            entry['packet_count'] = int(entry['packet_count'])
+        if entry['byte_count']:
+            entry['byte_count'] = int(entry['byte_count'])
+        if entry['tcp_flags']:
+            entry['tcp_flags'] = int(entry['tcp_flags'])
+        if entry['class_of_service']:
+            entry['class_of_service'] = int(entry['class_of_service'])
 
-            return entry
-
-        else: return None
+        return entry
 
 
     def get_blank_entry(self):

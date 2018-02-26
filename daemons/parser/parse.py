@@ -62,110 +62,56 @@ class LiveParser:
                     
                     entry = self.parser.parse_line(ourline)
 
-                    if entry:
-                        e = LogEvent()
-                        e.parsed_at = timezone.localtime(timezone.now())
-                        e.time_zone = TIME_ZONE
-                        e.eol_date_local = timezone.localtime(
-                                timezone.now()).date() + \
-                                        self.locallifespandelta
-                        e.eol_date_backup = timezone.localtime(
-                                timezone.now()).date() + \
-                                        self.backuplifespandelta
-                        e.event_type = eventtype
-                        e.date_stamp = entry['date_stamp']
-                        e.raw_text = ourline
-                        if entry['facility']:
-                            e.facility = entry['facility']
-                        else:
-                            e.facility = self.facility
-                        e.severity = entry['severity']
-                        e.log_source = entry['log_source']
-                        e.aggregated_events = entry['aggregated_events']
-                        e.source_host = entry['source_host']
-                        e.source_port = entry['source_port']
-                        e.dest_host = entry['dest_host']
-                        e.dest_port = entry['dest_port']
-                        e.source_process = entry['source_process']
-                        e.source_pid = entry['source_pid']
-                        e.action = entry['action']
-                        e.protocol = entry['protocol']
-                        e.packet_count = entry['packet_count']
-                        e.byte_count = entry['byte_count']
-                        e.tcp_flags = entry['tcp_flags']
-                        e.class_of_service = entry['class_of_service']
-                        e.interface = entry['interface']
-                        e.start_time = entry['start_time']
-                        e.duration = entry['duration']
-                        e.message = entry['message']
-                        e.source_user = entry['source_user']
-                        e.target_user = entry['target_user']
-                        e.sessionid = entry['sessionid']
-                        e.ext0 = entry['ext0']
-                        e.ext1 = entry['ext1']
-                        e.ext2 = entry['ext2']
-                        e.ext3 = entry['ext3']
-                        e.ext4 = entry['ext4']
-                        e.ext5 = entry['ext5']
-                        e.ext6 = entry['ext6']
-                        e.ext7 = entry['ext7']
-                        e.parsed_on = self.parsehost
-                        e.source_path = self.parsepath
-                        e.save()
-        
+                    #if entry:
+                    e = LogEvent()
+                    e.parsed_at = timezone.localtime(timezone.now())
+                    e.time_zone = TIME_ZONE
+                    e.eol_date_local = timezone.localtime(
+                            timezone.now()).date() + \
+                                    self.locallifespandelta
+                    e.eol_date_backup = timezone.localtime(
+                            timezone.now()).date() + \
+                                    self.backuplifespandelta
+                    e.event_type = eventtype
+                    e.date_stamp = entry['date_stamp']
+                    e.raw_text = ourline
+                    if entry['facility']:
+                        e.facility = entry['facility']
                     else:
-                        # No match
-                        entry = self.parser.get_blank_entry()
-                        e = LogEvent()
-                        e.parsed_at = timezone.localtime(timezone.now())
-                        e.time_zone = TIME_ZONE
-                        e.eol_date_local = timezone.localtime(
-                                timezone.now()).date() + \
-                                        self.locallifespandelta
-                        e.eol_date_backup = timezone.localtime(
-                                timezone.now()).date() + \
-                                        self.backuplifespandelta
-                        e.event_type = eventtype
-                        e.raw_text = ourline
-                        e.parsed_on = self.parsehost
-                        e.aggregated_events = 1
-                        e.source_path = self.parsepath
-                        e.date_stamp = entry['date_stamp']
-                        e.severity = entry['severity']
-                        if entry['facility']:
-                            e.facility = entry['facility']
-                        else:
-                            e.facility = self.facility
-                        e.log_source = entry['log_source']
-                        e.source_host = entry['source_host']
-                        e.source_port = entry['source_port']
-                        e.dest_host = entry['dest_host']
-                        e.dest_port = entry['dest_port']
-                        e.source_process = entry['source_process']
-                        e.source_pid = entry['source_pid']
-                        e.action = entry['action']
-                        e.protocol = entry['protocol']
-                        e.packet_count = entry['packet_count']
-                        e.byte_count = entry['byte_count']
-                        e.tcp_flags = entry['tcp_flags']
-                        e.class_of_service = entry['class_of_service']
-                        e.interface = entry['interface']
-                        e.start_time = entry['start_time']
-                        e.duration = entry['duration']
-                        e.message = entry['message']
-                        e.source_user = entry['source_user']
-                        e.target_user = entry['target_user']
-                        e.sessionid = entry['sessionid']
-                        e.ext0 = entry['ext0']
-                        e.ext1 = entry['ext1']
-                        e.ext2 = entry['ext2']
-                        e.ext3 = entry['ext3']
-                        e.ext4 = entry['ext4']
-                        e.ext5 = entry['ext5']
-                        e.ext6 = entry['ext6']
-                        e.ext7 = entry['ext7']
-
-                        e.save()
+                        e.facility = self.facility
+                    e.severity = entry['severity']
+                    e.log_source = entry['log_source']
+                    e.aggregated_events = entry['aggregated_events']
+                    e.source_host = entry['source_host']
+                    e.source_port = entry['source_port']
+                    e.dest_host = entry['dest_host']
+                    e.dest_port = entry['dest_port']
+                    e.source_process = entry['source_process']
+                    e.source_pid = entry['source_pid']
+                    e.action = entry['action']
+                    e.protocol = entry['protocol']
+                    e.packet_count = entry['packet_count']
+                    e.byte_count = entry['byte_count']
+                    e.tcp_flags = entry['tcp_flags']
+                    e.class_of_service = entry['class_of_service']
+                    e.interface = entry['interface']
+                    e.start_time = entry['start_time']
+                    e.duration = entry['duration']
+                    e.message = entry['message']
+                    e.source_user = entry['source_user']
+                    e.target_user = entry['target_user']
+                    e.sessionid = entry['sessionid']
+                    e.ext0 = entry['ext0']
+                    e.ext1 = entry['ext1']
+                    e.ext2 = entry['ext2']
+                    e.ext3 = entry['ext3']
+                    e.ext4 = entry['ext4']
+                    e.ext5 = entry['ext5']
+                    e.ext6 = entry['ext6']
+                    e.ext7 = entry['ext7']
+                    e.parsed_on = self.parsehost
+                    e.source_path = self.parsepath
+                    e.save()
 
                 else:
                     # Check if file has been rotated:
