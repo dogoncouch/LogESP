@@ -69,35 +69,7 @@ class ParseModule:
         """Try matching a line with a regex format"""
         match = re.findall(regexformat, line)
         if match:
-            # Create empty entry:
-            entry = {}
-
-
-            entry['date_stamp'] = None
-            entry['facility'] = ''
-            entry['severity'] = ''
-            entry['log_source'] = ''
-            entry['aggregated_events'] = 1
-            entry['source_host'] = ''
-            entry['source_port'] = ''
-            entry['source_process'] = ''
-            entry['action'] = ''
-            entry['source_pid'] = ''
-            entry['dest_host'] = ''
-            entry['dest_port'] = ''
-            entry['protocol'] = ''
-            entry['message'] = ''
-            entry['source_user'] = ''
-            entry['target_user'] = ''
-            entry['sessionid'] = ''
-            entry['ext0'] = ''
-            entry['ext1'] = ''
-            entry['ext2'] = ''
-            entry['ext3'] = ''
-            entry['ext4'] = ''
-            entry['ext5'] = ''
-            entry['ext6'] = ''
-            entry['ext7'] = ''
+            entry = self.get_blank_entry
 
             linelist = list(zip(fields, match[0]))
 
@@ -132,7 +104,56 @@ class ParseModule:
                 entry['source_pid'] = int(entry['source_pid'])
             else:
                 entry['source_pid'] = None
+            if entry['packet_count']:
+                entry['packet_count'] = int(entry['packet_count'])
+            if entry['byte_count']:
+                entry['byte_count'] = int(entry['byte_count'])
+            if entry['tcp_flags']:
+                entry['tcp_flags'] = int(entry['tcp_flags'])
+            if entry['class_of_service']:
+                entry['class_of_service'] = int(entry['class_of_service'])
 
             return entry
 
         else: return None
+
+
+    def get_blank_entry(self):
+        """Return a blank entry dictionary"""
+        # Create empty entry:
+        entry = {}
+
+        entry['date_stamp'] = None
+        entry['facility'] = ''
+        entry['severity'] = ''
+        entry['log_source'] = ''
+        entry['aggregated_events'] = 1
+        entry['source_host'] = ''
+        entry['source_port'] = ''
+        entry['source_process'] = ''
+        entry['action'] = ''
+        entry['source_pid'] = ''
+        entry['dest_host'] = ''
+        entry['dest_port'] = ''
+        entry['protocol'] = ''
+        entry['packet_count'] = None
+        entry['byte_count'] = None
+        entry['tcp_flags'] = None
+        entry['class_of_service'] = None
+        entry['interface'] = ''
+        entry['start_time'] = ''
+        entry['duration'] = ''
+        entry['source_user'] = ''
+        entry['target_user'] = ''
+        entry['sessionid'] = ''
+        entry['message'] = ''
+        entry['ext0'] = ''
+        entry['ext1'] = ''
+        entry['ext2'] = ''
+        entry['ext3'] = ''
+        entry['ext4'] = ''
+        entry['ext5'] = ''
+        entry['ext6'] = ''
+        entry['ext7'] = ''
+
+
