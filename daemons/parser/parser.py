@@ -69,7 +69,7 @@ class ParseModule:
         """Try matching a line with a regex format"""
         match = re.findall(regexformat, line)
         if match:
-            entry = self.get_blank_entry
+            entry = self.get_blank_entry()
 
             linelist = list(zip(fields, match[0]))
 
@@ -156,4 +156,4 @@ class ParseModule:
         entry['ext6'] = ''
         entry['ext7'] = ''
 
-
+        return entry
