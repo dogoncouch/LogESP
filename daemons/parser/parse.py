@@ -130,6 +130,8 @@ class LiveParser:
                         e.parsed_on = self.parsehost
                         e.aggregated_events = 1
                         e.source_path = self.parsepath
+                        e.date_stamp = entry['date_stamp']
+                        e.severity = entry['severity']
                         if entry['facility']:
                             e.facility = entry['facility']
                         else:
