@@ -22,7 +22,7 @@
 # 
 
 import daemons.parser.parsecore
-import daemons.sentry.sentrycore
+import daemons.sentry
 from threading import Thread
 import syslog
 import signal
@@ -39,16 +39,19 @@ class DaemonCore:
     def sigterm_handler(self, signal, frame):
         """Exit cleanly on sigterm"""
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigterm, exiting')
+        sleep(0.2)
         exit(0)
 
     def sighup_handler(self, signal, frame):
         """Exit cleanly so restart can happen on sighup"""
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sighup, restarting')
+        sleep(0.2)
         exit(1)
 
     def sigint_handler(self, signal, frame):
         """Exit cleanly on sigint"""
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigint, exiting')
+        sleep(0.2)
         exit(0)
 
     def start(self):
@@ -61,20 +64,22 @@ class DaemonCore:
         signal.signal(signal.SIGHUP, self.sighup_handler)
         signal.signal(signal.SIGINT, self.sigint_handler)
 
-        # Start parser and sentry threads:
+        # Start parser threads:
         parser = Thread(name='parser', target=daemons.parser.parsecore.start)
-        sentry = Thread(name='sentry', target=daemons.sentry.sentrycore.start)
         parser.daemon = True
-        sentry.daemon = True
-
         parser.start()
-        sentry.start()
+
+        # Start sentry threads:
+        limitsentry = Thread(name='limitsentry',
+                target=daemons.sentry.limitcore.start)
+        limitsentry.daemon = True
+        limitsentry.start()
 
         while True:
             if not parser.isAlive():
                 syslog.syslog(syslog.LOG_ALERT, 'LDSI parser has crashed!')
-            if not sentry.isAlive():
-                syslog.syslog(syslog.LOG_ALERT, 'LDSI sentry has crashed!')
+            if not limitsentry.isAlive():
+                syslog.syslog(syslog.LOG_ALERT, 'LDSI limit sentry has crashed!')
             sleep(120)
 
 if __name__ == "__main__":

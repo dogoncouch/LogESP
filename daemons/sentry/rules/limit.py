@@ -41,7 +41,7 @@ except ImportError:
 from siem.models import LogEvent, RuleEvent, LimitRule
 
 
-class SiemSentry:
+class LimitSentry:
 
     def __init__(self, rule):
         """Initialize trigger object"""
@@ -381,7 +381,7 @@ class SiemSentry:
 def start_rule(rule):
     """Initialize trigger object and start watching"""
     
-    sentry = SiemSentry(rule)
+    sentry = LimitSentry(rule)
 
     # Before starting, sleep randomly up to rule interval to stagger
     # database use:

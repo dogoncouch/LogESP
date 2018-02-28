@@ -30,11 +30,11 @@ import json
 import signal
 import syslog
 from time import sleep
-import daemons.sentry.sentry
+import daemons.sentry
 from siem.models import LimitRule
 
 
-class SentryCore:
+class LimitSentryCore:
 
     def __init__(self):
         """Initialize trigger engine"""
@@ -43,12 +43,6 @@ class SentryCore:
         self.newrules = []
         self.threads = {}
         syslog.openlog(facility=syslog.LOG_DAEMON)
-        #signal.signal(signal.SIGTERM, self.sigterm_handler)
-
-
-    #def sigterm_handler(self, signal, frame):
-    #    """Exit cleanly on sigterm"""
-    #    exit(0)
 
 
     def get_rules(self):
@@ -65,7 +59,7 @@ class SentryCore:
         # Start one thread per rule:
         for r in self.newrules:
             thread = threading.Thread(name=r.id,
-                    target=daemons.sentry.sentry.start_rule,
+                    target=daemons.sentry.rules.limit.start_rule,
                     args=(r,))
             thread.daemon = True
             thread.start()
@@ -95,5 +89,5 @@ class SentryCore:
 
     
 def start():
-    sentry = SentryCore()
+    sentry = LimitSentryCore()
     sentry.run_sentry()
