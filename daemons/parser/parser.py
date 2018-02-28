@@ -94,18 +94,25 @@ class ParseModule:
         entry['aggregated_events'] = int(entry['aggregated_events'])
         if entry['facility']:
             entry['facility'] = int(entry['facility'])
+        else: entry['facility'] = None
         if entry['severity']:
             entry['severity'] = int(entry['severity'])
+        else: entry['severity'] = None
         if entry['source_pid']:
             entry['source_pid'] = int(entry['source_pid'])
+        else: entry['source_pid'] = None
         if entry['packet_count']:
             entry['packet_count'] = int(entry['packet_count'])
+        else: entry['packet_count'] = None
         if entry['byte_count']:
             entry['byte_count'] = int(entry['byte_count'])
+        else: entry['byte_count'] = None
         if entry['tcp_flags']:
             entry['tcp_flags'] = int(entry['tcp_flags'])
+        else: entry['tcp_flags'] = None
         if entry['class_of_service']:
             entry['class_of_service'] = int(entry['class_of_service'])
+        else: entry['class_of_service'] = None
 
         return entry, matchfound
 
