@@ -56,9 +56,6 @@ class DaemonCore:
 
     def start(self):
         """Start parser and sentry engines"""
-        # Log start:
-        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
-
         # Handle signals:
         signal.signal(signal.SIGTERM, self.sigterm_handler)
         signal.signal(signal.SIGHUP, self.sighup_handler)
@@ -74,6 +71,9 @@ class DaemonCore:
                 target=daemons.sentry.limitcore.start)
         limitsentry.daemon = True
         limitsentry.start()
+
+        # Log start:
+        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
 
         while True:
             if not parser.isAlive():
