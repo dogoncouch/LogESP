@@ -87,6 +87,24 @@
         {% endfor %}
     </table>
 
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    &middot;
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    &middot;
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+
 {% else %}
     <p>No events.</p>
 {% endif %}
