@@ -58,18 +58,21 @@ class ParseModule:
 
     def parse_line(self, line):
         """Parse a line into a dictionary"""
-        entry = self.match_line(self.regex_format,
+        entry, matchfound = self.match_line(self.regex_format,
                 self.fields, line)
-        if self.backup_regex_format and self.backup_fields and not entry:
+        if self.backup_regex_format and self.backup_fields and not matchfound:
             entry = self.match_line(self.backup_regex_format,
                     self.backup_fields, line)
         return entry
 
     def match_line(self, regexformat, fields, line):
         """Try matching a line with a regex format"""
+        matchfound = False
         match = re.findall(regexformat, line)
         entry = self.get_blank_entry()
         if match:
+
+            matchfound = True
 
             linelist = list(zip(fields, match[0]))
 
@@ -104,7 +107,7 @@ class ParseModule:
         if entry['class_of_service']:
             entry['class_of_service'] = int(entry['class_of_service'])
 
-        return entry
+        return entry, matchfound
 
 
     def get_blank_entry(self):

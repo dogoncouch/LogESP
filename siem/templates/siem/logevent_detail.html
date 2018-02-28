@@ -18,8 +18,8 @@
     <li>Log Source: {{ event.log_source }}</li>
     <li>Aggregated Events: {{event.aggregated_events }}</li>
     <li>Event Type: {{ event.event_type }}</li>
-    <li>Facility: {{ event.facility }}</li>
-    <li>Severity: {{ event.severity }}</li>
+    <li>Facility: {{ event.get_facility_display }}</li>
+    <li>Severity: {{ event.get_severity_display }}</li>
     <li>Date Stamp: {{ event.date_stamp }}</li>
     <li>Source Host: {{ event.source_host }}</li>
     <li>Source Port: {{ event.source_port }}</li>
