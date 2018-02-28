@@ -61,7 +61,7 @@ class ParseModule:
         entry, matchfound = self.match_line(self.regex_format,
                 self.fields, line)
         if self.backup_regex_format and self.backup_fields and not matchfound:
-            entry = self.match_line(self.backup_regex_format,
+            entry, matchfound = self.match_line(self.backup_regex_format,
                     self.backup_fields, line)
         return entry
 
