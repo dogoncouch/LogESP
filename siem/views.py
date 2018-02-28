@@ -47,6 +47,10 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         source_port_val = self.request.GET.get('source_port_filter')
         dest_host_val = self.request.GET.get('dest_host_filter')
         dest_port_val = self.request.GET.get('dest_port_filter')
+        source_user_val = self.request.GET.get('source_user_filter')
+        target_user_val = self.request.GET.get('target_user_filter')
+        action_val = self.request.GET.get('action_filter')
+        interface_val = self.request.GET.get('interface_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
         raw_val = self.request.GET.get('raw_filter')
@@ -58,6 +62,10 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not source_port_val: source_port_val = ''
         if not dest_host_val: dest_host_val = ''
         if not dest_port_val: dest_port_val = ''
+        if not source_user_val: source_user_val = ''
+        if not target_user_val: target_user_val = ''
+        if not action_val: action_val = ''
+        if not interface_val: interface_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
         if time_val:
@@ -70,6 +78,10 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 source_port__contains=source_port_val,
                 dest_host__contains=dest_host_val,
                 dest_port__contains=dest_port_val,
+                source_user__contains=source_user_val,
+                target_user__contains=target_user_val,
+                action__contains=action_val,
+                interface__contains=interface_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
         else:
@@ -78,7 +90,13 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 log_source__contains=log_source_val,
                 source_process__contains=process_val,
                 source_host__contains=source_host_val,
+                source_port__contains=source_port_val,
                 dest_host__contains=dest_host_val,
+                dest_port__contains=dest_port_val,
+                source_user__contains=source_user_val,
+                target_user__contains=target_user_val,
+                action__contains=action_val,
+                interface__contains=interface_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
         return new_context
@@ -95,6 +113,14 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 'dest_host_filter', '')
         context['dest_port_filter'] = self.request.GET.get(
                 'dest_port_filter', '')
+        context['source_user_filter'] = self.request.GET.get(
+                'source_user_filter', '')
+        context['target_user_filter'] = self.request.GET.get(
+                'target_user_filter', '')
+        context['action_filter'] = self.request.GET.get(
+                'action_filter', '')
+        context['interface_filter'] = self.request.GET.get(
+                'interface_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
         context['message_filter'] = self.request.GET.get('message_filter', '')
         context['raw_filter'] = self.request.GET.get('raw_filter', '')

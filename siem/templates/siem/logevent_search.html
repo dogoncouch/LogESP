@@ -35,6 +35,16 @@
                 <input type="text" value="{{ dest_port_filter }}" name="dest_port_filter"/></td>
         </tr>
         <tr>
+            <td class="searchform">Source User:
+                <input type="text" value="{{ source_user_filter }}" name="source_user_filter"/></td>
+            <td class="searchform">Target User:
+                <input type="text" value="{{ target_user_filter }}" name="target_user_filter"/></td>
+            <td class="searchform">Action:
+                <input type="text" value="{{ action_filter }}" name="action_filter"/></td>
+            <td class="searchform">Interface:
+                <input type="text" value="{{ interface_filter }}" name="interface_filter"/></td>
+        </tr>
+        <tr>
             <td class="searchform">Event Type:
                 <input type="text" value="{{ type_filter }}" name="type_filter"/></td>
             <td class="searchform">End Date/Time:
@@ -50,7 +60,7 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&source_user={{ source_user_filter }}&target_user={{ target_user_filter }}&action={{ action_filter }}&interface={{ interface_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
                     &middot;
                 {% endif %}
                 <span class="page-current">
@@ -58,7 +68,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&source_user={{ source_user_filter }}&target_user={{ target_user_filter }}&action={{ action_filter }}&interface={{ interface_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
@@ -69,6 +79,8 @@
             <th>Event<br>Type</th><th>Log<br>Source</th>
             <th>Source<br>Process</th><th>#<br>Aggr</th>
             <th>Source<br>Host</th><th>Dest.<br>Host</th>
+            <th>Source<br>User</th><th>Target<br>User</th>
+            <th>Action</th><th>Inter-<br>face</th>
             <th class="left">Message</th></tr>
         {% for e in event_list %}
         <tr>
@@ -79,8 +91,12 @@
             <td>{{ e.log_source }}</td>
             <td>{{ e.source_process|truncatechars:12 }}</td>
             <td>{{ e.aggregated_events }}</td>
-            <td>{{ e.source_host }}:{{ e.source_port }}</td>
-            <td>{{ e.dest_host}}:{{ e.dest_port }}</td>
+            <td>{{ e.source_host }}{% if e.source_port %}:{{ e.source_port }}{% endif %}</td>
+            <td>{{ e.dest_host}}{% if e.dest_port %}:{{ e.dest_port }}{% endif %}</td>
+            <td>{{ e.source_user }}</td>
+            <td>{{ e.target_user }}</td>
+            <td>{{ e.action }}</td>
+            <td>{{ e.interface }}</td>
             <td>{{ e.message }}</td>
             </a>
         </tr>
@@ -91,7 +107,7 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&source_user={{ source_user_filter }}&target_user={{ target_user_filter }}&action={{ action_filter }}&interface={{ interface_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
                     &middot;
                 {% endif %}
                 <span class="page-current">
@@ -99,7 +115,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&source_user={{ source_user_filter }}&target_user={{ target_user_filter }}&action={{ action_filter }}&interface={{ interface_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&time_filter={{ time_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
