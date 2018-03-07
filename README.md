@@ -78,7 +78,7 @@ Optional arguments:
   -e <env-base>           Set a virtual environment
 ```
 
-The parser configuration file is at `config/parser.conf`. Cleaning should be handled by a cron job. `start.sh` can be run manually, or by `etc/rc.local`.
+The parser configuration file is at `config/parser.conf`. Cleaning should be handled by a cron job. `start.sh` can be run manually, or by `/etc/rc.local`.
 
 ## Screenshots
 
