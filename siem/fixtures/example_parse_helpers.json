@@ -108,5 +108,25 @@
     "match_regex": "\\s+password\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+)",
     "fields": "target_user,source_host,source_port,protocol"
   }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_console_config",
+    "desc": "Cisco console configuration event.",
+    "helper_type": "cisco_ios",
+    "match_regex": "Configured\\sfrom\\sconsole\\sby\\s(\\S+)\\son\\s(\\S+)\\s\\((\\S+)\\)",
+    "fields": "source_user,sessionid,source_host"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_line_protocol",
+    "desc": "Cisco line protocol events.",
+    "helper_type": "cisco_ios",
+    "match_regex": "Line protocol on Interface (\\S+),",
+    "fields": "interface"
+  }
 }
 ]
