@@ -23,64 +23,55 @@
 # SOFTWARE.
 
 import threading
-import os
-from sys import exit
-from configparser import ConfigParser
-import json
-import signal
 import syslog
 from time import sleep
 import daemons.sentry
-from siem.models import LimitRule
 
 
-class LimitSentryCore:
+class SentryMgrCore:
 
     def __init__(self):
-        """Initialize trigger engine"""
-        self.rlist = []
-        self.rules = []
-        self.newrules = []
+        """Initialize sentry core"""
+        self.rule_types = {}
         self.threads = {}
         syslog.openlog(facility=syslog.LOG_DAEMON)
 
 
-    def get_rules(self):
-        """Get rules from tables"""
-        rules = LimitRule.objects.all()
-        for r in rules:
-            if not r.id in self.rules:
-                self.newrules.append(r)
-        self.rules = [r.id for r in rules]
-        
+    def load_rule_types(self):
+        """Load all sentry rule types"""
+        for ruletype in sorted(daemons.sentry.rules.__all__):
+            self.rule_types[ruletype] = \
+                    __import__('daemons.sentry.rules.' + ruletype + '.core',
+                            globals(), locals(), ['sentry'])
 
-    def start_triggers(self):
-        """Start siemstress event triggers"""
-        # Start one thread per rule:
-        for r in self.newrules:
-            thread = threading.Thread(name=r.id,
-                    target=daemons.sentry.rules.limit.start_rule,
-                    args=(r,))
-            thread.daemon = True
-            thread.start()
 
-            self.threads[r.id] = thread
-        self.newrules = []
+    def start_rule_types(self):
+        """Start all sentry rule types"""
+        for t in self.rule_types:
+            s = threading.Thread(name=t,
+                    target=self.rule_types[t].start())
+            s.daemon = True
+            s.start()
+            self.threads[t] = s
+
+
+    def watch_rule_types(self):
+        """Monitor rule types for crashes"""
+        while True:
+            for t in self.threads:
+                if not self.threads[t].isAlive():
+                    msg = 'LDSI rule sentry thread for rule type ' + \
+                            t.name + 'has crashed'
+                    syslog.syslog(syslog.LOG_ERR, msg)
+            sleep(120)
 
 
     def run_sentry(self):
-        """Start trigger engine"""
+        """Start sentry engine"""
         try:
-            while True:
-                self.get_rules()
-                self.start_triggers()
-                for t in self.threads:
-                    if not self.threads[t].isAlive():
-                        msg = 'LDSI sentry thread for rule id ' + \
-                                t.name + 'has crashed'
-                        syslog.syslog(syslog.LOG_ERR, msg)
-                sleep(120)
-
+            self.load_rule_types()
+            self.start_rule_types()
+            self.watch_rule_types()
         except KeyboardInterrupt:
             exit(0)
         #except Exception as err:
@@ -89,5 +80,5 @@ class LimitSentryCore:
 
     
 def start():
-    sentry = LimitSentryCore()
+    sentry = SentryMgrCore()
     sentry.run_sentry()

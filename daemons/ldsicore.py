@@ -67,10 +67,10 @@ class DaemonCore:
         parser.start()
 
         # Start sentry threads:
-        limitsentry = Thread(name='limitsentry',
-                target=daemons.sentry.limitcore.start)
-        limitsentry.daemon = True
-        limitsentry.start()
+        sentry = Thread(name='sentry',
+                target=daemons.sentry.core.start)
+        sentry.daemon = True
+        sentry.start()
 
         # Log start:
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
@@ -78,8 +78,8 @@ class DaemonCore:
         while True:
             if not parser.isAlive():
                 syslog.syslog(syslog.LOG_ALERT, 'LDSI parser has crashed!')
-            if not limitsentry.isAlive():
-                syslog.syslog(syslog.LOG_ALERT, 'LDSI limit sentry has crashed!')
+            if not sentry.isAlive():
+                syslog.syslog(syslog.LOG_ALERT, 'LDSI sentry has crashed!')
             sleep(120)
 
 if __name__ == "__main__":
