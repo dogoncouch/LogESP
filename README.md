@@ -14,11 +14,8 @@ LDSI is a SIEM (Security Information and Event Management system) written in Pyt
 #### Security
 LDSI was designed and built as a security application, and minimalism can be good for security.
 
-##### Log Sources
-LDSI does not require credentials, or installation of its software, on log sources. Event forwarding is left entirely up to syslog daemons.
-
-##### Web Clients
-LDSI uses no client-side scripting.
+- LDSI does not require credentials, or installation of its software, on log sources. Event forwarding is left entirely up to syslog daemons.
+- LDSI uses no client-side scripting.
 
 #### [NIST](https://www.nist.gov/) guidelines
 The LDSI risk management system is based on NIST [risk assessment](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
