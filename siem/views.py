@@ -190,6 +190,8 @@ class LRIndexView(PermissionRequiredMixin, ListView):
     permission_required = 'siem.view_limitrule'
     template_name = 'siem/lr_index.html'
     context_object_name = 'lr_list'
+    def get_queryset(self):
+        return LimitRule.objects.order_by('event_type')
 
 class LRDetailView(PermissionRequiredMixin, DetailView):
     model = LimitRule
@@ -288,6 +290,8 @@ class PHIndexView(PermissionRequiredMixin, ListView):
     permission_required = 'siem.view_logeventparser'
     template_name = 'siem/ph_index.html'
     context_object_name = 'ph_list'
+    def get_queryset(self):
+        return ParseHelper.objects.order_by('helper_type')
 
 class PHDetailView(PermissionRequiredMixin, DetailView):
     model = ParseHelper
