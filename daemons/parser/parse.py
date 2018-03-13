@@ -89,6 +89,7 @@ class LiveParser:
                     e.source_process = entry['source_process']
                     e.source_pid = entry['source_pid']
                     e.action = entry['action']
+                    e.command = entry['command']
                     e.protocol = entry['protocol']
                     e.packet_count = entry['packet_count']
                     e.byte_count = entry['byte_count']

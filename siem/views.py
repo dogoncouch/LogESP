@@ -50,6 +50,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         source_user_val = self.request.GET.get('source_user_filter')
         target_user_val = self.request.GET.get('target_user_filter')
         action_val = self.request.GET.get('action_filter')
+        command_val = self.request.GET.get('command_filter')
         interface_val = self.request.GET.get('interface_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
@@ -65,6 +66,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not source_user_val: source_user_val = ''
         if not target_user_val: target_user_val = ''
         if not action_val: action_val = ''
+        if not command_val: command_val = ''
         if not interface_val: interface_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
@@ -81,6 +83,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 source_user__contains=source_user_val,
                 target_user__contains=target_user_val,
                 action__contains=action_val,
+                command__contains=command_val,
                 interface__contains=interface_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
@@ -96,6 +99,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 source_user__contains=source_user_val,
                 target_user__contains=target_user_val,
                 action__contains=action_val,
+                command__contains=command_val,
                 interface__contains=interface_val,
                 message__contains=message_val,
                 raw_text__contains=raw_val).order_by('-id')
@@ -119,6 +123,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 'target_user_filter', '')
         context['action_filter'] = self.request.GET.get(
                 'action_filter', '')
+        context['command_filter'] = self.request.GET.get(
+                'command_filter', '')
         context['interface_filter'] = self.request.GET.get(
                 'interface_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
@@ -202,7 +208,7 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter', 'process_filter',
-            'action_filter', 'interface_filter',
+            'action_filter', 'command_filter', 'interface_filter',
             'source_host_filter', 'source_port_filter',
             'dest_host_filter', 'dest_port_filter',
             'source_user_filter', 'target_user_filter',
@@ -223,7 +229,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter', 'process_filter',
-            'action_filter', 'interface_filter',
+            'action_filter', 'command_filter', 'interface_filter',
             'source_host_filter', 'source_port_filter',
             'dest_host_filter', 'dest_port_filter',
             'source_user_filter', 'target_user_filter',

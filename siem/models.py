@@ -54,6 +54,7 @@ class LogEvent(models.Model):
     source_pid = models.IntegerField(
             null=True, blank=True)
     action = models.CharField(max_length=48, default='')
+    command = models.CharField(max_length=64, default='')
     protocol = models.CharField(max_length=12, default='')
     packet_count = models.IntegerField(null=True, blank=True)
     byte_count = models.IntegerField(null=True, blank=True)
@@ -112,6 +113,8 @@ class LimitRule(models.Model):
     process_filter = models.CharField(max_length=24,
             null=True, blank=True)
     action_filter = models.CharField(max_length=48,
+            null=True, blank=True)
+    command_filter = models.CharField(max_length=64,
             null=True, blank=True)
     interface_filter = models.CharField(max_length=32,
             null=True, blank=True)

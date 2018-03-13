@@ -9,11 +9,12 @@
 
 {% if ph_list %}
     <table>
-        <tr><th>Name</th><th>Fields</th></tr>
+        <tr><th>Name</th><th>Type</th><th>Fields</th></tr>
         {% for ph in ph_list %}
             <tr>
                 <td><a href="{% url 'siem:ph_detail' ph.id %}">
                         {{ ph }}</a></td>
+                <td>{{ ph.heper_type }}</td>
                 <td>{{ ph.fields }}</td>
             </tr>
         {% endfor %}
