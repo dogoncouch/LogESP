@@ -24,6 +24,7 @@ class ATEIndexView(ListView):
     model = AdvThreatEvent
     template_name = 'risk/ate_index.html'
     context_object_name = 'ate_list'
+    permission_required = 'risk.view_advthreatevent'
     def get_queryset(self):
         return AdvThreatEvent.objects.order_by('-assigned_risk')
 
@@ -31,6 +32,7 @@ class NTEIndexView(ListView):
     model = NonAdvThreatEvent
     template_name = 'risk/nte_index.html'
     context_object_name = 'nte_list'
+    permission_required = 'risk.view_nonadvthreatevent'
     def get_queryset(self):
         return NonAdvThreatEvent.objects.order_by('-assigned_risk')
 
@@ -38,71 +40,85 @@ class ATSIndexView(ListView):
     model = AdvThreatSource
     template_name = 'risk/ats_index.html'
     context_object_name = 'ats_list'
+    permission_required = 'risk.view_advthreatsource'
 
 class NTSIndexView(ListView):
     model = NonAdvThreatSource
     template_name = 'risk/nts_index.html'
     context_object_name = 'nts_list'
+    permission_required = 'risk.view_nonadvthreatsource'
 
 class VulnIndexView(ListView):
     model = Vulnerability
     template_name = 'risk/vuln_index.html'
     context_object_name = 'vuln_list'
+    permission_required = 'risk.view_vulnerability'
 
 class CondIndexView(ListView):
     model = RiskCondition
     template_name = 'risk/cond_index.html'
     context_object_name = 'cond_list'
+    permission_required = 'risk.view_riskcondition'
 
 class ImpactIndexView(ListView):
     model = Impact
     template_name = 'risk/impact_index.html'
     context_object_name = 'impact_list'
+    permission_required = 'risk.view_impact'
 
 class ResponseIndexView(ListView):
     model = RiskResponse
     template_name = 'risk/response_index.html'
     context_object_name = 'response_list'
+    permission_required = 'risk.view_riskresponse'
 
 class ATEDetailView(DetailView):
     model = AdvThreatEvent
     template_name = 'risk/ate_detail.html'
     context_object_name = 'ate'
+    permission_required = 'risk.view_advthreatevent'
 
 class NTEDetailView(DetailView):
     model = NonAdvThreatEvent
     template_name = 'risk/nte_detail.html'
     context_object_name = 'nte'
+    permission_required = 'risk.view_nonadvthreatevent'
 
 class ATSDetailView(DetailView):
     model = AdvThreatSource
     template_name = 'risk/ats_detail.html'
     context_object_name = 'ats'
+    permission_required = 'risk.view_advthreatsource'
 
 class NTSDetailView(DetailView):
     model = NonAdvThreatSource
     template_name = 'risk/nts_detail.html'
     context_object_name = 'nts'
+    permission_required = 'risk.view_nonadvthreatsource'
 
 class VulnDetailView(DetailView):
     model = Vulnerability
     template_name = 'risk/vuln_detail.html'
     context_object_name = 'vuln'
+    permission_required = 'risk.view_vulnerability'
 
 class CondDetailView(DetailView):
     model = RiskCondition
     template_name = 'risk/cond_detail.html'
     context_object_name = 'cond'
+    permission_required = 'risk.view_riskcondition'
 
 class ImpactDetailView(DetailView):
     model = Impact
     template_name = 'risk/impact_detail.html'
     context_object_name = 'impact'
+    permission_required = 'risk.view_impact'
 
 class ResponseDetailView(DetailView):
     model = RiskResponse
     template_name = 'risk/response_detail.html'
     context_object_name = 'response'
+    permission_required = 'risk.view_riskresponse'
 
 class ATECreateView(PermissionRequiredMixin, CreateView):
     model = AdvThreatEvent

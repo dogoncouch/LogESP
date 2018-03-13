@@ -136,7 +136,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
 
 class LogEventDetailView(PermissionRequiredMixin, DetailView):
     model = LogEvent
-    permission_required = 'siem.view_logeventrule'
+    permission_required = 'siem.view_logevent'
     template_name = 'siem/logevent_detail.html'
     context_object_name = 'event'
 
@@ -181,7 +181,7 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
 
 class RuleEventDetailView(PermissionRequiredMixin, DetailView):
     model = RuleEvent
-    permission_required = 'siem.view_ruleeventrule'
+    permission_required = 'siem.view_ruleevent'
     template_name = 'siem/ruleevent_detail.html'
     context_object_name = 'event'
 

@@ -18,6 +18,7 @@ class OUIndexView(ListView):
     model = OrganizationalUnit
     template_name = 'hwam/ou_index.html'
     context_object_name = 'ou_list'
+    permission_required = 'hwam.view_organizationalunit'
 
     def get_queryset(self):
         """Return a list of parent-less organizational units"""
@@ -28,6 +29,7 @@ class HWIndexView(ListView):
     model = HardwareAsset
     template_name = 'hwam/hw_index.html'
     context_object_name = 'hw_list'
+    permission_required = 'hwam.view_hardwareasset'
 
     def get_queryset(self):
         """Return a list of parent-less hardware assets"""
@@ -38,6 +40,7 @@ class HWSearchView(ListView):
     model = HardwareAsset
     template_name = "hwam/hw_search.html"
     context_object_name = 'hw_list'
+    permission_required = 'hwam.view_hardwareasset'
     paginate_by = 20
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
@@ -58,6 +61,7 @@ class SWIndexView(ListView):
     model = SoftwareAsset
     template_name = 'hwam/sw_index.html'
     context_object_name = 'sw_list'
+    permission_required = 'hwam.view_softwareasset'
 
     def get_queryset(self):
         """Return a tuple of software assets"""
@@ -74,6 +78,7 @@ class SWSearchView(ListView):
     model = SoftwareAsset
     template_name = "hwam/sw_search.html"
     context_object_name = 'sw_list'
+    permission_required = 'hwam.view_softwareasset'
     paginate_by = 20
     def get_queryset(self):
         filter_val = self.request.GET.get('filter')
@@ -93,16 +98,19 @@ class OUDetailView(DetailView):
     model = OrganizationalUnit
     template_name = 'hwam/ou_detail.html'
     context_object_name = 'ou'
+    permission_required = 'hwam.view_organizationalunit'
 
 class HWDetailView(DetailView):
     model = HardwareAsset
     template_name = 'hwam/hw_detail.html'
     context_object_name = 'hw'
+    permission_required = 'hwam.view_hardwareasset'
 
 class SWDetailView(DetailView):
     model = SoftwareAsset
     template_name = 'hwam/sw_detail.html'
     context_object_name = 'sw'
+    permission_required = 'hwam.view_softwareasset'
 
 class OUCreateView(PermissionRequiredMixin, CreateView):
     model = OrganizationalUnit
