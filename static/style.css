@@ -14,6 +14,18 @@ DIV.navbar-content {
     font-size: 1.2em;
 }
 
+DIV.navbar-left{
+    display: inline-block;
+    text-align: left;
+}
+
+
+DIV.navbar-right{
+    display: inline-block;
+    float: right;
+    text-align: right;
+}
+
 DIV.main {
     padding: 0.5%;
 }

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
 
 from ldsi import views
 
@@ -28,6 +29,15 @@ urlpatterns = [
     path('hwam/', include('hwam.urls')),
     path('risk/', include('risk.urls')),
     path('siem/', include('siem.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('accounts/password_change/',
+        auth_views.PasswordChangeView.as_view(),
+        name='password_change'),
+    path('accounts/password_change/done/',
+        auth_views.PasswordChangeDoneView.as_view(),
+        name='password_change_done'),
+    #path('accounts/password_change/done/', auth_views., name=''),
     path('admin/', admin.site.urls),
 ]
