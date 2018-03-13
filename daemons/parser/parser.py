@@ -44,8 +44,10 @@ class ParseModule:
             self.backup_fields = None
 
         # Get parse helpers:
-        helperobjects = [ParseHelper.objects.get(
-            name=n) for n in parsehelpers]
+        try:
+            helperobjects = [ParseHelper.objects.get(
+                name=n) for n in parsehelpers]
+        except Exception: helperobjects = []
         self.parsehelpers = []
         for h in helperobjects:
             helper = {}
