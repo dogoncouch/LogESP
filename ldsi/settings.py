@@ -85,26 +85,27 @@ WSGI_APPLICATION = 'ldsi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'NAME': 'siem_data',
-#        'ENGINE': 'django.db.backends.mysql',
-#        'USER': 'ldsictrl',
-#        # Note: Change this!!!
-#        'PASSWORD': 'siems2bfine',
-#        'HOST': '127.0.0.1',
-#        'PORT': '3306',
-#        'OPTIONS': {
-#        }
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'siem_data',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'ldsictrl',
+        # Note: Change this!!!
+        'PASSWORD': 'siems2bfine',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_ALL_TABLES'"
+        }
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+#}
 
 
 # Password validation
@@ -143,6 +144,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-#STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
