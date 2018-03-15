@@ -26,7 +26,8 @@ def get_blank_entry():
     # Create empty entry:
     entry = {}
 
-    entry['date_stamp'] = None
+    entry['date_stamp'] = ''
+    entry['time_zone'] = ''
     entry['facility'] = None
     entry['severity'] = None
     entry['log_source'] = ''
