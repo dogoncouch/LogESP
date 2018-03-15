@@ -1,8 +1,6 @@
 # LDSI Installation
 - Ubuntu server 16.04
 
-Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
-
 ## Index
 
 - [Requirements](#requirements)
@@ -13,6 +11,8 @@ Note: This installation is intended for development, and trying out the software
 - [Nginx Setup](#nginx-setup)
 - [Edit rc.local](#edit-rclocal)
 - [Reboot](#reboot)
+
+Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
 ## Requirements
 ```
