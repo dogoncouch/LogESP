@@ -1,4 +1,4 @@
-# LDSI installation
+# LDSI Installation
 - Ubuntu server 16.04
 
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
@@ -15,7 +15,7 @@ systemctl enable --now mysql
 mysql_secure_installation
 mysql -u root -p
 ```
-Note: Change the password (IDENTIFIED BY). Even though it's localhost.
+Note: Change the password below (IDENTIFIED BY). Even though it's localhost.
 ```
 CREATE DATABASE siem_data CHARACTER SET UTF8;
 CREATE USER ldsictrl@localhost IDENTIFIED BY 'siems2bfine';
@@ -39,13 +39,13 @@ pip install django mysqlclient uwsgi
 ```
 
 ## LDSI Setup
-### Clone ldsi
+### Clone LDSI
 ```
 git clone https://github.com/dogoncouch/ldsi.git
 cd ldsi
 ```
 
-### Set up static files, database
+### Set Up Static Files, Database
 - Collect static files, set up database:
 ```
 python manage.py collectstatic
@@ -62,7 +62,7 @@ make new-db
 - Add more files, if necessary
 
 ## Rsyslog Setup
-### Place files
+### Place Files
 ```
 cp /opt/ldsi/ldsi/config/rsyslog/10-server.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/70-cisco.conf /etc/rsyslog.d/
@@ -79,16 +79,17 @@ systemctl restart rsyslog
 ```
 
 ## Nginx Setup
-### Create links
+### Create Links
 ```
 ln -s /opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf /etc/nginx/sites-enabled/
 ```
 
-### Create SSL certificate
+### Create SSL Certificate
 ```
 mkdir /etc/nginx/ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
 ```
+In a production environment, use SSL certificates signed by your CA.
 
 ## Edit rc.local
 ```
