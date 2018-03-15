@@ -10,6 +10,7 @@ Log events have the following attributes that can be parsed using parser fields:
 ```
 Attribute
 Name                Description
+-------------------------------
 date_stamp          A string representing the date stamp.
 log_source          The log source from which the event originated.
 facility            The syslog facility of the event (0-23).
@@ -48,6 +49,7 @@ In addition, log events have the following fields that are not defined by the pa
 ```
 Attribute
 Name            Description
+---------------------------
 parsed_at           The time the event was parsed (a datetime object, with 6 decimal places).
 time_zone           The time zone associated with the parsed_at datetime object.
 parsed_on           The hostname of the system on which the event was parsed.
@@ -61,6 +63,9 @@ raw_text            The entire raw text of the event.
 ### Anatomy of a Rule Event
 Rule events have the following attributes:
 ```
+Attribute
+Name                Description
+-------------------------------
 date_stamp          A datetime object representing the rule event was created.
 time_zone           The time zone associated with the date_stamp datetime object.
 source_rule         The rule that created the event.

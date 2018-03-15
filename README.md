@@ -5,8 +5,8 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 ## Index
 
 - [Introduction](#introduction)
-- [Installing](#installing)
 - [Documentation](#documentation)
+- [Installing](#installing)
 - [Screenshots](#screenshots)
 
 ## Introduction
@@ -31,13 +31,13 @@ LDSI includes a few different applications:
 - Assets - Asset Management
 - Risk - Risk Management
 
+## Documentation
+See the [documentation index](doc/index.md)
+
 ## Installing
 See [Ubuntu install instructions](doc/install-ubuntu.md) for Ubuntu server installation.
 
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
-
-## Documentation
-See the [documentation index](doc/index.md)
 
 ## Screenshots
 
