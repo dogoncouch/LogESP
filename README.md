@@ -1,10 +1,12 @@
 # LogDissect Security Intelligence
 
+LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+
 ## Index
 
 - [Introduction](#introduction)
 - [Installing](#installing)
-- [Daemons](#daemons)
+- [Documentation](#documentation)
 - [Screenshots](#screenshots)
 
 ## Introduction
@@ -34,8 +36,8 @@ See [Ubuntu install instructions](doc/install-ubuntu.md) for Ubuntu server insta
 
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
-## Daemons
-See [daemon documentation](doc/daemons.md) for info on starting/stopping/restarting daemons.
+## Documentation
+See the [documentation index](doc/index.md)
 
 ## Screenshots
 

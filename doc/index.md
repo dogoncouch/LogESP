@@ -2,6 +2,7 @@
 
 LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
+- [Installing on Ubuntu](install-ubuntu.md)
 - [Parsing](parsing.md)
   - [Parse Daemon](parsing.md/#parse-daemon)
   - [Event Parsing](parsing.md/#event-parsing)
