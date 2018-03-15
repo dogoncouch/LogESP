@@ -87,7 +87,7 @@ class ParseModule:
         entry['event_type'] = self.event_type
         entry['time_zone'] = self.time_zone
         entry['source_path'] = self.parse_path
-        entry['parsed_on'] = self.parsehost
+        entry['parsed_on'] = self.parse_host
         if match:
 
             matchfound = True
