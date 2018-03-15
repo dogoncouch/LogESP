@@ -99,10 +99,10 @@ def check_entry(entry):
         entry['raw_text'] = entry['raw_text'][:1280]
     if len(entry['log_source']) > 32:
         entry['log_source'] = entry['log_source'][:32]
-    if not 0 <= entry['facility']) < 24:
+    if not 0 <= entry['facility'] < 24:
         entry['facility'] = None
-    if not 0 <= entry['severity']) < 8:
-        entry['severity'] = entry['severity'][:]
+    if not 0 <= entry['severity'] < 8:
+        entry['severity'] = None
     #if entry['aggregated_events'] > :
     #    entry[''] = entry[''][:]
     if len(entry['source_host']) > 32:
