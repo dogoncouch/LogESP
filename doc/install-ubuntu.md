@@ -3,7 +3,18 @@
 
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
-## Install Requirements
+## Index
+
+- [Requirements](#requirements)
+- [MariaDB Setup](#mariadb-setup)
+- [Virtual Environment](#virtual-environment)
+- [LDSI Setup](#ldsi-setup)
+- [Rsyslog Setup](#rsyslog-setup)
+- [Nginx Setup](#nginx-setup)
+- [Edit rc.local](#edit-rc.local)
+- [Reboot](#reboot)
+
+## Requirements
 ```
 apt update ; apt upgrade
 apt install build-essential python3-dev python3-venv libmysqlclient-dev mariadb-server nginx
@@ -72,10 +83,6 @@ cp /opt/ldsi/ldsi/config/rsyslog/77-audit.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
 touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 chown syslog.admin /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
-```
-### Restart
-```
-systemctl restart rsyslog
 ```
 
 ## Nginx Setup
