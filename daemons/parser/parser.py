@@ -29,7 +29,8 @@ match_regex = '^([A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+(\S+)\s+(\S+)\[?
 
 
 class ParseModule:
-    def __init__(self, parser, parsehelpers=[]):
+    def __init__(self, parser, eventtype, timezone, parsepath,
+            parsehost, parsehelpers=[]):
         """Initialize a parsing module"""
         self.parser = LogEventParser.objects.get(name=parser)
         self.regex_format = re.compile(r'{}'.format(self.parser.match_regex))
@@ -37,6 +38,10 @@ class ParseModule:
         self.native_fields = {'parsed_at', 'time_zone', 'parsed_on',
                 'source_path', 'event_type', 'eol_date_local',
                 'eol_date_backup', 'raw_text'}
+        self.event_type = eventtype
+        self.time_zone = timezone
+        self.parse_path = parsepath
+        self.parse_host = parsehost
 
         if self.parser.backup_match_regex:
             self.backup_regex_format = re.compile(
@@ -78,6 +83,11 @@ class ParseModule:
         matchfound = False
         match = re.findall(regexformat, line)
         entry = daemons.parser.util.get_blank_entry()
+        entry['raw_text'] = line
+        entry['event_type'] = self.event_type
+        entry['time_zone'] = self.time_zone
+        entry['source_path'] = self.parse_path
+        entry['parsed_on'] = self.parsehost
         if match:
 
             matchfound = True

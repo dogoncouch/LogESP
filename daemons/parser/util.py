@@ -28,6 +28,8 @@ def get_blank_entry():
 
     entry['date_stamp'] = ''
     entry['time_zone'] = ''
+    entry['event_type'] = ''
+    entry['raw_text'] = ''
     entry['facility'] = None
     entry['severity'] = None
     entry['log_source'] = ''

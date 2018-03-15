@@ -42,7 +42,7 @@ class LiveParser:
         self.parser = None
 
 
-    def parse_entries(self, filename, eventtype):
+    def parse_entries(self, filename):
         """Parse log entries from a file like object"""
         # Get hostname, file name, tzone:
         
@@ -65,16 +65,16 @@ class LiveParser:
                     #if entry:
                     e = LogEvent()
                     e.parsed_at = timezone.localtime(timezone.now())
-                    e.time_zone = TIME_ZONE
+                    e.time_zone = entry['time_zone']
                     e.eol_date_local = timezone.localtime(
                             timezone.now()).date() + \
                                     self.locallifespandelta
                     e.eol_date_backup = timezone.localtime(
                             timezone.now()).date() + \
                                     self.backuplifespandelta
-                    e.event_type = eventtype
+                    e.event_type = entry['event_type']
                     e.date_stamp = entry['date_stamp']
-                    e.raw_text = ourline
+                    e.raw_text = entry['raw_text']
                     if entry['facility']:
                         e.facility = entry['facility']
                     else:
@@ -110,8 +110,8 @@ class LiveParser:
                     e.ext5 = entry['ext5']
                     e.ext6 = entry['ext6']
                     e.ext7 = entry['ext7']
-                    e.parsed_on = self.parsehost
-                    e.source_path = self.parsepath
+                    e.parsed_on = entry['parsed_on']
+                    e.source_path = entry['source_path']
                     e.save()
 
                 else:
@@ -137,14 +137,16 @@ class LiveParser:
         else:
             self.backuplifespandelta = \
                     timedelta(days=parseinfo['backup_lifespan_days'])
-        self.parser = ParseModule(parseinfo['parser'],
-                parsehelpers=parseinfo['parse_helpers'])
         self.parsepath = os.path.abspath(parseinfo['filename'])
         self.parsehost = socket.getfqdn()
+        self.parser = ParseModule(parseinfo['parser'],
+                parseinfo['event_type'],
+                TIME_ZONE,
+                self.parsepath, self.parsehost,
+                parsehelpers=parseinfo['parse_helpers'])
         try:
             while True:
-                self.parse_entries(parseinfo['filename'],
-                        parseinfo['event_type'])
+                self.parse_entries(parseinfo['filename'])
 
         except KeyboardInterrupt:
             pass
