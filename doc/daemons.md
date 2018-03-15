@@ -1,5 +1,7 @@
 # LogDissect Security Intelligence
 
+LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+
 ## Index
 
 - [Daemons](#daemons)

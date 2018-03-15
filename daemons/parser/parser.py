@@ -33,6 +33,11 @@ class ParseModule:
         """Initialize a parsing module"""
         self.parser = LogEventParser.objects.get(name=parser)
         self.regex_format = re.compile(r'{}'.format(self.parser.match_regex))
+
+        self.native_fields = {'parsed_at', 'time_zone', 'parsed_on',
+                'source_path', 'event_type', 'eol_date_local',
+                'eol_date_backup', 'raw_text'}
+
         if self.parser.backup_match_regex:
             self.backup_regex_format = re.compile(
                     r'{}'.format(self.parser.backup_match_regex))
@@ -80,7 +85,8 @@ class ParseModule:
             linelist = list(zip(fields, match[0]))
 
             for f, v in linelist:
-                entry[f] = v
+                if not f in self.native_fields:
+                    entry[f] = v
 
         # Parse helpers:
         for h in self.parsehelpers:
@@ -91,7 +97,8 @@ class ParseModule:
                 else:
                     extlist = list(zip(h['fields'], extmatch[0]))
                     for f, v in extlist:
-                        entry[f] = v
+                        if not f in self.native_fields:
+                            entry[f] = v
 
         entry = daemons.parser.util.check_entry(entry)
 

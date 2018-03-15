@@ -1,4 +1,6 @@
 # LDSI Installation
+LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+
 - Ubuntu server 16.04
 
 ## Index
@@ -77,6 +79,7 @@ make new-db
 ```
 cp /opt/ldsi/ldsi/config/rsyslog/10-server.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/70-cisco.conf /etc/rsyslog.d/
+cp /opt/ldsi/ldsi/config/rsyslog/71-daemon.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/75-snort.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/77-audit.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
