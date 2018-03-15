@@ -5,9 +5,23 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 ## Index
 
 - [Introduction](#introduction)
-- [Documentation](#documentation)
-- [Installing](#installing)
-- [Screenshots](#screenshots)
+- [Installing on Ubuntu](doc/install-ubuntu.md)
+- [Parsing](doc/parsing.md)
+  - [Parse Daemon](doc/parsing.md/#parse-daemon)
+  - [Event Parsing](doc/parsing.md/#event-parsing)
+    - [Parsers](doc/parsing.md/#parsers)
+    - [Parse Helpers](doc/parsing.md/#parse-helpers)
+- [Rules](doc/rules.md)
+  - [Sentry Daemon](doc/rules.md/#sentry-daemon)
+  - [Limit Rules](doc/rules.md/#limit-rules)
+    - [Rule vs. Log Events](doc/rules.md/#rule-vs-log-events)
+    - [Filters](doc/rules.md/#filters)
+    - [Magnitude Calculation](doc/rules.md/#magnitude-calculation)
+- [Events](doc/events.md)
+  - [Anatomy of a Log Event](doc/events.md/#anatomy-of-a-log-event)
+  - [Anatomy of a Rule Event](doc/events.md/#anatomy-of-a-rule-event)
+- [Daemons](doc/daemons.md)
+- [Screenshots](doc/screenshots.md)
 
 ## Introduction
 LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
@@ -30,38 +44,3 @@ LDSI includes a few different applications:
 - SIEM - Security Information and Event Management
 - Assets - Asset Management
 - Risk - Risk Management
-
-## Documentation
-See the [documentation index](doc/index.md)
-
-## Installing
-See [Ubuntu install instructions](doc/install-ubuntu.md) for Ubuntu server installation.
-
-Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
-
-## Screenshots
-
-### SIEM
-
-#### Log event search:
-![Log event search screenshot](media/log_event_search_screenshot.png)
-
-#### Log event detail view:
-![Log event detail screenshot](media/log_event_detail_screenshot.png)
-
-#### Rule event search:
-![Rule event search screenshot](media/rule_event_search_screenshot.png)
-
-#### Rule event detail view:
-![Rule event detail screenshot](media/rule_event_detail_screenshot.png)
-
-### Risk Management
-
-#### Adversarial threat event index:
-![Adversarial threat event index screenshot](media/adv_threat_event_index_screenshot.png)
-
-#### Adversarial threat event detail:
-![Adversarial threat event detail screenshot](media/adv_threat_event_detail_screenshot.png)
-
-#### Non-adversarial threat event detail:
-![Non-adversarial threat event index screenshot](media/nonadv_threat_event_detail_screenshot.png)
