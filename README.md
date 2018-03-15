@@ -30,7 +30,7 @@ LDSI includes a few different applications:
 - Risk - Risk Management
 
 ## Installing
-See [Ubuntu install instructions](https://github.com/dogoncouch/ldsi/blob/master/doc/install-ubuntu) for Ubuntu server installation.
+See [Ubuntu install instructions](doc/install-ubuntu.md) for Ubuntu server installation.
 
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
