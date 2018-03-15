@@ -30,42 +30,9 @@ LDSI includes a few different applications:
 - Risk - Risk Management
 
 ## Installing
-Requirements: python 3.x, django >=2.0, git, pip.
+See [Ubuntu install instructions](doc/install-ubuntu) for Ubuntu server installation.
 
-Note: This installation is intended for development, and trying out the software. Using the built-in Python Django web server is not recommended in real security operations environments. In production environments, LDSI should be configured by a professional with experience securing production servers.
-
-#### Step 1
-- Download the release:
-```
-git clone https://github.com/dogoncouch/ldsi.git
-```
-
-#### Step 2
-- Create a virtual environment and install django:
-```
-virtualenv -p python3 ldsi_env
-source ldsi_env/bin/activate
-pip install django
-```
-
-#### Step 3
-- Create/migrate the database, and add fixtures:
-```
-cd ldsi
-make new-db
-```
-
-#### Step 4
-- Start the server:
-```
-python manage.py runserver
-```
-
-#### Step 5
-- Try it: http://localhost:8000
-
-#### Step 6
-- Set up syslog service, clients
+Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
 ## Daemons
 ### start.sh
