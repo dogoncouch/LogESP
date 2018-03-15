@@ -73,36 +73,36 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if time_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__lte=time_val,
-                event_type__contains=type_val,
-                log_source__contains=log_source_val,
-                source_process__contains=process_val,
-                source_host__contains=source_host_val,
-                source_port__contains=source_port_val,
-                dest_host__contains=dest_host_val,
-                dest_port__contains=dest_port_val,
-                source_user__contains=source_user_val,
-                target_user__contains=target_user_val,
-                action__contains=action_val,
-                command__contains=command_val,
-                interface__contains=interface_val,
-                message__contains=message_val,
-                raw_text__contains=raw_val).order_by('-id')
+                event_type__icontains=type_val,
+                log_source__icontains=log_source_val,
+                source_process__icontains=process_val,
+                source_host__icontains=source_host_val,
+                source_port__icontains=source_port_val,
+                dest_host__icontains=dest_host_val,
+                dest_port__icontains=dest_port_val,
+                source_user__icontains=source_user_val,
+                target_user__icontains=target_user_val,
+                action__icontains=action_val,
+                command__icontains=command_val,
+                interface__icontains=interface_val,
+                message__iregex=message_val,
+                raw_text__iregex=raw_val).order_by('-id')
         else:
             new_context = LogEvent.objects.filter(
-                event_type__contains=type_val,
-                log_source__contains=log_source_val,
-                source_process__contains=process_val,
-                source_host__contains=source_host_val,
-                source_port__contains=source_port_val,
-                dest_host__contains=dest_host_val,
-                dest_port__contains=dest_port_val,
-                source_user__contains=source_user_val,
-                target_user__contains=target_user_val,
-                action__contains=action_val,
-                command__contains=command_val,
-                interface__contains=interface_val,
-                message__contains=message_val,
-                raw_text__contains=raw_val).order_by('-id')
+                event_type__icontains=type_val,
+                log_source__icontains=log_source_val,
+                source_process__icontains=process_val,
+                source_host__icontains=source_host_val,
+                source_port__icontains=source_port_val,
+                dest_host__icontains=dest_host_val,
+                dest_port__icontains=dest_port_val,
+                source_user__icontains=source_user_val,
+                target_user__icontains=target_user_val,
+                action__icontains=action_val,
+                command__icontains=command_val,
+                interface__icontains=interface_val,
+                message__iregex=message_val,
+                raw_text__iregex=raw_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
@@ -159,16 +159,16 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
         if time_val:
             new_context = RuleEvent.objects.filter(
             date_stamp__lte=time_val,
-            rule_category__contains=category_val,
-            event_type__contains=type_val,
+            rule_category__icontains=category_val,
+            event_type__icontains=type_val,
             magnitude__gte=mag_val,
-            message__contains=message_val).order_by('-id')
+            message__iregex=message_val).order_by('-id')
         else:
             new_context = RuleEvent.objects.filter(
-            rule_category__contains=category_val,
-            event_type__contains=type_val,
+            rule_category__icontains=category_val,
+            event_type__icontains=type_val,
             magnitude__gte=mag_val,
-            message__contains=message_val).order_by('-id')
+            message__iregex=message_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(RuleEventSearchView,self).get_context_data(**kwargs)
