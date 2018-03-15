@@ -11,7 +11,7 @@ Note: This installation is intended for development, and trying out the software
 - [LDSI Setup](#ldsi-setup)
 - [Rsyslog Setup](#rsyslog-setup)
 - [Nginx Setup](#nginx-setup)
-- [Edit rc.local](#edit-rc.local)
+- [Edit rc.local](#edit-rclocal)
 - [Reboot](#reboot)
 
 ## Requirements
