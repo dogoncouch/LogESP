@@ -10,13 +10,13 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 ## Parse Daemon
 The parse daemon is the program that parses log files into log events in the LDSI database. The files it parses are defined in the parser configuration file, at config/parser.conf in the repository. This configuration file also defines which event type to assign to events, which parser to use, the lifespan of the events, and optionally which parse helper type to use, and which syslog facility to assign.
 
-For more on running the parse daemon, see the [daemon documentation](daemon.md).
+For more on running the parse daemon, see the [daemon documentation](daemons.md).
 
 ## Event Parsing
 The parse daemon parses events using instructions from a parser, and optionally a group of parse helpers. The parser parses basic fields that are present in all events in the file being parsed, and parse helpers can be used to parse extra fields that aren't present in every single event.
 
 ### Parsers
-Parsers provide the parse daemon with instructions for parsing fields from events. Along with a name and description, parsers contain sets of matching information. Each set consists of a regular expression, and a comma-separated list of fields pulled by that regular expression. The fields can be any log event attribute (e.g. `source_host`, `dest_host`, `target_user`; see [Anatomy of a Log Event](#events.md/#anatomy-of-a-log-event))
+Parsers provide the parse daemon with instructions for parsing fields from events. Along with a name and description, parsers contain sets of matching information. Each set consists of a regular expression, and a comma-separated list of fields pulled by that regular expression. The fields can be any log event attribute (e.g. `source_host`, `dest_host`, `target_user`; see [Anatomy of a Log Event](events.md/#anatomy-of-a-log-event))
 
 Each parser can have two sets of regex/field pairs: a primary, and a backup. If the primary regular expression doesn't find a match, the backup will be tried.
 
