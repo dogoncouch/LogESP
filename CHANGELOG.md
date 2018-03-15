@@ -10,7 +10,8 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Added email alerts to rules
 - Added more filters to rules - action, interface, source/target user
 - Added password change pages
-- Sanity check for entry length, etc.
+- Added sanity check for entry length, etc.
+- Added documentation
 
 ### Updated
 - Fixed helper logic for single-field parse helpers
