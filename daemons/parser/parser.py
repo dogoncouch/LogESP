@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import re
+import daemons.parser.util
 
 from siem.models import LogEventParser, ParseHelper
 
@@ -71,7 +72,7 @@ class ParseModule:
         """Try matching a line with a regex format"""
         matchfound = False
         match = re.findall(regexformat, line)
-        entry = self.get_blank_entry()
+        entry = daemons.parser.util.get_blank_entry()
         if match:
 
             matchfound = True
@@ -81,81 +82,17 @@ class ParseModule:
             for f, v in linelist:
                 entry[f] = v
 
-            # Parse helpers:
-            for h in self.parsehelpers:
-                extmatch = re.findall(h['regex_format'], line)
-                if extmatch:
-                    if isinstance(extmatch[0], str):
-                        entry[h['fields'][0]] = extmatch[0]
-                    else:
-                        extlist = list(zip(h['fields'], extmatch[0]))
-                        for f, v in extlist:
-                            entry[f] = v
+        # Parse helpers:
+        for h in self.parsehelpers:
+            extmatch = re.findall(h['regex_format'], line)
+            if extmatch:
+                if isinstance(extmatch[0], str):
+                    entry[h['fields'][0]] = extmatch[0]
+                else:
+                    extlist = list(zip(h['fields'], extmatch[0]))
+                    for f, v in extlist:
+                        entry[f] = v
 
-        # Convert integer fields:
-        entry['aggregated_events'] = int(entry['aggregated_events'])
-        if entry['facility']:
-            entry['facility'] = int(entry['facility'])
-        else: entry['facility'] = None
-        if entry['severity']:
-            entry['severity'] = int(entry['severity'])
-        else: entry['severity'] = None
-        if entry['source_pid']:
-            entry['source_pid'] = int(entry['source_pid'])
-        else: entry['source_pid'] = None
-        if entry['packet_count']:
-            entry['packet_count'] = int(entry['packet_count'])
-        else: entry['packet_count'] = None
-        if entry['byte_count']:
-            entry['byte_count'] = int(entry['byte_count'])
-        else: entry['byte_count'] = None
-        if entry['tcp_flags']:
-            entry['tcp_flags'] = int(entry['tcp_flags'])
-        else: entry['tcp_flags'] = None
-        if entry['class_of_service']:
-            entry['class_of_service'] = int(entry['class_of_service'])
-        else: entry['class_of_service'] = None
+        entry = daemons.parser.util.check_entry(entry)
 
         return entry, matchfound
-
-
-    def get_blank_entry(self):
-        """Return a blank entry dictionary"""
-        # Create empty entry:
-        entry = {}
-
-        entry['date_stamp'] = None
-        entry['facility'] = None
-        entry['severity'] = None
-        entry['log_source'] = ''
-        entry['aggregated_events'] = 1
-        entry['source_host'] = ''
-        entry['source_port'] = ''
-        entry['source_process'] = ''
-        entry['action'] = ''
-        entry['command'] = ''
-        entry['source_pid'] = None
-        entry['dest_host'] = ''
-        entry['dest_port'] = ''
-        entry['protocol'] = ''
-        entry['packet_count'] = None
-        entry['byte_count'] = None
-        entry['tcp_flags'] = None
-        entry['class_of_service'] = None
-        entry['interface'] = ''
-        entry['start_time'] = ''
-        entry['duration'] = ''
-        entry['source_user'] = ''
-        entry['target_user'] = ''
-        entry['sessionid'] = ''
-        entry['message'] = ''
-        entry['ext0'] = ''
-        entry['ext1'] = ''
-        entry['ext2'] = ''
-        entry['ext3'] = ''
-        entry['ext4'] = ''
-        entry['ext5'] = ''
-        entry['ext6'] = ''
-        entry['ext7'] = ''
-
-        return entry

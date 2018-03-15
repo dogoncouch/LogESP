@@ -10,6 +10,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Added email alerts to rules
 - Added more filters to rules - action, interface, source/target user
 - Added password change pages
+- Sanity check for entry length, etc.
 
 ### Updated
 - Fixed helper logic for single-field parse helpers
@@ -18,6 +19,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Improved event search (more fields, better formatting)
 - Limit rules only sleep ~60s after not firing
 - Rule types are now modular
+- Parse helpers now work if parser fails
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
