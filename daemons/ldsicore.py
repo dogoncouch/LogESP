@@ -54,38 +54,38 @@ class DaemonCore:
         sleep(0.2)
         exit(0)
 
-    def start(self):
+    def start(self, runparser=True, runsentry=True):
         """Start parser and sentry engines"""
         # Handle signals:
         signal.signal(signal.SIGTERM, self.sigterm_handler)
         signal.signal(signal.SIGHUP, self.sighup_handler)
         signal.signal(signal.SIGINT, self.sigint_handler)
 
-        # Start parser threads:
-        parser = Thread(name='parser', target=daemons.parser.parsecore.start)
-        parser.daemon = True
-        parser.start()
-
-        # Start sentry threads:
-        sentry = Thread(name='sentry',
-                target=daemons.sentry.core.start)
-        sentry.daemon = True
-        sentry.start()
+        if runparser:
+            # Start parser threads:
+            parser = Thread(name='parser', target=daemons.parser.parsecore.start)
+            parser.daemon = True
+            parser.start()
+        if runsentry:
+            # Start sentry threads:
+            sentry = Thread(name='sentry',
+                    target=daemons.sentry.core.start)
+            sentry.daemon = True
+            sentry.start()
 
         # Log start:
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
 
         while True:
-            if not parser.isAlive():
-                syslog.syslog(syslog.LOG_ALERT, 'LDSI parser has crashed!')
-            if not sentry.isAlive():
-                syslog.syslog(syslog.LOG_ALERT, 'LDSI sentry has crashed!')
+                if runparser and not parser.isAlive():
+                    syslog.syslog(syslog.LOG_ALERT, 'LDSI parser has crashed!')
+                if runsentry and not sentry.isAlive():
+                    syslog.syslog(syslog.LOG_ALERT, 'LDSI sentry has crashed!')
             sleep(120)
 
 if __name__ == "__main__":
-    daemoncore = DaemonCore()
-    daemoncore.start()
+    main()
 
-def main():
+def main(parser=True, sentry=True):
     daemoncore = DaemonCore()
-    daemoncore.start()
+    daemoncore.start(runparser=parser, runsentry=sentry))

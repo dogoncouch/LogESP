@@ -36,9 +36,15 @@ usage() {
     echo "  -l                      Clean old events using local EOL date"
     echo "  -b <ldsi-base>          Set the LDSI base directory"
     echo "  -e <env-base>           Set a virtual environment"
+    echo "  -p                      Run parser only (no sentry)"
+    echo "  -s                      Run sentry only (no parser)"
 }
 
-while getopts ":hvrkclb:e:" o; do
+# Set defaults:
+RUNPARSER="True"
+RUNSENTRY="False"
+
+while getopts ":hvrkclb:e:ps" o; do
     case "${o}" in
         h)
             usage
@@ -64,6 +70,12 @@ while getopts ":hvrkclb:e:" o; do
             ;;
         e)
             ENVBASE=${OPTARG}
+            ;;
+        p)
+            RUNSENTRY="False"
+            ;;
+        s)
+            RUNPARSER="False"
             ;;
     esac
 done
@@ -120,7 +132,7 @@ fi
 echo Starting daemons...
 
 while :; do
-    `python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main()"`
+    `python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})"`
     if [[ $? -eq 0 ]]; then
         exit 0
     fi
