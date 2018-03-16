@@ -69,6 +69,10 @@ new-db-setup:
 	@echo --- Creating superuser...
 	python manage.py createsuperuser
 
+static:
+	@echo --- Collecting static files...
+	python manage.py collectstatic
+
 risk-fixtures:
 	@echo --- Loading NIST threat data fixtures...
 	python manage.py loaddata risk/fixtures/nist_threat_event_types.json risk/fixtures/nist_threat_src_types.json

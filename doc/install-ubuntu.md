@@ -61,7 +61,6 @@ cd ldsi
 ### Set Up Static Files, Database
 - Collect static files, set up database:
 ```
-python manage.py collectstatic
 make new-db
 ```
 
