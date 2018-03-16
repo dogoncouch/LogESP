@@ -61,7 +61,7 @@ daemon-help:
 	@echo Restart daemons with ./start.sh -r to re-read config
 	@echo
 
-new-db: new-db-setup fixtures
+new-db: new-db-setup static fixtures
 
 new-db-setup:
 	@echo --- Loading initial migrations...
