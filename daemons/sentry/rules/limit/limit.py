@@ -118,9 +118,9 @@ class LimitSentry:
         try:
             send_mass_mail(emaillist, fail_silently=False)
         except smtplib.SMTPException:
-            syslog.syslog(syslog.LOG_ERR, 
-                    'LDSI sentry failed to send email for rule ' + \
-                            self.rule.name)
+            msg = 'LDSI sentry failed to send email alerts for rule ' + \
+                    self.rule_name
+            syslog.syslog(syslog.LOG_ERR, msg)
 
 
 
@@ -133,43 +133,48 @@ class LimitSentry:
             self.get_first_logevent()
             expectrule = False
         while True:
-            # Set EOL time delta:
-            if self.rule.local_lifespan_days == 0:
-                self.locallifespandelta = timedelta(days=36524)
-            else:
-                self.locallifespandelta = \
-                        timedelta(days=self.rule.local_lifespan_days)
-            if self.rule.backup_lifespan_days == 0:
-                self.backuplifespandelta = timedelta(days=36524)
-            else:
-                self.backuplifespandelta = \
-                        timedelta(days=self.rule.backup_lifespan_days)
-            # Check the rule:
-            if self.rule.is_enabled:
-                if self.rule.rule_events: self.check_ruleevent()
-                else: self.check_logevent()
-            # Refresh the rule:
             try:
-                t = self.rule.time_int
-                self.rule = LimitRule.objects.get(pk=self.rule.id)
-                if self.rule.time_int != t:
-                    self.timeint = timedelta(minutes=self.rule.time_int)
-            except LimitRule.DoesNotExist:
-                break
-            # Check for change in event type:
-            if expectrule:
-                if not self.rule.rule_events:
-                    self.get_last_logevent()
-                    expectrule = False
-            else:
-                if self.rule.rule_events:
-                    self.get_last_ruleevent()
-                    expectrule = True
-            # Wait until next interval if firedr,; otherwise ~60 seconds:
-            if self.justfired:
-                sleep(int(self.rule.time_int) * 60)
-            else:
-                sleep(randrange(45, 60))
+                # Set EOL time delta:
+                if self.rule.local_lifespan_days == 0:
+                    self.locallifespandelta = timedelta(days=36524)
+                else:
+                    self.locallifespandelta = \
+                            timedelta(days=self.rule.local_lifespan_days)
+                if self.rule.backup_lifespan_days == 0:
+                    self.backuplifespandelta = timedelta(days=36524)
+                else:
+                    self.backuplifespandelta = \
+                            timedelta(days=self.rule.backup_lifespan_days)
+                # Check the rule:
+                if self.rule.is_enabled:
+                    if self.rule.rule_events: self.check_ruleevent()
+                    else: self.check_logevent()
+                # Refresh the rule:
+                try:
+                    t = self.rule.time_int
+                    self.rule = LimitRule.objects.get(pk=self.rule.id)
+                    if self.rule.time_int != t:
+                        self.timeint = timedelta(minutes=self.rule.time_int)
+                except LimitRule.DoesNotExist:
+                    break
+                # Check for change in event type:
+                if expectrule:
+                    if not self.rule.rule_events:
+                        self.get_last_logevent()
+                        expectrule = False
+                else:
+                    if self.rule.rule_events:
+                        self.get_last_ruleevent()
+                        expectrule = True
+                # Wait until next interval if firedr,; otherwise ~60 seconds:
+                if self.justfired:
+                    sleep(int(self.rule.time_int) * 60)
+                else:
+                    sleep(randrange(45, 60))
+            except Exception as err:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' crashing. Error: ' + str(err)
+                syslog.syslog(syslog.LOG_ERR, msg)
 
 
     def check_logevent(self):

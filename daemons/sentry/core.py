@@ -74,11 +74,11 @@ class SentryMgrCore:
             self.watch_rule_types()
         except KeyboardInterrupt:
             exit(0)
-        #except Exception as err:
-        #    exit(0)
-        #    print('Error: ' + str(err))
+        except Exception as err:
+            msg = 'LDSI core sentry thread crashing. Error: ' + str(err)
+            syslog.syslog(syslog.LOG_ERR, msg)
 
     
-def start():
+def main():
     sentry = SentryMgrCore()
     sentry.run_sentry()

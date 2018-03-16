@@ -10,7 +10,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Added email alerts to rules
 - Added more filters to rules - action, interface, source/target user
 - Added password change pages
-- Added sanity check for entry length, etc.
+- Added sanity check for entry field lengths, etc.
 - Added documentation
 
 ### Updated
@@ -21,6 +21,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Limit rules only sleep ~60s after not firing
 - Rule types are now modular
 - Parse helpers now work if parser fails
+- Daemon thread errors are logged to LOG\_DAEMON
 
 ## [0.1-alpha] - 2018-02-06
 - First test release

@@ -21,8 +21,8 @@
 # SOFTWARE.
 # 
 
-import daemons.parser.parsecore
-import daemons.sentry
+import daemons.parser.core
+import daemons.sentry.core
 from threading import Thread
 import syslog
 import signal
@@ -38,19 +38,22 @@ class DaemonCore:
 
     def sigterm_handler(self, signal, frame):
         """Exit cleanly on sigterm"""
-        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigterm, exiting')
+        msg = 'LDSI Daemon received sigterm, exiting'
+        syslog.syslog(syslog.LOG_INFO, msg)
         sleep(0.2)
         exit(0)
 
     def sighup_handler(self, signal, frame):
         """Exit cleanly so restart can happen on sighup"""
-        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sighup, restarting')
+        msg = 'LDSI Daemon received sighup, restarting'
+        syslog.syslog(syslog.LOG_INFO, msg)
         sleep(0.2)
         exit(1)
 
     def sigint_handler(self, signal, frame):
         """Exit cleanly on sigint"""
-        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon received sigint, exiting')
+        msg = 'LDSI daemon received sigint, exiting'
+        syslog.syslog(syslog.LOG_INFO, msg)
         sleep(0.2)
         exit(0)
 
@@ -63,13 +66,14 @@ class DaemonCore:
 
         if runparser:
             # Start parser threads:
-            parser = Thread(name='parser', target=daemons.parser.parsecore.start)
+            parser = Thread(name='parser',
+                    target=daemons.parser.core.main)
             parser.daemon = True
             parser.start()
         if runsentry:
             # Start sentry threads:
             sentry = Thread(name='sentry',
-                    target=daemons.sentry.core.start)
+                    target=daemons.sentry.core.main)
             sentry.daemon = True
             sentry.start()
 
@@ -78,9 +82,11 @@ class DaemonCore:
 
         while True:
                 if runparser and not parser.isAlive():
-                    syslog.syslog(syslog.LOG_ALERT, 'LDSI parser has crashed!')
+                    msg = 'LDSI parser has crashed!'
+                    syslog.syslog(syslog.LOG_ALERT, msg)
                 if runsentry and not sentry.isAlive():
-                    syslog.syslog(syslog.LOG_ALERT, 'LDSI sentry has crashed!')
+                    msg = 'LDSI sentry has crashed!'
+                    syslog.syslog(syslog.LOG_ALERT, msg)
             sleep(120)
 
 if __name__ == "__main__":

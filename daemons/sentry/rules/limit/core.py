@@ -83,9 +83,10 @@ class SentryCore:
 
         except KeyboardInterrupt:
             exit(0)
-        #except Exception as err:
-        #    exit(0)
-        #    print('Error: ' + str(err))
+        except Exception as err:
+            msg = 'LDSI sentry core limit rule thread crashing. Error: ' + \
+                    str(err)
+            syslog.syslog(syslog.LOG_ERR, msg)
 
     
 def start():

@@ -28,6 +28,7 @@ import socket
 import re
 import os.path
 import json
+import syslog
 
 from django.utils import timezone
 #import daemons.parser.parsers
@@ -40,6 +41,7 @@ class LiveParser:
     def __init__(self):
         """Initialize live parser"""
         self.parser = None
+        syslog.openlog(facility=syslog.LOG_DAEMON)
 
 
     def parse_entries(self, filename):
@@ -150,8 +152,10 @@ class LiveParser:
 
         except KeyboardInterrupt:
             pass
-        # except Exception as err:
-        #     print('Error: ' + str(err))
+        except Exception as err:
+            msg = 'LDSI parser thread for ' + self.parsepath + \
+                    ' crashing. Error: ' + str(err)
+            syslog.syslog(syslog.LOG_ERR, msg)
 
 
 def start_parse(parseinfo):

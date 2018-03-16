@@ -112,11 +112,12 @@ class ParseCore:
 
         except KeyboardInterrupt:
             pass
-        # except Exception as err:
-        #     print('Error: ' + str(err))
+        except Exception as err:
+            msg = 'LDSI core parser thread crashing. Error: ' + str(err)
+            syslog.syslog(syslog.LOG_ERR, msg)
 
 
     
-def start(conf='config/parser.conf'):
+def main(conf='config/parser.conf'):
     parser = ParseCore(config=conf)
     parser.run_parse()
