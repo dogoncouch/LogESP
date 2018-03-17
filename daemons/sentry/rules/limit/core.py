@@ -89,6 +89,6 @@ class SentryCore:
             syslog.syslog(syslog.LOG_ERR, msg)
 
     
-def start():
+def main():
     sentry = SentryCore()
     sentry.run_sentry()

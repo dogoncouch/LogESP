@@ -49,7 +49,7 @@ class SentryMgrCore:
         """Start all sentry rule types"""
         for t in self.rule_types:
             s = threading.Thread(name=t,
-                    target=self.rule_types[t].start())
+                    target=self.rule_types[t].main())
             s.daemon = True
             s.start()
             self.threads[t] = s
