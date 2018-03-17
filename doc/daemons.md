@@ -21,6 +21,8 @@ Optional arguments:
   -l                      Clean old events using local EOL date
   -b <ldsi-base>          Set the LDSI base directory
   -e <env-base>           Set a virtual environment
+  -p                      Run parser only (no sentry)
+  -s                      Run sentry only (no parser)
 ```
 
 The parser configuration file is at `config/parser.conf`. Cleaning should be handled by a cron job. `start.sh` can be run manually, or by `/etc/rc.local`.

@@ -85,7 +85,7 @@ cp /opt/ldsi/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
 touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 chown syslog.adm /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 ```
-This configuration uses a UDP server. In most environments, using a TCP syslog server with public key infrastructure integration is recommended.
+This configuration uses a UDP server. In a production environment, using a TCP syslog server with public key infrastructure integration is recommended. Log sources that require UDP should communicate out of band (i.e. on a management network).
 
 ## Nginx Setup
 ### Create Links
@@ -114,3 +114,6 @@ Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `LDSI-SRV` with 
 ```
 reboot
 ```
+
+## Distributed Environments
+Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.
