@@ -9,14 +9,14 @@
 
 {% if lr_list %}
     <table>
-        <tr><th>Rule Name</th><th>Event<br>Type</th><th>Enabled?</th>
-            <th>Rule<br>Events?</br>
+        <tr><th>Rule Name</th><th>Event<br>Type</th>
+            <th>Rule<br>Events?</br><th>Enabled?</th>
         {% for lr in lr_list %}
             <tr><td><a href="{% url 'siem:lr_detail' lr.id %}">
                     {{ lr }}</a></td>
                 <td>{{ lr.event_type }}</td>
-                <td>{{ lr.is_enabled }}</td>
                 <td>{{ lr.rule_events }}</td>
+                <td>{{ lr.is_enabled }}</td>
             </tr>
         {% endfor %}
     </table>
