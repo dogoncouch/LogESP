@@ -76,13 +76,13 @@
     "desc": "Sudo authentication fields",
     "helper_type": "auth",
     "match_regex": "(\\S+) : TTY=\\S+ ; PWD=\\S+ ; USER=(\\S+) ; COMMAND=(.+)$",
-    "fields": "source_user,target_user,action"
+    "fields": "source_user,target_user,command"
   }
 },
 {
   "model": "siem.parsehelper",
   "fields": {
-    "name": "sshd_disconnect_fields",
+    "name": "ssh_disconnect_fields",
     "desc": "Fields from sshd disconnect events.",
     "helper_type": "auth",
     "match_regex": "isconnecte?d? from (\\S+) port (\\d+)",
@@ -127,6 +127,86 @@
     "helper_type": "cisco_ios",
     "match_regex": "Line protocol on Interface (\\S+),",
     "fields": "interface"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "login_session",
+    "desc": "Login session and user.",
+    "helper_type": "auth",
+    "match_regex": "New session (\\S+) of user (\\S+)\\.",
+    "fields": "sessionid,source_user"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "logout_session",
+    "desc": "Logout session id.",
+    "helper_type": "auth",
+    "match_regex": "Removed session (\\S+)\\.",
+    "fields": "sessionid"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "ssh_connection_closed",
+    "desc": "Fields from ssh connection closed.",
+    "helper_type": "auth",
+    "match_regex": "Connection closed by (\\S+) port (\\S+)",
+    "fields": "source_host,source_port"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_ace",
+    "desc": "Cisco access control list log entry.",
+    "helper_type": "cisco_ios",
+    "match_regex": "([a-zA-Z]+\\d+): (\\w+) ACE (\\S+) ([0-9a-zA-Z.:]+)\\(([0-9a-zA-Z]+)\\) -> ([0-9a-zA-Z.:]+)\\(([0-9a-zA-Z]+)\\),\\s?trapped",
+    "fields": "interface,command,protocol,source_host,source_port,dest_host,dest_port"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "auditd_basic",
+    "desc": "Auditd basic information.",
+    "helper_type": "auditd",
+    "match_regex": "node=\\S+\\s+type=(\\S+)\\s+msg=audit\\(\\d+\\.\\d+:\\d+\\):\\s+pid=(\\d+)",
+    "fields": "action,source_pid"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "auditd_ext",
+    "desc": "Auditd extended information.",
+    "helper_type": "auditd",
+    "match_regex": "msg='op=\\S+\\s+acct=\"(\\S+)\"\\s+exe=\"(\\S+)\"\\s+hostname=(\\S+)\\s+addr=\\S+\\s+terminal=(\\S+)\\s+res=\\S+'",
+    "fields": "source_user,command,source_host,sessionid"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "auditd_ext2",
+    "desc": "Auditd extended information (2).",
+    "helper_type": "auditd",
+    "match_regex": "msg='op=\\S+\\s+id=(\\S+)\\s+exe=\"(\\S+)\"\\s+hostname=(\\S+)\\s+addr=\\S+\\s+terminal=(\\S+)\\s+res=\\S+'",
+    "fields": "source_user,command,source_host,sessionid"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "auditd_ext3",
+    "desc": "Auditd extended information (2).",
+    "helper_type": "auditd",
+    "match_regex": "uid=\\d+\\s+old-auid=\\d+\\s+auid=(\\d+)\\s+old-ses=\\d+\\s+ses=(\\d+)\\s+res=\\S+",
+    "fields": "source_user,sessionid"
   }
 }
 ]

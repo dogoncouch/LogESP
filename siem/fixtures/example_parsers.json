@@ -42,5 +42,16 @@
     "fields": "date_stamp,log_source,source_process,severity,action,message",
     "backup_fields": "date_stamp,log_source,source_process,action,message"
   }
+},
+{
+  "model": "siem.logeventparser",
+  "fields": {
+    "name": "windows_rsyslog",
+    "desc": "Windows rsyslog agent forwarded logs.",
+    "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+(\\S+)\\s+(.*)",
+    "backup_match_regex": null,
+    "fields": "date_stamp,log_source,source_process,message",
+    "backup_fields": null
+  }
 }
 ]
