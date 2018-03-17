@@ -94,4 +94,4 @@ if __name__ == "__main__":
 
 def main(parser=True, sentry=True):
     daemoncore = DaemonCore()
-    daemoncore.start(runparser=parser, runsentry=sentry))
+    daemoncore.start(runparser=parser, runsentry=sentry)
