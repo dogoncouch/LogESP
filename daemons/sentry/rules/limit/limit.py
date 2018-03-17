@@ -273,15 +273,18 @@ class LimitSentry:
             self.justfired = False
         else:
             totalevents = sum([x.aggregated_events for x in e])
-            numlogsources = len({x.log_source for x in e})
-            numsourcehosts = len({x.source_host for x in e})
-            numdesthosts = len({x.dest_host for x in e})
-            try: numlogsources.remove(None)
+            logsources = {x.log_source for x in e}
+            sourcehosts = {x.source_host for x in e}
+            desthosts = {x.dest_host for x in e}
+            try: logsources.remove(None)
             except KeyError: pass
-            try: numsourcehosts.remove(None)
+            try: sourcehosts.remove(None)
             except KeyError: pass
-            try: numdesthosts.remove(None)
+            try: desthosts.remove(None)
             except KeyError: pass
+            numlogsources = len(logsources)
+            numsourcehosts = len(sourcehosts)
+            numdesthosts = len(desthosts)
             if totalevents > self.rule.event_limit and \
                     numlogsources > self.rule.allowed_log_sources:
                 event = RuleEvent()
