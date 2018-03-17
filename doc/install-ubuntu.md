@@ -83,7 +83,7 @@ cp /opt/ldsi/ldsi/config/rsyslog/75-snort.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/77-audit.conf /etc/rsyslog.d/
 cp /opt/ldsi/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
 touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
-chown syslog.admin /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
+chown syslog.adm /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 ```
 This configuration uses a UDP server. In most environments, using a TCP syslog server with public key infrastructure integration is recommended.
 
