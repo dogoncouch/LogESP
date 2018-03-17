@@ -42,7 +42,7 @@ usage() {
 
 # Set defaults:
 RUNPARSER="True"
-RUNSENTRY="False"
+RUNSENTRY="True"
 
 while getopts ":hvrkclb:e:ps" o; do
     case "${o}" in
