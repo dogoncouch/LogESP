@@ -270,7 +270,9 @@ class LimitSentry:
             self.justfired = False
         else:
             totalevents = sum([x.aggregated_events for x in e])
-            numhosts = len({x.log_source for x in e})
+            numlogsources = len({x.log_source for x in e})
+            numsourcehosts = len({x.source_host for x in e})
+            numdesthosts = len({x.dest_host for x in e})
             if totalevents > self.rule.event_limit and \
                     numhosts > self.rule.allowed_log_sources:
                 event = RuleEvent()
@@ -297,7 +299,9 @@ class LimitSentry:
                         float(self.rule.severity_modifier)))
                 event.magnitude = magnitude
                 event.message = self.rule.message
-                event.log_source_count = numhosts
+                event.log_source_count = numlogsources
+                event.source_host_count = numsourcehosts
+                event.dest_host_count = numdesthosts
                 event.save()
                 event.source_ids_log.set(list(e))
                 event.save()

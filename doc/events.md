@@ -79,6 +79,8 @@ time_int            The time interval at which the rule is checked.
 source_ids_log      The source IDs of the log events involved.
 source_ids_rule     The source IDs of the rule events involved.
 log_source_count    The number of different log sources involved.
+source_host_count   The number of different source hosts involved.
+dest_host_count     The number of different destination hosts involved.
 message             The message conveyed by the rule.
 eol_date_local      Event end-of-life date in the LDSI database
 eol_date_backup     Event end-of-life date for backup copies

@@ -164,5 +164,9 @@ class RuleEvent(models.Model):
             blank=True, symmetrical=False)
     log_source_count = models.IntegerField(
             null=True, blank=True)
+    source_host_count = models.IntegerField(
+            null=True, blank=True)
+    dest_host_count = models.IntegerField(
+            null=True, blank=True)
     class Meta:
         permissions = (('view_ruleevent', 'Can view rule events'),)

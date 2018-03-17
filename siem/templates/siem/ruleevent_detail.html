@@ -23,6 +23,8 @@
     <li>Time Interval: {{ event.time_int }} minutes</li>
     <li>Severity: {{ event.severity }}</li>
     <li>Log Source Count: {{ event.log_source_count }}</li>
+    <li>Source Host Count: {{ event.source_host_count }}</li>
+    <li>Dest Host Count: {{ event.dest_host_count }}</li>
     <li>Message: {{ event.message }}</li>
     <li>Source Log Events:
         {%for s in event.source_ids_log.all %}
