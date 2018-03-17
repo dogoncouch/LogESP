@@ -86,8 +86,8 @@
             <th>Src<br>Proc</th><th>#<br>Aggr</th>
             <th>Src<br>Host</th><th>Dest<br>Host</th>
             <th>Src<br>User</th><th>Trgt<br>User</th>
-            <th>Act-<br>ion</th><th>Cmd</th>
-            <th>Ses-<br>sion</th><th>Inter-<br>face</th>
+            <th>Cmd</th><th>Ses-<br>sion</th>
+            <th>Act-<br>ion</th><th>Inter-<br>face</th>
             <th class="left">Message</th></tr>
         {% for e in event_list %}
         <tr>
@@ -102,9 +102,9 @@
             <td>{{ e.dest_host}}{% if e.dest_port %}:{{ e.dest_port }}{% endif %}</td>
             <td>{{ e.source_user }}</td>
             <td>{{ e.target_user }}</td>
-            <td>{{ e.action }}</td>
             <td>{{ e.command }}</td>
             <td>{{ e.sessionid }}</td>
+            <td>{{ e.action }}</td>
             <td>{{ e.interface }}</td>
             <td>{{ e.message }}</td>
             </a>
