@@ -259,6 +259,8 @@ class LPIndexView(PermissionRequiredMixin, ListView):
     permission_required = 'siem.view_logeventparser'
     template_name = 'siem/lp_index.html'
     context_object_name = 'lp_list'
+    def get_queryset(self):
+        return LogEventParser.objects.order_by('name')
 
 class LPDetailView(PermissionRequiredMixin, DetailView):
     model = LogEventParser
@@ -297,7 +299,7 @@ class PHIndexView(PermissionRequiredMixin, ListView):
     template_name = 'siem/ph_index.html'
     context_object_name = 'ph_list'
     def get_queryset(self):
-        return ParseHelper.objects.order_by('helper_type')
+        return ParseHelper.objects.order_by('helper_type', 'name')
 
 class PHDetailView(PermissionRequiredMixin, DetailView):
     model = ParseHelper
