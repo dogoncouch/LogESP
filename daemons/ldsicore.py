@@ -81,12 +81,12 @@ class DaemonCore:
         syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
 
         while True:
-                if runparser and not parser.isAlive():
-                    msg = 'LDSI parser has crashed!'
-                    syslog.syslog(syslog.LOG_ALERT, msg)
-                if runsentry and not sentry.isAlive():
-                    msg = 'LDSI sentry has crashed!'
-                    syslog.syslog(syslog.LOG_ALERT, msg)
+            if runparser and not parser.isAlive():
+                msg = 'LDSI parser has crashed!'
+                syslog.syslog(syslog.LOG_ALERT, msg)
+            if runsentry and not sentry.isAlive():
+                msg = 'LDSI sentry has crashed!'
+                syslog.syslog(syslog.LOG_ALERT, msg)
             sleep(120)
 
 if __name__ == "__main__":
