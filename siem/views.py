@@ -51,6 +51,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         target_user_val = self.request.GET.get('target_user_filter')
         action_val = self.request.GET.get('action_filter')
         command_val = self.request.GET.get('command_filter')
+        session_val = self.request.GET.get('session_filter')
         interface_val = self.request.GET.get('interface_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
@@ -67,6 +68,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not target_user_val: target_user_val = ''
         if not action_val: action_val = ''
         if not command_val: command_val = ''
+        if not session_val: session_val = ''
         if not interface_val: interface_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
@@ -84,6 +86,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 target_user__icontains=target_user_val,
                 action__icontains=action_val,
                 command__icontains=command_val,
+                sessionid__icontains=session_val,
                 interface__icontains=interface_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
@@ -100,6 +103,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 target_user__icontains=target_user_val,
                 action__icontains=action_val,
                 command__icontains=command_val,
+                sessionid__icontains=session_val,
                 interface__icontains=interface_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
@@ -125,6 +129,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 'action_filter', '')
         context['command_filter'] = self.request.GET.get(
                 'command_filter', '')
+        context['session_filter'] = self.request.GET.get(
+                'session_filter', '')
         context['interface_filter'] = self.request.GET.get(
                 'interface_filter', '')
         context['type_filter'] = self.request.GET.get('type_filter', '')
