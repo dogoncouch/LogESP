@@ -98,7 +98,8 @@ class LimitSentry:
             self.lasteventid = e.latest('id').id
 
 
-    def send_email_alerts(self, magnitude, eventcount, logsources):
+    def send_email_alerts(self, magnitude, eventcount, logsources,
+            sourcehosts, desthosts):
         """Send email alerts for rule"""
         msgsubject = 'LDSI rule broken: ' + self.rule.name
         msglist = []
@@ -108,6 +109,8 @@ class LimitSentry:
         msglist.append('Event limit: ' + str(self.rule.event_limit))
         msglist.append('Time interval: ' + str(self.rule.time_int))
         msglist.append('Log sources: ' + str(logsources))
+        msglist.append('source Hosts: ' + str(sourcehosts))
+        msglist.append('Dest Hosts: ' + str(desthosts))
         msglist.append('Message: ' + self.rule.message)
         msg = '\n'.join(msglist)
         emaillist = []
@@ -274,7 +277,7 @@ class LimitSentry:
             numsourcehosts = len({x.source_host for x in e})
             numdesthosts = len({x.dest_host for x in e})
             if totalevents > self.rule.event_limit and \
-                    numhosts > self.rule.allowed_log_sources:
+                    numlogsources > self.rule.allowed_log_sources:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
@@ -307,7 +310,8 @@ class LimitSentry:
                 event.save()
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
-                    self.send_email_alerts(magnitude, totalevents, numhosts)
+                    self.send_email_alerts(magnitude, totalevents,
+                            numlogsources, numsourcehosts, numdesthosts)
                 self.justfired = True
             else:
                 self.justfired = False
@@ -381,7 +385,8 @@ class LimitSentry:
                 event.save()
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
-                    self.send_email_alerts(magnitude, totalevents, numhosts)
+                    self.send_email_alerts(magnitude, totalevents,
+                            numlogsources, numsourcehosts, numdesthosts)
                 self.justfired = True
             else:
                 self.justfired = False
