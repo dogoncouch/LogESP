@@ -137,27 +137,31 @@ class LimitSentry:
             expectrule = False
         while True:
             try:
-                # Set EOL time delta:
-                if self.rule.local_lifespan_days == 0:
-                    self.locallifespandelta = timedelta(days=36524)
-                else:
-                    self.locallifespandelta = \
-                            timedelta(days=self.rule.local_lifespan_days)
-                if self.rule.backup_lifespan_days == 0:
-                    self.backuplifespandelta = timedelta(days=36524)
-                else:
-                    self.backuplifespandelta = \
-                            timedelta(days=self.rule.backup_lifespan_days)
                 # Check the rule:
                 if self.rule.is_enabled:
                     if self.rule.rule_events: self.check_ruleevent()
                     else: self.check_logevent()
                 # Refresh the rule:
                 try:
+                    locallifespan = self.rule.local_lifespan_days
+                    backuplifespan = self.rule.backup_lifespan_days
                     t = self.rule.time_int
                     self.rule = LimitRule.objects.get(pk=self.rule.id)
                     if self.rule.time_int != t:
                         self.timeint = timedelta(minutes=self.rule.time_int)
+                    # Set EOL time delta:
+                    if self.rule.local_lifespan_days != locallifespan:
+                        if self.rule.local_lifespan_days == 0:
+                            self.locallifespandelta = timedelta(days=36524)
+                        else:
+                            self.locallifespandelta = \
+                                    timedelta(days=self.rule.local_lifespan_days)
+                    if self.rule.backup_lifespan_days != backuplifespan:
+                        if self.rule.backup_lifespan_days == 0:
+                            self.backuplifespandelta = timedelta(days=36524)
+                        else:
+                            self.backuplifespandelta = \
+                                    timedelta(days=self.rule.backup_lifespan_days)
                 except LimitRule.DoesNotExist:
                     break
                 # Check for change in event type:
@@ -178,6 +182,7 @@ class LimitSentry:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
                         ' crashing. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
+                exit(0)
 
 
     def check_logevent(self):
