@@ -197,7 +197,8 @@ class LRIndexView(PermissionRequiredMixin, ListView):
     template_name = 'siem/lr_index.html'
     context_object_name = 'lr_list'
     def get_queryset(self):
-        return LimitRule.objects.order_by('event_type')
+        return LimitRule.objects.order_by('name').order_by(
+                'rule_events').order_by('event_type')
 
 class LRDetailView(PermissionRequiredMixin, DetailView):
     model = LimitRule
