@@ -23,6 +23,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Parse helpers now work if parser fails
 - Daemon thread errors are logged to LOG\_DAEMON
 - Parser and sentry can now be run separately (distributed environments)
+- Rule events now track source/dest host count
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
