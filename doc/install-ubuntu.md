@@ -106,7 +106,7 @@ Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `LDSI-SRV` with 
 ## Edit rc.local
 - Add the following:
 ```
-/opt/ldsi/ldsi/start.sh -b /opt/ldsi/ldsi -e /opt/ldsi & >> /dev/null
+/opt/ldsi/ldsi/start.sh -b /opt/ldsi/ldsi -e /opt/ldsi >> /dev/null &
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
 ```
 
