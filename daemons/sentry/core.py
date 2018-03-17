@@ -25,7 +25,7 @@
 import threading
 import syslog
 from time import sleep
-import daemons.sentry
+#import daemons.sentry
 
 
 class SentryMgrCore:
