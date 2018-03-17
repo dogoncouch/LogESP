@@ -22,6 +22,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Rule types are now modular
 - Parse helpers now work if parser fails
 - Daemon thread errors are logged to LOG\_DAEMON
+- Parser and sentry can now be run separately (distributed environments)
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
