@@ -25,7 +25,7 @@
 import threading
 import syslog
 from time import sleep
-#import daemons.sentry
+from daemons.sentry.rules import __all__ as ruletype_list
 
 
 class SentryMgrCore:
@@ -39,7 +39,7 @@ class SentryMgrCore:
 
     def load_rule_types(self):
         """Load all sentry rule types"""
-        for ruletype in sorted(daemons.sentry.rules.__all__):
+        for ruletype in sorted(ruletype_list):
             self.rule_types[ruletype] = \
                     __import__('daemons.sentry.rules.' + ruletype + '.core',
                             globals(), locals(), ['sentry'])
