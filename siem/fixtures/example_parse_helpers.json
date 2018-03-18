@@ -75,8 +75,8 @@
     "name": "sudo_fields",
     "desc": "Sudo authentication fields",
     "helper_type": "auth",
-    "match_regex": "(\\S+) : TTY=\\S+ ; PWD=\\S+ ; USER=(\\S+) ; COMMAND=(.+)$",
-    "fields": "source_user,target_user,command"
+    "match_regex": "(\\S+) : TTY=(\\S+) ; PWD=\\S+ ; USER=(\\S+) ; COMMAND=(.+)$",
+    "fields": "source_user,sessionid,target_user,command"
   }
 },
 {
@@ -207,6 +207,16 @@
     "helper_type": "auditd",
     "match_regex": "uid=\\d+\\s+old-auid=\\d+\\s+auid=(\\d+)\\s+old-ses=\\d+\\s+ses=(\\d+)\\s+res=\\S+",
     "fields": "source_user,sessionid"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "snort_fields",
+    "desc": "Snort IDS fields.",
+    "helper_type": "snort_ids",
+    "match_regex": "\\[[0-9:]+\\]\\s+(\\S+)\\s+.*\\[Classification:\\s+.*\\]\\s+\\[Priority:\\s+\\d+\\]\\s+{\\S+}\\s+(\\S+)\\s+->\\s+(\\S+)",
+    "fields": "action,source_host,dest_host"
   }
 }
 ]

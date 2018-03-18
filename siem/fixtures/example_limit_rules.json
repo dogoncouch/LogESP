@@ -4,7 +4,7 @@
   "fields": {
     "name": "sshd authfail 4m",
     "desc": "Over 7 sshd auth fail events in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
@@ -41,7 +41,7 @@
   "fields": {
     "name": "sshd root authfail 4m",
     "desc": "Over 3 sshd auth fail events for root in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
@@ -78,7 +78,7 @@
   "fields": {
     "name": "sshd cont authfail",
     "desc": "Continued sshd auth fail events in 20 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": true,
     "rule_category": "remote auth attack",
@@ -115,7 +115,7 @@
   "fields": {
     "name": "sshd cont root authfail",
     "desc": "Continued sshd auth fail events for root in 20 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": true,
     "rule_category": "remote auth attack",
@@ -152,7 +152,7 @@
   "fields": {
     "name": "sudo authorization fail",
     "desc": "Non-privileged user attempting to use sudo - 4m intervals.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -189,7 +189,7 @@
   "fields": {
     "name": "sudo authentication fail",
     "desc": "Sudo authentication failures (up to 3 tries each) in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -226,7 +226,7 @@
   "fields": {
     "name": "su auth fail",
     "desc": "su auth fail - 4m interval",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -263,7 +263,7 @@
   "fields": {
     "name": "gdm authfail 4m",
     "desc": "Over 4 Gnome Display Manager auth failures in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -300,7 +300,7 @@
   "fields": {
     "name": "compiz authfail 4m",
     "desc": "Over 4 compiz display manager auth failures in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -337,7 +337,7 @@
   "fields": {
     "name": "terminal authfail 4m",
     "desc": "Over 4 login authentication failures from 'login' in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -374,7 +374,7 @@
   "fields": {
     "name": "terminal root authfail 4m",
     "desc": "Local terminal auth failures for root in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -411,7 +411,7 @@
   "fields": {
     "name": "lightdm authfail 4m",
     "desc": "Over 4 lightdm auth failures in 4 minutes.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "local auth attack",
@@ -448,7 +448,7 @@
   "fields": {
     "name": "cisco_authfail_4m",
     "desc": "Over 3 Cisco management plane authentication failures (4m intervals)",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "remote auth attack",
@@ -485,7 +485,7 @@
   "fields": {
     "name": "cisco_cont_authfail",
     "desc": "Continued auth fail on cisco devices over 20 minutes",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": true,
     "rule_category": "remote auth attack",
@@ -522,7 +522,7 @@
   "fields": {
     "name": "ldsi_thread_crash",
     "desc": "LDSI daemon thread crash.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "LDSI internal",
@@ -559,7 +559,7 @@
   "fields": {
     "name": "cisco_ace_deny",
     "desc": "Packet denied based on Cisco access control list entry.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "access_control",
@@ -596,7 +596,7 @@
   "fields": {
     "name": "ldsi_parser_idle",
     "desc": "LDSI daemon is not parsing any files.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "LDSI internal",
@@ -633,7 +633,7 @@
   "fields": {
     "name": "ldsi_parser_crash",
     "desc": "LDSI parser thread crash.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "LDSI internal",
@@ -670,7 +670,7 @@
   "fields": {
     "name": "ldsi_sentry_crash",
     "desc": "LDSI sentry thread crash.",
-    "is_enabled": false,
+    "is_enabled": true,
     "email_alerts": false,
     "rule_events": false,
     "rule_category": "LDSI internal",
