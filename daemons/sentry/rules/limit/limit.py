@@ -55,21 +55,57 @@ class LimitSentry:
 
     def get_first_logevent(self):
         """Get the starting log event"""
-        e = LogEvent.objects.all()
+        connsuccess = False
+        while not connsuccess:
+            try:
+                e = LogEvent.objects.all()
+                connsuccess = True
+            except Exception:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' got db error. Error: ' + err
+                syslog.syslog(syslog.LOG_ERR, msg)
+                sleep(0.2)
         if len(e) == 0:
             self.lasteventid = 0
         else:
-            erange = LogEvent.objects.filter(
-                    parsed_at__gt=timezone.localtime(
-                        timezone.now()) - self.timeint)
+            connsuccess = False
+            while not connsuccess:
+                try:
+                    erange = LogEvent.objects.filter(
+                            parsed_at__gt=timezone.localtime(
+                                timezone.now()) - self.timeint)
+                    connsuccess = True
+                except Exception:
+                    msg = 'LDSI sentry thread for ' + self.rule.name + \
+                            ' got db error. Error: ' + err
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                    sleep(0.2)
             if len(erange) == 0:
-                self.lasteventid = LogEvent.objects.latest('id').id
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        self.lasteventid = LogEvent.objects.latest('id').id
+                        connsuccess = True
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
             else:
                 self.lasteventid = erange.first().id - 1
 
     def get_last_logevent(self):
         """Set the last event id"""
-        e = LogEvent.objects.all()
+        connsuccess = False
+        while not connsuccess:
+            try:
+                e = LogEvent.objects.all()
+                connsuccess = True
+            except Exception:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' got db error. Error: ' + err
+                syslog.syslog(syslog.LOG_ERR, msg)
+                sleep(0.2)
         if len(e) == 0:
             self.lasteventid = 0
         else:
@@ -77,21 +113,57 @@ class LimitSentry:
 
     def get_first_ruleevent(self):
         """Get the starting log event"""
-        e = RuleEvent.objects.all()
+        connsuccess = False
+        while not connsuccess:
+            try:
+                e = RuleEvent.objects.all()
+                connsuccess = True
+            except Exception:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' got db error. Error: ' + err
+                syslog.syslog(syslog.LOG_ERR, msg)
+                sleep(0.2)
         if len(e) == 0:
             self.lasteventid = 0
         else:
-            erange = RuleEvent.objects.filter(
-                    date_stamp__gt=timezone.localtime(
-                        timezone.now()) - self.timeint)
+            connsuccess = False
+            while not connsuccess:
+                try:
+                    erange = RuleEvent.objects.filter(
+                            date_stamp__gt=timezone.localtime(
+                                timezone.now()) - self.timeint)
+                    connsuccess = True
+                except Exception:
+                    msg = 'LDSI sentry thread for ' + self.rule.name + \
+                            ' got db error. Error: ' + err
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                    sleep(0.2)
             if len(erange) == 0:
-                self.lasteventid = RuleEvent.objects.latest('id').id
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        self.lasteventid = RuleEvent.objects.latest('id').id
+                        connsuccess = True
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
             else:
                 self.lasteventid = erange.first().id - 1
 
     def get_last_ruleevent(self):
         """Set the last event id"""
-        e = RuleEvent.objects.all()
+        connsuccess = False
+        while not connsuccess:
+            try:
+                e = RuleEvent.objects.all()
+                connsuccess = True
+            except Exception:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' got db error. Error: ' + err
+                syslog.syslog(syslog.LOG_ERR, msg)
+                sleep(0.2)
         if len(e) == 0:
             self.lasteventid = 0
         else:
@@ -135,6 +207,17 @@ class LimitSentry:
         else:
             self.get_first_logevent()
             expectrule = False
+        # Set EOL time delta:
+        if self.rule.local_lifespan_days == 0:
+            self.locallifespandelta = timedelta(days=36524)
+        else:
+            self.locallifespandelta = \
+                    timedelta(days=self.rule.local_lifespan_days)
+        if self.rule.backup_lifespan_days == 0:
+            self.backuplifespandelta = timedelta(days=36524)
+        else:
+            self.backuplifespandelta = \
+                    timedelta(days=self.rule.backup_lifespan_days)
         while True:
             try:
                 # Check the rule:
@@ -142,28 +225,38 @@ class LimitSentry:
                     if self.rule.rule_events: self.check_ruleevent()
                     else: self.check_logevent()
                 # Refresh the rule:
-                try:
-                    locallifespan = self.rule.local_lifespan_days
-                    backuplifespan = self.rule.backup_lifespan_days
-                    t = self.rule.time_int
-                    self.rule = LimitRule.objects.get(pk=self.rule.id)
-                    if self.rule.time_int != t:
-                        self.timeint = timedelta(minutes=self.rule.time_int)
-                    # Set EOL time delta:
-                    if self.rule.local_lifespan_days != locallifespan:
-                        if self.rule.local_lifespan_days == 0:
-                            self.locallifespandelta = timedelta(days=36524)
-                        else:
-                            self.locallifespandelta = \
-                                    timedelta(days=self.rule.local_lifespan_days)
-                    if self.rule.backup_lifespan_days != backuplifespan:
-                        if self.rule.backup_lifespan_days == 0:
-                            self.backuplifespandelta = timedelta(days=36524)
-                        else:
-                            self.backuplifespandelta = \
-                                    timedelta(days=self.rule.backup_lifespan_days)
-                except LimitRule.DoesNotExist:
-                    break
+                locallifespan = self.rule.local_lifespan_days
+                backuplifespan = self.rule.backup_lifespan_days
+                t = self.rule.time_int
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        self.rule = LimitRule.objects.get(name=self.rule.name)
+                        connsuccess = True
+                    except LimitRule.DoesNotExist:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' exiting. Rule no longer exists.'
+                        exit(0)
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
+                if self.rule.time_int != t:
+                    self.timeint = timedelta(minutes=self.rule.time_int)
+                # Set EOL time delta:
+                if self.rule.local_lifespan_days != locallifespan:
+                    if self.rule.local_lifespan_days == 0:
+                        self.locallifespandelta = timedelta(days=36524)
+                    else:
+                        self.locallifespandelta = \
+                                timedelta(days=self.rule.local_lifespan_days)
+                if self.rule.backup_lifespan_days != backuplifespan:
+                    if self.rule.backup_lifespan_days == 0:
+                        self.backuplifespandelta = timedelta(days=36524)
+                    else:
+                        self.backuplifespandelta = \
+                                timedelta(days=self.rule.backup_lifespan_days)
                 # Check for change in event type:
                 if expectrule:
                     if not self.rule.rule_events:
@@ -222,58 +315,94 @@ class LimitSentry:
             rawtextfilter = '.*{}.*'.format('.*')
         if self.justfired:
             if self.rule.event_type:
-                e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                        event_type=self.rule.event_type,
-                        log_source__icontains=logsourcefilter,
-                        source_process__icontains=processfilter,
-                        action__icontains=actionfilter,
-                        interface__icontains=interfacefilter,
-                        source_host__icontains=sourcehostfilter,
-                        dest_host__icontains=desthostfilter,
-                        source_user__icontains=sourceuserfilter,
-                        target_user__icontains=targetuserfilter,
-                        message__iregex=messagefilter,
-                        raw_text__iregex=rawtextfilter)
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = LogEvent.objects.filter(id__gt=self.lasteventid,
+                                event_type=self.rule.event_type,
+                                log_source__icontains=logsourcefilter,
+                                source_process__icontains=processfilter,
+                                action__icontains=actionfilter,
+                                interface__icontains=interfacefilter,
+                                source_host__icontains=sourcehostfilter,
+                                dest_host__icontains=desthostfilter,
+                                source_user__icontains=sourceuserfilter,
+                                target_user__icontains=targetuserfilter,
+                                message__iregex=messagefilter,
+                                raw_text__iregex=rawtextfilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
             else:
-                e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                        log_source__contains=logsourcefilter,
-                        source_process__contains=processfilter,
-                        action__icontains=actionfilter,
-                        interface__icontains=interfacefilter,
-                        source_host__icontains=sourcehostfilter,
-                        dest_host__icontains=desthostfilter,
-                        source_user__icontains=sourceuserfilter,
-                        target_user__icontains=targetuserfilter,
-                        message__iregex=messagefilter,
-                        raw_text__iregex=rawtextfilter)
-        else:
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = LogEvent.objects.filter(id__gt=self.lasteventid,
+                                log_source__contains=logsourcefilter,
+                                source_process__contains=processfilter,
+                                action__icontains=actionfilter,
+                                interface__icontains=interfacefilter,
+                                source_host__icontains=sourcehostfilter,
+                                dest_host__icontains=desthostfilter,
+                                source_user__icontains=sourceuserfilter,
+                                target_user__icontains=targetuserfilter,
+                                message__iregex=messagefilter,
+                                raw_text__iregex=rawtextfilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
+        else:        
             startdatestamp = timezone.localtime(timezone.now()) - self.timeint
             if self.rule.event_type:
-                e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
-                        event_type=self.rule.event_type,
-                        log_source__icontains=logsourcefilter,
-                        source_process__icontains=processfilter,
-                        action__icontains=actionfilter,
-                        interface__icontains=interfacefilter,
-                        source_host__icontains=sourcehostfilter,
-                        dest_host__icontains=desthostfilter,
-                        source_user__icontains=sourceuserfilter,
-                        target_user__icontains=targetuserfilter,
-                        message__iregex=messagefilter,
-                        raw_text__iregex=rawtextfilter)
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
+                                event_type=self.rule.event_type,
+                                log_source__icontains=logsourcefilter,
+                                source_process__icontains=processfilter,
+                                action__icontains=actionfilter,
+                                interface__icontains=interfacefilter,
+                                source_host__icontains=sourcehostfilter,
+                                dest_host__icontains=desthostfilter,
+                                source_user__icontains=sourceuserfilter,
+                                target_user__icontains=targetuserfilter,
+                                message__iregex=messagefilter,
+                                raw_text__iregex=rawtextfilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
             else:
-                e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
-                        log_source__contains=logsourcefilter,
-                        source_process__contains=processfilter,
-                        action__icontains=actionfilter,
-                        interface__icontains=interfacefilter,
-                        source_host__icontains=sourcehostfilter,
-                        dest_host__icontains=desthostfilter,
-                        source_user__icontains=sourceuserfilter,
-                        target_user__icontains=targetuserfilter,
-                        message__iregex=messagefilter,
-                        raw_text__iregex=rawtextfilter)
-        
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
+                                log_source__contains=logsourcefilter,
+                                source_process__contains=processfilter,
+                                action__icontains=actionfilter,
+                                interface__icontains=interfacefilter,
+                                source_host__icontains=sourcehostfilter,
+                                dest_host__icontains=desthostfilter,
+                                source_user__icontains=sourceuserfilter,
+                                target_user__icontains=targetuserfilter,
+                                message__iregex=messagefilter,
+                                raw_text__iregex=rawtextfilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
+
         if len(e) == 0:
             self.justfired = False
         else:
@@ -319,9 +448,18 @@ class LimitSentry:
                 event.log_source_count = numlogsources
                 event.source_host_count = numsourcehosts
                 event.dest_host_count = numdesthosts
-                event.save()
+                connsuccess = False
+                #event.save()
                 event.source_ids_log.set(list(e))
-                event.save()
+                while not connsuccess:
+                    try:
+                        event.save()
+                        connsuccess = True
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents,
@@ -344,29 +482,65 @@ class LimitSentry:
         else: magnitudefilter = 0
         if self.justfired:
             if self.rule.event_type:
-                e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                        event_type=self.rule.event_type,
-                        source_rule__name__icontains=rulenamefilter,
-                        magnitude__gte=magnitudefilter,
-                        message__iregex=messagefilter)
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = RuleEvent.objects.filter(id__gt=self.lasteventid,
+                                event_type=self.rule.event_type,
+                                source_rule__name__icontains=rulenamefilter,
+                                magnitude__gte=magnitudefilter,
+                                message__iregex=messagefilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
             else:
-                e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                        source_rule__name__icontains=rulenamefilter,
-                        magnitude__gte=magnitudefilter,
-                        message__iregex=messagefilter)
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = RuleEvent.objects.filter(id__gt=self.lasteventid,
+                                source_rule__name__icontains=rulenamefilter,
+                                magnitude__gte=magnitudefilter,
+                                message__iregex=messagefilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
         else:
             startdatestamp = timezone.localtime(timezone.now()) - self.timeint
             if self.rule.event_type:
-                e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
-                        event_type=self.rule.event_type,
-                        source_rule__name__icontains=rulenamefilter,
-                        magnitude__gte=magnitudefilter,
-                        message__iregex=messagefilter)
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
+                                event_type=self.rule.event_type,
+                                source_rule__name__icontains=rulenamefilter,
+                                magnitude__gte=magnitudefilter,
+                                message__iregex=messagefilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
             else:
-                e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
-                        source_rule__name__icontains=rulenamefilter,
-                        magnitude__gte=magnitudefilter,
-                        message__iregex=messagefilter)
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
+                                source_rule__name__icontains=rulenamefilter,
+                                magnitude__gte=magnitudefilter,
+                                message__iregex=messagefilter)
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
 
         if len(e) == 0:
             self.justfired = False
@@ -394,9 +568,17 @@ class LimitSentry:
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
-                event.save()
+                #event.save()
                 event.source_ids_rule.set(list(e))
-                event.save()
+                while not connsuccess:
+                    try:
+                        event.save()
+                        connsuccess = True
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents,

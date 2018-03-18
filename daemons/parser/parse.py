@@ -114,7 +114,15 @@ class LiveParser:
                     e.ext7 = entry['ext7']
                     e.parsed_on = entry['parsed_on']
                     e.source_path = entry['source_path']
-                    e.save()
+                    while not connsuccess:
+                        try:
+                            e.save()
+                            connsuccess = True
+                        except Exception:
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got db error. Error: ' + err
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                            sleep(0.2)
 
                 else:
                     # Check if file has been rotated:
