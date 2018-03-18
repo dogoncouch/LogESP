@@ -449,7 +449,15 @@ class LimitSentry:
                 event.source_host_count = numsourcehosts
                 event.dest_host_count = numdesthosts
                 connsuccess = False
-                #event.save()
+                while not connsuccess:
+                    try:
+                        event.save()
+                        connsuccess = True
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
                 event.source_ids_log.set(list(e))
                 while not connsuccess:
                     try:
@@ -568,7 +576,15 @@ class LimitSentry:
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
-                #event.save()
+                while not connsuccess:
+                    try:
+                        event.save()
+                        connsuccess = True
+                    except Exception:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + err
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
                 event.source_ids_rule.set(list(e))
                 while not connsuccess:
                     try:
