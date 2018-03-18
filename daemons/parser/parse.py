@@ -114,6 +114,7 @@ class LiveParser:
                     e.ext7 = entry['ext7']
                     e.parsed_on = entry['parsed_on']
                     e.source_path = entry['source_path']
+                    connsuccess = False
                     while not connsuccess:
                         try:
                             e.save()
