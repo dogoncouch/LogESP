@@ -69,9 +69,11 @@ make new-db
 ```
 
 ### Edit ldsi/settings.py
-- Change `0.0.0.0` to server IP/FQDN in `ALLOWED_HOSTS`
-- Review database settings
+- Add server IP/FQDN to `ALLOWED_HOSTS`
 - Update `TIME_ZONE` setting
+
+### Edit config/db.conf
+- Update username, password
 
 ### Edit config/parser.conf
 - Uncomment necessary files
