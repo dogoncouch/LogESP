@@ -348,7 +348,7 @@ class LimitSentry:
                                 target_user__iregex=targetuserfilter,
                                 path__iregex=pathfilter,
                                 parameters__iregex=parametersfilter,
-                                referrer__iregex=referrerfilter
+                                referrer__iregex=referrerfilter,
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -375,7 +375,7 @@ class LimitSentry:
                                 target_user__iregex=targetuserfilter,
                                 path__iregex=pathfilter,
                                 parameters__iregex=parametersfilter,
-                                referrer__iregex=referrerfilter
+                                referrer__iregex=referrerfilter,
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -405,7 +405,7 @@ class LimitSentry:
                                 target_user__iregex=targetuserfilter,
                                 path__iregex=pathfilter,
                                 parameters__iregex=parametersfilter,
-                                referrer__iregex=referrerfilter
+                                referrer__iregex=referrerfilter,
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -432,7 +432,7 @@ class LimitSentry:
                                 target_user__iregex=targetuserfilter,
                                 path__iregex=pathfilter,
                                 parameters__iregex=parametersfilter,
-                                referrer__iregex=referrerfilter
+                                referrer__iregex=referrerfilter,
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
