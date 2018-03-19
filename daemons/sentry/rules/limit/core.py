@@ -77,7 +77,7 @@ class SentryCore:
                 for t in self.threads:
                     if not self.threads[t].isAlive():
                         msg = 'LDSI sentry thread for rule id ' + \
-                                t + 'has crashed'
+                                str(t) + 'has crashed'
                         syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
 

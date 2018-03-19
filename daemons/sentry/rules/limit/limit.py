@@ -541,12 +541,16 @@ class LimitSentry:
     def check_ruleevent(self):
         """Check rule events based on a rule"""
 
-        if self.rule.rulename_filter: rulenamefilter = self.rule.rulename_filter
-        else: rulenamefilter = ''
-        if self.rule.message_filter_regex:
-            messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
+        if self.rule.rulename_filter_regex:
+            rulenamefilter = r'.*{}.*'.format(
+                    self.rule.rulename_filter_regex)
         else:
-            messagefilter = '.*{}.*'.format('.*')
+            rulenamefilter = r'.*'
+        if self.rule.message_filter_regex:
+            messagefilter = '.*{}.*'.format(
+                    self.rule.message_filter_regex)
+        else:
+            messagefilter = r'.*'
         if self.rule.magnitude_filter: magnitudefilter = self.rule.magnitude_filter
         else: magnitudefilter = 0
         if self.justfired:
