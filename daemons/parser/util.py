@@ -149,11 +149,11 @@ def check_entry(entry):
         entry['target_user'] = entry['target_user'][:32]
     if len(entry['sessionid']) > 24:
         entry['sessionid'] = entry['sessionid'][:24]
-    if len(entry['path'] > 128:
+    if len(entry['path']) > 128:
         entry['path'] = entry['path'][:128]
-    if len(entry['parameters'] > 384:
+    if len(entry['parameters']) > 384:
         entry['parameters'] = entry['parameters'][:384]
-    if len(entry['referrer'] > 384:
+    if len(entry['referrer']) > 384:
         entry['referrer'] = entry['referrer'][:256]
     if len(entry['message']) > 1024:
         entry['message'] = entry['message'][:1024]
