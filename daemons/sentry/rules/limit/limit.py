@@ -281,53 +281,66 @@ class LimitSentry:
     def check_logevent(self):
         """Check log events based on a rule"""
         
-        if self.rule.log_source_filter:
-            logsourcefilter = self.rule.log_source_filter
-        else: logsourcefilter = ''
+        if self.rule.log_source_filter_regex:
+            logsourcefilter = r'.*{}.*'.format(self.rule.log_source_filter_regex)
+        else:
+            logsourcefilter = r'.*'
         if self.rule.process_filter_regex:
-            processfilter = self.rule.process_filter_regex
-        else: processfilter = ''
+            processfilter = r'.*{}.*'.format(self.rule.process_filter_regex)
+        else:
+            processfilter = r'.*'
         if self.rule.action_filter_regex:
-            actionfilter = self.rule.action_filter_regex
-        else: actionfilter = ''
+            actionfilter = r'.*{}.*'.format(self.rule.action_filter_regex)
+        else:
+            actionfilter = r'.*'
         if self.rule.interface_filter_regex:
-            interfacefilter = self.rule.interface_filter_regex
-        else: interfacefilter = ''
+            interfacefilter = r'.*{}.*'.format(self.rule.interface_filter_regex)
+        else:
+            interfacefilter = r'.*'
         if self.rule.source_host_filter_regex:
-            sourcehostfilter = self.rule.source_host_filter_regex
-        else: sourcehostfilter = ''
+            sourcehostfilter = r'.*{}.*'.format(self.rule.source_host_filter_regex)
+        else:
+            sourcehostfilter = r'.*'
         if self.rule.source_port_filter_regex:
-            sourceportfilter = self.rule.source_port_filter_regex
-        else: sourceportfilter = ''
+            sourceportfilter = r'.*{}.*'.format(self.rule.source_port_filter_regex)
+        else:
+            sourceportfilter = r'.*'
         if self.rule.dest_host_filter_regex:
-            desthostfilter = self.rule.dest_host_filter_regex
-        else: desthostfilter = ''
+            desthostfilter = r'.*{}.*'.format(self.rule.dest_host_filter_regex)
+        else:
+            desthostfilter = r'.*'
         if self.rule.dest_port_filter_regex:
-            destportfilter = self.rule.dest_port_filter_regex
-        else: destportfilter = ''
+            destportfilter = r'.*{}.*'.format(self.rule.dest_port_filter_regex)
+        else:
+            destportfilter = r'.*'
         if self.rule.source_user_filter_regex:
-            sourceuserfilter = self.rule.source_user_filter_regex
-        else: sourceuserfilter = ''
+            sourceuserfilter = r'.*{}.*'.format(self.rule.source_user_filter_regex)
+        else:
+            sourceuserfilter = r'.*'
         if self.rule.target_user_filter_regex:
-            targetuserfilter = self.rule.target_user_filter_regex
-        else: targetuserfilter = ''
+            targetuserfilter = r'.*{}.*'.format(self.rule.target_user_filter_regex)
+        else:
+            targetuserfilter = r'.*'
         if self.rule.path_filter_regex:
-            pathfilter = self.rule.path_filter_regex
-        else: pathfilter = ''
+            pathfilter = r'.*{}.*'.format(self.rule.path_filter_regex)
+        else:
+            pathfilter = r'.*'
         if self.rule.parameters_filter_regex:
-            parametersfilter = self.rule.parameters_filter_regex
-        else: parametersfilter = ''
+            parametersfilter = r'.*{}.*'.format(self.rule.parameters_filter_regex)
+        else:
+            parametersfilter = r'.*'
         if self.rule.referrer_filter_regex:
-            referrerfilter = self.rule.referrer_filter_regex
-        else: referrerfilter = ''
+            referrerfilter = r'.*{}.*'.format(self.rule.referrer_filter_regex)
+        else:
+            referrerfilter = r'.*'
         if self.rule.message_filter_regex:
-            messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
+            messagefilter = r'.*{}.*'.format(self.rule.message_filter_regex)
         else:
-            messagefilter = '.*{}.*'.format('.*')
+            messagefilter = r'.*'
         if self.rule.raw_text_filter_regex:
-            rawtextfilter = '.*{}.*'.format(self.rule.raw_text_filter_regex)
+            rawtextfilter = r'.*{}.*'.format(self.rule.raw_text_filter_regex)
         else:
-            rawtextfilter = '.*{}.*'.format('.*')
+            rawtextfilter = r'.*'
         if self.justfired:
             if self.rule.event_type:
                 connsuccess = False
