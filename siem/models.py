@@ -68,7 +68,7 @@ class LogEvent(models.Model):
     sessionid = models.CharField(max_length=24, default='')
     path = models.CharField(max_length=128, default='')
     parameters = models.CharField(max_length=384, default='')
-    referer = models.CharField(max_length=384, default='')
+    referrer = models.CharField(max_length=384, default='')
     message = models.CharField(max_length=1024, default='')
     ext0 = models.CharField(max_length=128, default='')
     ext1 = models.CharField(max_length=128, default='')
