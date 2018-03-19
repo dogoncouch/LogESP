@@ -137,7 +137,7 @@ class LimitRule(models.Model):
             null=True, blank=True)
     parameters_filter_regex = models.CharField(max_length=128, default='',
             null=True, blank=True)
-    referer_filter_regex = models.CharField(max_length=128, default='',
+    referrer_filter_regex = models.CharField(max_length=128, default='',
             null=True, blank=True)
     rulename_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
