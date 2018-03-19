@@ -72,6 +72,10 @@
     </table>
 </form>
 
+{% if total_events %}
+<p>Total Events: {{ total_events }}</p>
+{% endif %}
+
 {% if event_list %}
     {% if is_paginated %}
         <div class="pagination">

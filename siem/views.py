@@ -194,6 +194,12 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         context['endtime_filter'] = self.request.GET.get(
                 'endtime_filter', '')
         context['order'] = 'desc'
+        #if context['starttime_filter'] and context['endtime_filter']:
+        #    eventspersec = timezone.datetime.strptime(
+        #            endtime_filter, '%Y-%m-%d %H:%M:%S') - \
+        #            timezone.datetime.strptime(
+        #                    starttime_filter, '%Y-%m-%d %H:%M:%S')
+        context['total_events'] = len(context[context_object_name])
         return context
 
 class LogEventDetailView(PermissionRequiredMixin, DetailView):
