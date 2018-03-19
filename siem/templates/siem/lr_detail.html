@@ -38,20 +38,20 @@
         <li>Allowed Source Hosts: {{ lr.allowed_log_sources }}</li>
         <li>Message Filter Regex: {{ lr.message_filter_regex }}</li>
         <li>Log Event Filters:<ul>
-            <li>Log Source Filter: {{ lr.log_source_filter }}</li>
-            <li>Process Filter: {{ lr.process_filter }}</li>
-            <li>Action Filter: {{ lr.action_filter }}</li>
-            <li>Interface Filter: {{ lr.interface_filter }}</li>
-            <li>Source Host Filter: {{ lr.source_host_filter }}</li>
-            <li>Source Port Filter: {{ lr.source_port_filter }}</li>
-            <li>Dest Host Filter: {{ lr.dest_host_filter }}</li>
-            <li>Dest Port Filter: {{ lr.dest_port_filter }}</li>
-            <li>Source User Filter: {{ lr.source_user_filter }}</li>
-            <li>Target User Filter: {{ lr.target_user_filter }}</li>
+            <li>Log Source Filter Regex: {{ lr.log_source_filter_regex }}</li>
+            <li>Process Filter Regex: {{ lr.process_filter_regex }}</li>
+            <li>Action Filter Regex: {{ lr.action_filter_regex }}</li>
+            <li>Interface Filter Regex: {{ lr.interface_filter_regex }}</li>
+            <li>Source Host Filter Regex: {{ lr.source_host_filter_regex }}</li>
+            <li>Source Port Filter Regex: {{ lr.source_port_filter_regex }}</li>
+            <li>Dest Host Filter Regex: {{ lr.dest_host_filter_regex }}</li>
+            <li>Dest Port Filter Regex: {{ lr.dest_port_filter_regex }}</li>
+            <li>Source User Filter Regex: {{ lr.source_user_filter_regex }}</li>
+            <li>Target User Filter Regex: {{ lr.target_user_filter_regex }}</li>
             <li>Raw Text Filter Regex: {{ lr.raw_text_filter_regex }}</li>
             </ul>
         <li>Rule Event Filters:<ul>
-            <li>Rule Name Filter: {{ lr.rulename_filter }}</li>
+            <li>Rule Name Filter Regex: {{ lr.rulename_filter_regex }}</li>
             <li>Min. Magnitude: {{ lr.magnitude_filter }}</li></ul>
         </ul></li>
     <li>Message: {{ lr.message }}</li>

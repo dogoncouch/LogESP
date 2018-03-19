@@ -53,6 +53,9 @@ def get_blank_entry():
     entry['source_user'] = ''
     entry['target_user'] = ''
     entry['sessionid'] = ''
+    entry['path'] = ''
+    entry['parameters'] = ''
+    entry['referrer'] = ''
     entry['message'] = ''
     entry['ext0'] = ''
     entry['ext1'] = ''
@@ -146,6 +149,12 @@ def check_entry(entry):
         entry['target_user'] = entry['target_user'][:32]
     if len(entry['sessionid']) > 24:
         entry['sessionid'] = entry['sessionid'][:24]
+    if len(entry['path'] > 128:
+        entry['path'] = entry['path'][:128]
+    if len(entry['parameters'] > 384:
+        entry['parameters'] = entry['parameters'][:384]
+    if len(entry['referrer'] > 384:
+        entry['referrer'] = entry['referrer'][:256]
     if len(entry['message']) > 1024:
         entry['message'] = entry['message'][:1024]
     if len(entry['ext0']) > 128:

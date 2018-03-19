@@ -5,6 +5,7 @@
 {% block content-main %}
 
 <h1>Events (Rule-Based)</h1>
+<p>Search fields accept regular expressions (except date/time and magnitude fields)</p>
 
 <form method="get" action="{% url 'siem:ruleevent_search' %}">
     <table class="searchform">

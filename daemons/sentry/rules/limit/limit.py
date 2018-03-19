@@ -284,27 +284,42 @@ class LimitSentry:
         if self.rule.log_source_filter:
             logsourcefilter = self.rule.log_source_filter
         else: logsourcefilter = ''
-        if self.rule.process_filter:
-            processfilter = self.rule.process_filter
+        if self.rule.process_filter_regex:
+            processfilter = self.rule.process_filter_regex
         else: processfilter = ''
-        if self.rule.action_filter:
-            actionfilter = self.rule.action_filter
+        if self.rule.action_filter_regex:
+            actionfilter = self.rule.action_filter_regex
         else: actionfilter = ''
-        if self.rule.interface_filter:
-            interfacefilter = self.rule.interface_filter
+        if self.rule.interface_filter_regex:
+            interfacefilter = self.rule.interface_filter_regex
         else: interfacefilter = ''
-        if self.rule.source_host_filter:
-            sourcehostfilter = self.rule.source_host_filter
+        if self.rule.source_host_filter_regex:
+            sourcehostfilter = self.rule.source_host_filter_regex
         else: sourcehostfilter = ''
-        if self.rule.dest_host_filter:
-            desthostfilter = self.rule.dest_host_filter
+        if self.rule.source_port_filter_regex:
+            sourceportfilter = self.rule.source_port_filter_regex
+        else: sourceportfilter = ''
+        if self.rule.dest_host_filter_regex:
+            desthostfilter = self.rule.dest_host_filter_regex
         else: desthostfilter = ''
-        if self.rule.source_user_filter:
-            sourceuserfilter = self.rule.source_user_filter
+        if self.rule.dest_port_filter_regex:
+            destportfilter = self.rule.dest_port_filter_regex
+        else: destportfilter = ''
+        if self.rule.source_user_filter_regex:
+            sourceuserfilter = self.rule.source_user_filter_regex
         else: sourceuserfilter = ''
-        if self.rule.target_user_filter:
-            targetuserfilter = self.rule.target_user_filter
+        if self.rule.target_user_filter_regex:
+            targetuserfilter = self.rule.target_user_filter_regex
         else: targetuserfilter = ''
+        if self.rule.path_filter_regex:
+            pathfilter = self.rule.path_filter_regex
+        else: pathfilter = ''
+        if self.rule.parameters_filter_regex:
+            parametersfilter = self.rule.parameters_filter_regex
+        else: parametersfilter = ''
+        if self.rule.referrer_filter_regex:
+            referrerfilter = self.rule.referrer_filter_regex
+        else: referrerfilter = ''
         if self.rule.message_filter_regex:
             messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
@@ -318,16 +333,22 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = LogEvent.objects.filter(id__gt=self.lasteventid,
+                        e = LogEvent.objects.filter(
+                                id__gt=self.lasteventid,
                                 event_type=self.rule.event_type,
-                                log_source__icontains=logsourcefilter,
-                                source_process__icontains=processfilter,
-                                action__icontains=actionfilter,
-                                interface__icontains=interfacefilter,
-                                source_host__icontains=sourcehostfilter,
-                                dest_host__icontains=desthostfilter,
-                                source_user__icontains=sourceuserfilter,
-                                target_user__icontains=targetuserfilter,
+                                log_source__iregex=logsourcefilter,
+                                source_process__iregex=processfilter,
+                                action__iregex=actionfilter,
+                                interface__iregex=interfacefilter,
+                                source_host__iregex=sourcehostfilter,
+                                source_port__iregex=sourceportfilter,
+                                dest_host__iregex=desthostfilter,
+                                dest_port__iregex=destportfilter,
+                                source_user__iregex=sourceuserfilter,
+                                target_user__iregex=targetuserfilter,
+                                path__iregex=pathfilter,
+                                parameters__iregex=parametersfilter,
+                                referrer__iregex=referrerfilter
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -340,15 +361,21 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = LogEvent.objects.filter(id__gt=self.lasteventid,
-                                log_source__contains=logsourcefilter,
-                                source_process__contains=processfilter,
-                                action__icontains=actionfilter,
-                                interface__icontains=interfacefilter,
-                                source_host__icontains=sourcehostfilter,
-                                dest_host__icontains=desthostfilter,
-                                source_user__icontains=sourceuserfilter,
-                                target_user__icontains=targetuserfilter,
+                        e = LogEvent.objects.filter(
+                                id__gt=self.lasteventid,
+                                log_source__iregex=logsourcefilter,
+                                source_process__iregex=processfilter,
+                                action__iregex=actionfilter,
+                                interface__iregex=interfacefilter,
+                                source_host__iregex=sourcehostfilter,
+                                source_port__iregex=sourceportfilter,
+                                dest_host__iregex=desthostfilter,
+                                dest_port__iregex=destportfilter,
+                                source_user__iregex=sourceuserfilter,
+                                target_user__iregex=targetuserfilter,
+                                path__iregex=pathfilter,
+                                parameters__iregex=parametersfilter,
+                                referrer__iregex=referrerfilter
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -363,16 +390,22 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
+                        e = LogEvent.objects.filter(
+                                parsed_at__gt=startdatestamp,
                                 event_type=self.rule.event_type,
-                                log_source__icontains=logsourcefilter,
-                                source_process__icontains=processfilter,
-                                action__icontains=actionfilter,
-                                interface__icontains=interfacefilter,
-                                source_host__icontains=sourcehostfilter,
-                                dest_host__icontains=desthostfilter,
-                                source_user__icontains=sourceuserfilter,
-                                target_user__icontains=targetuserfilter,
+                                log_source__iregex=logsourcefilter,
+                                source_process__iregex=processfilter,
+                                action__iregex=actionfilter,
+                                interface__iregex=interfacefilter,
+                                source_host__iregex=sourcehostfilter,
+                                source_port__iregex=sourceportfilter,
+                                dest_host__iregex=desthostfilter,
+                                dest_port__iregex=destportfilter,
+                                source_user__iregex=sourceuserfilter,
+                                target_user__iregex=targetuserfilter,
+                                path__iregex=pathfilter,
+                                parameters__iregex=parametersfilter,
+                                referrer__iregex=referrerfilter
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -385,15 +418,21 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = LogEvent.objects.filter(parsed_at__gt=startdatestamp,
-                                log_source__contains=logsourcefilter,
-                                source_process__contains=processfilter,
-                                action__icontains=actionfilter,
-                                interface__icontains=interfacefilter,
-                                source_host__icontains=sourcehostfilter,
-                                dest_host__icontains=desthostfilter,
-                                source_user__icontains=sourceuserfilter,
-                                target_user__icontains=targetuserfilter,
+                        e = LogEvent.objects.filter(
+                                parsed_at__gt=startdatestamp,
+                                log_source__iregex=logsourcefilter,
+                                source_process__iregex=processfilter,
+                                action__iregex=actionfilter,
+                                interface__iregex=interfacefilter,
+                                source_host__iregex=sourcehostfilter,
+                                source_port__iregex=sourceportfilter,
+                                dest_host__iregex=desthostfilter,
+                                dest_port__iregex=destportfilter,
+                                source_user__iregex=sourceuserfilter,
+                                target_user__iregex=targetuserfilter,
+                                path__iregex=pathfilter,
+                                parameters__iregex=parametersfilter,
+                                referrer__iregex=referrerfilter
                                 message__iregex=messagefilter,
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
@@ -503,9 +542,10 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = RuleEvent.objects.filter(id__gt=self.lasteventid,
+                        e = RuleEvent.objects.filter(
+                                id__gt=self.lasteventid,
                                 event_type=self.rule.event_type,
-                                source_rule__name__icontains=rulenamefilter,
+                                source_rule__name__iregex=rulenamefilter,
                                 magnitude__gte=magnitudefilter,
                                 message__iregex=messagefilter)
                         connsuccess = True
@@ -518,8 +558,9 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = RuleEvent.objects.filter(id__gt=self.lasteventid,
-                                source_rule__name__icontains=rulenamefilter,
+                        e = RuleEvent.objects.filter(
+                                id__gt=self.lasteventid,
+                                source_rule__name__iregex=rulenamefilter,
                                 magnitude__gte=magnitudefilter,
                                 message__iregex=messagefilter)
                         connsuccess = True
@@ -529,14 +570,16 @@ class LimitSentry:
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
         else:
-            startdatestamp = timezone.localtime(timezone.now()) - self.timeint
+            startdatestamp = timezone.localtime(
+                    timezone.now()) - self.timeint
             if self.rule.event_type:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
+                        e = RuleEvent.objects.filter(
+                                date_stamp__gt=startdatestamp,
                                 event_type=self.rule.event_type,
-                                source_rule__name__icontains=rulenamefilter,
+                                source_rule__name__iregex=rulenamefilter,
                                 magnitude__gte=magnitudefilter,
                                 message__iregex=messagefilter)
                         connsuccess = True
@@ -549,8 +592,9 @@ class LimitSentry:
                 connsuccess = False
                 while not connsuccess:
                     try:
-                        e = RuleEvent.objects.filter(date_stamp__gt=startdatestamp,
-                                source_rule__name__icontains=rulenamefilter,
+                        e = RuleEvent.objects.filter(
+                                date_stamp__gt=startdatestamp,
+                                source_rule__name__iregex=rulenamefilter,
                                 magnitude__gte=magnitudefilter,
                                 message__iregex=messagefilter)
                         connsuccess = True

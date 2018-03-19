@@ -3,15 +3,16 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 
 ## [Unreleased]
 ### Added
-- Added start.sh script for starting/restarting/stopping daemon
-- Added source and destination host filters to limit rules
-- Added parse helper types for simpler config updates
-- Added event fields for netflow parsing
-- Added email alerts to rules
-- Added more filters to rules - action, interface, source/target user
-- Added password change pages
-- Added sanity check for entry field lengths, etc.
-- Added documentation
+- `start.sh` script for starting/restarting/stopping daemon
+- Source and destination host filters to limit rules
+- Parse helper types for simpler config updates
+- Event fields for netflow parsing
+- Email alerts to rules
+- More filters to rules - action, interface, source/target user
+- Password change pages
+- Sanity check for entry field lengths, etc.
+- Documentation
+- Event fields for web server logs
 
 ### Updated
 - Fixed helper logic for single-field parse helpers
@@ -24,6 +25,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Daemon thread errors are logged to LOG\_DAEMON
 - Parser and sentry can now be run separately (distributed environments)
 - Rule events now track source/dest host count
+- Rules and searches use more regular expressions
 
 ## [0.1-alpha] - 2018-02-06
 - First test release

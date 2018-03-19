@@ -18,7 +18,7 @@ Limit rules define a set of event criteria, an event limit, and a time interval.
 If a rule's `rule_events` attribute is set to True, it will monitor rule events; otherwise, it will monitor log events.
 
 ### Filters
-Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken. A few fields can use regular expressions.
+Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken. Mostfields can use regular expressions.
 
 Rules can filter on the following fields:
 ```
@@ -27,18 +27,21 @@ Field               Event
 ----------------------------------
 message             Any     Yes
 raw_text            Log     Yes
-log_source          Log     No
-process             Log     No
-action              Log     No
-command             Log     No
-interface           Log     No
-source_host         Log     No
-source_port         Log     No
-dest_host           Log     No
-dest_port           Log     No
-source_user         Log     No
-target_user         Log     No
-source_rule__name   Rule    No
+log_source          Log     Yes
+process             Log     Yes
+action              Log     Yes
+command             Log     Yes
+interface           Log     Yes
+source_host         Log     Yes
+source_port         Log     Yes
+dest_host           Log     Yes
+dest_port           Log     Yes
+source_user         Log     Yes
+target_user         Log     Yes
+path                Log     Yes
+parameters          Log     Yes
+referrer            Log     Yes
+source_rule__name   Rule    Yes
 magnitude           Rule    No
 ```
 In addition to these filters, rule events have an optional `event_type` attribute. Event types must match exactly, if present.

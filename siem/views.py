@@ -53,6 +53,9 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         command_val = self.request.GET.get('command_filter')
         session_val = self.request.GET.get('session_filter')
         interface_val = self.request.GET.get('interface_filter')
+        path_val = self.request.GET.get('path_filter')
+        parameters_val = self.request.GET.get('parameters_filter')
+        referrer_val = self.request.GET.get('referrer_filter')
         type_val = self.request.GET.get('type_filter')
         message_val = self.request.GET.get('message_filter')
         raw_val = self.request.GET.get('raw_filter')
@@ -71,78 +74,81 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not command_val: command_val = ''
         if not session_val: session_val = ''
         if not interface_val: interface_val = ''
+        if not path_val: path_val = ''
+        if not parameters_val: parameters_val = ''
+        if not referrer_val: referrer_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
         if endtime_val and starttime_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__gte=starttime_val,
                 parsed_at__lte=endtime_val,
-                event_type__icontains=type_val,
-                log_source__icontains=log_source_val,
-                source_process__icontains=process_val,
-                source_host__icontains=source_host_val,
-                source_port__icontains=source_port_val,
-                dest_host__icontains=dest_host_val,
-                dest_port__icontains=dest_port_val,
-                source_user__icontains=source_user_val,
-                target_user__icontains=target_user_val,
-                action__icontains=action_val,
-                command__icontains=command_val,
-                sessionid__icontains=session_val,
-                interface__icontains=interface_val,
+                event_type__iregex=type_val,
+                log_source__iregex=log_source_val,
+                source_process__iregex=process_val,
+                source_host__iregex=source_host_val,
+                source_port__iregex=source_port_val,
+                dest_host__iregex=dest_host_val,
+                dest_port__iregex=dest_port_val,
+                source_user__iregex=source_user_val,
+                target_user__iregex=target_user_val,
+                action__iregex=action_val,
+                command__iregex=command_val,
+                sessionid__iregex=session_val,
+                interface__iregex=interface_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         elif starttime_val and not endtime_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__gte=starttime_val,
-                event_type__icontains=type_val,
-                log_source__icontains=log_source_val,
-                source_process__icontains=process_val,
-                source_host__icontains=source_host_val,
-                source_port__icontains=source_port_val,
-                dest_host__icontains=dest_host_val,
-                dest_port__icontains=dest_port_val,
-                source_user__icontains=source_user_val,
-                target_user__icontains=target_user_val,
-                action__icontains=action_val,
-                command__icontains=command_val,
-                sessionid__icontains=session_val,
-                interface__icontains=interface_val,
+                event_type__iregex=type_val,
+                log_source__iregex=log_source_val,
+                source_process__iregex=process_val,
+                source_host__iregex=source_host_val,
+                source_port__iregex=source_port_val,
+                dest_host__iregex=dest_host_val,
+                dest_port__iregex=dest_port_val,
+                source_user__iregex=source_user_val,
+                target_user__iregex=target_user_val,
+                action__iregex=action_val,
+                command__iregex=command_val,
+                sessionid__iregex=session_val,
+                interface__iregex=interface_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         elif endtime_val and not starttime_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__lte=endtime_val,
-                event_type__icontains=type_val,
-                log_source__icontains=log_source_val,
-                source_process__icontains=process_val,
-                source_host__icontains=source_host_val,
-                source_port__icontains=source_port_val,
-                dest_host__icontains=dest_host_val,
-                dest_port__icontains=dest_port_val,
-                source_user__icontains=source_user_val,
-                target_user__icontains=target_user_val,
-                action__icontains=action_val,
-                command__icontains=command_val,
-                sessionid__icontains=session_val,
-                interface__icontains=interface_val,
+                event_type__iregex=type_val,
+                log_source__iregex=log_source_val,
+                source_process__iregex=process_val,
+                source_host__iregex=source_host_val,
+                source_port__iregex=source_port_val,
+                dest_host__iregex=dest_host_val,
+                dest_port__iregex=dest_port_val,
+                source_user__iregex=source_user_val,
+                target_user__iregex=target_user_val,
+                action__iregex=action_val,
+                command__iregex=command_val,
+                sessionid__iregex=session_val,
+                interface__iregex=interface_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         else:
             new_context = LogEvent.objects.filter(
-                event_type__icontains=type_val,
-                log_source__icontains=log_source_val,
-                source_process__icontains=process_val,
-                source_host__icontains=source_host_val,
-                source_port__icontains=source_port_val,
-                dest_host__icontains=dest_host_val,
-                dest_port__icontains=dest_port_val,
-                source_user__icontains=source_user_val,
-                target_user__icontains=target_user_val,
-                action__icontains=action_val,
-                command__icontains=command_val,
-                sessionid__icontains=session_val,
-                interface__icontains=interface_val,
+                event_type__iregex=type_val,
+                log_source__iregex=log_source_val,
+                source_process__iregex=process_val,
+                source_host__iregex=source_host_val,
+                source_port__iregex=source_port_val,
+                dest_host__iregex=dest_host_val,
+                dest_port__iregex=dest_port_val,
+                source_user__iregex=source_user_val,
+                target_user__iregex=target_user_val,
+                action__iregex=action_val,
+                command__iregex=command_val,
+                sessionid__iregex=session_val,
+                interface__iregex=interface_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         return new_context
@@ -171,9 +177,18 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 'session_filter', '')
         context['interface_filter'] = self.request.GET.get(
                 'interface_filter', '')
-        context['type_filter'] = self.request.GET.get('type_filter', '')
-        context['message_filter'] = self.request.GET.get('message_filter', '')
-        context['raw_filter'] = self.request.GET.get('raw_filter', '')
+        context['path_filter'] = self.request.GET.get(
+                'path_filter', '')
+        context['parameters_filter'] = self.request.GET.get(
+                'parameters_filter', '')
+        context['referrer_filter'] = self.request.GET.get(
+                'referrer_filter', '')
+        context['type_filter'] = self.request.GET.get(
+                'type_filter', '')
+        context['message_filter'] = self.request.GET.get(
+                'message_filter', '')
+        context['raw_filter'] = self.request.GET.get(
+                'raw_filter', '')
         context['starttime_filter'] = self.request.GET.get(
                 'starttime_filter', '')
         context['endtime_filter'] = self.request.GET.get(
@@ -208,28 +223,28 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
             new_context = RuleEvent.objects.filter(
                 date_stamp__gte=starttime_val,
                 date_stamp__lte=endtime_val,
-                rule_category__icontains=category_val,
-                event_type__icontains=type_val,
+                rule_category__iregex=category_val,
+                event_type__iregex=type_val,
                 magnitude__gte=mag_val,
                 message__iregex=message_val).order_by('-id')
         elif starttime_val and not endtime_val:
             new_context = RuleEvent.objects.filter(
                 date_stamp__gte=starttime_val,
-                rule_category__icontains=category_val,
-                event_type__icontains=type_val,
+                rule_category__iregex=category_val,
+                event_type__iregex=type_val,
                 magnitude__gte=mag_val,
                 message__iregex=message_val).order_by('-id')
         elif endtime_val and not starttime_val:
             new_context = RuleEvent.objects.filter(
                 date_stamp__lte=endtime_val,
-                rule_category__icontains=category_val,
-                event_type__icontains=type_val,
+                rule_category__iregex=category_val,
+                event_type__iregex=type_val,
                 magnitude__gte=mag_val,
                 message__iregex=message_val).order_by('-id')
         else:
             new_context = RuleEvent.objects.filter(
-                rule_category__icontains=category_val,
-                event_type__icontains=type_val,
+                rule_category__iregex=category_val,
+                event_type__iregex=type_val,
                 magnitude__gte=mag_val,
                 message__iregex=message_val).order_by('-id')
         return new_context
@@ -276,12 +291,15 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
-            'log_source_filter', 'process_filter',
-            'action_filter', 'command_filter', 'interface_filter',
-            'source_host_filter', 'source_port_filter',
-            'dest_host_filter', 'dest_port_filter',
-            'source_user_filter', 'target_user_filter',
-            'rulename_filter', 'magnitude_filter',
+            'log_source_filter_regex', 'process_filter_regex',
+            'action_filter_regex', 'command_filter_regex',
+            'interface_filter_regex',
+            'source_host_filter_regex', 'source_port_filter_regex',
+            'dest_host_filter_regex', 'dest_port_filter_regex',
+            'source_user_filter_regex', 'target_user_filter_regex',
+            'path_filter_regex', 'parameters_filter_regex',
+            'referrer_filter_regex',
+            'rulename_filter_regex', 'magnitude_filter',
             'message']
     def get_success_url(self):
         return reverse_lazy('siem:lr_detail', args=(self.object.id,))
@@ -297,12 +315,15 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit', 'allowed_log_sources',
             'message_filter_regex', 'raw_text_filter_regex',
-            'log_source_filter', 'process_filter',
-            'action_filter', 'command_filter', 'interface_filter',
-            'source_host_filter', 'source_port_filter',
-            'dest_host_filter', 'dest_port_filter',
-            'source_user_filter', 'target_user_filter',
-            'rulename_filter', 'magnitude_filter',
+            'log_source_filter_regex', 'process_filter_regex',
+            'action_filter_regex', 'command_filter_regex',
+            'interface_filter_regex',
+            'source_host_filter_regex', 'source_port_filter_regex',
+            'dest_host_filter_regex', 'dest_port_filter_regex',
+            'source_user_filter_regex', 'target_user_filter_regex',
+            'path_filter_regex', 'parameters_filter_regex',
+            'referrer_filter_regex',
+            'rulename_filter_regex', 'magnitude_filter',
             'message']
     def get_success_url(self):
         return reverse_lazy('siem:lr_detail', args=(self.object.id,))

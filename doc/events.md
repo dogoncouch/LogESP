@@ -35,6 +35,9 @@ duration            A string representing the duration.
 source_user         The user who initiated the event.
 target_user         The user targeted in the event.
 sessionid           The session ID of the session involved in the event.
+path                The URI or file path
+parameters          The parameters (web server logs, etc).
+referrer            The referrer (web server logs, etc).
 message             The message conveyed.
 ext0                A field meant to be defined by the user.
 ext1                A field meant to be defined by the user.

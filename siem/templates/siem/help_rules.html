@@ -31,24 +31,27 @@
 
 <a name="filters"></a>
 <h3>Filters</h3>
-<p>Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken. A few fields can use regular expressions.</p>
+<p>Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken. Most fields can use regular expressions.</p>
 <p>Rules can filter on the following fields:</p>
 <table>
     <tr><th>Field</th><th>Event<br>Type</th><th>Regex?</th></tr>
     <tr><td>message</td><td>Any</td><td>Yes</td></tr>
     <tr><td>raw_text</td><td>Log</td><td>Yes</td></tr>
-    <tr><td>log_source</td><td>Log</td><td>No</td></tr>
-    <tr><td>process</td><td>Log</td><td>No</td></tr>
-    <tr><td>action</td><td>Log</td><td>No</td></tr>
-    <tr><td>command</td><td>Log</td><td>No</td></tr>
-    <tr><td>interface</td><td>Log</td><td>No</td></tr>
-    <tr><td>source_host</td><td>Log</td><td>No</td></tr>
-    <tr><td>source_port</td><td>Log</td><td>No</td></tr>
-    <tr><td>dest_host</td><td>Log</td><td>No</td></tr>
-    <tr><td>dest_port</td><td>Log</td><td>No</td></tr>
-    <tr><td>source_user</td><td>Log</td><td>No</td></tr>
-    <tr><td>target_user</td><td>Log</td><td>No</td></tr>
-    <tr><td>source_rule__name</td><td>Rule</td><td>No</td></tr>
+    <tr><td>log_source</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>process</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>action</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>command</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>interface</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>source_host</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>source_port</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>dest_host</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>dest_port</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>source_user</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>target_user</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>path</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>parameters</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>referrer</td><td>Log</td><td>Yes</td></tr>
+    <tr><td>source_rule__name</td><td>Rule</td><td>Yes</td></tr>
     <tr><td>magnitude</td><td>Rule</td><td>No</td></tr>
 </table>
 <p>In addition to these filters, rule events have an optional event_type attribute. Event types must match exactly, if present.</p>

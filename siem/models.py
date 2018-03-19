@@ -66,6 +66,9 @@ class LogEvent(models.Model):
     source_user = models.CharField(max_length=32, default='')
     target_user = models.CharField(max_length=32, default='')
     sessionid = models.CharField(max_length=24, default='')
+    path = models.CharField(max_length=128, default='')
+    parameters = models.CharField(max_length=384, default='')
+    referer = models.CharField(max_length=384, default='')
     message = models.CharField(max_length=1024, default='')
     ext0 = models.CharField(max_length=128, default='')
     ext1 = models.CharField(max_length=128, default='')
@@ -108,29 +111,35 @@ class LimitRule(models.Model):
             null=True, blank=True)
     raw_text_filter_regex = models.CharField(max_length=1024,
             null=True, blank=True)
-    log_source_filter = models.CharField(max_length=32,
+    log_source_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
-    process_filter = models.CharField(max_length=24,
+    process_filter_regex = models.CharField(max_length=24,
             null=True, blank=True)
-    action_filter = models.CharField(max_length=48,
+    action_filter_regex = models.CharField(max_length=48,
             null=True, blank=True)
-    command_filter = models.CharField(max_length=64,
+    command_filter_regex = models.CharField(max_length=64,
             null=True, blank=True)
-    interface_filter = models.CharField(max_length=32,
+    interface_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
-    source_host_filter = models.CharField(max_length=32,
+    source_host_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
-    source_port_filter = models.CharField(max_length=8,
+    source_port_filter_regex = models.CharField(max_length=8,
             null=True, blank=True)
-    dest_host_filter = models.CharField(max_length=32,
+    dest_host_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
-    dest_port_filter = models.CharField(max_length=8,
+    dest_port_filter_regex = models.CharField(max_length=8,
             null=True, blank=True)
-    source_user_filter = models.CharField(max_length=32,
+    source_user_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
-    target_user_filter = models.CharField(max_length=32,
+    target_user_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
-    rulename_filter = models.CharField(max_length=32,
+    path_filter_regex = models.CharField(max_length=128, default='',
+            null=True, blank=True)
+    parameters_filter_regex = models.CharField(max_length=128, default='',
+            null=True, blank=True)
+    referer_filter_regex = models.CharField(max_length=128, default='',
+            null=True, blank=True)
+    rulename_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
     magnitude_filter = models.IntegerField(null=True, blank=True)
     message = models.CharField(max_length=1024)
