@@ -13,13 +13,17 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 - [Nginx Setup](#nginx-setup)
 - [Edit rc.local](#edit-rclocal)
 - [Reboot](#reboot)
+- [Extras](#extras)
+  - [Production Environments](#production-environments)
+  - [Distributed Environments](#distributed-environments)
 
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
 ## Requirements
+On small home networks, LDSI can be run on an ubuntu server virtual machine with less than half of a processor, 1.5G of memory, and 5G of disk space.
 ```
 apt update ; apt upgrade
-apt install build-essential python3-dev python3-venv libmysqlclient-dev mariadb-server nginx
+apt install build-essential python3-dev python3-venv libmysqlclient-dev mariadb-server nginx ntp
 ```
 
 ## Mariadb Setup
@@ -65,7 +69,7 @@ make new-db
 ```
 
 ### Edit ldsi/settings.py
-- Add host to `ALLOWED_HOSTS`
+- Change `0.0.0.0` to server IP/FQDN in `ALLOWED_HOSTS`
 - Review database settings
 - Update `TIME_ZONE` setting
 
@@ -101,7 +105,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx
 In a production environment, use SSL certificates signed by your CA.
 
 ### Set Server Name
-Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `LDSI-SRV` with your server FQDN or IP address.
+Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
 
 ## Edit rc.local
 - Add the following:
@@ -115,5 +119,23 @@ Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `LDSI-SRV` with 
 reboot
 ```
 
-## Distributed Environments
+## Extras
+### Production Environments
+In a production security environment, a few more steps are recommended:
+- Secure NTP communication
+- Use an SSL certificate signed by your CA
+- Use NTP on log sources for time synchronization
+
+### Distributed Environments
 Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.
+
+A few extra precautions are recommended:
+- Use separate MariaDB credentials (with minimal permissions) on servers
+  - Web servers don't need to add, change, or delete log events or rule events
+  - Parsing servers only need to do the following:
+    - Read parsers and parse helpers
+    - Create log events
+  - Sentry servers only need to do the following:
+    - Read limit rules and log/rule events
+    - Create rule events
+- Use SSL for MariaDB communication
