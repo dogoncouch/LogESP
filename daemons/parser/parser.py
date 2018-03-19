@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 import re
-import daemons.parser.util
+import daemons.parser.utils
 
 from siem.models import LogEventParser, ParseHelper
 
@@ -82,7 +82,7 @@ class ParseModule:
         """Try matching a line with a regex format"""
         matchfound = False
         match = re.findall(regexformat, line)
-        entry = daemons.parser.util.get_blank_entry()
+        entry = daemons.parser.utils.get_blank_entry()
         entry['raw_text'] = line
         entry['event_type'] = self.event_type
         entry['time_zone'] = self.time_zone
@@ -110,6 +110,6 @@ class ParseModule:
                         if not f in self.native_fields:
                             entry[f] = v
 
-        entry = daemons.parser.util.check_entry(entry)
+        entry = daemons.parser.utils.check_entry(entry)
 
         return entry, matchfound
