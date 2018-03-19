@@ -485,7 +485,6 @@ class LimitSentry:
                                 self.backuplifespandelta
                 event.event_type = self.rule.event_type
                 event.source_rule = self.rule
-                event.log_source = self.rule.log_source_filter
                 event.event_limit = self.rule.event_limit
                 event.event_count = totalevents
                 event.time_int = self.rule.time_int
