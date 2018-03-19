@@ -57,9 +57,7 @@ Rule event magnitude is calculated using the following factors:
 
 The actual calculation:
 ```
-1 +
 ((event_count / (event_limit + 1)) * overkill_modifier)
--1)
 
 *
 
