@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'v2oem$sm5mtfz4n8=t)c37&y^3=c+)jxl2hf3ws$7(#eevpw+)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = []
 
 # Email settings
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -87,15 +87,17 @@ WSGI_APPLICATION = 'ldsi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'siem_data',
+        #'NAME': 'siem_data',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'ldsictrl',
+        #'USER': 'ldsictrl',
         # Note: Change this!!!
-        'PASSWORD': 'siems2bfine',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        #'PASSWORD': 'siems2bfine',
+        #'HOST': '127.0.0.1',
+        #'PORT': '3306',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_ALL_TABLES'"
+            'read_default_file': 'config/db.conf',
+            'isolation_level': 'read committed'
+            #'init_command': "SET sql_mode='STRICT_ALL_TABLES'"
         }
     }
 }
