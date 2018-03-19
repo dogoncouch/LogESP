@@ -131,6 +131,7 @@ In a production security environment, a few more steps are recommended:
 - Secure NTP communication
 - Use an SSL certificate signed by your CA
 - Use NTP on log sources for time synchronization
+- Update the `SECRET_KEY` setting in `ldsi/settings.py`
 
 ### Distributed Environments
 Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.

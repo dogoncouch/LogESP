@@ -96,8 +96,8 @@ DATABASES = {
         #'PORT': '3306',
         'OPTIONS': {
             'read_default_file': 'config/db.conf',
-            'isolation_level': 'read committed'
-            #'init_command': "SET sql_mode='STRICT_ALL_TABLES'"
+            'isolation_level': 'read committed',
+            'init_command': "SET sql_mode='STRICT_ALL_TABLES'"
         }
     }
 }
