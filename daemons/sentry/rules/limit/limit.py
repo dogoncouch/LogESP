@@ -58,16 +58,15 @@ class LimitSentry:
         connsuccess = False
         while not connsuccess:
             try:
-                e = LogEvent.objects.all()
+                e = LogEvent.objects.last()
                 connsuccess = True
             except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
                         ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
-        if len(e) == 0:
-            self.lasteventid = 0
-        else:
+        if e:
+            self.lasteventid = e.id
             connsuccess = False
             while not connsuccess:
                 try:
@@ -80,52 +79,43 @@ class LimitSentry:
                             ' got db error. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                     sleep(0.2)
-            if len(erange) == 0:
-                connsuccess = False
-                while not connsuccess:
-                    try:
-                        self.lasteventid = LogEvent.objects.latest('id').id
-                        connsuccess = True
-                    except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
-                        sleep(0.2)
-            else:
+            if len(erange) != 0:
                 self.lasteventid = erange.first().id - 1
+        else:
+            self.lasteventid = 0
 
     def get_last_logevent(self):
         """Set the last event id"""
+        # To Do: fix this so it doesn't get all events every time
         connsuccess = False
         while not connsuccess:
             try:
-                e = LogEvent.objects.all()
+                e = LogEvent.objects.last()
                 connsuccess = True
             except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
                         ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
-        if len(e) == 0:
-            self.lasteventid = 0
+        if e:
+            self.lasteventid = e.id
         else:
-            self.lasteventid = e.latest('id').id
+            self.lasteventid = 0
 
     def get_first_ruleevent(self):
         """Get the starting log event"""
         connsuccess = False
         while not connsuccess:
             try:
-                e = RuleEvent.objects.all()
+                e = RuleEvent.objects.last()
                 connsuccess = True
             except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
                         ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
-        if len(e) == 0:
-            self.lasteventid = 0
-        else:
+        if e:
+            self.lasteventid = e.id
             connsuccess = False
             while not connsuccess:
                 try:
@@ -138,36 +128,28 @@ class LimitSentry:
                             ' got db error. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                     sleep(0.2)
-            if len(erange) == 0:
-                connsuccess = False
-                while not connsuccess:
-                    try:
-                        self.lasteventid = RuleEvent.objects.latest('id').id
-                        connsuccess = True
-                    except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
-                        sleep(0.2)
-            else:
+            if len(erange) != 0:
                 self.lasteventid = erange.first().id - 1
+        else:
+            self.lasteventid = 0
 
     def get_last_ruleevent(self):
         """Set the last event id"""
+        # To Do: fix this so it doesn't get all events every time
         connsuccess = False
         while not connsuccess:
             try:
-                e = RuleEvent.objects.all()
+                e = RuleEvent.objects.last()
                 connsuccess = True
             except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
                         ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
-        if len(e) == 0:
-            self.lasteventid = 0
+        if e:
+            self.lasteventid = e.id
         else:
-            self.lasteventid = e.latest('id').id
+            self.lasteventid = 0
 
 
     def send_email_alerts(self, magnitude, eventcount, logsources,
@@ -282,65 +264,65 @@ class LimitSentry:
         """Check log events based on a rule"""
         
         if self.rule.log_source_filter_regex:
-            logsourcefilter = r'.*{}.*'.format(self.rule.log_source_filter_regex)
+            logsourcefilter = '.*{}.*'.format(self.rule.log_source_filter_regex)
         else:
-            logsourcefilter = r'.*'
+            logsourcefilter = '.*'
         if self.rule.process_filter_regex:
-            processfilter = r'.*{}.*'.format(self.rule.process_filter_regex)
+            processfilter = '.*{}.*'.format(self.rule.process_filter_regex)
         else:
-            processfilter = r'.*'
+            processfilter = '.*'
         if self.rule.action_filter_regex:
-            actionfilter = r'.*{}.*'.format(self.rule.action_filter_regex)
+            actionfilter = '.*{}.*'.format(self.rule.action_filter_regex)
         else:
-            actionfilter = r'.*'
+            actionfilter = '.*'
         if self.rule.interface_filter_regex:
-            interfacefilter = r'.*{}.*'.format(self.rule.interface_filter_regex)
+            interfacefilter = '.*{}.*'.format(self.rule.interface_filter_regex)
         else:
-            interfacefilter = r'.*'
+            interfacefilter = '.*'
         if self.rule.source_host_filter_regex:
-            sourcehostfilter = r'.*{}.*'.format(self.rule.source_host_filter_regex)
+            sourcehostfilter = '.*{}.*'.format(self.rule.source_host_filter_regex)
         else:
-            sourcehostfilter = r'.*'
+            sourcehostfilter = '.*'
         if self.rule.source_port_filter_regex:
-            sourceportfilter = r'.*{}.*'.format(self.rule.source_port_filter_regex)
+            sourceportfilter = '.*{}.*'.format(self.rule.source_port_filter_regex)
         else:
-            sourceportfilter = r'.*'
+            sourceportfilter = '.*'
         if self.rule.dest_host_filter_regex:
-            desthostfilter = r'.*{}.*'.format(self.rule.dest_host_filter_regex)
+            desthostfilter = '.*{}.*'.format(self.rule.dest_host_filter_regex)
         else:
-            desthostfilter = r'.*'
+            desthostfilter = '.*'
         if self.rule.dest_port_filter_regex:
-            destportfilter = r'.*{}.*'.format(self.rule.dest_port_filter_regex)
+            destportfilter = '.*{}.*'.format(self.rule.dest_port_filter_regex)
         else:
-            destportfilter = r'.*'
+            destportfilter = '.*'
         if self.rule.source_user_filter_regex:
-            sourceuserfilter = r'.*{}.*'.format(self.rule.source_user_filter_regex)
+            sourceuserfilter = '.*{}.*'.format(self.rule.source_user_filter_regex)
         else:
-            sourceuserfilter = r'.*'
+            sourceuserfilter = '.*'
         if self.rule.target_user_filter_regex:
-            targetuserfilter = r'.*{}.*'.format(self.rule.target_user_filter_regex)
+            targetuserfilter = '.*{}.*'.format(self.rule.target_user_filter_regex)
         else:
-            targetuserfilter = r'.*'
+            targetuserfilter = '.*'
         if self.rule.path_filter_regex:
-            pathfilter = r'.*{}.*'.format(self.rule.path_filter_regex)
+            pathfilter = '.*{}.*'.format(self.rule.path_filter_regex)
         else:
-            pathfilter = r'.*'
+            pathfilter = '.*'
         if self.rule.parameters_filter_regex:
-            parametersfilter = r'.*{}.*'.format(self.rule.parameters_filter_regex)
+            parametersfilter = '.*{}.*'.format(self.rule.parameters_filter_regex)
         else:
-            parametersfilter = r'.*'
+            parametersfilter = '.*'
         if self.rule.referrer_filter_regex:
-            referrerfilter = r'.*{}.*'.format(self.rule.referrer_filter_regex)
+            referrerfilter = '.*{}.*'.format(self.rule.referrer_filter_regex)
         else:
-            referrerfilter = r'.*'
+            referrerfilter = '.*'
         if self.rule.message_filter_regex:
-            messagefilter = r'.*{}.*'.format(self.rule.message_filter_regex)
+            messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
         else:
-            messagefilter = r'.*'
+            messagefilter = '.*'
         if self.rule.raw_text_filter_regex:
-            rawtextfilter = r'.*{}.*'.format(self.rule.raw_text_filter_regex)
+            rawtextfilter = '.*{}.*'.format(self.rule.raw_text_filter_regex)
         else:
-            rawtextfilter = r'.*'
+            rawtextfilter = '.*'
         if self.justfired:
             if self.rule.event_type:
                 connsuccess = False
@@ -542,16 +524,17 @@ class LimitSentry:
         """Check rule events based on a rule"""
 
         if self.rule.rulename_filter_regex:
-            rulenamefilter = r'.*{}.*'.format(
+            rulenamefilter = '.*{}.*'.format(
                     self.rule.rulename_filter_regex)
         else:
-            rulenamefilter = r'.*'
+            rulenamefilter = '.*'
         if self.rule.message_filter_regex:
             messagefilter = '.*{}.*'.format(
                     self.rule.message_filter_regex)
         else:
-            messagefilter = r'.*'
-        if self.rule.magnitude_filter: magnitudefilter = self.rule.magnitude_filter
+            messagefilter = '.*'
+        if self.rule.magnitude_filter:
+            magnitudefilter = self.rule.magnitude_filter
         else: magnitudefilter = 0
         if self.justfired:
             if self.rule.event_type:
@@ -646,7 +629,7 @@ class LimitSentry:
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
-                consuccess = False
+                connsuccess = False
                 while not connsuccess:
                     try:
                         event.save()
@@ -656,7 +639,7 @@ class LimitSentry:
                                 ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
-                consuccess = False
+                connsuccess = False
                 while not connsuccess:
                     try:
                         event.source_ids_rule.set(list(e))
@@ -666,7 +649,7 @@ class LimitSentry:
                                 ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
-                consuccess = False
+                connsuccess = False
                 while not connsuccess:
                     try:
                         event.save()
