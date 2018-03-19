@@ -74,6 +74,10 @@ make new-db
 
 ### Edit config/db.conf
 - Update username, password
+- Update file permissions
+```
+chmod 640 config/db.conf
+```
 
 ### Edit config/parser.conf
 - Uncomment necessary files
