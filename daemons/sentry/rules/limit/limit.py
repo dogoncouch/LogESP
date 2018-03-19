@@ -60,9 +60,9 @@ class LimitSentry:
             try:
                 e = LogEvent.objects.all()
                 connsuccess = True
-            except Exception:
+            except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + err
+                        ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
         if len(e) == 0:
@@ -75,9 +75,9 @@ class LimitSentry:
                             parsed_at__gt=timezone.localtime(
                                 timezone.now()) - self.timeint)
                     connsuccess = True
-                except Exception:
+                except Exception as err:
                     msg = 'LDSI sentry thread for ' + self.rule.name + \
-                            ' got db error. Error: ' + err
+                            ' got db error. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                     sleep(0.2)
             if len(erange) == 0:
@@ -86,9 +86,9 @@ class LimitSentry:
                     try:
                         self.lasteventid = LogEvent.objects.latest('id').id
                         connsuccess = True
-                    except Exception:
+                    except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
             else:
@@ -101,9 +101,9 @@ class LimitSentry:
             try:
                 e = LogEvent.objects.all()
                 connsuccess = True
-            except Exception:
+            except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + err
+                        ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
         if len(e) == 0:
@@ -118,9 +118,9 @@ class LimitSentry:
             try:
                 e = RuleEvent.objects.all()
                 connsuccess = True
-            except Exception:
+            except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + err
+                        ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
         if len(e) == 0:
@@ -133,9 +133,9 @@ class LimitSentry:
                             date_stamp__gt=timezone.localtime(
                                 timezone.now()) - self.timeint)
                     connsuccess = True
-                except Exception:
+                except Exception as err:
                     msg = 'LDSI sentry thread for ' + self.rule.name + \
-                            ' got db error. Error: ' + err
+                            ' got db error. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                     sleep(0.2)
             if len(erange) == 0:
@@ -144,9 +144,9 @@ class LimitSentry:
                     try:
                         self.lasteventid = RuleEvent.objects.latest('id').id
                         connsuccess = True
-                    except Exception:
+                    except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
             else:
@@ -159,9 +159,9 @@ class LimitSentry:
             try:
                 e = RuleEvent.objects.all()
                 connsuccess = True
-            except Exception:
+            except Exception as err:
                 msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + err
+                        ' got db error. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
         if len(e) == 0:
@@ -239,7 +239,7 @@ class LimitSentry:
                         exit(0)
                     except Exception:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + err
+                        ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
                 if self.rule.time_int != t:
@@ -333,7 +333,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
             else:
@@ -354,7 +354,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
         else:        
@@ -378,7 +378,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
             else:
@@ -399,7 +399,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
 
@@ -453,19 +453,29 @@ class LimitSentry:
                     try:
                         event.save()
                         connsuccess = True
-                    except Exception:
+                    except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
-                event.source_ids_log.set(list(e))
+                connsuccess = False
+                while not connsuccess:
+                    try:
+                        event.source_ids_log.set(list(e))
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + str(err)
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
+                connsuccess = False
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
-                    except Exception:
+                    except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
                 self.lasteventid = e.latest('id').id
@@ -501,7 +511,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
             else:
@@ -515,7 +525,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
         else:
@@ -532,7 +542,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
             else:
@@ -546,7 +556,7 @@ class LimitSentry:
                         connsuccess = True
                     except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
 
@@ -576,23 +586,34 @@ class LimitSentry:
                         ((8 - self.rule.severity) * \
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
+                consuccess = False
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
-                    except Exception:
+                    except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
-                event.source_ids_rule.set(list(e))
+                consuccess = False
+                while not connsuccess:
+                    try:
+                        event.source_ids_rule.set(list(e))
+                        connsuccess = True
+                    except Exception as err:
+                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                                ' got db error. Error: ' + str(err)
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                        sleep(0.2)
+                consuccess = False
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
-                    except Exception:
+                    except Exception as err:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + err
+                                ' got db error. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                         sleep(0.2)
                 self.lasteventid = e.latest('id').id

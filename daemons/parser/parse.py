@@ -119,9 +119,9 @@ class LiveParser:
                         try:
                             e.save()
                             connsuccess = True
-                        except Exception:
+                        except Exception as err:
                             msg = 'LDSI parser thread for ' + filename + \
-                                    ' got db error. Error: ' + err
+                                    ' got db error. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                             sleep(0.2)
 
