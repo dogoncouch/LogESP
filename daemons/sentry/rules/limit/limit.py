@@ -86,7 +86,6 @@ class LimitSentry:
 
     def get_last_logevent(self):
         """Set the last event id"""
-        # To Do: fix this so it doesn't get all events every time
         connsuccess = False
         while not connsuccess:
             try:
@@ -135,7 +134,6 @@ class LimitSentry:
 
     def get_last_ruleevent(self):
         """Set the last event id"""
-        # To Do: fix this so it doesn't get all events every time
         connsuccess = False
         while not connsuccess:
             try:
