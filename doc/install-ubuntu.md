@@ -68,7 +68,7 @@ cd ldsi
 make new-db
 ```
 
-### Edit ldsi/settings.py
+### Edit config/settings.py
 - Add server IP/FQDN to `ALLOWED_HOSTS`
 - Update `TIME_ZONE` setting
 
@@ -133,7 +133,8 @@ In a production security environment, a few more steps are recommended:
 - Secure NTP communication
 - Use an SSL certificate signed by your CA
 - Use NTP on log sources for time synchronization
-- Update the `SECRET_KEY` setting in `ldsi/settings.py`
+- Update the `SECRET_KEY` setting in `config/settings.py`
+Note: LDSI isn't ready for production environments yet. Use with caution; review all django settings.
 
 ### Distributed Environments
 Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.
@@ -148,3 +149,4 @@ A few extra precautions are recommended:
     - Read limit rules and log/rule events
     - Create rule events
 - Use SSL for MariaDB communication
+- Use access control lists to minimize exposure
