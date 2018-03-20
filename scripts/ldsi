@@ -1,0 +1,153 @@
+#!/bin/bash
+
+# MIT License
+# 
+# Copyright (c) 2017 Dan Persons <dpersonsdev@gmail.com>
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# 
+
+
+# Set defaults:
+RUNPARSER="True"
+RUNSENTRY="True"
+LDSIBASE="/opt/ldsi/ldsi"
+ENVBASE="/opt/ldsi"
+PIDFILE="/opt/ldsi/run/ldsi.pid"
+
+usage() {
+    echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-l] [-p|-s] [-b <ldsi-base>] [-e <env-base>]"
+    echo
+    echo "Optional arguments:"
+    echo "  -h                      Print this help message"
+    echo "  -v                      Print the version number"
+    echo "  -l                      Use local EOL date when cleaning"
+    echo "  -p                      Run parser only (no sentry)"
+    echo "  -s                      Run sentry only (no parser)"
+    echo "  -b <ldsi-base>          Set the LDSI base directory"
+    echo "  -e <env-base>           Set a virtual environment"
+}
+
+case "${1}" in
+    start)
+        STARTING=1
+        shift
+        ;;
+    stop)
+        STOPPING=1
+        shift
+        ;;
+    restart)
+        RESTARTING=1
+        shift
+        ;;
+    clean)
+        CLEANING=1
+        shift
+        ;;
+esac
+
+while getopts ":hvlpsb:e:" o; do
+    case "${o}" in
+        h)
+            usage
+            exit 0
+            ;;
+        v)
+            VERSION=`python manage.py shell -c "import ldsi; print(ldsi.__version__)"`
+            echo "${0##*/}-$VERSION"
+            exit 0
+            ;;
+        l)
+            CLEANLOCAL=1
+            ;;
+        p)
+            RUNSENTRY="False"
+            ;;
+        s)
+            RUNPARSER="False"
+            ;;
+        b)
+            LDSIBASE=${OPTARG}
+            ;;
+        e)
+            ENVBASE=${OPTARG}
+            ;;
+        *)
+            usage
+            exit 0
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -d ${ENVBASE} ]; then
+    source "${ENVBASE}/bin/activate"
+else
+    echo "LDSI env directory ${ENVBASE} not found."
+    exit 1
+fi
+
+if [ -d $LDSIBASE ]; then
+    cd "${LDSIBASE}"
+else
+    echo "LDSI base directory ${LDSIBASE} not found."
+fi
+
+if [ $STARTING ]; then
+    rm -rf "${ENVBASE}/run"
+    mkdir "${ENVBASE}/run"
+    if [ -f ${PIDFILE} ]; then
+        echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
+    else
+        python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
+        echo -n "$! " >> ${PIDFILE}
+    fi
+fi
+
+if [ $STOPPING ]; then
+    if [ -f ${PIDFILE} ]; then
+        PIDLIST=`cat ${PIDFILE}`
+        for PID in ${PIDLIST[@]}; do
+            kill ${PID}
+        done
+        rm -f ${PIDFILE}
+    else
+        echo "ldsi daemon not running (no PID file)."
+    fi
+fi
+
+if [ $RESTARTING ]; then
+    if [ -f ${PIDFILE} ]; then
+        PIDLIST=`cat ${PIDFILE}`
+        for PID in ${PIDLIST[@]}; do
+            kill -1 ${PID}
+        done
+    else
+        echo "ldsi daemon not running (no PID file)."
+    fi
+fi
+
+if [ $CLEANING ]; then
+    if [ $CLEANINGLOCAL ]; then
+        python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
+    else
+        python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
+    fi
+fi

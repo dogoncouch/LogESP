@@ -76,7 +76,9 @@ make new-db
 - Update username, password
 - Update file permissions
 ```
+chgrp www-data config/db.conf
 chmod 640 config/db.conf
+chmod 640 config/parser.conf
 ```
 
 ### Edit config/parser.conf
@@ -116,7 +118,7 @@ Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with y
 ## Edit rc.local
 - Add the following:
 ```
-/opt/ldsi/ldsi/start.sh -b /opt/ldsi/ldsi -e /opt/ldsi >> /dev/null &
+/opt/ldsi/ldsi/scripts/ldsi start
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
 ```
 
