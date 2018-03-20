@@ -1,5 +1,5 @@
-# sqlite database file
-db.sqlite3
+# Temporary files
+tmp/*
 
 # Vim swap files
 *.swp

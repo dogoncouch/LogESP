@@ -11,6 +11,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from config.settings import SECRET_KEY, DEBUG, ALLOWED_HOSTS
+from config.settings import LANGUAGE_CODE, TIME_ZONE
+try:
+    from config.settings import EMAIL_BACKEND, EMAIL_USE_TLS
+    from config.settings import EMAIL_HOST, EMAIL_PORT
+    from config.settings import EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
+    from config.settings import EMAIL_ALERT_FROM_ADDRESS
+except ImportError: pass
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,24 +26,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v2oem$sm5mtfz4n8=t)c37&y^3=c+)jxl2hf3ws$7(#eevpw+)'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = []
-
-# Email settings
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_USE_TLS = True
-#EMAIL_HOST = 'smtp.example.com'
-#EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'ldsiserver@example.com'
-#EMAIL_HOST_PASSWORD = 'BIGSECRET'
-#EMAIL_ALERT_FROM_ADDRESS = 'noreply@example.com'
-
 
 # Application definition
 
@@ -128,13 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 
