@@ -107,7 +107,6 @@ class LimitSentry:
                     msg = 'LDSI parser thread for ' + filename + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
-                if dbtries == 0:
                 sleep(0.2)
         if e:
             self.lasteventid = e.id
