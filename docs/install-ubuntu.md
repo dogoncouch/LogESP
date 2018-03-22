@@ -93,7 +93,7 @@ ln -s /opt/ldsi/ldsi/scripts/ldsi /usr/local/bin
 ### Add ldsid User
 ```
 useradd -r -d /opt/ldsi/ldsi -s /sbin/nologin -U ldsid
-chgrp ldsid /opt/ldsi/ldsi/run/ldsid
+chgrp -R ldsid /opt/ldsid/ldsid
 ```
 
 ## Rsyslog Setup
@@ -128,15 +128,14 @@ Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with y
 
 ### Set PID File Permissions
 ```
-mkdir /opt/ldsi/ldsi/run
 touch /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
 chmod 664 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
+```
 
 ## Edit rc.local
 - Add the following:
 ```
 su -s "/bin/bash" -c "/opt/ldsi/ldsi/scripts/ldsi start" ldsid
-/opt/ldsi/ldsi/scripts/ldsi start
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
 ```
 
