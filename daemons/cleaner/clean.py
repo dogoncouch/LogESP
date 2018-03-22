@@ -28,15 +28,123 @@ from siem.models import LogEvent, RuleEvent
 def clean(local=False):
     """Delete EOL events"""
     if local:
-        logevents = LogEvent.objects.filter(
-                eol_date_local__lte=timezone.localtime(timezone.now()).date())
-        ruleevents = RuleEvent.objects.filter(
-                eol_date_local__lte=timezone.localtime(timezone.now()).date())
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                logevents = LogEvent.objects.filter(
+                        eol_date_local__lte=timezone.localtime(
+                            timezone.now()).date())
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                ruleevents = RuleEvent.objects.filter(
+                        eol_date_local__lte=timezone.localtime(
+                            timezone.now()).date())
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)
     else:
-        logevents = LogEvent.objects.filter(
-                eol_date_backup__lte=timezone.localtime(timezone.now()).date())
-        ruleevents = RuleEvent.objects.filter(
-                eol_date_backup__lte=timezone.localtime(timezone.now()).date())
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                logevents = LogEvent.objects.filter(
+                        eol_date_backup__lte=timezone.localtime(
+                            timezone.now()).date())
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                ruleevents = RuleEvent.objects.filter(
+                        eol_date_backup__lte=timezone.localtime(
+                            timezone.now()).date())
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)
     
-    for e in logevents: e.delete()
-    for e in ruleevents: e.delete()
+    for e in logevents:
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                e.delete()
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)
+    for e in ruleevents:
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                e.delete()
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)

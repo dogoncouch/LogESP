@@ -40,12 +40,6 @@ class ParseCore:
         self.conf = config
         self.threads = []
         syslog.openlog(facility=syslog.LOG_DAEMON)
-        #signal.signal(signal.SIGTERM, self.sigterm_handler)
-
-
-    #def sigterm_handler(self, signal, frame):
-    #    """Exit cleanly on sigterm"""
-    #    exit(0)
 
 
     def get_config(self):

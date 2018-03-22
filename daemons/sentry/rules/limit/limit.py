@@ -56,18 +56,23 @@ class LimitSentry:
     def get_first_logevent(self):
         """Get the starting log event"""
         connsuccess = False
+        dbtries = 20
         while not connsuccess:
             try:
                 e = LogEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + str(err)
-                syslog.syslog(syslog.LOG_ERR, msg)
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
                 sleep(0.2)
         if e:
             self.lasteventid = e.id
             connsuccess = False
+            dbtries = 20
             while not connsuccess:
                 try:
                     erange = LogEvent.objects.filter(
@@ -75,9 +80,12 @@ class LimitSentry:
                                 timezone.now()) - self.timeint)
                     connsuccess = True
                 except Exception as err:
-                    msg = 'LDSI sentry thread for ' + self.rule.name + \
-                            ' got db error. Error: ' + str(err)
-                    syslog.syslog(syslog.LOG_ERR, msg)
+                    if dbtries == 0:
+                        dbtries = 20
+                        msg = 'LDSI parser thread for ' + filename + \
+                                ' got 20 db errors. Error: ' + str(err)
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                    dbtries -= 1
                     sleep(0.2)
             if len(erange) != 0:
                 self.lasteventid = erange.first().id - 1
@@ -87,14 +95,18 @@ class LimitSentry:
     def get_last_logevent(self):
         """Set the last event id"""
         connsuccess = False
+        dbtries = 20
         while not connsuccess:
             try:
                 e = LogEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + str(err)
-                syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                if dbtries == 0:
                 sleep(0.2)
         if e:
             self.lasteventid = e.id
@@ -104,18 +116,23 @@ class LimitSentry:
     def get_first_ruleevent(self):
         """Get the starting log event"""
         connsuccess = False
+        dbtries = 20
         while not connsuccess:
             try:
                 e = RuleEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + str(err)
-                syslog.syslog(syslog.LOG_ERR, msg)
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
                 sleep(0.2)
         if e:
             self.lasteventid = e.id
             connsuccess = False
+            dbtries = 20
             while not connsuccess:
                 try:
                     erange = RuleEvent.objects.filter(
@@ -123,9 +140,12 @@ class LimitSentry:
                                 timezone.now()) - self.timeint)
                     connsuccess = True
                 except Exception as err:
-                    msg = 'LDSI sentry thread for ' + self.rule.name + \
-                            ' got db error. Error: ' + str(err)
-                    syslog.syslog(syslog.LOG_ERR, msg)
+                    if dbtries == 0:
+                        dbtries = 20
+                        msg = 'LDSI parser thread for ' + filename + \
+                                ' got 20 db errors. Error: ' + str(err)
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                    dbtries -= 1
                     sleep(0.2)
             if len(erange) != 0:
                 self.lasteventid = erange.first().id - 1
@@ -135,14 +155,18 @@ class LimitSentry:
     def get_last_ruleevent(self):
         """Set the last event id"""
         connsuccess = False
+        dbtries = 20
         while not connsuccess:
             try:
                 e = RuleEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + str(err)
-                syslog.syslog(syslog.LOG_ERR, msg)
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
                 sleep(0.2)
         if e:
             self.lasteventid = e.id
@@ -209,6 +233,7 @@ class LimitSentry:
                 backuplifespan = self.rule.backup_lifespan_days
                 t = self.rule.time_int
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         self.rule = LimitRule.objects.get(name=self.rule.name)
@@ -218,9 +243,12 @@ class LimitSentry:
                                 ' exiting. Rule no longer exists.'
                         exit(0)
                     except Exception:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
                 if self.rule.time_int != t:
                     self.timeint = timedelta(minutes=self.rule.time_int)
@@ -324,6 +352,7 @@ class LimitSentry:
         if self.justfired:
             if self.rule.event_type:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = LogEvent.objects.filter(
@@ -346,12 +375,16 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
             else:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = LogEvent.objects.filter(
@@ -373,14 +406,18 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
         else:        
             startdatestamp = timezone.localtime(timezone.now()) - self.timeint
             if self.rule.event_type:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = LogEvent.objects.filter(
@@ -403,12 +440,16 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
             else:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = LogEvent.objects.filter(
@@ -430,9 +471,12 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
 
         if len(e) == 0:
@@ -480,34 +524,46 @@ class LimitSentry:
                 event.source_host_count = numsourcehosts
                 event.dest_host_count = numdesthosts
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         event.source_ids_log.set(list(e))
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
@@ -537,6 +593,7 @@ class LimitSentry:
         if self.justfired:
             if self.rule.event_type:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = RuleEvent.objects.filter(
@@ -547,12 +604,16 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
             else:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = RuleEvent.objects.filter(
@@ -562,15 +623,19 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
         else:
             startdatestamp = timezone.localtime(
                     timezone.now()) - self.timeint
             if self.rule.event_type:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = RuleEvent.objects.filter(
@@ -581,12 +646,16 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
             else:
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         e = RuleEvent.objects.filter(
@@ -596,9 +665,12 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
 
         if len(e) == 0:
@@ -628,34 +700,47 @@ class LimitSentry:
                         float(self.rule.severity_modifier)))
                 event.message = self.rule.message
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         event.source_ids_rule.set(list(e))
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        dbtries -= 1
                         sleep(0.2)
                 connsuccess = False
+                dbtries = 20
                 while not connsuccess:
                     try:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
-                                ' got db error. Error: ' + str(err)
-                        syslog.syslog(syslog.LOG_ERR, msg)
+                        if dbtries == 0:
+                            dbtries = 20
+                            msg = 'LDSI parser thread for ' + filename + \
+                                    ' got 20 db errors. Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                            dbtries = 20
+                        dbtries -= 1
                         sleep(0.2)
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:

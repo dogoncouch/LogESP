@@ -47,7 +47,24 @@ class SentryCore:
 
     def get_rules(self):
         """Get rules from tables"""
-        rules = LimitRule.objects.all()
+        connsuccess = False
+        dbtries = 20
+        while not connsuccess:
+            try:
+                rules = LimitRule.objects.all()
+                connsuccess = True
+            except LimitRule.DoesNotExist:
+                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        ' exiting. Rule no longer exists.'
+                exit(0)
+            except Exception:
+                if dbtries == 0:
+                    dbtries = 20
+                    msg = 'LDSI parser thread for ' + filename + \
+                            ' got 20 db errors. Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                dbtries -= 1
+                sleep(0.2)
         for r in rules:
             if not r.id in self.rules:
                 self.newrules.append(r)
