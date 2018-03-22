@@ -69,9 +69,7 @@ while getopts ":hvlpsb:e:" o; do
             exit 0
             ;;
         v)
-            VERSION=`python manage.py shell -c "import ldsi; print(ldsi.__version__)"`
-            echo "${0##*/}-$VERSION"
-            exit 0
+            VERSIONCHECK=1
             ;;
         l)
             CLEANLOCAL=1
@@ -96,7 +94,7 @@ while getopts ":hvlpsb:e:" o; do
 done
 shift $((OPTIND-1))
 
-PIDFILE="${LDSIBASE}/run/ldsid/ldsi.pid"
+PIDFILE="${LDSIBASE}/run/ldsi.pid"
 
 if [ -d "${ENVBASE}" ]; then
     source "${ENVBASE}/bin/activate"
@@ -112,10 +110,13 @@ else
     exit 1
 fi
 
+if [ $VERSIONCHECK ]; then
+    VERSION=`python manage.py shell -c "import ldsi; print(ldsi.__version__)"`
+    echo "${0##*/}-$VERSION"
+    exit 0
+fi
+
 if [ $STARTING ]; then
-    if ! [ -d "${LDSIBASE}/run/ldsid" ]; then
-        mkdir -p "${LDSIBASE}/run/ldsid"
-    fi
     if [ -f "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
     else
@@ -143,9 +144,6 @@ elif [ $RESTARTING ]; then
         rm -f "${PIDFILE}"
     fi
     sleep 0.5
-    if ! [ -d "${LDSIBASE}/run/ldsid" ]; then
-        mkdir "${LDSIBASE}/run/ldsid"
-    fi
     python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
     echo -n "$! " >> "${PIDFILE}"
 
