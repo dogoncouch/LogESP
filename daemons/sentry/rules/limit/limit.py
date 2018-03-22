@@ -102,6 +102,7 @@ class LimitSentry:
                 connsuccess = True
             except Exception as err:
                 dbtries -= 1
+                if dbtries == 0:
                     dbtries = 20
                     msg = 'LDSI parser thread for ' + filename + \
                             ' got 20 db errors. Error: ' + str(err)
