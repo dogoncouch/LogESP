@@ -85,6 +85,11 @@ chmod 640 config/parser.conf
 - Uncomment necessary files
 - Add more files, if necessary
 
+### Link ldsi daemon to /usr/local/bin
+```
+ln -s /opt/ldsi/ldsi/scripts/ldsi /usr/local/bin
+```
+
 ## Rsyslog Setup
 ### Place Files
 ```
