@@ -96,7 +96,7 @@ while getopts ":hvlpsb:e:" o; do
 done
 shift $((OPTIND-1))
 
-PIDFILE="${LDSIBASE}/run/ldsi.pid"
+PIDFILE="${LDSIBASE}/run/ldsid/ldsi.pid"
 
 if [ -d "${ENVBASE}" ]; then
     source "${ENVBASE}/bin/activate"
@@ -113,8 +113,8 @@ else
 fi
 
 if [ $STARTING ]; then
-    if ! [ -d "${LDSIBASE}/run" ]; then
-        mkdir "${LDSIBASE}/run"
+    if ! [ -d "${LDSIBASE}/run/ldsid" ]; then
+        mkdir -p "${LDSIBASE}/run/ldsid"
     fi
     if [ -f "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
@@ -143,8 +143,8 @@ elif [ $RESTARTING ]; then
         rm -f "${PIDFILE}"
     fi
     sleep 0.5
-    if ! [ -d "${LDSIBASE}/run" ]; then
-        mkdir "${LDSIBASE}/run"
+    if ! [ -d "${LDSIBASE}/run/ldsid" ]; then
+        mkdir "${LDSIBASE}/run/ldsid"
     fi
     python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
     echo -n "$! " >> "${PIDFILE}"

@@ -90,6 +90,11 @@ chmod 640 config/parser.conf
 ln -s /opt/ldsi/ldsi/scripts/ldsi /usr/local/bin
 ```
 
+### Add ldsid User
+```
+useradd -r -d /opt/ldsi/ldsi -s /sbin/nologin -U ldsid
+```
+
 ## Rsyslog Setup
 ### Place Files
 ```
