@@ -120,6 +120,12 @@ In a production environment, use SSL certificates signed by your CA.
 ### Set Server Name
 Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
 
+### Set PID File Permissions
+```
+mkdir /opt/ldsi/ldsi/run
+touch /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
+chmod 664 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
+
 ## Edit rc.local
 - Add the following:
 ```
