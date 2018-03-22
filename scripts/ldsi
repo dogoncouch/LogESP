@@ -97,14 +97,14 @@ while getopts ":hvlpsb:e:" o; do
 done
 shift $((OPTIND-1))
 
-if [ -d ${ENVBASE} ]; then
+if [ -d "${ENVBASE}" ]; then
     source "${ENVBASE}/bin/activate"
 else
     echo "LDSI env directory ${ENVBASE} not found."
     exit 1
 fi
 
-if [ -d $LDSIBASE ]; then
+if [ -d "$LDSIBASE" ]; then
     cd "${LDSIBASE}"
 else
     echo "LDSI base directory ${LDSIBASE} not found."
@@ -113,35 +113,40 @@ fi
 if [ $STARTING ]; then
     rm -rf "${ENVBASE}/run"
     mkdir "${ENVBASE}/run"
-    if [ -f ${PIDFILE} ]; then
+    if [ -f "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
     else
         python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
-        echo -n "$! " >> ${PIDFILE}
+        echo -n "$! " >> "${PIDFILE}"
     fi
 fi
 
 if [ $STOPPING ]; then
-    if [ -f ${PIDFILE} ]; then
-        PIDLIST=`cat ${PIDFILE}`
+    if [ -f "${PIDFILE}" ]; then
+        PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
             kill ${PID}
         done
-        rm -f ${PIDFILE}
+        rm -f "${PIDFILE}"
     else
         echo "ldsi daemon not running (no PID file)."
     fi
 fi
 
 if [ $RESTARTING ]; then
-    if [ -f ${PIDFILE} ]; then
-        PIDLIST=`cat ${PIDFILE}`
+    if [ -f "${PIDFILE}" ]; then
+        PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
-            kill -1 ${PID}
+            kill ${PID}
         done
-    else
-        echo "ldsi daemon not running (no PID file)."
+        rm -f "${PIDFILE}"
     fi
+    sleep 0.5
+    if ! [ -d "${ENVBASE}/run" ]; then
+        mkdir "${ENVBASE}/run"
+    fi
+    python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
+    echo -n "$! " >> "${PIDFILE}"
 fi
 
 if [ $CLEANING ]; then
