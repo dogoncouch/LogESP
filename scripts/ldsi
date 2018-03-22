@@ -29,7 +29,6 @@ RUNPARSER="True"
 RUNSENTRY="True"
 LDSIBASE="/opt/ldsi/ldsi"
 ENVBASE="/opt/ldsi"
-PIDFILE="/opt/ldsi/run/ldsi.pid"
 
 usage() {
     echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-l] [-p|-s] [-b <ldsi-base>] [-e <env-base>]"
@@ -97,6 +96,8 @@ while getopts ":hvlpsb:e:" o; do
 done
 shift $((OPTIND-1))
 
+PIDFILE="${LDSIBASE}/run/ldsi.pid"
+
 if [ -d "${ENVBASE}" ]; then
     source "${ENVBASE}/bin/activate"
 else
@@ -108,20 +109,21 @@ if [ -d "$LDSIBASE" ]; then
     cd "${LDSIBASE}"
 else
     echo "LDSI base directory ${LDSIBASE} not found."
+    exit 1
 fi
 
 if [ $STARTING ]; then
-    rm -rf "${ENVBASE}/run"
-    mkdir "${ENVBASE}/run"
+    if ! [ -d "${LDSIBASE}/run" ]; then
+        mkdir "${LDSIBASE}/run"
+    fi
     if [ -f "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
     else
         python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
         echo -n "$! " >> "${PIDFILE}"
     fi
-fi
 
-if [ $STOPPING ]; then
+elif [ $STOPPING ]; then
     if [ -f "${PIDFILE}" ]; then
         PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
@@ -131,9 +133,8 @@ if [ $STOPPING ]; then
     else
         echo "ldsi daemon not running (no PID file)."
     fi
-fi
 
-if [ $RESTARTING ]; then
+elif [ $RESTARTING ]; then
     if [ -f "${PIDFILE}" ]; then
         PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
@@ -142,14 +143,13 @@ if [ $RESTARTING ]; then
         rm -f "${PIDFILE}"
     fi
     sleep 0.5
-    if ! [ -d "${ENVBASE}/run" ]; then
-        mkdir "${ENVBASE}/run"
+    if ! [ -d "${LDSIBASE}/run" ]; then
+        mkdir "${LDSIBASE}/run"
     fi
     python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
     echo -n "$! " >> "${PIDFILE}"
-fi
 
-if [ $CLEANING ]; then
+elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
         python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
     else
