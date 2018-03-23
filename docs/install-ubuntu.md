@@ -63,9 +63,10 @@ useradd -r -d /opt/ldsi -s /sbin/nologin -U ldsid
 ```
 
 ### Set Up Static Files, Database
-- Collect static files, set up database:
+- Set up database, collect static files:
 ```
 make new-db
+make static
 ```
 
 ### Edit config/settings.py
@@ -75,11 +76,6 @@ make new-db
 ### Edit config/db.conf
 - Update username, password
 - Update file permissions
-```
-chgrp www-data config/db.conf
-chmod 640 config/db.conf
-chmod 640 config/parser.conf
-```
 
 ### Edit config/parser.conf
 - Uncomment necessary files
@@ -97,7 +93,7 @@ chown ldsid.www-data /opt/ldsi/config/db.conf
 chmod 640 /opt/ldsi/config/db.conf
 chmod 640 /opt/ldsi/config/parser.conf
 chown ldsid.www-data /opt/ldsi/run
-chmod 660 /opt/ldsi/run
+chmod 664 /opt/ldsi/run
 ```
 
 ## Rsyslog Setup
