@@ -248,6 +248,7 @@ class LimitSentry:
                     except LimitRule.DoesNotExist:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
                                 ' exiting. Rule no longer exists.'
+                        syslog.syslog(syslog.LOG_NOTICE, msg)
                         exit(0)
                     except Exception:
                         if dbtries == 0:

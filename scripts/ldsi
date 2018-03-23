@@ -105,7 +105,7 @@ PIDFILE="${LDSIBASE}/run/ldsi.pid"
 #fi
 
 if [ -d "${LDSIBASE}" ]; then
-    if [ -f "${LDSIBASE}/bin/activate"]; then
+    if [ -f "${LDSIBASE}/bin/activate" ]; then
         source "${LDSIBASE}/bin/activate"
     else
         echo "LDSI virtual env at ${LDSIBASE}/bin/activate not found"
