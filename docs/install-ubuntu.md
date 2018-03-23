@@ -41,7 +41,7 @@ FLUSH PRIVILEGES;
 exit
 ```
 
-## Virtual Environment
+## LDSI Setup
 ### Clone LDSI
 ```
 cd /opt
@@ -54,14 +54,14 @@ cd ldsi
 cd /opt
 python3 -m venv .
 source bin/activate
-```
-
-### Virtual env programs
-```
 pip install django mysqlclient uwsgi
 ```
 
-## LDSI Setup
+### Add ldsid User
+```
+useradd -r -d /opt/ldsi -s /sbin/nologin -U ldsid
+```
+
 ### Set Up Static Files, Database
 - Collect static files, set up database:
 ```
@@ -90,19 +90,14 @@ chmod 640 config/parser.conf
 ln -s /opt/ldsi/scripts/ldsi /usr/local/bin
 ```
 
-### Add ldsid User
-```
-useradd -r -d /opt/ldsi -s /sbin/nologin -U ldsid
-```
-
 ### Update Permissions
 ```
-chgrp -R ldsid /opt/ldsid
-chown ldsid.www-data /opt/ldsid/config/db.conf
-chmod 640 /opt/ldsid/config/db.conf
-chmod 640 /opt/ldsid/config/parser.conf
-chown ldsid.www-data /opt/ldsid/run
-chmod 660 /opt/ldsid/run
+chgrp -R ldsid /opt/ldsi
+chown ldsid.www-data /opt/ldsi/config/db.conf
+chmod 640 /opt/ldsi/config/db.conf
+chmod 640 /opt/ldsi/config/parser.conf
+chown ldsid.www-data /opt/ldsi/run
+chmod 660 /opt/ldsi/run
 ```
 
 ## Rsyslog Setup
