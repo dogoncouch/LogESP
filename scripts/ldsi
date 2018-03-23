@@ -111,9 +111,9 @@ else
 fi
 
 if [ $VERSIONCHECK ]; then
-    VERSION=`python manage.py shell -c "import ldsi; print(ldsi.__version__)"`
+    VERSION=`python "${LDISBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"`
     echo "${0##*/}-$VERSION"
-    exit 0
+    exit 0	
 fi
 
 if [ $STARTING ]; then
