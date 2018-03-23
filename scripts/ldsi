@@ -28,7 +28,6 @@
 RUNPARSER="True"
 RUNSENTRY="True"
 LDSIBASE="/opt/ldsi"
-#ENVBASE="/opt/ldsi"
 
 usage() {
     echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-l] [-p|-s] [-b <ldsi-base>] [-e <env-base>]"
@@ -54,6 +53,10 @@ case "${1}" in
         ;;
     restart)
         RESTARTING=1
+        shift
+        ;;
+    status)
+        STATUSCHECK=1
         shift
         ;;
     clean)
@@ -84,9 +87,6 @@ while getopts ":hvlpsb:" o; do
         b)
             LDSIBASE=${OPTARG}
             ;;
-        #e)
-        #    ENVBASE=${OPTARG}
-        #    ;;
         *)
             usage
             exit 0
@@ -96,13 +96,6 @@ done
 shift $((OPTIND-1))
 
 PIDFILE="${LDSIBASE}/run/ldsi.pid"
-
-#if [ -d "${ENVBASE}" ]; then
-#    source "${ENVBASE}/bin/activate"
-#else
-#    echo "LDSI env directory ${ENVBASE} not found."
-#    exit 1
-#fi
 
 if [ -d "${LDSIBASE}" ]; then
     if [ -f "${LDSIBASE}/bin/activate" ]; then
@@ -116,18 +109,17 @@ else
     exit 1
 fi
 
-if [ $VERSIONCHECK ]; then
-    VERSION=`python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"`
-    echo "${0##*/}-$VERSION"
-    exit 0	
-fi
-
 if [ $STARTING ]; then
     if [ -f "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
     else
-        python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
-        echo -n "$! " >> "${PIDFILE}"
+        read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LDSIPROC} ]; then
+            echo "LDSI already running at PID ${LDSIPROC}. Stop first."
+        else
+            python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
+            echo -n "$! " >> "${PIDFILE}"
+        fi
     fi
 
 elif [ $STOPPING ]; then
@@ -138,7 +130,12 @@ elif [ $STOPPING ]; then
         done
         rm -f "${PIDFILE}"
     else
-        echo "ldsi daemon not running (no PID file)."
+        read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LDSIPROC} ]; then
+            kill "${LDSIPROC}"
+        else
+            echo "ldsi daemon not running."
+        fi
     fi
 
 elif [ $RESTARTING ]; then
@@ -148,6 +145,14 @@ elif [ $RESTARTING ]; then
             kill ${PID}
         done
         rm -f "${PIDFILE}"
+    else
+        read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LDSIPROC} ]; then
+            kill "${LDSIPROC}"
+        else
+            echo "ldsi daemon not running"
+            exit(1)
+        fi
     fi
     sleep 0.5
     python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
@@ -159,4 +164,27 @@ elif [ $CLEANING ]; then
     else
         python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
     fi
+
+elif [ $STATUSCHECK ]; then
+    echo "=== ldsi daemon ==="
+    if [ -f ${PIDFILE} ]; then
+        PIDLIST=`cat "${PIDFILE}"`
+        for PID in ${PIDLIST[@]}; do
+            echo "PID on file: $(cat "${PIDFILE}")"
+        done
+    else
+        echo "No PID on file."
+    fi
+    read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
+    if [ ${LDSIPROC} ]; then
+        echo "Running PID: ${LDSIPROC}"
+    else
+        echo "No PID running."
+    fi
+
+elif [ $VERSIONCHECK ]; then
+    VERSION=`python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"`
+    echo "${0##*/}-$VERSION"
+    exit 0	
+
 fi
