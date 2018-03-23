@@ -19,7 +19,7 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
 
 ## Requirements
-On small home networks, LDSI can be run on an ubuntu server virtual machine with less than half of a processor, 1.5G of memory, and 5G of disk space.
+On small home networks, LDSI can be run on an ubuntu server virtual machine with less than half of a processor, 1.5G of memory, and 8G of disk space.
 ```
 apt update ; apt upgrade
 apt install build-essential python3-dev python3-venv libmysqlclient-dev mariadb-server nginx ntp
