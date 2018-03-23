@@ -7,7 +7,6 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 
 - [Requirements](#requirements)
 - [MariaDB Setup](#mariadb-setup)
-- [Virtual Environment](#virtual-environment)
 - [LDSI Setup](#ldsi-setup)
 - [Rsyslog Setup](#rsyslog-setup)
 - [Nginx Setup](#nginx-setup)
