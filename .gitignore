@@ -8,11 +8,12 @@ tmp/*
 blah.*
 
 # Virtual environment
-bin/*
+bin/
 lib64
 pip-selfcheck.json
 pyvenv.cfg
 share/
+run/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
