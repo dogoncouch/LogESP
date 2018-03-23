@@ -7,6 +7,13 @@ tmp/*
 # dogoncouch's badly named temporary files
 blah.*
 
+# Virtual environment
+bin/*
+lib64
+pip-selfcheck.json
+pyvenv.cfg
+share/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

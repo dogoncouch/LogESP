@@ -27,8 +27,8 @@
 # Set defaults:
 RUNPARSER="True"
 RUNSENTRY="True"
-LDSIBASE="/opt/ldsi/ldsi"
-ENVBASE="/opt/ldsi"
+LDSIBASE="/opt/ldsi"
+#ENVBASE="/opt/ldsi"
 
 usage() {
     echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-l] [-p|-s] [-b <ldsi-base>] [-e <env-base>]"
@@ -40,7 +40,7 @@ usage() {
     echo "  -p                      Run parser only (no sentry)"
     echo "  -s                      Run sentry only (no parser)"
     echo "  -b <ldsi-base>          Set the LDSI base directory"
-    echo "  -e <env-base>           Set a virtual environment"
+    #echo "  -e <env-base>           Set a virtual environment"
 }
 
 case "${1}" in
@@ -62,7 +62,8 @@ case "${1}" in
         ;;
 esac
 
-while getopts ":hvlpsb:e:" o; do
+#while getopts ":hvlpsb:e:" o; do
+while getopts ":hvlpsb:" o; do
     case "${o}" in
         h)
             usage
@@ -83,9 +84,9 @@ while getopts ":hvlpsb:e:" o; do
         b)
             LDSIBASE=${OPTARG}
             ;;
-        e)
-            ENVBASE=${OPTARG}
-            ;;
+        #e)
+        #    ENVBASE=${OPTARG}
+        #    ;;
         *)
             usage
             exit 0
@@ -96,22 +97,26 @@ shift $((OPTIND-1))
 
 PIDFILE="${LDSIBASE}/run/ldsi.pid"
 
-if [ -d "${ENVBASE}" ]; then
-    source "${ENVBASE}/bin/activate"
-else
-    echo "LDSI env directory ${ENVBASE} not found."
-    exit 1
-fi
+#if [ -d "${ENVBASE}" ]; then
+#    source "${ENVBASE}/bin/activate"
+#else
+#    echo "LDSI env directory ${ENVBASE} not found."
+#    exit 1
+#fi
 
-if [ -d "$LDSIBASE" ]; then
-    cd "${LDSIBASE}"
+if [ -d "${LDSIBASE}" ]; then
+    if [ -f "${LDSIBASE}/bin/activate"]; then
+        source "${LDSIBASE}/bin/activate"
+    else
+        echo "LDSI virtual env at ${LDSIBASE}/bin/activate not found"
+    fi
 else
     echo "LDSI base directory ${LDSIBASE} not found."
     exit 1
 fi
 
 if [ $VERSIONCHECK ]; then
-    VERSION=`python "${LDISBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"`
+    VERSION=`python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"`
     echo "${0##*/}-$VERSION"
     exit 0	
 fi
@@ -120,7 +125,7 @@ if [ $STARTING ]; then
     if [ -f "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
     else
-        python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
+        python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
         echo -n "$! " >> "${PIDFILE}"
     fi
 
@@ -144,12 +149,12 @@ elif [ $RESTARTING ]; then
         rm -f "${PIDFILE}"
     fi
     sleep 0.5
-    python manage.py shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
+    python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
     echo -n "$! " >> "${PIDFILE}"
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
-        python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
+        python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
     else
         python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
     fi

@@ -42,11 +42,17 @@ exit
 ```
 
 ## Virtual Environment
+### Clone LDSI
+```
+cd /opt
+git clone https://github.com/dogoncouch/ldsi.git
+cd ldsi
+```
+
 ### Create virtual env
 ```
 cd /opt
-python3 -m venv ldsi
-cd ldsi
+python3 -m venv .
 source bin/activate
 ```
 
@@ -56,12 +62,6 @@ pip install django mysqlclient uwsgi
 ```
 
 ## LDSI Setup
-### Clone LDSI
-```
-git clone https://github.com/dogoncouch/ldsi.git
-cd ldsi
-```
-
 ### Set Up Static Files, Database
 - Collect static files, set up database:
 ```
@@ -87,24 +87,33 @@ chmod 640 config/parser.conf
 
 ### Link ldsi daemon to /usr/local/bin
 ```
-ln -s /opt/ldsi/ldsi/scripts/ldsi /usr/local/bin
+ln -s /opt/ldsi/scripts/ldsi /usr/local/bin
 ```
 
 ### Add ldsid User
 ```
-useradd -r -d /opt/ldsi/ldsi -s /sbin/nologin -U ldsid
-chgrp -R ldsid /opt/ldsid/ldsid
+useradd -r -d /opt/ldsi -s /sbin/nologin -U ldsid
+```
+
+### Update Permissions
+```
+chgrp -R ldsid /opt/ldsid
+chown ldsid.www-data /opt/ldsid/config/db.conf
+chmod 640 /opt/ldsid/config/db.conf
+chmod 640 /opt/ldsid/config/parser.conf
+chown ldsid.www-data /opt/ldsid/run
+chmod 660 /opt/ldsid/run
 ```
 
 ## Rsyslog Setup
 ### Place Files
 ```
-cp /opt/ldsi/ldsi/config/rsyslog/10-server.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/70-cisco.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/71-daemon.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/75-snort.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/77-audit.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
+cp /opt/ldsi/config/rsyslog/10-server.conf /etc/rsyslog.d/
+cp /opt/ldsi/config/rsyslog/70-cisco.conf /etc/rsyslog.d/
+cp /opt/ldsi/config/rsyslog/71-daemon.conf /etc/rsyslog.d/
+cp /opt/ldsi/config/rsyslog/75-snort.conf /etc/rsyslog.d/
+cp /opt/ldsi/config/rsyslog/77-audit.conf /etc/rsyslog.d/
+cp /opt/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
 touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 chown syslog.adm /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 ```
@@ -113,7 +122,7 @@ This configuration uses a UDP server. In a production environment, using a TCP s
 ## Nginx Setup
 ### Create Links
 ```
-ln -s /opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf /etc/nginx/sites-enabled/
+ln -s /opt/ldsi/config/nginx/ldsi_nginx.conf /etc/nginx/sites-enabled/
 ```
 
 ### Create SSL Certificate
@@ -124,19 +133,20 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx
 In a production environment, use SSL certificates signed by your CA.
 
 ### Set Server Name
-Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
+Edit `/opt/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
 
 ### Set PID File Permissions
 ```
-touch /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
-chmod 664 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
+touch /opt/ldsi/run/ldsi-uwsgi-master.pid
+chown www-data.www-data /opt/ldsi/run/ldsi-uwsgi-master.pid
+chmod 644 /opt/ldsi/run/ldsi-uwsgi-master.pid
 ```
 
 ## Edit rc.local
 - Add the following:
 ```
-su -s "/bin/bash" -c "/opt/ldsi/ldsi/scripts/ldsi start" ldsid
-/opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
+su -s "/bin/bash" -c "/opt/ldsi/scripts/ldsi start" ldsid
+/opt/ldsi/bin/uwsgi --ini /opt/ldsi/config/nginx/ldsi_uwsgi.ini
 ```
 
 ## Reboot
