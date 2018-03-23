@@ -64,7 +64,8 @@ class LimitSentry:
             except Exception as err:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
+                    msg = 'LDSI sentry thread for rule ' + \
+                            self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -82,7 +83,8 @@ class LimitSentry:
                 except Exception as err:
                     if dbtries == 0:
                         dbtries = 20
-                        msg = 'LDSI parser thread for ' + filename + \
+                        msg = 'LDSI sentry thread for rule ' + \
+                                self.rule.name + \
                                 ' got 20 db errors. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                     dbtries -= 1
@@ -104,7 +106,8 @@ class LimitSentry:
                 dbtries -= 1
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
+                    msg = 'LDSI sentry thread for rule ' + \
+                            self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(0.2)
@@ -124,7 +127,8 @@ class LimitSentry:
             except Exception as err:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
+                    msg = 'LDSI sentry thread for rule ' + \
+                            self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -142,7 +146,8 @@ class LimitSentry:
                 except Exception as err:
                     if dbtries == 0:
                         dbtries = 20
-                        msg = 'LDSI parser thread for ' + filename + \
+                        msg = 'LDSI sentry thread for rule ' + \
+                                self.rule.name + \
                                 ' got 20 db errors. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
                     dbtries -= 1
@@ -163,7 +168,8 @@ class LimitSentry:
             except Exception as err:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
+                    msg = 'LDSI sentry thread for rule ' + \
+                            self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -236,7 +242,8 @@ class LimitSentry:
                 dbtries = 20
                 while not connsuccess:
                     try:
-                        self.rule = LimitRule.objects.get(name=self.rule.name)
+                        self.rule = LimitRule.objects.get(
+                                name=self.rule.name)
                         connsuccess = True
                     except LimitRule.DoesNotExist:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \
@@ -245,7 +252,8 @@ class LimitSentry:
                     except Exception:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -258,13 +266,15 @@ class LimitSentry:
                         self.locallifespandelta = timedelta(days=36524)
                     else:
                         self.locallifespandelta = \
-                                timedelta(days=self.rule.local_lifespan_days)
+                                timedelta(
+                                        days=self.rule.local_lifespan_days)
                 if self.rule.backup_lifespan_days != backuplifespan:
                     if self.rule.backup_lifespan_days == 0:
                         self.backuplifespandelta = timedelta(days=36524)
                     else:
                         self.backuplifespandelta = \
-                                timedelta(days=self.rule.backup_lifespan_days)
+                                timedelta(
+                                        days=self.rule.backup_lifespan_days)
                 # Check for change in event type:
                 if expectrule:
                     if not self.rule.rule_events:
@@ -290,63 +300,78 @@ class LimitSentry:
         """Check log events based on a rule"""
         
         if self.rule.log_source_filter_regex:
-            logsourcefilter = '.*{}.*'.format(self.rule.log_source_filter_regex)
+            logsourcefilter = '.*{}.*'.format(
+                    self.rule.log_source_filter_regex)
         else:
             logsourcefilter = '.*'
         if self.rule.process_filter_regex:
-            processfilter = '.*{}.*'.format(self.rule.process_filter_regex)
+            processfilter = '.*{}.*'.format(
+                    self.rule.process_filter_regex)
         else:
             processfilter = '.*'
         if self.rule.action_filter_regex:
-            actionfilter = '.*{}.*'.format(self.rule.action_filter_regex)
+            actionfilter = '.*{}.*'.format(
+                    self.rule.action_filter_regex)
         else:
             actionfilter = '.*'
         if self.rule.interface_filter_regex:
-            interfacefilter = '.*{}.*'.format(self.rule.interface_filter_regex)
+            interfacefilter = '.*{}.*'.format(
+                    self.rule.interface_filter_regex)
         else:
             interfacefilter = '.*'
         if self.rule.source_host_filter_regex:
-            sourcehostfilter = '.*{}.*'.format(self.rule.source_host_filter_regex)
+            sourcehostfilter = '.*{}.*'.format(
+                    self.rule.source_host_filter_regex)
         else:
             sourcehostfilter = '.*'
         if self.rule.source_port_filter_regex:
-            sourceportfilter = '.*{}.*'.format(self.rule.source_port_filter_regex)
+            sourceportfilter = '.*{}.*'.format(
+                    self.rule.source_port_filter_regex)
         else:
             sourceportfilter = '.*'
         if self.rule.dest_host_filter_regex:
-            desthostfilter = '.*{}.*'.format(self.rule.dest_host_filter_regex)
+            desthostfilter = '.*{}.*'.format(
+                    self.rule.dest_host_filter_regex)
         else:
             desthostfilter = '.*'
         if self.rule.dest_port_filter_regex:
-            destportfilter = '.*{}.*'.format(self.rule.dest_port_filter_regex)
+            destportfilter = '.*{}.*'.format(
+                    self.rule.dest_port_filter_regex)
         else:
             destportfilter = '.*'
         if self.rule.source_user_filter_regex:
-            sourceuserfilter = '.*{}.*'.format(self.rule.source_user_filter_regex)
+            sourceuserfilter = '.*{}.*'.format(
+                    self.rule.source_user_filter_regex)
         else:
             sourceuserfilter = '.*'
         if self.rule.target_user_filter_regex:
-            targetuserfilter = '.*{}.*'.format(self.rule.target_user_filter_regex)
+            targetuserfilter = '.*{}.*'.format(
+                    self.rule.target_user_filter_regex)
         else:
             targetuserfilter = '.*'
         if self.rule.path_filter_regex:
-            pathfilter = '.*{}.*'.format(self.rule.path_filter_regex)
+            pathfilter = '.*{}.*'.format(
+                    self.rule.path_filter_regex)
         else:
             pathfilter = '.*'
         if self.rule.parameters_filter_regex:
-            parametersfilter = '.*{}.*'.format(self.rule.parameters_filter_regex)
+            parametersfilter = '.*{}.*'.format(
+                    self.rule.parameters_filter_regex)
         else:
             parametersfilter = '.*'
         if self.rule.referrer_filter_regex:
-            referrerfilter = '.*{}.*'.format(self.rule.referrer_filter_regex)
+            referrerfilter = '.*{}.*'.format(
+                    self.rule.referrer_filter_regex)
         else:
             referrerfilter = '.*'
         if self.rule.message_filter_regex:
-            messagefilter = '.*{}.*'.format(self.rule.message_filter_regex)
+            messagefilter = '.*{}.*'.format(
+                    self.rule.message_filter_regex)
         else:
             messagefilter = '.*'
         if self.rule.raw_text_filter_regex:
-            rawtextfilter = '.*{}.*'.format(self.rule.raw_text_filter_regex)
+            rawtextfilter = '.*{}.*'.format(
+                    self.rule.raw_text_filter_regex)
         else:
             rawtextfilter = '.*'
         if self.justfired:
@@ -377,7 +402,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -408,13 +434,15 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
                         sleep(0.2)
         else:        
-            startdatestamp = timezone.localtime(timezone.now()) - self.timeint
+            startdatestamp = timezone.localtime(timezone.now()) - \
+                    self.timeint
             if self.rule.event_type:
                 connsuccess = False
                 dbtries = 20
@@ -442,7 +470,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -473,7 +502,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -532,7 +562,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -546,7 +577,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -560,7 +592,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -606,7 +639,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -625,7 +659,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -648,7 +683,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -667,7 +703,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -708,7 +745,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -722,7 +760,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                         dbtries -= 1
@@ -736,7 +775,8 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI parser thread for ' + filename + \
+                            msg = 'LDSI sentry thread for rule ' + \
+                                    self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
                             dbtries = 20

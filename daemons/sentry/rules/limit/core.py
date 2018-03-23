@@ -60,8 +60,9 @@ class SentryCore:
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI sentry thread for ' + self.rule.name + \
+                            ' got 20 db errors while retrieving rules. ' + \
+                            'Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)

@@ -118,16 +118,18 @@ class LiveParser:
                     e.parsed_on = entry['parsed_on']
                     e.source_path = entry['source_path']
                     connsuccess = False
-                    dbtries = 20
+                    dbtries = 40
                     while not connsuccess:
                         try:
                             e.save()
                             connsuccess = True
                         except Exception as err:
                             if dbtries == 0:
-                                dbtries = 20
+                                dbtries = 40
                                 msg = 'LDSI parser thread for ' + filename + \
-                                        ' got 20 db errors. Error: ' + str(err)
+                                        ' got 40 db errors on event: ' + \
+                                        ourline[:80] + \
+                                        '... Error: ' + str(err)
                                 syslog.syslog(syslog.LOG_ERR, msg)
                             dbtries -= 1
                             sleep(0.2)
