@@ -110,6 +110,7 @@ if [ -d "${LDSIBASE}" ]; then
     else
         echo "LDSI virtual env at ${LDSIBASE}/bin/activate not found"
     fi
+    cd "${LDSIBASE}"
 else
     echo "LDSI base directory ${LDSIBASE} not found."
     exit 1
