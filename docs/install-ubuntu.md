@@ -53,7 +53,7 @@ cd ldsi
 cd /opt
 python3 -m venv .
 source bin/activate
-pip install django mysqlclient uwsgi
+pip install requirements.txt
 ```
 
 ### Add ldsid User
