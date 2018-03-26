@@ -10,7 +10,7 @@ def validate_modifier_range(value):
         raise ValidationError('%s not in 0.1-10 range' % value)
 
 class LogEventParser(models.Model):
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32)
     desc = models.CharField(max_length=200, null=True, blank=True)
     is_builtin = models.BooleanField(default=False, blank=True)
     match_regex = models.CharField(max_length=1024)
@@ -21,9 +21,12 @@ class LogEventParser(models.Model):
             null=True, blank=True)
     def __str__(self):
         return self.name
+    class Meta:
+        permissions = (('view_logeventparser', 'Can view log event parsers'),)
+        unique_together = ('name', 'is_builtin')
 
 class ParseHelper(models.Model):
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32)
     desc = models.CharField(max_length=200, null=True, blank=True)
     is_builtin = models.BooleanField(default=False, blank=True)
     helper_type = models.CharField(max_length=32)
@@ -31,6 +34,9 @@ class ParseHelper(models.Model):
     fields = models.CharField(max_length=512)
     def __str__(self):
         return self.name
+    class Meta:
+        permissions = (('view_logeventparser', 'Can view log event parsers'),)
+        unique_together = ('name', 'is_builtin')
 
 class LogEvent(models.Model):
     parsed_at = models.DateTimeField(6)
@@ -88,7 +94,7 @@ class LogEvent(models.Model):
 
 
 class LimitRule(models.Model):
-    name = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=32)
     desc = models.CharField(max_length=200,
             null=True, blank=True)
     is_builtin = models.BooleanField(default=False, blank=True)
@@ -153,6 +159,7 @@ class LimitRule(models.Model):
         return self.name
     class Meta:
         permissions = (('view_limitrule', 'Can view limit rules'),)
+        unique_together = ('name', 'is_builtin')
 
 
 class RuleEvent(models.Model):
