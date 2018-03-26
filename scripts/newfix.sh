@@ -1,6 +1,10 @@
 #!/bin/sh
 
-rm tmp/*.json
+if ! [ -d tmp ]; then
+    mkdir tmp
+else
+    rm tmp/*.json
+fi
 
 python manage.py dumpdata --indent 2 siem.LimitRule > tmp/example_limit_rules.json
 python manage.py dumpdata --indent 2 siem.LogEventParser > tmp/example_parsers.json
