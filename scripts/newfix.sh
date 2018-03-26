@@ -10,6 +10,10 @@ scripts/clean-fixtures.py tmp/*.json
 
 #sed -i 's/  "is_enabled": true,/  "is_enabled": false,/g' tmp/example_limit_rules.json
 sed -i 's/  "is_enabled": \w+,\n//g' tmp/example_limit_rules.json
+sed -i 's/  "is_builtin": false,/  "is_builtin": true,/g' tmp/example_limit_rules.json
+sed -i 's/  "is_builtin": false,/  "is_builtin": true,/g' tmp/example_parsers.json
+sed -i 's/  "is_builtin": false,/  "is_builtin": true,/g' tmp/example_parse_helpers.json
+
 
 cp -r tmp /home/notroot/
 chown -R notroot.notroot /home/notroot/tmp
