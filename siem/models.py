@@ -91,7 +91,7 @@ class LimitRule(models.Model):
     name = models.CharField(max_length=32, unique=True)
     desc = models.CharField(max_length=200,
             null=True, blank=True)
-    is_builtin = models.BooleanField(default=False)
+    is_builtin = models.BooleanField(default=False, blank=True)
     is_enabled = models.BooleanField(default=True)
     email_alerts = models.BooleanField(default=False)
     alert_users = models.ManyToManyField(User,
