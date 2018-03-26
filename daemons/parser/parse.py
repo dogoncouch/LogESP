@@ -33,7 +33,7 @@ import syslog
 from django.utils import timezone
 #import daemons.parser.parsers
 from daemons.parser.parser import ParseModule
-from siem.models import LogEvent
+from siem.models import LogEvent, LogEventParser, ParseHelper
 from ldsi.settings import TIME_ZONE
 
 class LiveParser:
@@ -53,8 +53,17 @@ class LiveParser:
         
             # Read to the end of the file:
             inputfile.read()
-            
+
+            c = 6000
             while True:
+                if c <= 0:
+                    self.parser = LogEventParser.objects.get(pk=self.parser.id)
+                    self.parser = ParseModule(parseinfo['parser'],
+                            parseinfo['event_type'],
+                            TIME_ZONE,
+                            self.parsepath, self.parsehost,
+                            helpertype=self.helper_type)
+                    c = 6000
                 # Check for a new line:
                 line = inputfile.readline()
         
@@ -143,8 +152,6 @@ class LiveParser:
 
 
     def parse_file(self, parseinfo):
-            #self, filename, parser, eventtype,
-            #locallifespan, backuplifespan, facility):
         """Parse a file into ldsi"""
         self.facility = parseinfo['facility']
         # Set EOL time delta:
@@ -160,11 +167,12 @@ class LiveParser:
                     timedelta(days=parseinfo['backup_lifespan_days'])
         self.parsepath = os.path.abspath(parseinfo['filename'])
         self.parsehost = socket.getfqdn()
+        self.helper_type = parseinfo['helper_type']
         self.parser = ParseModule(parseinfo['parser'],
                 parseinfo['event_type'],
                 TIME_ZONE,
                 self.parsepath, self.parsehost,
-                parsehelpers=parseinfo['parse_helpers'])
+                helpertype=self.helper_type)
         try:
             while True:
                 self.parse_entries(parseinfo['filename'])

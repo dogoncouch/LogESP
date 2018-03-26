@@ -243,7 +243,7 @@ class LimitSentry:
                 while not connsuccess:
                     try:
                         self.rule = LimitRule.objects.get(
-                                name=self.rule.name)
+                                pk=self.rule.id)
                         connsuccess = True
                     except LimitRule.DoesNotExist:
                         msg = 'LDSI sentry thread for ' + self.rule.name + \

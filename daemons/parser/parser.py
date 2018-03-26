@@ -30,7 +30,7 @@ match_regex = '^([A-Z][a-z]{2}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})\s+(\S+)\s+(\S+)\[?
 
 class ParseModule:
     def __init__(self, parser, eventtype, timezone, parsepath,
-            parsehost, parsehelpers=[]):
+            parsehost, helpertype=None):
         """Initialize a parsing module"""
         self.parser = LogEventParser.objects.get(name=parser)
         self.regex_format = re.compile(r'{}'.format(self.parser.match_regex))
@@ -55,10 +55,13 @@ class ParseModule:
             self.backup_fields = None
 
         # Get parse helpers:
-        try:
-            helperobjects = [ParseHelper.objects.get(
-                name=n) for n in parsehelpers]
-        except Exception: helperobjects = []
+        if helpertype:
+            try:
+                helperobjects = ParseHelper.objects.filter(
+                        helper_type=helpertype)
+            except Exception: helperobjects = []
+        else:
+            helperobjects = []
         self.parsehelpers = []
         for h in helperobjects:
             helper = {}

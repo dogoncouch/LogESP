@@ -64,12 +64,10 @@ class ParseCore:
             except Exception:
                 p['parser'] = 'syslog'
             try:
-                helpertype = config.get(sec,
+                p['helper_type'] = config.get(sec,
                         'helper_type')
-                p['parse_helpers'] = ParseHelper.objects.filter(
-                        helper_type=helpertype)
             except Exception:
-                p['parse_helpers'] = []
+                p['helper_type'] = None
             try:
                 p['facility'] = int(config.get(sec, 'facility'))
             except Exception:
@@ -82,10 +80,10 @@ class ParseCore:
         """Run the parser"""
         try:
             self.get_config()
-            for entry in self.plist:
-                thread = Thread(name=entry['filename'],
+            for p in self.plist:
+                thread = Thread(name=p['filename'],
                         target=daemons.parser.parse.start_parse,
-                        args=(entry,))
+                        args=(p,))
                 thread.daemon = True
                 thread.start()
                 self.threads.append(thread)
