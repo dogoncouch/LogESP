@@ -13,6 +13,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Sanity check for entry field lengths, etc.
 - Documentation
 - Event fields for web server logs
+- `ldsi` script for controlling daemons
 
 ### Updated
 - Fixed helper logic for single-field parse helpers
@@ -26,6 +27,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Parser and sentry can now be run separately (distributed environments)
 - Rule events now track source/dest host count
 - Rules and searches use more regular expressions
+- ldsi daemon runs without privileges
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
