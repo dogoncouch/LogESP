@@ -4,6 +4,7 @@
   "fields": {
     "name": "pam_aggr",
     "desc": "PAM aggregated event count",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "PAM (\\d+) more authentication failure",
     "fields": "aggregated_events"
@@ -14,6 +15,7 @@
   "fields": {
     "name": "pam_auth_fields",
     "desc": "PAM authentication source host field.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "rhost=(\\S*)\\s+user=(\\S*)",
     "fields": "source_host,target_user"
@@ -24,6 +26,7 @@
   "fields": {
     "name": "cisco_auth_fields",
     "desc": "Cisco auth log fields.",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "New\\s+(\\S+)\\s+connection\\s+for\\s+user\\s+(\\S+),\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,target_user,source_host,dest_host"
@@ -34,6 +37,7 @@
   "fields": {
     "name": "cisco_aggr",
     "desc": "Cisco aggregated events.",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": ",\\s+aggregated\\s+\\((\\d+)\\)",
     "fields": "aggregated_events"
@@ -44,6 +48,7 @@
   "fields": {
     "name": "cisco_auth_fields_2",
     "desc": "Cisco auth log fields with no user.",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "New\\s+(\\S+)\\s+connection,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "protocol,source_host,dest_host"
@@ -54,6 +59,7 @@
   "fields": {
     "name": "cisco_auth_fields_3",
     "desc": "Cisco auth log fields for accepted CLI session",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "User\\s+CLI\\s+session\\s+for\\s+user\\s+(\\S+)\\s+over\\s+(\\S+)\\s*,\\s+source\\s+(\\S+)\\s+destination\\s+(\\S+)",
     "fields": "target_user,protocol,source_host,dest_host"
@@ -64,6 +70,7 @@
   "fields": {
     "name": "ssh_pubkey_auth",
     "desc": "Fields from ssh initiation with public key.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "Accepted\\s+publickey\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+):",
     "fields": "target_user,source_host,source_port,protocol"
@@ -74,9 +81,10 @@
   "fields": {
     "name": "sudo_fields",
     "desc": "Sudo authentication fields",
+    "is_builtin": true,
     "helper_type": "auth",
-    "match_regex": "(\\S+) : TTY=(\\S+) ; PWD=\\S+ ; USER=(\\S+) ; COMMAND=(.+)$",
-    "fields": "source_user,sessionid,target_user,command"
+    "match_regex": "(\\S+) : TTY=(\\S+) ; PWD=(\\S+) ; USER=(\\S+) ; COMMAND=(.+)$",
+    "fields": "source_user,sessionid,path,target_user,command"
   }
 },
 {
@@ -84,6 +92,7 @@
   "fields": {
     "name": "ssh_disconnect_fields",
     "desc": "Fields from sshd disconnect events.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "isconnecte?d? from (\\S+) port (\\d+)",
     "fields": "source_host,source_port"
@@ -94,6 +103,7 @@
   "fields": {
     "name": "su_session_fields",
     "desc": "SU/sudo auth session user fields",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "session\\s+\\S+\\s+for\\s+user\\s+(\\S+)\\s*b?y?\\s*([^( ]*)",
     "fields": "target_user,source_user"
@@ -104,6 +114,7 @@
   "fields": {
     "name": "ssh_password_auth",
     "desc": "Fields from ssh initiation with a password.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "\\s+password\\s+for\\s+(\\S+)\\s+from\\s+(\\S+)\\s+port\\s+(\\S+)\\s+(\\S+)",
     "fields": "target_user,source_host,source_port,protocol"
@@ -114,6 +125,7 @@
   "fields": {
     "name": "cisco_console_config",
     "desc": "Cisco console configuration event.",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "Configured\\sfrom\\sconsole\\sby\\s(\\S+)\\son\\s(\\S+)\\s\\((\\S+)\\)",
     "fields": "source_user,sessionid,source_host"
@@ -124,6 +136,7 @@
   "fields": {
     "name": "cisco_line_protocol",
     "desc": "Cisco line protocol events.",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "Line protocol on Interface (\\S+),",
     "fields": "interface"
@@ -134,6 +147,7 @@
   "fields": {
     "name": "login_session",
     "desc": "Login session and user.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "New session (\\S+) of user (\\S+)\\.",
     "fields": "sessionid,source_user"
@@ -144,6 +158,7 @@
   "fields": {
     "name": "logout_session",
     "desc": "Logout session id.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "Removed session (\\S+)\\.",
     "fields": "sessionid"
@@ -154,6 +169,7 @@
   "fields": {
     "name": "ssh_connection_closed",
     "desc": "Fields from ssh connection closed.",
+    "is_builtin": true,
     "helper_type": "auth",
     "match_regex": "Connection closed by (\\S+) port (\\S+)",
     "fields": "source_host,source_port"
@@ -164,6 +180,7 @@
   "fields": {
     "name": "cisco_ace",
     "desc": "Cisco access control list log entry.",
+    "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "([a-zA-Z]+\\d+): (\\w+) ACE (\\S+) ([0-9a-zA-Z.:]+)\\(([0-9a-zA-Z]+)\\) -> ([0-9a-zA-Z.:]+)\\(([0-9a-zA-Z]+)\\),\\s?trapped",
     "fields": "interface,command,protocol,source_host,source_port,dest_host,dest_port"
@@ -174,6 +191,7 @@
   "fields": {
     "name": "auditd_basic",
     "desc": "Auditd basic information.",
+    "is_builtin": true,
     "helper_type": "auditd",
     "match_regex": "node=\\S+\\s+type=(\\S+)\\s+msg=audit\\(\\d+\\.\\d+:\\d+\\):\\s+pid=(\\d+)",
     "fields": "action,source_pid"
@@ -184,6 +202,7 @@
   "fields": {
     "name": "auditd_ext",
     "desc": "Auditd extended information.",
+    "is_builtin": true,
     "helper_type": "auditd",
     "match_regex": "msg='op=\\S+\\s+acct=\"(\\S+)\"\\s+exe=\"(\\S+)\"\\s+hostname=(\\S+)\\s+addr=\\S+\\s+terminal=(\\S+)\\s+res=\\S+'",
     "fields": "source_user,command,source_host,sessionid"
@@ -194,6 +213,7 @@
   "fields": {
     "name": "auditd_ext2",
     "desc": "Auditd extended information (2).",
+    "is_builtin": true,
     "helper_type": "auditd",
     "match_regex": "msg='op=\\S+\\s+id=(\\S+)\\s+exe=\"(\\S+)\"\\s+hostname=(\\S+)\\s+addr=\\S+\\s+terminal=(\\S+)\\s+res=\\S+'",
     "fields": "source_user,command,source_host,sessionid"
@@ -204,6 +224,7 @@
   "fields": {
     "name": "auditd_ext3",
     "desc": "Auditd extended information (2).",
+    "is_builtin": true,
     "helper_type": "auditd",
     "match_regex": "uid=\\d+\\s+old-auid=\\d+\\s+auid=(\\d+)\\s+old-ses=\\d+\\s+ses=(\\d+)\\s+res=\\S+",
     "fields": "source_user,sessionid"
@@ -214,9 +235,43 @@
   "fields": {
     "name": "snort_fields",
     "desc": "Snort IDS fields.",
+    "is_builtin": true,
     "helper_type": "snort_ids",
     "match_regex": "\\[[0-9:]+\\]\\s+(\\S+)\\s+.*\\[Classification:\\s+.*\\]\\s+\\[Priority:\\s+\\d+\\]\\s+{\\S+}\\s+(\\S+)\\s+->\\s+(\\S+)",
     "fields": "action,source_host,dest_host"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "msg_repeated_auth",
+    "desc": "Syslog event aggregation.",
+    "is_builtin": true,
+    "helper_type": "auth",
+    "match_regex": "message repeated (\\d+) times:",
+    "fields": "aggregated_events"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "msg_repeated_daemon",
+    "desc": "Syslog event aggregation.",
+    "is_builtin": true,
+    "helper_type": "daemon",
+    "match_regex": "message repeated (\\d+) times:",
+    "fields": "aggregated_events"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "msg_repeated_snort",
+    "desc": "Syslog event aggregation.",
+    "is_builtin": true,
+    "helper_type": "snort_ids",
+    "match_regex": "message repeated (\\d+) times:",
+    "fields": "aggregated_events"
   }
 }
 ]

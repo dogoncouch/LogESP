@@ -4,6 +4,7 @@
   "fields": {
     "name": "syslog",
     "desc": "Standard syslog parser",
+    "is_builtin": true,
     "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
     "backup_match_regex": null,
     "fields": "date_stamp,log_source,source_process,source_pid,message",
@@ -15,6 +16,7 @@
   "fields": {
     "name": "syslognohost",
     "desc": "Standard syslog stamp without a host.",
+    "is_builtin": true,
     "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
     "backup_match_regex": null,
     "fields": "date_stamp,source_process,source_pid,message",
@@ -26,6 +28,7 @@
   "fields": {
     "name": "syslogiso",
     "desc": "Syslog with ISO 8601 timestamp.",
+    "is_builtin": true,
     "match_regex": "^(\\d\\d\\d\\d-?\\d\\d-?\\d\\dT\\d\\d:?\\d\\d:?\\d\\d\\.?\\d*[+-:0-9Z]+)\\s+(\\S+)\\s+([^\\[\\] ]+)\\[?(\\d*)\\]?: (.*)",
     "backup_match_regex": null,
     "fields": "date_stamp,log_source,source_process,source_pid,message",
@@ -37,6 +40,7 @@
   "fields": {
     "name": "cisco_ios",
     "desc": "Cisco log sources with host configured as origin-id.",
+    "is_builtin": true,
     "match_regex": "([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2}\\.?\\d*)\\s+\\S+\\s+\\d+:\\s+(\\S+):\\s+%([a-zA-Z0-9_]+)-(\\d)-([a-zA-Z0-9_]+): (.*)",
     "backup_match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2}\\.?\\d*)\\s+(\\S+)\\s+([^\\[\\]]+)\\s%[a-zA-Z0-9_]+-\\w-([a-zA-Z0-9_]+): (.*)",
     "fields": "date_stamp,log_source,source_process,severity,action,message",
@@ -48,10 +52,23 @@
   "fields": {
     "name": "windows_rsyslog",
     "desc": "Windows rsyslog agent forwarded logs.",
+    "is_builtin": true,
     "match_regex": "^([A-Z][a-z]{2}\\s+\\d{1,2}\\s+\\d{2}:\\d{2}:\\d{2})\\s+(\\S+)\\s+(\\S+)\\s+(.*)",
     "backup_match_regex": null,
     "fields": "date_stamp,log_source,source_process,message",
     "backup_fields": null
+  }
+},
+{
+  "model": "siem.logeventparser",
+  "fields": {
+    "name": "web_access",
+    "desc": "Web access logs.",
+    "is_builtin": true,
+    "match_regex": "^(\\S+)\\s+-\\s+-\\s+\\[(\\S+\\s+[0-9+-]+)\\]\\s+\"(\\S+)\\s+(\\S+)\\s+(\\S+)\"\\s+(\\d+)\\s+(\\d+)\\s+\"(\\S+)\"\\s+\"(.*)\"",
+    "backup_match_regex": "^(\\S+)\\s+-\\s+-\\s+\\[(\\S+)\\]\\s+\"(\\S+)\\s+(\\S+)\\s+(\\S+)\"\\s+(\\d+)\\s+(\\d+)\\s+\"(\\S+)\"\\s+\"(.*)\"",
+    "fields": "source_host,date_stamp,command,path,protocol,status,byte_count,referrer,ext0",
+    "backup_fields": "source_host,date_stamp,command,path,protocol,status,byte_count,referrer,ext0"
   }
 }
 ]
