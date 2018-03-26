@@ -78,7 +78,8 @@ class DaemonCore:
             sentry.start()
 
         # Log start:
-        sleep(0.2)syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
+        sleep(0.2)
+        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
 
         while True:
             if runparser and not parser.isAlive():
