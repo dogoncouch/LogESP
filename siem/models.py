@@ -12,6 +12,7 @@ def validate_modifier_range(value):
 class LogEventParser(models.Model):
     name = models.CharField(max_length=32, unique=True)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    is_builtin = models.BooleanField(default=False)
     match_regex = models.CharField(max_length=1024)
     backup_match_regex = models.CharField(max_length=1024,
             null=True, blank=True)
@@ -24,6 +25,7 @@ class LogEventParser(models.Model):
 class ParseHelper(models.Model):
     name = models.CharField(max_length=32, unique=True)
     desc = models.CharField(max_length=200, null=True, blank=True)
+    is_builtin = models.BooleanField(default=False)
     helper_type = models.CharField(max_length=32)
     match_regex = models.CharField(max_length=1024)
     fields = models.CharField(max_length=512)
@@ -88,6 +90,7 @@ class LimitRule(models.Model):
     name = models.CharField(max_length=32, unique=True)
     desc = models.CharField(max_length=200,
             null=True, blank=True)
+    is_builtin = models.BooleanField(default=False)
     is_enabled = models.BooleanField(default=True)
     email_alerts = models.BooleanField(default=False)
     alert_users = models.ManyToManyField(User,
