@@ -97,6 +97,11 @@ shift $((OPTIND-1))
 
 PIDFILE="${LDSIBASE}/run/ldsi.pid"
 
+if ! [ `whoami` = 'root' ]; then
+    echo "Root privileges required."
+    exit 1
+fi
+
 if [ -d "${LDSIBASE}" ]; then
     if [ -f "${LDSIBASE}/bin/activate" ]; then
         source "${LDSIBASE}/bin/activate"
@@ -117,8 +122,7 @@ if [ $STARTING ]; then
         if [ ${LDSIPROC} ]; then
             echo "LDSI already running at PID ${LDSIPROC}. Stop first."
         else
-            python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
-            echo -n "$! " >> "${PIDFILE}"
+            su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
         fi
     fi
 
@@ -155,14 +159,13 @@ elif [ $RESTARTING ]; then
         fi
     fi
     sleep 0.5
-    python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" &
-    echo -n "$! " >> "${PIDFILE}"
+    su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
-        python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"
+        su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
     else
-        python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"
+        su -p -c 'python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
     fi
 
 elif [ $STATUSCHECK ]; then
@@ -183,7 +186,7 @@ elif [ $STATUSCHECK ]; then
     fi
 
 elif [ $VERSIONCHECK ]; then
-    VERSION=`python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"`
+    VERSION=`su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
     echo "${0##*/}-$VERSION"
     exit 0	
 

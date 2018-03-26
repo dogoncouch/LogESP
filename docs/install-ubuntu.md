@@ -135,7 +135,7 @@ chmod 644 /opt/ldsi/run/ldsi-uwsgi-master.pid
 ## Edit rc.local
 - Add the following:
 ```
-su -s "/bin/bash" -c "/opt/ldsi/scripts/ldsi start" ldsid
+/opt/ldsi/scripts/ldsi start
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/config/nginx/ldsi_uwsgi.ini
 ```
 
