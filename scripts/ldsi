@@ -122,6 +122,7 @@ if [ $STARTING ]; then
         if [ ${LDSIPROC} ]; then
             echo "LDSI already running at PID ${LDSIPROC}. Stop first."
         else
+            export LDSIBASE RUNPARSER RUNSENTRY PIDFILE
             su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
         fi
     fi
@@ -159,13 +160,16 @@ elif [ $RESTARTING ]; then
         fi
     fi
     sleep 0.5
+    export LDSIBASE RUNPARSER RUNSENTRY PIDFILE
     su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
+        export LDSIBASE
         su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
     else
-        su -p -c 'python manage.py shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
+        export LDSIBASE
+        su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
     fi
 
 elif [ $STATUSCHECK ]; then
@@ -186,6 +190,7 @@ elif [ $STATUSCHECK ]; then
     fi
 
 elif [ $VERSIONCHECK ]; then
+    export LDSIBASE
     VERSION=`su -p -c 'python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
     echo "${0##*/}-$VERSION"
     exit 0	
