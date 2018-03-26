@@ -123,7 +123,7 @@ if [ $STARTING ]; then
             echo "LDSI already running at PID ${LDSIPROC}. Stop first."
         else
             export LDSIBASE RUNPARSER RUNSENTRY PIDFILE
-            su -p -c 'source "${LDSIBASE}/bin/activate ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
+            su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
         fi
     fi
 
@@ -161,15 +161,15 @@ elif [ $RESTARTING ]; then
     fi
     sleep 0.5
     export LDSIBASE RUNPARSER RUNSENTRY PIDFILE
-    su -p -c 'source "${LDSIBASE}/bin/activate ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
+    su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
         export LDSIBASE
-        su -p -c 'source "${LDSIBASE}/bin/activate ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
+        su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
     else
         export LDSIBASE
-        su -p -c 'source "${LDSIBASE}/bin/activate ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
+        su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
     fi
 
 elif [ $STATUSCHECK ]; then
@@ -191,7 +191,7 @@ elif [ $STATUSCHECK ]; then
 
 elif [ $VERSIONCHECK ]; then
     export LDSIBASE
-    VERSION=`su -p -c 'source "${LDSIBASE}/bin/activate ; python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
+    VERSION=`su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
     echo "${0##*/}-$VERSION"
     exit 0	
 
