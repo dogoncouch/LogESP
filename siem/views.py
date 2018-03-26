@@ -53,6 +53,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         command_val = self.request.GET.get('command_filter')
         session_val = self.request.GET.get('session_filter')
         interface_val = self.request.GET.get('interface_filter')
+        status_val = self.request.GET.get('status_filter')
         path_val = self.request.GET.get('path_filter')
         parameters_val = self.request.GET.get('parameters_filter')
         referrer_val = self.request.GET.get('referrer_filter')
@@ -74,6 +75,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not command_val: command_val = ''
         if not session_val: session_val = ''
         if not interface_val: interface_val = ''
+        if not status_val: status_val = ''
         if not path_val: path_val = ''
         if not parameters_val: parameters_val = ''
         if not referrer_val: referrer_val = ''
@@ -96,6 +98,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 command__iregex=command_val,
                 sessionid__iregex=session_val,
                 interface__iregex=interface_val,
+                status__iregex=status_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         elif starttime_val and not endtime_val:
@@ -114,6 +117,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 command__iregex=command_val,
                 sessionid__iregex=session_val,
                 interface__iregex=interface_val,
+                status__iregex=status_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         elif endtime_val and not starttime_val:
@@ -132,6 +136,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 command__iregex=command_val,
                 sessionid__iregex=session_val,
                 interface__iregex=interface_val,
+                status__iregex=status_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         else:
@@ -149,6 +154,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 command__iregex=command_val,
                 sessionid__iregex=session_val,
                 interface__iregex=interface_val,
+                status__iregex=status_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
         return new_context
@@ -177,6 +183,8 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 'session_filter', '')
         context['interface_filter'] = self.request.GET.get(
                 'interface_filter', '')
+        context['status_filter'] = self.request.GET.get(
+                'status_filter', '')
         context['path_filter'] = self.request.GET.get(
                 'path_filter', '')
         context['parameters_filter'] = self.request.GET.get(
@@ -293,7 +301,7 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter_regex', 'process_filter_regex',
             'action_filter_regex', 'command_filter_regex',
-            'interface_filter_regex',
+            'interface_filter_regex', 'status_filter_regex',
             'source_host_filter_regex', 'source_port_filter_regex',
             'dest_host_filter_regex', 'dest_port_filter_regex',
             'source_user_filter_regex', 'target_user_filter_regex',
@@ -317,7 +325,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'message_filter_regex', 'raw_text_filter_regex',
             'log_source_filter_regex', 'process_filter_regex',
             'action_filter_regex', 'command_filter_regex',
-            'interface_filter_regex',
+            'interface_filter_regex', 'status_filter_regex',
             'source_host_filter_regex', 'source_port_filter_regex',
             'dest_host_filter_regex', 'dest_port_filter_regex',
             'source_user_filter_regex', 'target_user_filter_regex',

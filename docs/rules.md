@@ -32,6 +32,7 @@ process             Log     Yes
 action              Log     Yes
 command             Log     Yes
 interface           Log     Yes
+status              Log     Yes
 source_host         Log     Yes
 source_port         Log     Yes
 dest_host           Log     Yes

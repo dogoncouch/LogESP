@@ -63,6 +63,7 @@ class LogEvent(models.Model):
     tcp_flags = models.IntegerField(null=True, blank=True)
     class_of_service = models.IntegerField(null=True, blank=True)
     interface = models.CharField(max_length=32, default='')
+    status = models.CharField(max_length=24, default='')
     start_time = models.CharField(max_length=32, null=True, blank=True)
     duration = models.CharField(max_length=32, null=True, blank=True)
     source_user = models.CharField(max_length=32, default='')
@@ -123,6 +124,8 @@ class LimitRule(models.Model):
     command_filter_regex = models.CharField(max_length=64,
             null=True, blank=True)
     interface_filter_regex = models.CharField(max_length=32,
+            null=True, blank=True)
+    status_filter_regex = models.CharField(max_length=24,
             null=True, blank=True)
     source_host_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)

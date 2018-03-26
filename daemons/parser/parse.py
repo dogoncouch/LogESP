@@ -98,6 +98,7 @@ class LiveParser:
                     e.tcp_flags = entry['tcp_flags']
                     e.class_of_service = entry['class_of_service']
                     e.interface = entry['interface']
+                    e.status = entry['status']
                     e.start_time = entry['start_time']
                     e.duration = entry['duration']
                     e.message = entry['message']

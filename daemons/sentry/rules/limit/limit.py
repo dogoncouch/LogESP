@@ -320,6 +320,11 @@ class LimitSentry:
                     self.rule.interface_filter_regex)
         else:
             interfacefilter = '.*'
+        if self.rule.status_filter_regex:
+            statusfilter = '.*{}.*'.format(
+                    self.rule.status_filter_regex)
+        else:
+            statusfilter = '.*'
         if self.rule.source_host_filter_regex:
             sourcehostfilter = '.*{}.*'.format(
                     self.rule.source_host_filter_regex)
@@ -388,6 +393,7 @@ class LimitSentry:
                                 source_process__iregex=processfilter,
                                 action__iregex=actionfilter,
                                 interface__iregex=interfacefilter,
+                                status__iregex=statusfilter,
                                 source_host__iregex=sourcehostfilter,
                                 source_port__iregex=sourceportfilter,
                                 dest_host__iregex=desthostfilter,
@@ -420,6 +426,7 @@ class LimitSentry:
                                 source_process__iregex=processfilter,
                                 action__iregex=actionfilter,
                                 interface__iregex=interfacefilter,
+                                status__iregex=statusfilter,
                                 source_host__iregex=sourcehostfilter,
                                 source_port__iregex=sourceportfilter,
                                 dest_host__iregex=desthostfilter,
@@ -456,6 +463,7 @@ class LimitSentry:
                                 source_process__iregex=processfilter,
                                 action__iregex=actionfilter,
                                 interface__iregex=interfacefilter,
+                                status__iregex=statusfilter,
                                 source_host__iregex=sourcehostfilter,
                                 source_port__iregex=sourceportfilter,
                                 dest_host__iregex=desthostfilter,
@@ -488,6 +496,7 @@ class LimitSentry:
                                 source_process__iregex=processfilter,
                                 action__iregex=actionfilter,
                                 interface__iregex=interfacefilter,
+                                status__iregex=statusfilter,
                                 source_host__iregex=sourcehostfilter,
                                 source_port__iregex=sourceportfilter,
                                 dest_host__iregex=desthostfilter,

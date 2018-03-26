@@ -48,6 +48,7 @@ def get_blank_entry():
     entry['tcp_flags'] = None
     entry['class_of_service'] = None
     entry['interface'] = ''
+    entry['status'] = ''
     entry['start_time'] = ''
     entry['duration'] = ''
     entry['source_user'] = ''
@@ -139,6 +140,8 @@ def check_entry(entry):
     #    entry[''] = entry[''][:]
     if len(entry['interface']) > 32:
         entry['interface'] = entry['interface'][:32]
+    if len(entry['status']) > 24:
+        entry['status'] = entry['status'][:24]
     if len(entry['start_time']) > 32:
         entry['start_time'] = entry['start_time'][:32]
     if len(entry['duration']) > 32:

@@ -30,6 +30,7 @@ byte_count          The number of bytes involved.
 tcp_flags           The TCP flags (an integer).
 class_of_service    The ToS (type of service) field (an integer).
 interface           The network interface involved.
+status              The status (interface status, http status code, etc).
 start_time          A string representing the start time (for flows, videos, motion sensor events).
 duration            A string representing the duration.
 source_user         The user who initiated the event.

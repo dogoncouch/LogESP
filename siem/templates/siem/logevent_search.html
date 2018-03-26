@@ -50,6 +50,8 @@
                 <input type="text" value="{{ action_filter }}" name="action_filter"/></td>
             <td class="searchform">Interface:
                 <input type="text" value="{{ interface_filter }}" name="interface_filter"/></td>
+            <td class="searchform">Status:
+                <input type="text" value="{{ status_filter }}" name="status_filter"/></td>
         </tr>
         <tr>
             <td class="searchform">Path (URI/file):
@@ -77,7 +79,7 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&status_filter={{ status_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
                     &middot;
                 {% endif %}
                 <span class="page-current">
@@ -85,7 +87,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&status_filter={{ status_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
@@ -99,6 +101,7 @@
             <th>Src<br>User</th><th>Trgt<br>User</th>
             <th>Cmd</th><th>Ses-<br>sion</th>
             <th>Act-<br>ion</th><th>Inter-<br>face</th>
+            <th>Stat-<br>us</hr>
             <th>Path</th><th>Prm</th><th>Ref</th>
             <th class="left">Message</th></tr>
         {% for e in event_list %}
@@ -118,6 +121,7 @@
             <td>{{ e.sessionid }}</td>
             <td>{{ e.action }}</td>
             <td>{{ e.interface }}</td>
+            <td>{{ e.status}}</td>
             <td>{{ e.path }}</td>
             <td>{{ e.parameters }}</td>
             <td>{{ e.referrer }}</td>
@@ -131,7 +135,7 @@
         <div class="pagination">
             <span class="page-links">
                 {% if page_obj.has_previous %}
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&dest_host_filter={{ dest_host_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&status_filter={{ status_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.previous_page_number }}">previous</a>
                     &middot;
                 {% endif %}
                 <span class="page-current">
@@ -139,7 +143,7 @@
                 </span>
                 {% if page_obj.has_next %}
                     &middot;
-                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="{{ request.get_path }}?log_source_filter={{ log_source_filter }}&process_filter={{ process_filter }}&source_host_filter={{ source_host_filter }}&source_port_filter={{ source_port_filter }}&dest_host_filter={{ dest_host_filter }}&dest_port_filter={{ dest_port_filter }}&source_user_filter={{ source_user_filter }}&target_user_filter={{ target_user_filter }}&action_filter={{ action_filter }}&command_filter={{ command_filter }}&session_filter={{ session_filter }}&interface_filter={{ interface_filter }}&status_filter={{ status_filter }}&path_filter={{ path_filter }}&parameters_filter={{ parameters_filter }}&referrer_filter={{ referrer_filter }}&type_filter={{ type_filter }}&message_filter={{ message_filter }}&raw_filter={{ raw_filter }}&starttime_filter={{ starttime_filter }}&endtime_filter={{ endtime_filter }}&page={{ page_obj.next_page_number }}">next</a>
                 {% endif %}
             </span>
         </div>
