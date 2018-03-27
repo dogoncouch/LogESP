@@ -138,8 +138,8 @@
     "desc": "Cisco line protocol events.",
     "is_builtin": true,
     "helper_type": "cisco_ios",
-    "match_regex": "Line protocol on Interface (\\S+),",
-    "fields": "interface"
+    "match_regex": "Line protocol on Interface (\\S+), changed state to (\\S+)$",
+    "fields": "interface,status"
   }
 },
 {
@@ -178,12 +178,12 @@
 {
   "model": "siem.parsehelper",
   "fields": {
-    "name": "cisco_ace",
-    "desc": "Cisco access control list log entry.",
+    "name": "cisco_acl_s300",
+    "desc": "Cisco s300 series access control list log entry for.",
     "is_builtin": true,
     "helper_type": "cisco_ios",
     "match_regex": "([a-zA-Z]+\\d+): (\\w+) ACE (\\S+) ([0-9a-zA-Z.:]+)\\(([0-9a-zA-Z]+)\\) -> ([0-9a-zA-Z.:]+)\\(([0-9a-zA-Z]+)\\),\\s?trapped",
-    "fields": "interface,command,protocol,source_host,source_port,dest_host,dest_port"
+    "fields": "interface,status,protocol,source_host,source_port,dest_host,dest_port"
   }
 },
 {
@@ -272,6 +272,50 @@
     "helper_type": "snort_ids",
     "match_regex": "message repeated (\\d+) times:",
     "fields": "aggregated_events"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_interface_status",
+    "desc": "Cisco interface status.",
+    "is_builtin": true,
+    "helper_type": "cisco_ios",
+    "match_regex": "Interface (\\S+), changed state to (\\S+)$",
+    "fields": "interface,status"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_s300_int_status",
+    "desc": "Cisco s300 series interface status changes",
+    "is_builtin": true,
+    "helper_type": "cisco_ios",
+    "match_regex": "%LINK-\\w-(\\w+):\\s+([a-zA-Z]+\\d+)",
+    "fields": "status,interface"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_s300_vlan_status",
+    "desc": "Cisco s300 series vlan status changes",
+    "is_builtin": true,
+    "helper_type": "cisco_ios",
+    "match_regex": "%LINK-\\w-(\\w+):\\s+([a-zA-Z]+\\s+\\d+)",
+    "fields": "status,interface"
+  }
+},
+{
+  "model": "siem.parsehelper",
+  "fields": {
+    "name": "cisco_acl_ios",
+    "desc": "Cisco access control list log entry.",
+    "is_builtin": true,
+    "helper_type": "cisco_ios",
+    "match_regex": "list\\s+\\w+\\s+(\\w+)\\s+(.*)\\s+(\\S+)\\s+\\(([a-zA-Z]+\\s?[0-9/]+)\\s+[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\.[0-9a-fA-F]{4}\\)\\s+->\\s+(\\S+)\\s+\\(.*\\),\\s+(\\d+)\\s+packet",
+    "fields": "status,protocol,source_host,interface,dest_host,packet_count"
   }
 }
 ]
