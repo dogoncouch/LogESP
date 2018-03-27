@@ -7,13 +7,8 @@ tmp/*
 # dogoncouch's badly named temporary files
 blah.*
 
-# Virtual environment
-bin/
-lib64
-pip-selfcheck.json
-pyvenv.cfg
-share/
-run/
+# PID files and wsgi socket
+run/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
