@@ -280,8 +280,8 @@ class LRIndexView(PermissionRequiredMixin, ListView):
     template_name = 'siem/lr_index.html'
     context_object_name = 'lr_list'
     def get_queryset(self):
-        return LimitRule.objects.order_by('is_enabled', 'event_type',
-                'rule_events', 'name')
+        return LimitRule.objects.order_by('is_builtin', 'is_enabled',
+                'event_type', 'rule_events', 'name')
 
 class LRDetailView(PermissionRequiredMixin, DetailView):
     model = LimitRule
@@ -350,7 +350,8 @@ class LPIndexView(PermissionRequiredMixin, ListView):
     template_name = 'siem/lp_index.html'
     context_object_name = 'lp_list'
     def get_queryset(self):
-        return LogEventParser.objects.order_by('name')
+        return LogEventParser.objects.order_by('is_builtin',
+                'is_enabled', 'name')
 
 class LPDetailView(PermissionRequiredMixin, DetailView):
     model = LogEventParser
@@ -389,7 +390,8 @@ class PHIndexView(PermissionRequiredMixin, ListView):
     template_name = 'siem/ph_index.html'
     context_object_name = 'ph_list'
     def get_queryset(self):
-        return ParseHelper.objects.order_by('helper_type', 'name')
+        return ParseHelper.objects.order_by('is_builtin',
+                'helper_type', 'name')
 
 class PHDetailView(PermissionRequiredMixin, DetailView):
     model = ParseHelper
@@ -419,4 +421,3 @@ class PHDeleteView(PermissionRequiredMixin, DeleteView):
     context_object_name = 'ph'
     def get_success_url(self):
         return reverse('siem:ph_index')
-

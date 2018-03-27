@@ -9,13 +9,15 @@
 
 {% if ph_list %}
     <table>
-        <tr><th>Name</th><th>Type</th><th>Fields</th></tr>
+        <tr><th>Name</th><th>Type</th><th>Fields</th>
+            <th>Built-<br>in</th></tr>
         {% for ph in ph_list %}
             <tr>
                 <td><a href="{% url 'siem:ph_detail' ph.id %}">
                         {{ ph }}</a></td>
                 <td>{{ ph.helper_type }}</td>
                 <td>{{ ph.fields }}</td>
+                <td>{{ ph.is_builtin }}</td>
             </tr>
         {% endfor %}
     </table>
