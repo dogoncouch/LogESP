@@ -97,12 +97,7 @@ chmod 664 /opt/ldsi/ldsi/run
 ## Rsyslog Setup
 ### Place Files
 ```
-cp /opt/ldsi/ldsi/config/rsyslog/10-server.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/70-cisco.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/71-daemon.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/75-snort.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/77-audit.conf /etc/rsyslog.d/
-cp /opt/ldsi/ldsi/config/rsyslog/78-windows.conf /etc/rsyslog.d/
+cp /opt/ldsi/ldsi/config/rsyslog/server/*.conf /etc/rsyslog.d/
 touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 chown syslog.adm /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 ```
