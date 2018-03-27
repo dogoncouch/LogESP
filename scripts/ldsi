@@ -27,7 +27,8 @@
 # Set defaults:
 RUNPARSER="True"
 RUNSENTRY="True"
-LDSIBASE="/opt/ldsi"
+LDSIBASE="/opt/ldsi/ldsi"
+ENVBASE="/opt/ldsi"
 
 usage() {
     echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-l] [-p|-s] [-b <ldsi-base>] [-e <env-base>]"
@@ -39,7 +40,7 @@ usage() {
     echo "  -p                      Run parser only (no sentry)"
     echo "  -s                      Run sentry only (no parser)"
     echo "  -b <ldsi-base>          Set the LDSI base directory"
-    #echo "  -e <env-base>           Set a virtual environment"
+    echo "  -e <env-base>           Set a virtual environment"
 }
 
 case "${1}" in
@@ -65,8 +66,7 @@ case "${1}" in
         ;;
 esac
 
-#while getopts ":hvlpsb:e:" o; do
-while getopts ":hvlpsb:" o; do
+while getopts ":hvlpsb:e:" o; do
     case "${o}" in
         h)
             usage
@@ -87,6 +87,9 @@ while getopts ":hvlpsb:" o; do
         b)
             LDSIBASE=${OPTARG}
             ;;
+        e)
+            ENVBASE=${OPTARG}
+            ;;
         *)
             usage
             exit 0
@@ -102,12 +105,18 @@ if ! [ `whoami` = 'root' ]; then
     exit 1
 fi
 
-if [ -d "${LDSIBASE}" ]; then
-    if [ -f "${LDSIBASE}/bin/activate" ]; then
-        source "${LDSIBASE}/bin/activate"
+if [ -d "${ENVBASE}" ]; then
+    if [ -f "${ENVBASE}/bin/activate" ]; then
+        source "${ENVBASE}/bin/activate"
     else
-        echo "LDSI virtual env at ${LDSIBASE}/bin/activate not found"
+        echo "LDSI virtual env at ${ENVBASE}/bin/activate not found"
     fi
+else
+    echo "LDSI virtual env base directory ${ENVBASE} not found."
+    exit 1
+fi
+
+if [ -d "${LDSIBASE}" ]; then
     cd "${LDSIBASE}"
 else
     echo "LDSI base directory ${LDSIBASE} not found."
@@ -122,8 +131,8 @@ if [ $STARTING ]; then
         if [ ${LDSIPROC} ]; then
             echo "LDSI already running at PID ${LDSIPROC}. Stop first."
         else
-            export LDSIBASE RUNPARSER RUNSENTRY PIDFILE
-            su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
+            export ENVBASE LDSIBASE RUNPARSER RUNSENTRY PIDFILE
+            su -p -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
         fi
     fi
 
@@ -160,16 +169,16 @@ elif [ $RESTARTING ]; then
         fi
     fi
     sleep 0.5
-    export LDSIBASE RUNPARSER RUNSENTRY PIDFILE
-    su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
+    export ENVBASE LDSIBASE RUNPARSER RUNSENTRY PIDFILE
+    su -p -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
-        export LDSIBASE
-        su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
+        export ENVBASE LDSIBASE
+        su -p -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
     else
-        export LDSIBASE
-        su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
+        export ENVBASE LDSIBASE
+        su -p -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
     fi
 
 elif [ $STATUSCHECK ]; then
@@ -190,8 +199,8 @@ elif [ $STATUSCHECK ]; then
     fi
 
 elif [ $VERSIONCHECK ]; then
-    export LDSIBASE
-    VERSION=`su -p -c 'source "${LDSIBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
+    export ENVBASE LDSIBASE
+    VERSION=`su -p -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
     echo "${0##*/}-$VERSION"
     exit 0	
 

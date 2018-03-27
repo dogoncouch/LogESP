@@ -35,7 +35,7 @@ from siem.models import ParseHelper
 
 class ParseCore:
 
-    def __init__(self, config='/opt/ldsi/config/parser.conf'):
+    def __init__(self, config='/opt/ldsi/ldsi/config/parser.conf'):
         """Initialize live parser"""
         self.conf = config
         self.threads = []
