@@ -29,6 +29,7 @@ import signal
 from sys import exit
 from time import sleep
 
+from django.db.utils import OperationalError
 from siem.models import LogEvent
 
 class DaemonCore:
@@ -72,7 +73,7 @@ class DaemonCore:
                 x = LogEvent.objects.last()
                 dbconnection = True
                 del(x)
-            except django.db.utils.OperationalError:
+            except OperationalError:
                 pass
 
         if runparser:
