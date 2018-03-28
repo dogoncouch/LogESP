@@ -128,6 +128,7 @@ chmod 644 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
 - Add the following:
 ```
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
+su -p -c '> /opt/ldsi/ldsi/run/ldsi.pid' ldsid
 /opt/ldsi/ldsi/scripts/ldsi start
 ```
 
