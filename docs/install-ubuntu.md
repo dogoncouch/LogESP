@@ -90,7 +90,6 @@ chown ldsid.www-data /opt/ldsi/ldsi/config/db.conf
 chmod 640 /opt/ldsi/ldsi/config/db.conf
 chmod 640 /opt/ldsi/ldsi/config/parser.conf
 chown -R ldsid.www-data /opt/ldsi/ldsi/run
-chmod 664 /opt/ldsi/ldsi/run
 ```
 
 ## Rsyslog Setup
@@ -129,7 +128,6 @@ chmod 644 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
 - Add the following:
 ```
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
-rm -f /opt/ldsi/ldsi/run/ldsi.pid
 /opt/ldsi/ldsi/scripts/ldsi start
 ```
 
