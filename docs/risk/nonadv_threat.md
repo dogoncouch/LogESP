@@ -1,28 +1,28 @@
-# Adversarial Threat Documentation
+# Non-Adversarial Threat Documentation
 
 The LDSI risk management system is based on the [NIST risk assessment guidelines](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final).
 
 ## Index
 
-- [Adversarial Threat Events](#adversarial-threat-events)
-- [Adversarial Threat Sources](#adversarial-threat-sources)
-- [Vulnerabilities](#vulnerabilities)
-- [Responses](#responses)
-- [Impacts](#impacts)
+  - [Non-Adversarial Threat Events](#non-adversarial-threat-events)
+  - [Non-Adversarial Threat Sources](#non-adversarial-threat-sources)
+  - [Risk Conditions](#risk-conditions)
+  - [Responses](#responses)
+  - [Impacts](#impacts)
 
-## Adversarial Threat Events
-An adversarial threat event is an event that is caused intentionally (by an adversary or other malicious entity), and could have negative impacts.
+## Non-Adversarial Threat Events
+A non-adversarial threat event is an event that is not caused intentionally, but could cause harm to an organization (i.e. an earthquake, a configuration mistake).
 
-### Adversarial Threat Event Anatomy
+### Non-Adversarial Threat Event Anatomy
 
 - `name` - the event name
 - `desc` - a description of the event
 - `event_type` - the event type
 - `info_source` - the source of information on the threat
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
-- [soures](#adversarial-threat-sources) - adversarial threat sources that could cause the event
 - `relevance` - the relevance, or likelihood, of the event
-- [vulnerabilities](#vulnerabilities) - vulnerabilities related to the event
+- [soures](#adversarial-threat-sources) - non-adversarial threat sources that could cause the event
+- [risk conditions](#vulnerabilities) - predisposing conditions related to the event
 - [responses](#responses) - measures taken in response to the threat
 - `likelihood_initiation` - the likelihood of the event being initiated (scale of 1 to 100)
 - `likelihood_impact` - the likelihood of adverse impact if the event is initiated (scale of 1 to 100)
@@ -30,7 +30,7 @@ An adversarial threat event is an event that is caused intentionally (by an adve
 - `assigned_risk` - the level of risk assigned to the event (scale of 1 to 100)
 
 ## Adversarial Threat Sources
-An adversarial threat source is a person or entity with intent to cause harm to an organization.
+A non-adversarial threat source is a person, entity, or occurance that could cause harm to an organization without intent.
 
 - `name` - the threat source name
 - `desc` - a description of the threat source
@@ -38,11 +38,9 @@ An adversarial threat source is a person or entity with intent to cause harm to 
 - `info_source` - the source of information on the threat source
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
 - `in_scope` - whether or not the threat source in within the scope of risk management
-- `capability` - the threat source's level of capability (scale of 1 to 100)
-- `intent` - the threat source's level of intent (scale of 1 to 100)
-- `targeting` - the threat source's level of intent on specific targets (scale of 1 to 100)
+- `range_of_effect` - the threat source's range of effect (scale of 1 to 100
 
-## Vulnerabilities
+## Risk Conditions
 Vulnerabilities are conditions that make a threat event more likely to happen.
 
 - `name` - the vulnerability name
@@ -50,7 +48,7 @@ Vulnerabilities are conditions that make a threat event more likely to happen.
 - `vuln_type` - the vulnerability type
 - `info_source` - the source of information on the threat source
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
-- `severity` - the vulnerability's level of severity (scale of 1 to 100)
+- `pervasiveness` - the vulnerability's level of severity (scale of 1 to 100)
 
 ## Responses
 Responses are measures taken to reduce the risk from a threat.
