@@ -54,6 +54,11 @@ class SoftwareAssetAdmin(admin.ModelAdmin):
             ('Parent Systems', {'fields': ['parent_hardware', 'parent_software']}),
             ('Device Information', {'fields': [
                 'software_type', 'sw_property_id',
+                'hostname', 'domain_name',
+                'ip4_address_1', 'ip4_address_2',
+                'ip4_address_3', 'ip4_address_4',
+                'ip6_address_1', 'ip6_address_2',
+                'ip6_address_3', 'ip6_address_4',
                 'package_name', 'package_version']}),
             ('Status Information', {'fields': ['status']}),
             ('Life Cycle', {'fields': ['date_added', 'date_eol']}),
