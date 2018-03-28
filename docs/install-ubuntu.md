@@ -52,7 +52,7 @@ source bin/activate
 ```
 git clone https://github.com/dogoncouch/ldsi.git
 cd ldsi
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Add ldsid User
@@ -63,8 +63,8 @@ useradd -r -d /opt/ldsi/ldsi -s /sbin/nologin -U ldsid
 ### Set Up Static Files, Database
 - Set up database, collect static files:
 ```
-make new-db
-make static
+make newdb
+make staticfiles
 ```
 
 ### Edit config/settings.py
@@ -73,7 +73,6 @@ make static
 
 ### Edit config/db.conf
 - Update username, password
-- Update file permissions
 
 ### Edit config/parser.conf
 - Uncomment necessary files
@@ -90,7 +89,7 @@ chgrp -R ldsid /opt/ldsi/ldsi
 chown ldsid.www-data /opt/ldsi/ldsi/config/db.conf
 chmod 640 /opt/ldsi/ldsi/config/db.conf
 chmod 640 /opt/ldsi/ldsi/config/parser.conf
-chown ldsid.www-data /opt/ldsi/ldsi/run
+chown -R ldsid.www-data /opt/ldsi/ldsi/run
 chmod 664 /opt/ldsi/ldsi/run
 ```
 
@@ -130,6 +129,7 @@ chmod 644 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
 - Add the following:
 ```
 /opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
+rm -f /opt/ldsi/ldsi/run/ldsi.pid
 /opt/ldsi/ldsi/scripts/ldsi start
 ```
 

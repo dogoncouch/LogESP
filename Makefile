@@ -19,12 +19,14 @@ help:
 	@echo ------------------------------
 	@echo make daemon-help
 	@echo
-	@echo --- New database setup
+	@echo --- New instance setup
 	@echo ------------------------
 	@echo -- Set up new DB with fixtures-
-	@echo make new-db
+	@echo make newdb
 	@echo -- Set up new DB without fixtures-
-	@echo make new-db-setup
+	@echo make newdb-setup
+	@echo -- Collect static files
+	@echo make staticfiles
 	@echo
 	@echo --- View help on individual fixtures
 	@echo --------------------------------------
@@ -54,22 +56,22 @@ daemon-help:
 	@echo
 	@echo --- Daemon help
 	@echo -----------------
-	@echo -- Use start.sh to start parser and sentry daemons-
-	@echo ./start.sh -h
+	@echo -- Use scripts/ldsi to start parser and sentry daemons-
+	@echo scripts/ldsi -h
 	@echo
 	@echo Make sure to edit config/parser.conf
-	@echo Restart daemons with ./start.sh -r to re-read config
+	@echo Restart daemons with scripts/ldsi restart to re-read config
 	@echo
 
-new-db: new-db-setup fixtures
+newdb: newdb-setup fixtures
 
-new-db-setup:
+newdb-setup:
 	@echo --- Loading initial migrations...
 	python manage.py migrate
 	@echo --- Creating superuser...
 	python manage.py createsuperuser
 
-static:
+staticfiles:
 	@echo --- Collecting static files...
 	python manage.py collectstatic
 
