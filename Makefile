@@ -74,6 +74,7 @@ newdb-setup:
 staticfiles:
 	@echo --- Collecting static files...
 	python manage.py collectstatic
+	mkdir -p media
 
 risk-fixtures:
 	@echo --- Loading NIST threat data fixtures...
