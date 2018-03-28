@@ -8,21 +8,18 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 
 ## Daemons
 ### start.sh
-Parser and sentry daemons can be started, restarted, and stopped with start.sh, which includes options for setting the LDSI base directory and virtual environment base directory.
+Parser and sentry daemons can be started, restarted, and stopped with `scripts/ldsi`, which includes options for setting the LDSI base directory and virtual environment base directory.
 ```
-Usage: start.sh [-hv] <directory> <command>
+Usage: ldsi [-hv] {start|stop|restart|status|clean} [-lps] [-b LDSIBASE] [-e ENVBASE]
 
 Optional arguments:
   -h                      Print this help message
   -v                      Print the version number
-  -r                      Restart daemons
-  -k                      Stop daemons
-  -c                      Clean old events using backup EOL date
   -l                      Clean old events using local EOL date
-  -b <ldsi-base>          Set the LDSI base directory
-  -e <env-base>           Set a virtual environment
   -p                      Run parser only (no sentry)
   -s                      Run sentry only (no parser)
+  -b <ldsi-base>          Set the LDSI base directory
+  -e <env-base>           Set a virtual environment
 ```
 
 The parser configuration file is at `config/parser.conf`. Cleaning should be handled by a cron job. `start.sh` can be run manually, or by `/etc/rc.local`.

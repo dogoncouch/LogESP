@@ -31,7 +31,7 @@ LDSIBASE="/opt/ldsi/ldsi"
 ENVBASE="/opt/ldsi"
 
 usage() {
-    echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-l] [-p|-s] [-b <ldsi-base>] [-e <env-base>]"
+    echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-lps] [-b LDSIBASE] [-e ENVBASE]"
     echo
     echo "Optional arguments:"
     echo "  -h                      Print this help message"
