@@ -11,6 +11,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Sanity check for entry field lengths, etc.
 - Documentation
 - `ldsi` script for controlling daemons
+- `hostname`, `domain_name`, and IP addresses to sw assets
 
 ### Updated
 - Improved risk management workflows

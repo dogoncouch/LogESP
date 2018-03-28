@@ -133,7 +133,17 @@ class SoftwareAsset(models.Model):
     software_type = models.ForeignKey(SoftwareType,
             related_name='assets',
             null=True, blank=True, on_delete=models.SET_NULL)
-    package_name = models.CharField(max_length=20, null=True, blank=True)
+    hostname = models.CharField(max_length=48, null=True, blank=True)
+    domain_name = models.CharField(max_length=48, null=True, blank=True)
+    ip4_address_1 = models.CharField(max_length=20, null=True, blank=True)
+    ip4_address_2 = models.CharField(max_length=20, null=True, blank=True)
+    ip4_address_3 = models.CharField(max_length=20, null=True, blank=True)
+    ip4_address_4 = models.CharField(max_length=20, null=True, blank=True)
+    ip6_address_1 = models.CharField(max_length=42, null=True, blank=True)
+    ip6_address_2 = models.CharField(max_length=42, null=True, blank=True)
+    ip6_address_3 = models.CharField(max_length=42, null=True, blank=True)
+    ip6_address_4 = models.CharField(max_length=42, null=True, blank=True)
+    package_name = models.CharField(max_length=32, null=True, blank=True)
     package_version = models.CharField(max_length=20, null=True, blank=True)
     sw_property_id = models.CharField(max_length=30, null=True, blank=True)
     status = models.IntegerField(choices=status_choices, default=6)
