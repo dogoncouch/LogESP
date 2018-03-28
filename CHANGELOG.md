@@ -26,7 +26,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Rules and searches use more regular expressions
 - ldsi daemon runs without privileges
 - Parser threads re-read parsers/helpers every 6,000 events or 10 minutes
-- `log_source` event attribute can be set in `config/parser.conf`
+- `log_source` and `source_process` can be set in `config/parser.conf`
 
 ### Fixed
 - Helper logic for single-field parse helpers
