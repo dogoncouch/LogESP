@@ -20,10 +20,14 @@
 
 
 ### Specifications
-- Command tried: 
-- logdissect version: 
+- ldsi version (in `ldsi/__init__.py`): 
 - Python version: 
 - Operating system: 
 - Operating system version: 
+- Deployment info
+  - SQL server name/version: 
+  - SQL client library name/version: 
+  - WSGI name/version: 
+  - Web server name/version: 
 - Log file type: 
 - Other info that might be useful: 
