@@ -29,6 +29,7 @@ import signal
 from sys import exit
 from time import sleep
 
+from siem.models import LogEvent
 
 class DaemonCore:
     def __init__(self):
@@ -63,6 +64,16 @@ class DaemonCore:
         signal.signal(signal.SIGTERM, self.sigterm_handler)
         signal.signal(signal.SIGHUP, self.sighup_handler)
         signal.signal(signal.SIGINT, self.sigint_handler)
+
+        # Wait for database:
+        dbconnection = False
+        while not dbconnection:
+            try:
+                x = LogEvent.objects.last()
+                dbconnection = True
+                del(x)
+            except django.db.utils.OperationalError:
+                pass
 
         if runparser:
             # Start parser threads:
