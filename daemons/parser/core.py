@@ -76,6 +76,10 @@ class ParseCore:
                 p['log_source'] = config.get(sec, 'log_source')
             except Exception:
                 p['log_source'] = None
+            try:
+                p['source_process'] = config.get(sec, 'source_process')
+            except Exception:
+                p['source_process'] = None
             self.plist.append(p)
 
 

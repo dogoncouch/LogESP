@@ -96,13 +96,16 @@ class LiveParser:
                         e.log_source = self.log_source
                     else:
                         e.log_source = entry['log_source']
+                    if self.source_process:
+                        e.source_process = self.source_process
+                    else:
+                        e.source_process = entry['source_process']
+                    e.source_pid = entry['source_pid']
                     e.aggregated_events = entry['aggregated_events']
                     e.source_host = entry['source_host']
                     e.source_port = entry['source_port']
                     e.dest_host = entry['dest_host']
                     e.dest_port = entry['dest_port']
-                    e.source_process = entry['source_process']
-                    e.source_pid = entry['source_pid']
                     e.action = entry['action']
                     e.command = entry['command']
                     e.protocol = entry['protocol']
@@ -178,6 +181,7 @@ class LiveParser:
                 self.parsepath, self.parsehost,
                 helpertype=self.helper_type)
         self.log_source = parseinfo['log_source']
+        self.source_process = parseinfo['source_process']
 
         try:
             while True:

@@ -48,4 +48,5 @@ backup_lifespan_days=366
 A few more settings are available, in addition to the ones used above:
 
 - `log_source` - for logs that don't indicate the originating host (e.g. web access logs)
+- `source_process` - `source_process` to assign to all events
 - `facility` - sets the syslog facility (0-23)
