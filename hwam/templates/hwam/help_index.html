@@ -1,0 +1,67 @@
+{% extends "hwam/base.html" %}
+
+{% block sub-title %}Asset Management Documentation | {% endblock %}
+
+{% block content-main %}
+
+<h1>LDSI Asset Management Documentation</h1>
+
+<h2>Index</h2>
+
+<ul>
+    <li><a href="#organizational-units">Organizational Units</a></li>
+    <li><a href="#hardware-assets">Hardware Assets</a></li>
+    <li><a href="#software-assets">Software Assets</a></li>
+</ul>
+
+<a name="organizational-units"></a>
+<h2>Organizational Units</a>
+<p>Organizational units can be departments, office locations, or anything else by which your organization can be ... organized. OUs can have a parent OU; an organization should be arranged in a tree.</p>
+
+<a name="hardware-assets"></a>
+<h2>Hardware Assets</h2>
+<p>Hardware assets can be any piece of hardware, from door locks to servers to USB thumb drives. Each hardware asset belongs to an OU. Hardware assets can have a parent hardware asset (for example, a hard drive in a server), along with the following attributes:</p>
+
+<ul>
+    <li><b>name</b> - the asset name</li>
+    <li><b>desc</b> - a description of the asset</li>
+    <li><b>asset_owner</b> - the person responsible for the asset</li>
+    <li><b>asset_custodian</b> - the custodian of the asset</li>
+    <li><b>hardware_type</b> - the hardware type</li>
+    <li><b>device_maker</b> - the manufacturer</li>
+    <li><b>device_model</b> - the device model</li>
+    <li><b>property_id</b> - the asset's company-assigned property ID</li>
+    <li><b>location</b> - the location of the asset</li>
+    <li><b>status</b> - the status of the asset</li>
+    <li><b>date_added</b> - the date the asset was added</li>
+    <li><b>date_eol</b> - the asset's end of life date</li>
+</ul>
+
+<a name="software-assets"></a>
+<h2>Software Assets</h2>
+<p>Software assets can be anything from files to operating systems. Software assets belong to an OU, and can have multiple parent hardware and software assets (for example, a virtual machine that runs on a cluster of 20 servers). They also have the following attributes:</p>
+
+<ul>
+    <li><b>custodian_swam</b> - Software asset management custodian</li>
+    <li><b>custodian_csm</b> - configuration management custodian</li>
+    <li><b>custodian_vul</b> - patching/vulnerability management custodian</li>
+    <li><b>software_type</b> - the software type</li>
+    <li><b>hostname</b> - the host name, if applicable</li>
+    <li><b>domain_name</b> - the domain name</li>
+    <li><b>ip4_address_1</b> - an IPv4 address</li>
+    <li><b>ip4_address_2</b> - an IPv4 address</li>
+    <li><b>ip4_address_3</b> - an IPv4 address</li>
+    <li><b>ip4_address_4</b> - an IPv4 address</li>
+    <li><b>ip6_address_1</b> - an IPv6 address</li>
+    <li><b>ip6_address_2</b> - an IPv6 address</li>
+    <li><b>ip6_address_3</b> - an IPv6 address</li>
+    <li><b>ip6_address_4</b> - an IPv6 address</li>
+    <li><b>package_name</b> - the package name</li>
+    <li><b>package_version</b> - the package version</li>
+    <li><b>sw_property_id</b> - the asset's company-assigned property ID</li>
+    <li><b>status</b> - the status of the asset</li>
+    <li><b>date_added</b> - the date the asset was added</li>
+    <li><b>date_eol</b> - the asset's end of life date</li>
+</ul>
+
+{% endblock %}

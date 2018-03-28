@@ -14,6 +14,9 @@ from .models import SoftwareAsset
 def index(request):
     return render(request, 'hwam/index.html')
 
+def help_index(request):
+    return render(request, 'hwam/help_index.html')
+
 class OUIndexView(ListView):
     model = OrganizationalUnit
     template_name = 'hwam/ou_index.html'

@@ -20,6 +20,15 @@ def at_index(request):
 def nt_index(request):
     return render(request, 'risk/nt_index.html')
 
+def help_index(request):
+    return render(request, 'risk/help_index.html')
+
+def help_adv_threat(request):
+    return render(request, 'risk/help_adv_threat.html')
+
+def help_nonadv_threat(request):
+    return render(request, 'risk/help_nonadv_threat.html')
+
 class ATEIndexView(ListView):
     model = AdvThreatEvent
     template_name = 'risk/ate_index.html'

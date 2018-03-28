@@ -1,0 +1,32 @@
+{% extends "risk/base.html" %}
+
+{% block sub-title %}Risk Management Documentation | {% endblock %}
+
+{% block content-main %}
+
+<h1>LDSI Risk Management Documentation</h1>
+
+<p>The LDSI risk management system is based on the <a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final">NIST risk assessment guidelines</a>.</p>
+
+<h2>Index</h2>
+
+<ul>
+    <li><a href="{% url 'siem:adv_threat_help' %}"Adversarial Threats</a></li>
+    <ul>
+        <li><a href="{% url 'siem:adv_threat_help' %}#adversarial-threat-events">Adversarial Threat Events</a></li>
+        <li><a href="{% url 'siem:adv_threat_help' %}#adversarial-threat-sources">Adversarial Threat Sources</a></li>
+        <li><a href="{% url 'siem:adv_threat_help' %}#vulnerabilities">Vulnerabilities</a></li>
+        <li><a href="{% url 'siem:adv_threat_help' %}#responses">Responses</a></li>
+        <li><a href="{% url 'siem:adv_threat_help' %}#impacts">Impacts</a></li>
+    </ul></li>
+    <li><a href="{% url 'siem:nonadv_threat_help' %}">Non-Adversarial Threats</a></li>
+    <ul>
+        <li><a href="{% url 'siem:nonadv_threat_help' %}#non-adversarial-threat-events">Non-Adversarial Threat Events</a></li>
+        <li><a href="{% url 'siem:nonadv_threat_help' %}#non-adversarial-threat-sources">Non-Adversarial Threat Sources</a></li>
+        <li><a href="{% url 'siem:nonadv_threat_help' %}#risk-conditions">Risk Conditions</a></li>
+        <li><a href="{% url 'siem:nonadv_threat_help' %}#responses">Responses</a></li>
+        <li><a href="{% url 'siem:nonadv_threat_help' %}#impacts">Impacts</a></li>
+    </ul>
+</ul>
+
+{% endblock %}

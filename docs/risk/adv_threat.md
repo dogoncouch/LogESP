@@ -1,4 +1,6 @@
-# Adversarial Threat Documentation
+# LDSI Adversarial Threat Documentation
+
+LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 The LDSI risk management system is based on the [NIST risk assessment guidelines](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final).
 
@@ -20,7 +22,7 @@ An adversarial threat event is an event that is caused intentionally (by an adve
 - `event_type` - the event type
 - `info_source` - the source of information on the threat
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
-- [soures](#adversarial-threat-sources) - adversarial threat sources that could cause the event
+- [sources](#adversarial-threat-sources) - adversarial threat sources that could cause the event
 - `relevance` - the relevance, or likelihood, of the event
 - [vulnerabilities](#vulnerabilities) - vulnerabilities related to the event
 - [responses](#responses) - measures taken in response to the threat

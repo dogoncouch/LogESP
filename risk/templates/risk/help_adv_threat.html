@@ -1,0 +1,98 @@
+{% extends "risk/base.html" %}
+
+{% block sub-title %}Adversarial Threat Documentation | {% endblock %}
+
+{% block content-main %}
+
+<h1>Adversarial Threat Documentation</h1>
+
+<p>The LDSI risk management system is based on the <a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final">NIST risk assessment guidelines</a>.</p>
+
+<h2>Index</h2>
+
+<ul>
+    <li><a href="#adversarial-threat-events">Adversarial Threat Events</a></li>
+    <li><a href="#adversarial-threat-sources">Adversarial Threat Sources</a></li>
+    <li><a href="#vulnerabilities">Vulnerabilities</a></li>
+    <li><a href="#responses">Responses</a></li>
+    <li><a href="#impacts">Impacts</a></li>
+</ul>
+
+<a name="adversarial-threat-events"></a>
+<h2>Adversarial Threat Events</h2>
+<p>An adversarial threat event is an event that is caused intentionally (by an adversary or other malicious entity), and could have negative impacts.</p>
+
+<h3>Adversarial Threat Event Anatomy</h3>
+
+<ul>
+    <li><b>name</b> - the event name</li>
+    <li><b>desc</b> - a description of the event</li>
+    <li><b>event_type</b> - the event type</li>
+    <li><b>info_source</b> - the source of information on the threat</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><a href="#adversarial-threat-sources"><b>sources</b></a> - adversarial threat sources that could cause the event</li>
+    <li><b>relevance</b> - the relevance, or likelihood, of the event</li>
+    <li><a href="#vulnerabilities"><b>vulnerabilities</b></a> - vulnerabilities related to the event</li>
+    <li><a href="#responses"><b>responses</b></a> - measures taken in response to the threat</li>
+    <li><b>likelihood_initiation</b>` - the likelihood of the event being initiated (scale of 1 to 100)</li>
+    <li><b>likelihood_impact</b> - the likelihood of adverse impact if the event is initiated (scale of 1 to 100)</li>
+    <li><b>impacts</b>](#impacts) - potential impacts of the event</li>
+    <li><b>assigned_risk</b> - the level of risk assigned to the event (scale of 1 to 100)</li>
+</ul>
+
+<a name="adversarial-threat-sources"></a>
+<h2>Adversarial Threat Sources</h2>
+<p>An adversarial threat source is a person or entity with intent to cause harm to an organization.</p>
+
+<ul>
+    <li><b>name</b> - the threat source name</li>
+    <li><b>desc</b> - a description of the threat source</li>
+    <li><b>event_type</b> - the threat source type</li>
+    <li><b>info_source</b> - the source of information on the threat source</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>in_scope</b> - whether or not the threat source in within the scope of risk management</li>
+    <li><b>capability</b> - the threat source's level of capability (scale of 1 to 100)</li>
+    <li><b>intent</b> - the threat source's level of intent (scale of 1 to 100)</li>
+    <li><b>targeting</b> - the threat source's level of intent on specific targets (scale of 1 to 100)</li>
+</ul>
+
+<a name="vulnerabilities"></a>
+<h2>Vulnerabilities</h2>
+<p>Vulnerabilities are conditions that make a threat event more likely to happen.</p>
+
+<ul>
+    <li><b>name</b> - the vulnerability name</li>
+    <li><b>desc</b> - a description of the vulnerability</li>
+    <li><b>vuln_type</b> - the vulnerability type</li>
+    <li><b>info_source</b> - the source of information on the threat source</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>severity</b> - the vulnerability's level of severity (scale of 1 to 100)</li>
+</ul>
+
+<a name="responses"></a>
+<h2>Responses</h2>
+<p>Responses are measures taken to reduce the risk from a threat.</p>
+
+<ul>
+    <li><b>name</b> - the response name<li>
+    <li><b>desc</b> - a description of the response<li>
+    <li><b>response_type</b> - the response type<li>
+    <li><b>effectiveness</b> - the effectiveness of the response (scale of 1 to 100)<li>
+    <li><b>status</b> - the status of the response (enabled, planned, declined, etc)<li>
+</ul>
+
+<a name="impacts"></a>
+<h2>Impacts</h2>
+<p>Impacts are the unwanted results if a threat event were to occur.</p>
+
+<ul>
+    <li><b>name</b> - the impact name</li>
+    <li><b>desc</b> - a description of the impact</li>
+    <li><b>impact_type</b> - the impact type</li>
+    <li><b>info_source</b> - the source of information on the threat source</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>severity</b> - the impact's level of severity (scale of 1 to 100)</li>
+    <li><b>impact_tier</b> - the impact tier (organization-wide, department-wide, or localized)</li>
+</ul>
+
+{% endblock %}

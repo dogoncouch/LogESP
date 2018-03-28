@@ -1,0 +1,96 @@
+{% extends "risk/base.html" %}
+
+{% block sub-title %}Non-Adversarial Threat Documentation | {% endblock %}
+
+{% block content-main %}
+
+<h1>Non-Adversarial Threat Documentation</h1>
+
+<p>The LDSI risk management system is based on the <a href="https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final">NIST risk assessment guidelines</a>.</p>
+
+<h2>Index</h2>
+
+<ul>
+    <li><a href="#non-adversarial-threat-events">Non-Adversarial Threat Events</a></li>
+    <li><a href="#non-adversarial-threat-sources">Non-Adversarial Threat Sources</a></li>
+    <li><a href="#risk-conditions">Risk Conditions</a></li>
+    <li><a href="#responses">Responses</a></li>
+    <li><a href="#impacts">Impacts</a></li>
+</ul>
+
+<a name="non-adversarial-threat-events"></a>
+<h2>Non-Adversarial Threat Events</h2>
+<p>A non-adversarial threat event is an event that is not caused intentionally, but could cause harm to an organization (i.e. an earthquake, a configuration mistake).</p>
+
+<h3>Non-Adversarial Threat Event Anatomy</h3>
+
+<ul>
+    <li><b>name</b> - the event name</li>
+    <li><b>desc</b> - a description of the event</li>
+    <li><b>event_type</b> - the event type</li>
+    <li><b>info_source</b> - the source of information on the threat</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>relevance</b> - the relevance, or likelihood, of the event</li>
+    <li><a href="#non-adversarial-threat-sources"><b>sources</b></a> - non-adversarial threat sources that could cause the event</li>
+    <li><a href="#risk-conditions"><b>risk conditions</b></a> - predisposing conditions related to the event</li>
+    <li><a href="#responses"><b>responses</b></a> - measures taken in response to the threat</li>
+    <li><b>likelihood_initiation</b> - the likelihood of the event being initiated (scale of 1 to 100)</li>
+    <li><b>likelihood_impact</b> - the likelihood of adverse impact if the event is initiated (scale of 1 to 100)</li>
+    <li><a href="#impacts"><b>impacts</b></a> - potential impacts of the event</li>
+    <li><b>assigned_risk</b> - the level of risk assigned to the event (scale of 1 to 100)</li>
+</ul>
+
+<a name="non-adversarial-threat-sources"></a>
+<h2>Non-Adversarial Threat Sources</h2>
+<p>A non-adversarial threat source is a person, entity, or occurance that could cause harm to an organization without intent.</p>
+
+<ul>
+    <li><b>name</b> - the threat source name</li>
+    <li><b>desc</b> - a description of the threat source</li>
+    <li><b>event_type</b> - the threat source type</li>
+    <li><b>info_source</b> - the source of information on the threat source</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>in_scope</b> - whether or not the threat source in within the scope of risk management</li>
+    <li><b>range_of_effect</b> - the threat source's range of effect (scale of 1 to 100)</li>
+</ul>
+
+<a name="risk-conditions"></a>
+<h2>Risk Conditions</h2>
+<p>Risk conditions are predisposing conditions that make a threat event more likely to happen.</p>
+
+<ul>
+    <li><b>name</b> - the condition name</li>
+    <li><b>desc</b> - a description of the condition</li>
+    <li><b>vuln_type</b> - the condition type</li>
+    <li><b>info_source</b> - the source of information on the condition</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>pervasiveness</b> - the condition's level of pervasiveness (scale of 1 to 100)</li>
+</ul>
+
+<a name="responses"></a>
+<h2>Responses</h2>
+<p>Responses are measures taken to reduce the risk from a threat.</p>
+
+<ul>
+    <li><b>name</b> - the response name<li>
+    <li><b>desc</b> - a description of the response<li>
+    <li><b>response_type</b> - the response type<li>
+    <li><b>effectiveness</b> - the effectiveness of the response (scale of 1 to 100)<li>
+    <li><b>status</b> - the status of the response (enabled, planned, declined, etc)<li>
+</ul>
+
+<a name="impacts"></a>
+<h2>Impacts</h2>
+<p>Impacts are the unwanted results if a threat event were to occur.</p>
+
+<ul>
+    <li><b>name</b> - the impact name</li>
+    <li><b>desc</b> - a description of the impact</li>
+    <li><b>impact_type</b> - the impact type</li>
+    <li><b>info_source</b> - the source of information on the threat source</li>
+    <li><b>tier</b> - the information source tier (organization-wide, department-wide, or localized)</li>
+    <li><b>severity</b> - the impact's level of severity (scale of 1 to 100)</li>
+    <li><b>impact_tier</b> - the impact tier (organization-wide, department-wide, or localized)</li>
+</ul>
+
+{% endblock %}

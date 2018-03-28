@@ -1,4 +1,6 @@
-# Non-Adversarial Threat Documentation
+# LDSI Non-Adversarial Threat Documentation
+
+LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 The LDSI risk management system is based on the [NIST risk assessment guidelines](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final).
 
@@ -21,8 +23,8 @@ A non-adversarial threat event is an event that is not caused intentionally, but
 - `info_source` - the source of information on the threat
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
 - `relevance` - the relevance, or likelihood, of the event
-- [soures](#adversarial-threat-sources) - non-adversarial threat sources that could cause the event
-- [risk conditions](#vulnerabilities) - predisposing conditions related to the event
+- [sources](#non-adversarial-threat-sources) - non-adversarial threat sources that could cause the event
+- [risk conditions](#risk-conditions) - predisposing conditions related to the event
 - [responses](#responses) - measures taken in response to the threat
 - `likelihood_initiation` - the likelihood of the event being initiated (scale of 1 to 100)
 - `likelihood_impact` - the likelihood of adverse impact if the event is initiated (scale of 1 to 100)
@@ -38,15 +40,15 @@ A non-adversarial threat source is a person, entity, or occurance that could cau
 - `info_source` - the source of information on the threat source
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
 - `in_scope` - whether or not the threat source in within the scope of risk management
-- `range_of_effect` - the threat source's range of effect (scale of 1 to 100
+- `range_of_effect` - the threat source's range of effect (scale of 1 to 100)
 
 ## Risk Conditions
-Vulnerabilities are conditions that make a threat event more likely to happen.
+Risk conditions are predisposing conditions that make a threat event more likely to happen.
 
-- `name` - the vulnerability name
-- `desc` - a description of the vulnerability
-- `vuln_type` - the vulnerability type
-- `info_source` - the source of information on the threat source
+- `name` - the condition name
+- `desc` - a description of the condition
+- `vuln_type` - the condition type
+- `info_source` - the source of information on the condition
 - `tier` - the information source tier (organization-wide, department-wide, or localized)
 - `pervasiveness` - the vulnerability's level of severity (scale of 1 to 100)
 

@@ -7,6 +7,7 @@ from . import views
 app_name = 'hwam'
 urlpatterns = [
     path('', login_required(views.index), name='index'),
+    path('help/', login_required(views.help_index), name='help_index'),
     path('ou/', login_required(views.OUIndexView.as_view()),
         name='ou_index'),
     path('hw/', login_required(views.HWIndexView.as_view()),
