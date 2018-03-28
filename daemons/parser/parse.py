@@ -41,6 +41,7 @@ class LiveParser:
     def __init__(self):
         """Initialize live parser"""
         self.parser = None
+        self.log_source = None
         syslog.openlog(facility=syslog.LOG_DAEMON)
 
 
@@ -91,7 +92,10 @@ class LiveParser:
                     else:
                         e.facility = self.facility
                     e.severity = entry['severity']
-                    e.log_source = entry['log_source']
+                    if self.log_source:
+                        e.log_source = self.log_source
+                    else:
+                        e.log_source = entry['log_source']
                     e.aggregated_events = entry['aggregated_events']
                     e.source_host = entry['source_host']
                     e.source_port = entry['source_port']
@@ -173,6 +177,8 @@ class LiveParser:
                 TIME_ZONE,
                 self.parsepath, self.parsehost,
                 helpertype=self.helper_type)
+        self.log_source = parseinfo['log_source']
+
         try:
             while True:
                 self.parse_entries(parseinfo['filename'])
