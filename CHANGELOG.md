@@ -3,20 +3,16 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 
 ## [Unreleased]
 ### Added
-- `start.sh` script for starting/restarting/stopping daemon
-- Source and destination host filters to limit rules
+- Many filters to limit rules
 - Parse helper types for simpler config updates
-- Event fields for netflow parsing
-- Email alerts to rules
-- More filters to rules - action, interface, source/target user
+- Event fields for netflows, web server logs, and more
+- Email alerts for rules
 - Password change pages
 - Sanity check for entry field lengths, etc.
 - Documentation
-- Event fields for web server logs
 - `ldsi` script for controlling daemons
 
 ### Updated
-- Fixed helper logic for single-field parse helpers
 - Improved risk management workflows
 - Split username field into `source_user`, `target_user`
 - Improved event search (more fields, better formatting)
@@ -28,6 +24,11 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Rule events now track source/dest host count
 - Rules and searches use more regular expressions
 - ldsi daemon runs without privileges
+- Parser threads re-read parsers/helpers every 6,000 events or 10 minutes
+- `log_source` event attribute can be set in `config/parser.conf`
+
+### Fixed
+- Helper logic for single-field parse helpers
 
 ## [0.1-alpha] - 2018-02-06
 - First test release
