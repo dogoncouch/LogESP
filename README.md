@@ -7,7 +7,7 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](LICENSE)
 - [Introduction](#introduction)
 - [Installing on Ubuntu](docs/install-ubuntu.md)
 - [Screenshots](docs/screenshots.md)
-### SIEM documentation
+### SIEM Documentation
 - [Parsing](docs/siem/parsing.md)
   - [Parse Daemon](docs/siem/parsing.md/#parse-daemon)
   - [Event Parsing](docs/siem/parsing.md/#event-parsing)
@@ -24,6 +24,8 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](LICENSE)
   - [Anatomy of a Log Event](docs/siem/events.md/#anatomy-of-a-log-event)
   - [Anatomy of a Rule Event](docs/siem/events.md/#anatomy-of-a-rule-event)
 - [Daemons](docs/siem/daemons.md)
+### Asset Management Documentation
+- [Asset Management](docs/hwam.md)
 
 ## Introduction
 LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
