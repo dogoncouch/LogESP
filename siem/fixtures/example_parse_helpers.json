@@ -248,7 +248,7 @@
     "desc": "Syslog event aggregation.",
     "is_builtin": true,
     "helper_type": "auth",
-    "match_regex": "message repeated (\\d+) times:",
+    "match_regex": "message\\s+repeated\\s+(\\d+)\\s+times:",
     "fields": "aggregated_events"
   }
 },
@@ -259,7 +259,7 @@
     "desc": "Syslog event aggregation.",
     "is_builtin": true,
     "helper_type": "daemon",
-    "match_regex": "message repeated (\\d+) times:",
+    "match_regex": "message\\s+repeated\\s+(\\d+)\\s+times:",
     "fields": "aggregated_events"
   }
 },
@@ -270,7 +270,7 @@
     "desc": "Syslog event aggregation.",
     "is_builtin": true,
     "helper_type": "snort_ids",
-    "match_regex": "message repeated (\\d+) times:",
+    "match_regex": "message\\s+repeated\\s+(\\d+)\\s+times:",
     "fields": "aggregated_events"
   }
 },

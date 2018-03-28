@@ -73,7 +73,7 @@ class ParseCore:
             except Exception:
                 p['facility'] = None
             try:
-                p['log_source'] = int(config.get(sec, 'log_source'))
+                p['log_source'] = config.get(sec, 'log_source')
             except Exception:
                 p['log_source'] = None
             self.plist.append(p)
