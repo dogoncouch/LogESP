@@ -7,6 +7,16 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](LICENSE)
 - [Introduction](#introduction)
 - [Installing on Ubuntu](docs/install-ubuntu.md)
 - [Screenshots](docs/screenshots.md)
+### Asset Management Documentation
+- [Asset Management](docs/hwam.md)
+### Risk Management Documentation
+- [Adversarial Threats](docs/risk/adv_threat.md)
+  - [Adversarial Threat Events](docs/risk/adv_threat.md#adversarial-threat-event-anatomy)
+  - [Adversarial Threat Sources](docs/risk/adv_threat.md#adversarial-threat-sources)
+  - [Vulnerabilities](docs/risk/adv_threat.md@vulnerabilities)
+  - [Responses](docs/risk/adv_threat.md#responses)
+  - [Impacts](docs/risk/adv_threat.md@impacts)
+- [Non-Adversarial Threats](docs/risk/nonadv_threat.md)
 ### SIEM Documentation
 - [Parsing](docs/siem/parsing.md)
   - [Parse Daemon](docs/siem/parsing.md/#parse-daemon)
@@ -20,12 +30,10 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](LICENSE)
     - [Rule vs. Log Events](docs/siem/rules.md/#rule-vs-log-events)
     - [Filters](docs/siem/rules.md/#filters)
     - [Magnitude Calculation](docs/siem/rules.md/#magnitude-calculation)
-- [Events](docs/siem/events.md)
-  - [Anatomy of a Log Event](docs/siem/events.md/#anatomy-of-a-log-event)
-  - [Anatomy of a Rule Event](docs/siem/events.md/#anatomy-of-a-rule-event)
+  - [Events](docs/siem/events.md)
+    - [Anatomy of a Log Event](docs/siem/events.md/#anatomy-of-a-log-event)
+    - [Anatomy of a Rule Event](docs/siem/events.md/#anatomy-of-a-rule-event)
 - [Daemons](docs/siem/daemons.md)
-### Asset Management Documentation
-- [Asset Management](docs/hwam.md)
 
 ## Introduction
 LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.

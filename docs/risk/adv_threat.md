@@ -1,7 +1,14 @@
 # Adversarial Threat Documentation
 
-## Adversarial Threat Event Anatomy
+The LDSI risk management system is based on the [NIST risk assessment guidelines](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final).
 
+## Adversarial Threat Events
+An adversarial threat event is an event that is caused intentionally (by an adversary or other malicious entity), and could have negative impacts.
+
+### Adversarial Threat Event Anatomy
+
+- `name` - the event name
+- `desc` - a description of the event
 - `type` - the event type
 - `info_source` - the source of information on the threat
 - `info_tier` - the information source tier (organization-wide, department-wide, or localized)
