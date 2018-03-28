@@ -142,7 +142,8 @@ elif [ $STOPPING ]; then
         for PID in ${PIDLIST[@]}; do
             kill ${PID}
         done
-        rm -f "${PIDFILE}"
+        echo "" > "${PIDFILE}"
+        #rm -f "${PIDFILE}"
     else
         read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
         if [ ${LDSIPROC} ]; then
@@ -158,7 +159,8 @@ elif [ $RESTARTING ]; then
         for PID in ${PIDLIST[@]}; do
             kill ${PID}
         done
-        rm -f "${PIDFILE}"
+        echo "" > "${PIDFILE}"
+        #rm -f "${PIDFILE}"
     else
         read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
         if [ ${LDSIPROC} ]; then
