@@ -7,7 +7,6 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 - [Daemons](#daemons)
 
 ## Daemons
-### start.sh
 Parser and sentry daemons can be started, restarted, and stopped with `scripts/ldsi`, which includes options for setting the LDSI base directory and virtual environment base directory.
 ```
 Usage: ldsi [-hv] {start|stop|restart|status|clean} [-lps] [-b LDSIBASE] [-e ENVBASE]

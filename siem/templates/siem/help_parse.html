@@ -7,12 +7,13 @@
 <h1>Parsing Documentation</h1>
 
 <ul>
-    <li><a href="{% url 'siem:parse_help' %}#daemon">Parse Daemon</a></li>
-    <li><a href="{% url 'siem:parse_help' %}#event">Event Parsing</a><ul>
-        <li><a href="{% url 'siem:parse_help' %}#parsers">Parsers</a></li>
-        <li><a href="{% url 'siem:parse_help' %}#helpers">Parse Helpers</a></li>
+    <li><a href="#daemon">Parse Daemon</a></li>
+    <li><a href="#event">Event Parsing</a><ul>
+        <li><a href="#parsers">Parsers</a></li>
+        <li><a href="#helpers">Parse Helpers</a></li>
         </ul>
     </li>
+    <li><a href="#configuration">Configuration</a></li>
 </ul>
 
 <hr>
@@ -32,8 +33,38 @@
 
 <p>Each parser can have two sets of regex/field pairs: a primary, and a backup. If the primary regular expression doesn't find a match, the backup will be tried.</p>
 
-<a name="helpers">
-</a><h3>Parse Helpers</h3>
+<a name="helpers"></a>
+<h3>Parse Helpers</h3>
 <p>Parse helpers contain a regular expression and a comma-separated list of fields, similar to a parser. After parsing the main fields, the parse daemon tries each parse helper (of the helper type defined in the config file). If it finds a match, it pulls out extra fields; if not, it just moves on. Parse helpers are useful for parsing regular expressions and fields that aren't present in every single event.</p>
+<hr>
+<a name="configuration"></a>
+<h2>Configuration</h2>
+<p>The parser configuration file at `config/parser.conf` has one section per file. Here is an example section:</p>
+
+<pre>
+[auth]
+filename=/var/log/auth.log
+event_type=auth
+parser=syslog
+helper_type=auth
+local_lifespan_days=185
+backup_lifespan_days=366
+</pre>
+
+<ul>
+    <li>The section name must be unique, and should be meaningful; it is used in parser error logs.</li>
+    <li><b>filename</b> - the file to follow</li>
+    <li><b>event_type</b>` - the <b>event_type</b> to set for parsed events</li>
+    <li><b>parser</b>` - the parser to use when parsing events</li>
+    <li><b>helper_type</b>` - the type of parse helpers to use for additional fields</li>
+    <li><b>local_lifespan_days</b>` - the lifespan, in days, for the locally stored copy</li>
+    <li><b>backup_lifespan_days</b>` - the lifespan, in days, for the backup copy</li>
+</ul>
+
+<p>A few more settings are available, in addition to the ones used above:</p>
+<ul>
+    <li><b>`log_source</b>` - for logs that don't indicate the originating host (e.g. web access logs)</li>
+    <li><b>`facility</b>` - sets the syslog facility (0-23)</li>
+</ul>
 
 {% endblock %}
