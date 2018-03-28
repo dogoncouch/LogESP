@@ -124,7 +124,7 @@ else
 fi
 
 if [ $STARTING ]; then
-    if [ -f "${PIDFILE}" ]; then
+    if [ -s "${PIDFILE}" ]; then
         echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
     else
         read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
@@ -137,7 +137,7 @@ if [ $STARTING ]; then
     fi
 
 elif [ $STOPPING ]; then
-    if [ -f "${PIDFILE}" ]; then
+    if [ -s "${PIDFILE}" ]; then
         PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
             kill ${PID}
@@ -154,7 +154,7 @@ elif [ $STOPPING ]; then
     fi
 
 elif [ $RESTARTING ]; then
-    if [ -f "${PIDFILE}" ]; then
+    if [ -s "${PIDFILE}" ]; then
         PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
             kill ${PID}
@@ -185,7 +185,7 @@ elif [ $CLEANING ]; then
 
 elif [ $STATUSCHECK ]; then
     echo "=== ldsi daemon ==="
-    if [ -f ${PIDFILE} ]; then
+    if [ -s ${PIDFILE} ]; then
         PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
             echo "PID on file: $(cat "${PIDFILE}")"
