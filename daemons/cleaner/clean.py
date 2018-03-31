@@ -36,15 +36,11 @@ def clean(local=False):
                         eol_date_local__lte=timezone.localtime(
                             timezone.now()).date())
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' exiting. Rule no longer exists.'
-                exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                            str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)
@@ -56,15 +52,11 @@ def clean(local=False):
                         eol_date_local__lte=timezone.localtime(
                             timezone.now()).date())
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' exiting. Rule no longer exists.'
-                exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                            str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)
@@ -77,15 +69,11 @@ def clean(local=False):
                         eol_date_backup__lte=timezone.localtime(
                             timezone.now()).date())
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' exiting. Rule no longer exists.'
-                exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                            str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)
@@ -97,15 +85,11 @@ def clean(local=False):
                         eol_date_backup__lte=timezone.localtime(
                             timezone.now()).date())
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' exiting. Rule no longer exists.'
-                exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                            str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)
@@ -117,15 +101,11 @@ def clean(local=False):
             try:
                 e.delete()
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' exiting. Rule no longer exists.'
-                exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                            str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)
@@ -136,15 +116,11 @@ def clean(local=False):
             try:
                 e.delete()
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
-                        ' exiting. Rule no longer exists.'
-                exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI parser thread for ' + filename + \
-                            ' got 20 db errors. Error: ' + str(err)
+                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                            str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
                 sleep(0.2)
