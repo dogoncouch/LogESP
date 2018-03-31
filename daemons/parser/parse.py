@@ -145,7 +145,7 @@ class LiveParser:
                                 dbtries = 40
                                 msg = 'LDSI parser thread for ' + filename + \
                                         ' got 40 db errors. Event: ' + \
-                                        str(ourline[:80]) + \
+                                        str(ourline[:120]) + \
                                         '... Error: ' + str(err)
                                 syslog.syslog(syslog.LOG_ERR, msg)
                             dbtries -= 1
