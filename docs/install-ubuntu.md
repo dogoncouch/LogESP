@@ -58,6 +58,7 @@ pip install -r requirements.txt
 ### Add logespd User
 ```
 useradd -r -d /opt/LogESP -s /sbin/nologin -U logespd
+gpasswd -a logespd adm
 ```
 
 ### Set Up Static Files, Database
