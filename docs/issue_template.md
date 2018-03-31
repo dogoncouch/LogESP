@@ -20,7 +20,7 @@
 
 
 ### Specifications
-- ldsi version (in `ldsi/__init__.py`): 
+- LogESP version (in `LogESP/__init__.py`): 
 - Python version: 
 - Operating system: 
 - Operating system version: 

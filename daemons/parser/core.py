@@ -35,7 +35,7 @@ from siem.models import ParseHelper
 
 class ParseCore:
 
-    def __init__(self, config='/opt/ldsi/ldsi/config/parser.conf'):
+    def __init__(self, config='/opt/LogESP/config/parser.conf'):
         """Initialize live parser"""
         self.conf = config
         self.threads = []
@@ -102,18 +102,18 @@ class ParseCore:
                     if thread.isAlive():
                         isAlive=True
                     else:
-                        msg = 'LDSI parser thread for file ' + \
+                        msg = 'LogESP parser thread for file ' + \
                                 thread.name + ' has crashed'
                         syslog.syslog(syslog.LOG_CRIT, msg)
                 if not isAlive:
-                    msg = 'LDSI is not parsing any files'
+                    msg = 'LogESP is not parsing any files'
                     syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
 
         except KeyboardInterrupt:
             pass
         except Exception as err:
-            msg = 'LDSI core parser thread crashing. Error: ' + str(err)
+            msg = 'LogESP core parser thread crashing. Error: ' + str(err)
             syslog.syslog(syslog.LOG_ERR, msg)
 
 

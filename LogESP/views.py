@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, redirect
-from ldsi import __version__
+from LogESP import __version__
 # Create your views here.
 
 def index(request):

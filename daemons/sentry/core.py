@@ -60,7 +60,7 @@ class SentryMgrCore:
         while True:
             for t in self.threads:
                 if not self.threads[t].isAlive():
-                    msg = 'LDSI rule sentry thread for rule type ' + \
+                    msg = 'LogESP rule sentry thread for rule type ' + \
                             t + ' has crashed'
                     syslog.syslog(syslog.LOG_ERR, msg)
             sleep(120)
@@ -75,7 +75,7 @@ class SentryMgrCore:
         except KeyboardInterrupt:
             exit(0)
         except Exception as err:
-            msg = 'LDSI core sentry thread crashing. Error: ' + str(err)
+            msg = 'LogESP core sentry thread crashing. Error: ' + str(err)
             syslog.syslog(syslog.LOG_ERR, msg)
 
     

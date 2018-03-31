@@ -1,4 +1,4 @@
-# LDSI secondary settings file
+# LogESP secondary settings file
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'v2oem$sm5mtfz4n8=t)c37&y^3=c+)jxl2hf3ws$7(#eevpw+)'
@@ -13,7 +13,7 @@ ALLOWED_HOSTS = []
 #EMAIL_USE_TLS = True
 #EMAIL_HOST = 'smtp.example.com'
 #EMAIL_PORT = 587
-#EMAIL_HOST_USER = 'ldsiserver@example.com'
+#EMAIL_HOST_USER = 'logespserver@example.com'
 #EMAIL_HOST_PASSWORD = 'BIGSECRET'
 #EMAIL_ALERT_FROM_ADDRESS = 'noreply@example.com'
 

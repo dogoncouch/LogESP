@@ -1,8 +1,8 @@
-# LDSI Adversarial Threat Documentation
+# LogESP Adversarial Threat Documentation
 
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
-The LDSI risk management system is based on the [NIST risk assessment guidelines](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final).
+The LogESP risk management system is based on the [NIST risk assessment guidelines](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final).
 
 ## Index
 

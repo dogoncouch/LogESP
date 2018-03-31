@@ -1,4 +1,4 @@
-"""ldsi URL Configuration
+"""LogESP URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
@@ -19,7 +19,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 
-from ldsi import views
+from LogESP import views
 
 urlpatterns = [
     path('', login_required(views.index), name='index'),

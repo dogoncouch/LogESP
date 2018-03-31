@@ -56,11 +56,11 @@ daemon-help:
 	@echo
 	@echo --- Daemon help
 	@echo -----------------
-	@echo -- Use scripts/ldsi to start parser and sentry daemons-
-	@echo scripts/ldsi -h
+	@echo -- Use scripts/logesp to start parser and sentry daemons-
+	@echo scripts/logesp -h
 	@echo
 	@echo Make sure to edit config/parser.conf
-	@echo Restart daemons with scripts/ldsi restart to re-read config
+	@echo Restart daemons with scripts/logesp restart to re-read config
 	@echo
 
 newdb: newdb-setup fixtures

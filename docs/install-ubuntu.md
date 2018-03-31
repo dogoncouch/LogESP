@@ -1,5 +1,5 @@
-# LDSI Installation
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+# LogESP Installation
+LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 - Ubuntu server 16.04
 
@@ -7,7 +7,7 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 
 - [Requirements](#requirements)
 - [MariaDB Setup](#mariadb-setup)
-- [LDSI Setup](#ldsi-setup)
+- [LogESP Setup](#logesp-setup)
 - [Rsyslog Setup](#rsyslog-setup)
 - [Nginx Setup](#nginx-setup)
 - [Edit rc.local](#edit-rclocal)
@@ -16,10 +16,10 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
   - [Production Environments](#production-environments)
   - [Distributed Environments](#distributed-environments)
 
-Note: This installation is intended for development, and trying out the software. In production environments, LDSI should be configured by a professional with experience securing production servers.
+Note: This installation is intended for development, and trying out the software. In production environments, LogESP should be configured by a professional with experience securing production servers.
 
 ## Requirements
-On small home networks, LDSI can be run on an ubuntu server virtual machine with less than half of a processor, 1.5G of memory, and 8G of disk space.
+On small home networks, LogESP can be run on an ubuntu server virtual machine with less than half of a processor, 1.5G of memory, and 8G of disk space.
 ```
 apt update ; apt upgrade
 apt install build-essential python3-dev python3-venv libmysqlclient-dev mariadb-server nginx ntp
@@ -34,30 +34,30 @@ mysql -u root -p
 Note: Change the password below (IDENTIFIED BY). Even though it's localhost.
 ```
 CREATE DATABASE siem_data CHARACTER SET UTF8;
-CREATE USER ldsictrl@localhost IDENTIFIED BY 'siems2bfine';
-GRANT ALL PRIVILEGES ON siem_data TO ldsictrl@localhost;
+CREATE USER logespctrl@localhost IDENTIFIED BY 'siems2bfine';
+GRANT ALL PRIVILEGES ON siem_data TO logespctrl@localhost;
 FLUSH PRIVILEGES;
 exit
 ```
 
-## LDSI Setup
-### Create virtual env
+## LogESP Setup
+### Clone LogESP
 ```
-python3 -m venv /opt/ldsi
-cd /opt/ldsi
-source bin/activate
+cd /opt
+git clone https://github.com/dogoncouch/LogESP.git
+cd LogESP
 ```
 
-### Clone LDSI
+### Create virtual env
 ```
-git clone https://github.com/dogoncouch/ldsi.git
-cd ldsi
+python3 -m venv /opt/LogESP/env
+source env/bin/activate
 pip install -r requirements.txt
 ```
 
-### Add ldsid User
+### Add logespd User
 ```
-useradd -r -d /opt/ldsi/ldsi -s /sbin/nologin -U ldsid
+useradd -r -d /opt/LogESP -s /sbin/nologin -U logespd
 ```
 
 ### Set Up Static Files, Database
@@ -78,24 +78,24 @@ make staticfiles
 - Uncomment necessary files
 - Add more files, if necessary
 
-### Link ldsi daemon to /usr/local/bin
+### Link daemon script to /usr/local/bin
 ```
-ln -s /opt/ldsi/ldsi/scripts/ldsi /usr/local/bin
+ln -s /opt/LogESP/scripts/logesp /usr/local/bin
 ```
 
 ### Update Permissions
 ```
-chgrp -R ldsid /opt/ldsi/ldsi
-chown ldsid.www-data /opt/ldsi/ldsi/config/db.conf
-chmod 640 /opt/ldsi/ldsi/config/db.conf
-chmod 640 /opt/ldsi/ldsi/config/parser.conf
-chown -R ldsid.www-data /opt/ldsi/ldsi/run
+chgrp -R logespd /opt/LogESP
+chown logespd.www-data /opt/LogESP/config/db.conf
+chmod 640 /opt/LogESP/config/db.conf
+chmod 640 /opt/LogESP/config/parser.conf
+chown -R logespd.www-data /opt/LogESP/run
 ```
 
 ## Rsyslog Setup
 ### Place Files
 ```
-cp /opt/ldsi/ldsi/config/rsyslog/server/*.conf /etc/rsyslog.d/
+cp /opt/LogESP/config/rsyslog/server/*.conf /etc/rsyslog.d/
 touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 chown syslog.adm /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 ```
@@ -104,7 +104,7 @@ This configuration uses a UDP server. In a production environment, using a TCP s
 ## Nginx Setup
 ### Create Links
 ```
-ln -s /opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf /etc/nginx/sites-enabled/
+ln -s /opt/LogESP/config/nginx/logesp_nginx.conf /etc/nginx/sites-enabled/
 ```
 
 ### Create SSL Certificate
@@ -115,21 +115,21 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx
 In a production environment, use SSL certificates signed by your CA.
 
 ### Set Server Name
-Edit `/opt/ldsi/ldsi/config/nginx/ldsi_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
+Edit `/opt/LogESP/config/nginx/logesp_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
 
 ### Set PID File Permissions
 ```
-touch /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
-chown www-data.www-data /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
-chmod 644 /opt/ldsi/ldsi/run/ldsi-uwsgi-master.pid
+touch /opt/LogESP/run/logesp-uwsgi-master.pid
+chown www-data.www-data /opt/LogESP/run/logesp-uwsgi-master.pid
+chmod 644 /opt/LogESP/run/logesp-uwsgi-master.pid
 ```
 
 ## Edit rc.local
 - Add the following:
 ```
-/opt/ldsi/bin/uwsgi --ini /opt/ldsi/ldsi/config/nginx/ldsi_uwsgi.ini
-su -s '/bin/bash' -c '> /opt/ldsi/ldsi/run/ldsi.pid' ldsid
-/opt/ldsi/ldsi/scripts/ldsi start
+/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
+su -s '/bin/bash' -c '> /opt/LogESP/run/logesp.pid' logespd
+/opt/LogESP/scripts/logesp start
 ```
 
 ## Reboot
@@ -144,7 +144,7 @@ In a production security environment, a few more steps are recommended:
 - Use an SSL certificate signed by your CA
 - Use NTP on log sources for time synchronization
 - Update the `SECRET_KEY` setting in `config/settings.py`
-Note: LDSI isn't ready for production environments yet. Use with caution; review all django settings.
+Note: LogESP isn't ready for production environments yet. Use with caution; review all django settings.
 
 ### Distributed Environments
 Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.

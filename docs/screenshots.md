@@ -1,6 +1,6 @@
-# LDSI Screenshots
+# LogESP Screenshots
 
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 ## Index
 - [SIEM](#siem)

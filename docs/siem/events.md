@@ -1,6 +1,6 @@
 # Event Documentation
 
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 - [Anatomy of a Log Event](#anatomy-of-a-log-event)
 - [Anatomy of a Rule Event](#anatomy-of-a-rule-event)
@@ -59,7 +59,7 @@ time_zone           The time zone associated with the parsed_at datetime object.
 parsed_on           The hostname of the system on which the event was parsed.
 source_path         The full path of the file from which the event originated.
 event_type          The event type defined by the parser configuration.
-eol_date_local      Event end-of-life date in the LDSI database.
+eol_date_local      Event end-of-life date in the LogESP database.
 eol_date_backup     Event end-of-life date for backup copies.
 raw_text            The entire raw text of the event.
 ```
@@ -86,7 +86,7 @@ log_source_count    The number of different log sources involved.
 source_host_count   The number of different source hosts involved.
 dest_host_count     The number of different destination hosts involved.
 message             The message conveyed by the rule.
-eol_date_local      Event end-of-life date in the LDSI database
+eol_date_local      Event end-of-life date in the LogESP database
 eol_date_backup     Event end-of-life date for backup copies
 ```
 For more on how magnitude is calculated, see the [rule documentation](rules.md).

@@ -40,21 +40,21 @@ class DaemonCore:
 
     def sigterm_handler(self, signal, frame):
         """Exit cleanly on sigterm"""
-        msg = 'LDSI Daemon received sigterm, exiting'
+        msg = 'LogESP Daemon received sigterm, exiting'
         syslog.syslog(syslog.LOG_INFO, msg)
         sleep(0.2)
         exit(0)
 
     def sighup_handler(self, signal, frame):
         """Exit cleanly so restart can happen on sighup"""
-        msg = 'LDSI Daemon received sighup, restarting'
+        msg = 'LogESP Daemon received sighup, restarting'
         syslog.syslog(syslog.LOG_INFO, msg)
         sleep(0.2)
         exit(1)
 
     def sigint_handler(self, signal, frame):
         """Exit cleanly on sigint"""
-        msg = 'LDSI daemon received sigint, exiting'
+        msg = 'LogESP daemon received sigint, exiting'
         syslog.syslog(syslog.LOG_INFO, msg)
         sleep(0.2)
         exit(0)
@@ -91,14 +91,14 @@ class DaemonCore:
 
         # Log start:
         sleep(0.2)
-        syslog.syslog(syslog.LOG_INFO, 'LDSI Daemon has started')
+        syslog.syslog(syslog.LOG_INFO, 'LogESP Daemon has started')
 
         while True:
             if runparser and not parser.isAlive():
-                msg = 'LDSI parser has crashed!'
+                msg = 'LogESP parser has crashed!'
                 syslog.syslog(syslog.LOG_ALERT, msg)
             if runsentry and not sentry.isAlive():
-                msg = 'LDSI sentry has crashed!'
+                msg = 'LogESP sentry has crashed!'
                 syslog.syslog(syslog.LOG_ALERT, msg)
             sleep(120)
 

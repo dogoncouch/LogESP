@@ -1,6 +1,6 @@
-# LogDissect Security Intelligence
+# LogESP
 
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](LICENSE)
+LogESP (c) 2018 Dan Persons | [MIT License](LICENSE)
 
 ## Index
 
@@ -41,24 +41,24 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](LICENSE)
 - [Daemons](docs/siem/daemons.md)
 
 ## Introduction
-LDSI is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
+LogESP is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
 
 ### Design Principles
 #### Security
-LDSI was designed and built as a security application, and minimalism can be good for security.
+LogESP was designed and built as a security application, and minimalism can be good for security.
 
-- LDSI is built on the Python Django framework
-- LDSI does not require credentials, or installation of its software, on log sources. Event forwarding is left entirely up to syslog daemons.
-- The LDSI web interface uses no client-side scripting.
+- LogESP is built on the Python Django framework
+- LogESP does not require credentials, or installation of its software, on log sources. Event forwarding is left entirely up to syslog daemons.
+- The LogESP web interface uses no client-side scripting.
 
 #### [NIST](https://www.nist.gov/) guidelines
-The LDSI risk management system is based on NIST [risk assessment](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
+The LogESP risk management system is based on NIST [risk assessment](https://csrc.nist.gov/publications/detail/sp/800-30/rev-1/final) guidelines, and the SIEM and forensics apps are designed to support the NIST [incident response](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) and [forensics](https://csrc.nist.gov/publications/detail/sp/800-86/final) guidelines.
 
 #### Simplicity
-LDSI embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
+LogESP embraces the Unix design philosophy. It is designed to be as simple as possible, in order to be easy to understand, use, maintain, and extend.
 
 ### Applications
-LDSI includes a few different applications:
+LogESP includes a few different applications:
 - SIEM - Security Information and Event Management
 - Assets - Asset Management
 - Risk - Risk Management

@@ -54,13 +54,13 @@ class SentryCore:
                 rules = LimitRule.objects.all()
                 connsuccess = True
             except LimitRule.DoesNotExist:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                msg = 'LogESP sentry thread for ' + self.rule.name + \
                         ' exiting. Rule no longer exists.'
                 exit(0)
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI sentry thread for ' + self.rule.name + \
+                    msg = 'LogESP sentry thread for ' + self.rule.name + \
                             ' got 20 db errors while retrieving rules. ' + \
                             'Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
@@ -94,7 +94,7 @@ class SentryCore:
                 self.start_triggers()
                 for t in self.threads:
                     if not self.threads[t].isAlive():
-                        msg = 'LDSI sentry thread for rule id ' + \
+                        msg = 'LogESP sentry thread for rule id ' + \
                                 str(t) + 'has crashed'
                         syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
@@ -102,7 +102,7 @@ class SentryCore:
         except KeyboardInterrupt:
             exit(0)
         except Exception as err:
-            msg = 'LDSI sentry core limit rule thread crashing. Error: ' + \
+            msg = 'LogESP sentry core limit rule thread crashing. Error: ' + \
                     str(err)
             syslog.syslog(syslog.LOG_ERR, msg)
 

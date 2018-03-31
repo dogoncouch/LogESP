@@ -33,9 +33,9 @@ from sys import exit
 from django.utils import timezone
 from django.core.mail import send_mass_mail
 from django.contrib.auth.models import User
-from ldsi.settings import TIME_ZONE
+from LogESP.settings import TIME_ZONE
 try:
-    from ldsi.settings import EMAIL_ALERT_FROM_ADDRESS
+    from LogESP.settings import EMAIL_ALERT_FROM_ADDRESS
 except ImportError:
     EMAIL_ALERT_FROM_ADDRESS = 'noreply@example.com'
 from siem.models import LogEvent, RuleEvent, LimitRule
@@ -64,7 +64,7 @@ class LimitSentry:
             except Exception as err:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI sentry thread for rule ' + \
+                    msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
@@ -83,7 +83,7 @@ class LimitSentry:
                 except Exception as err:
                     if dbtries == 0:
                         dbtries = 20
-                        msg = 'LDSI sentry thread for rule ' + \
+                        msg = 'LogESP sentry thread for rule ' + \
                                 self.rule.name + \
                                 ' got 20 db errors. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
@@ -106,7 +106,7 @@ class LimitSentry:
                 dbtries -= 1
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI sentry thread for rule ' + \
+                    msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
@@ -127,7 +127,7 @@ class LimitSentry:
             except Exception as err:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI sentry thread for rule ' + \
+                    msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
@@ -146,7 +146,7 @@ class LimitSentry:
                 except Exception as err:
                     if dbtries == 0:
                         dbtries = 20
-                        msg = 'LDSI sentry thread for rule ' + \
+                        msg = 'LogESP sentry thread for rule ' + \
                                 self.rule.name + \
                                 ' got 20 db errors. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
@@ -168,7 +168,7 @@ class LimitSentry:
             except Exception as err:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI sentry thread for rule ' + \
+                    msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
@@ -183,7 +183,7 @@ class LimitSentry:
     def send_email_alerts(self, magnitude, eventcount, logsources,
             sourcehosts, desthosts):
         """Send email alerts for rule"""
-        msgsubject = 'LDSI rule broken: ' + self.rule.name
+        msgsubject = 'LogESP rule broken: ' + self.rule.name
         msglist = []
         msglist.append(msgsubject + '\n')
         msglist.append('Magnitude: ' + str(magnitude))
@@ -203,7 +203,7 @@ class LimitSentry:
         try:
             send_mass_mail(emaillist, fail_silently=False)
         except smtplib.SMTPException:
-            msg = 'LDSI sentry failed to send email alerts for rule ' + \
+            msg = 'LogESP sentry failed to send email alerts for rule ' + \
                     self.rule_name
             syslog.syslog(syslog.LOG_ERR, msg)
 
@@ -246,14 +246,14 @@ class LimitSentry:
                                 pk=self.rule.id)
                         connsuccess = True
                     except LimitRule.DoesNotExist:
-                        msg = 'LDSI sentry thread for ' + self.rule.name + \
+                        msg = 'LogESP sentry thread for ' + self.rule.name + \
                                 ' exiting. Rule no longer exists.'
                         syslog.syslog(syslog.LOG_NOTICE, msg)
                         exit(0)
                     except Exception:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -291,7 +291,7 @@ class LimitSentry:
                 else:
                     sleep(randrange(45, 60))
             except Exception as err:
-                msg = 'LDSI sentry thread for ' + self.rule.name + \
+                msg = 'LogESP sentry thread for ' + self.rule.name + \
                         ' crashing. Error: ' + str(err)
                 syslog.syslog(syslog.LOG_ERR, msg)
                 exit(0)
@@ -409,7 +409,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -442,7 +442,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -479,7 +479,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -512,7 +512,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -572,7 +572,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -587,7 +587,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -602,7 +602,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -649,7 +649,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -669,7 +669,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -693,7 +693,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -713,7 +713,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -755,7 +755,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -770,7 +770,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
@@ -785,7 +785,7 @@ class LimitSentry:
                     except Exception as err:
                         if dbtries == 0:
                             dbtries = 20
-                            msg = 'LDSI sentry thread for rule ' + \
+                            msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
                                     ' got 20 db errors. Error: ' + str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)

@@ -1,6 +1,6 @@
 # Rule Documentation
 
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 - [Sentry Daemon](#sentry-daemon)
 - [Limit Rules](#limit-rules)

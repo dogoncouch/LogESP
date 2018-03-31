@@ -34,7 +34,7 @@ from django.utils import timezone
 #import daemons.parser.parsers
 from daemons.parser.parser import ParseModule
 from siem.models import LogEvent, LogEventParser, ParseHelper
-from ldsi.settings import TIME_ZONE
+from LogESP.settings import TIME_ZONE
 
 class LiveParser:
 
@@ -143,7 +143,7 @@ class LiveParser:
                         except Exception as err:
                             if dbtries == 0:
                                 dbtries = 40
-                                msg = 'LDSI parser thread for ' + filename + \
+                                msg = 'LogESP parser thread for ' + filename + \
                                         ' got 40 db errors. Event: ' + \
                                         str(ourline[:120]) + \
                                         '... Error: ' + str(err)
@@ -159,7 +159,7 @@ class LiveParser:
 
 
     def parse_file(self, parseinfo):
-        """Parse a file into ldsi"""
+        """Parse a file into LogESP"""
         self.facility = parseinfo['facility']
         # Set EOL time delta:
         if parseinfo['local_lifespan_days'] == 0:
@@ -190,7 +190,7 @@ class LiveParser:
         except KeyboardInterrupt:
             pass
         except Exception as err:
-            msg = 'LDSI parser thread for ' + self.parsepath + \
+            msg = 'LogESP parser thread for ' + self.parsepath + \
                     ' crashing. Error: ' + str(err)
             syslog.syslog(syslog.LOG_ERR, msg)
 

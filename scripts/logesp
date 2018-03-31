@@ -27,11 +27,11 @@
 # Set defaults:
 RUNPARSER="True"
 RUNSENTRY="True"
-LDSIBASE="/opt/ldsi/ldsi"
-ENVBASE="/opt/ldsi"
+LOGESPBASE="/opt/LogESP"
+ENVBASE="/opt/LogESP/env"
 
 usage() {
-    echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-lps] [-b LDSIBASE] [-e ENVBASE]"
+    echo "Usage: ${0##*/} [{start|stop|restart|clean}] [-hv] [-lps] [-b LOGESPBASE] [-e ENVBASE]"
     echo
     echo "Optional arguments:"
     echo "  -h                      Print this help message"
@@ -39,7 +39,7 @@ usage() {
     echo "  -l                      Use local EOL date when cleaning"
     echo "  -p                      Run parser only (no sentry)"
     echo "  -s                      Run sentry only (no parser)"
-    echo "  -b <ldsi-base>          Set the LDSI base directory"
+    echo "  -b <LogESP-base>        Set the LogESP base directory"
     echo "  -e <env-base>           Set a virtual environment"
 }
 
@@ -85,7 +85,7 @@ while getopts ":hvlpsb:e:" o; do
             RUNPARSER="False"
             ;;
         b)
-            LDSIBASE=${OPTARG}
+            LOGESPBASE=${OPTARG}
             ;;
         e)
             ENVBASE=${OPTARG}
@@ -98,7 +98,7 @@ while getopts ":hvlpsb:e:" o; do
 done
 shift $((OPTIND-1))
 
-PIDFILE="${LDSIBASE}/run/ldsi.pid"
+PIDFILE="${LOGESPBASE}/run/logesp.pid"
 
 if ! [ `whoami` = 'root' ]; then
     echo "Root privileges required."
@@ -109,30 +109,30 @@ if [ -d "${ENVBASE}" ]; then
     if [ -f "${ENVBASE}/bin/activate" ]; then
         source "${ENVBASE}/bin/activate"
     else
-        echo "LDSI virtual env at ${ENVBASE}/bin/activate not found"
+        echo "LogESP virtual env at ${ENVBASE}/bin/activate not found"
     fi
 else
-    echo "LDSI virtual env base directory ${ENVBASE} not found."
+    echo "LogESP virtual env base directory ${ENVBASE} not found."
     exit 1
 fi
 
-if [ -d "${LDSIBASE}" ]; then
-    cd "${LDSIBASE}"
+if [ -d "${LOGESPBASE}" ]; then
+    cd "${LOGESPBASE}"
 else
-    echo "LDSI base directory ${LDSIBASE} not found."
+    echo "LogESP base directory ${LOGESPBASE} not found."
     exit 1
 fi
 
 if [ $STARTING ]; then
     if [ -s "${PIDFILE}" ]; then
-        echo "PID file ${PIDFILE} already exists. Stop ldsi daemon first."
+        echo "PID file ${PIDFILE} already exists. Stop LogESP daemon first."
     else
-        read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
-        if [ ${LDSIPROC} ]; then
-            echo "LDSI already running at PID ${LDSIPROC}. Stop first."
+        read LOGESPPROC WASTE <<< `ps aux | grep 'daemons.logespcore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LOGESPPROC} ]; then
+            echo "LogESP already running at PID ${LOGESPPROC}. Stop first."
         else
-            export ENVBASE LDSIBASE RUNPARSER RUNSENTRY PIDFILE
-            su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
+            export ENVBASE LOGESPBASE RUNPARSER RUNSENTRY PIDFILE
+            su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LOGESPBASE}/manage.py" shell -c "import daemons.logespcore ; daemons.logespcore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' logespd
         fi
     fi
 
@@ -145,11 +145,11 @@ elif [ $STOPPING ]; then
         > "${PIDFILE}"
         #rm -f "${PIDFILE}"
     else
-        read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
-        if [ ${LDSIPROC} ]; then
-            kill "${LDSIPROC}"
+        read LOGESPPROC WASTE <<< `ps aux | grep 'daemons.logespcore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LOGESPPROC} ]; then
+            kill "${LOGESPPROC}"
         else
-            echo "ldsi daemon not running."
+            echo "LogESP daemon not running."
         fi
     fi
 
@@ -162,29 +162,29 @@ elif [ $RESTARTING ]; then
         > "${PIDFILE}"
         #rm -f "${PIDFILE}"
     else
-        read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
-        if [ ${LDSIPROC} ]; then
-            kill "${LDSIPROC}"
+        read LOGESPPROC WASTE <<< `ps aux | grep 'daemons.logespcore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LOGESPPROC} ]; then
+            kill "${LOGESPPROC}"
         else
-            echo "ldsi daemon not running"
+            echo "LogESP daemon not running"
             exit 1
         fi
     fi
     sleep 0.5
-    export ENVBASE LDSIBASE RUNPARSER RUNSENTRY PIDFILE
-    su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.ldsicore ; daemons.ldsicore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' ldsid
+    export ENVBASE LOGESPBASE RUNPARSER RUNSENTRY PIDFILE
+    su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LOGESPBASE}/manage.py" shell -c "import daemons.logespcore ; daemons.logespcore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' logespd
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then
-        export ENVBASE LDSIBASE
-        su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' ldsid
+        export ENVBASE LOGESPBASE
+        su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LOGESPBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean(local=True)"' logespd
     else
-        export ENVBASE LDSIBASE
-        su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' ldsid
+        export ENVBASE LOGESPBASE
+        su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LOGESPBASE}/manage.py" shell -c "import daemons.cleaner.clean ; daemons.cleaner.clean.clean()"' logespd
     fi
 
 elif [ $STATUSCHECK ]; then
-    echo "=== ldsi daemon ==="
+    echo "=== LogESP daemon ==="
     if [ -s ${PIDFILE} ]; then
         PIDLIST=`cat "${PIDFILE}"`
         for PID in ${PIDLIST[@]}; do
@@ -193,16 +193,16 @@ elif [ $STATUSCHECK ]; then
     else
         echo "No PID on file."
     fi
-    read LDSIPROC WASTE <<< `ps aux | grep 'daemons.ldsicore.main' | grep -v grep | awk '{print $2}'`
-    if [ ${LDSIPROC} ]; then
-        echo "Running PID: ${LDSIPROC}"
+    read LOGESPPROC WASTE <<< `ps aux | grep 'daemons.logespcore.main' | grep -v grep | awk '{print $2}'`
+    if [ ${LOGESPPROC} ]; then
+        echo "Running PID: ${LOGESPPROC}"
     else
         echo "No PID running."
     fi
 
 elif [ $VERSIONCHECK ]; then
-    export ENVBASE LDSIBASE
-    VERSION=`su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LDSIBASE}/manage.py" shell -c "import ldsi; print(ldsi.__version__)"' ldsid`
+    export ENVBASE LOGESPBASE
+    VERSION=`su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LOGESPBASE}/manage.py" shell -c "import LogESP; print(LogESP.__version__)"' logespd`
     echo "${0##*/}-$VERSION"
     exit 0	
 

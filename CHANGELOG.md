@@ -1,5 +1,5 @@
 # Change log
-Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/ldsi)
+Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
 ## [Unreleased]
 ### Added
@@ -10,7 +10,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Password change pages
 - Sanity check for entry field lengths, etc.
 - Documentation
-- `ldsi` script for controlling daemons
+- `logesp` script for controlling daemons
 - `hostname`, `domain_name`, and IP addresses to sw assets
 
 ### Updated
@@ -24,7 +24,7 @@ Change log for [LogDissect Security Intelligence](https://github.com/dogoncouch/
 - Parser and sentry can now be run separately (distributed environments)
 - Rule events now track source/dest host count
 - Rules and searches use more regular expressions
-- ldsi daemon runs without privileges
+- logesp daemon runs without privileges
 - Parser threads re-read parsers/helpers every 6,000 events or 10 minutes
 - `log_source` and `source_process` can be set in `config/parser.conf`
 

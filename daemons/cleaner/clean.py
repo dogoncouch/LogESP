@@ -39,7 +39,7 @@ def clean(local=False):
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                    msg = 'LogESP cleaner got 20 db errors. Error: ' + \
                             str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -55,7 +55,7 @@ def clean(local=False):
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                    msg = 'LogESP cleaner got 20 db errors. Error: ' + \
                             str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -72,7 +72,7 @@ def clean(local=False):
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                    msg = 'LogESP cleaner got 20 db errors. Error: ' + \
                             str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -88,7 +88,7 @@ def clean(local=False):
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                    msg = 'LogESP cleaner got 20 db errors. Error: ' + \
                             str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -104,7 +104,7 @@ def clean(local=False):
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                    msg = 'LogESP cleaner got 20 db errors. Error: ' + \
                             str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1
@@ -119,7 +119,7 @@ def clean(local=False):
             except Exception:
                 if dbtries == 0:
                     dbtries = 20
-                    msg = 'LDSI cleaner got 20 db errors. Error: ' + \
+                    msg = 'LogESP cleaner got 20 db errors. Error: ' + \
                             str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
                 dbtries -= 1

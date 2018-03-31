@@ -1,6 +1,6 @@
 # Parsing Documentation
 
-LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE)
+LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
 - [Parse Daemon](#parse-daemon)
 - [Event Parsing](#event-parsing)
@@ -9,7 +9,7 @@ LogDissect Security Intelligence (c) 2018 Dan Persons | [MIT License](../LICENSE
 - [Configuration](#configuration)
 
 ## Parse Daemon
-The parse daemon is the program that parses log files into log events in the LDSI database. The files it parses are defined in the parser configuration file, at config/parser.conf in the repository. This configuration file also defines which event type to assign to events, which parser to use, the lifespan of the events, and optionally which parse helper type to use, and which syslog facility to assign.
+The parse daemon is the program that parses log files into log events in the LogESP database. The files it parses are defined in the parser configuration file, at config/parser.conf in the repository. This configuration file also defines which event type to assign to events, which parser to use, the lifespan of the events, and optionally which parse helper type to use, and which syslog facility to assign.
 
 For more on running the parse daemon, see the [daemon documentation](daemons.md).
 
