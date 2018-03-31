@@ -625,7 +625,7 @@
     "referrer_filter_regex": "",
     "rulename_filter_regex": null,
     "magnitude_filter": null,
-    "message": "An LogESP daemon thread has crashed",
+    "message": "A LogESP daemon thread has crashed",
     "alert_users": []
   }
 },
