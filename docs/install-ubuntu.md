@@ -66,6 +66,7 @@ useradd -r -d /opt/LogESP -s /sbin/nologin -U logespd
 make newdb
 make staticfiles
 ```
+Note: When confirming static file collection, you must type `yes`, not `y`.
 
 ### Edit config/settings.py
 - Add server IP/FQDN to `ALLOWED_HOSTS`
@@ -85,9 +86,9 @@ ln -s /opt/LogESP/scripts/logesp /usr/local/bin
 
 ### Update Permissions
 ```
-chgrp -R logespd /opt/LogESP
 chown logespd.www-data /opt/LogESP/config/db.conf
 chmod 640 /opt/LogESP/config/db.conf
+chown root.logespd /opt/LogESP/config/parser.conf
 chmod 640 /opt/LogESP/config/parser.conf
 chown -R logespd.www-data /opt/LogESP/run
 ```
