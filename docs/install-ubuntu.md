@@ -76,14 +76,16 @@ ln -s /opt/LogESP/scripts/logesp /usr/local/bin
 
 ### Update Permissions
 ```
+cp /opt/LogESP/config/db.conf.example /opt/LogESP/config/db.conf
 chown logespd.www-data /opt/LogESP/config/db.conf
 chmod 640 /opt/LogESP/config/db.conf
+cp /opt/LogESP/config/parser.conf.example /opt/LogESP/config/parser.conf
 chown root.logespd /opt/LogESP/config/parser.conf
 chmod 640 /opt/LogESP/config/parser.conf
-chown -R logespd.www-data /opt/LogESP/run
 cp config/settings.py.example config/settings.py
 chown logespd.www-data config/settings.py
 chmod 640 config/settings.py
+chown -R logespd.www-data /opt/LogESP/run
 ```
 
 ### Edit config/settings.py
@@ -109,6 +111,7 @@ This configuration uses a UDP server. In a production environment, using a TCP s
 ## Nginx Setup
 ### Create Links
 ```
+cp /opt/LogESP/config/nginx/logesp_nginx.conf.example /opt/LogESP/config/nginx/logesp_nginx.conf
 ln -s /opt/LogESP/config/nginx/logesp_nginx.conf /etc/nginx/sites-enabled/
 ```
 
@@ -117,7 +120,7 @@ ln -s /opt/LogESP/config/nginx/logesp_nginx.conf /etc/nginx/sites-enabled/
 mkdir /etc/nginx/ssl
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
 ```
-In a production environment, use SSL certificates signed by your CA.
+In a production environment, use an SSL certificate signed by your CA.
 
 ### Set Server Name
 Edit `/opt/LogESP/config/nginx/logesp_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
