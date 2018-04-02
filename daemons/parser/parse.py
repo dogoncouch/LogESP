@@ -135,14 +135,13 @@ class LiveParser:
                     e.parsed_on = entry['parsed_on']
                     e.source_path = entry['source_path']
                     connsuccess = False
-                    dbtries = 40
+                    dbtries = 20
                     while not connsuccess:
                         try:
                             e.save()
                             connsuccess = True
                         except Exception as err:
                             if dbtries == 0:
-                                dbtries = 40
                                 msg = 'LogESP parser thread for ' + filename + \
                                         ' got 40 db errors. Restarting. ' + \
                                         'Event: ' + str(ourline[:160]) + \

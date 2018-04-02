@@ -63,6 +63,19 @@ daemon-help:
 	@echo Restart daemons with scripts/logesp restart to re-read config
 	@echo
 
+update:
+	@echo Stopping daemons...
+	logespd stop
+	@echo Updating environment...
+	pip install -Ur requirements.txt
+	@echo Pulling changes from GitHub...
+	git pull
+	@echo Updating database
+	python manage.py migrate
+	@echo === Reboot or restart UWSGI to update web frontend ===
+	@read -p "Reboot now (y/n)? " REBOOTCHOICE; \
+	    if [ "${REBOOTCHOICE}" = 'y' ]; then reboot; fi
+
 newdb: newdb-setup fixtures
 
 newdb-setup:
