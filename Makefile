@@ -21,9 +21,9 @@ help:
 	@echo
 	@echo --- New instance setup
 	@echo ------------------------
-	@echo -- Set up new DB with fixtures-
+	@echo -- Set up new DB with fixtures
 	@echo make newdb
-	@echo -- Set up new DB without fixtures-
+	@echo -- Set up new DB without fixtures
 	@echo make newdb-setup
 	@echo -- Collect static files
 	@echo make staticfiles
@@ -31,6 +31,10 @@ help:
 	@echo --- View help on individual fixtures
 	@echo --------------------------------------
 	@echo make fixture-help
+	@echo
+	@echo --- Update LogESP
+	@echo -------------------
+	@echo make update
 	@echo
 
 fixture-help:
@@ -40,15 +44,15 @@ fixture-help:
 	@echo - Note- \'make new-db\' installs fixtures automatically.
 	@echo - Avoid installing them twice.
 	@echo
-	@echo -- Install all fixtures-
+	@echo -- Install all fixtures
 	@echo make fixtures
-	@echo -- Install only risk management fixtures-
+	@echo -- Install only risk management fixtures
 	@echo make risk-fixtures
-	@echo -- Install only asset type fixtures-
+	@echo -- Install only asset type fixtures
 	@echo make asset-fixtures
-	@echo -- Install only siem parse fixtures-
+	@echo -- Install only siem parse fixtures
 	@echo make parser-fixtures
-	@echo -- Install only example siem rules-
+	@echo -- Install only example siem rules
 	@echo make example-rules
 	@echo
 
@@ -56,7 +60,7 @@ daemon-help:
 	@echo
 	@echo --- Daemon help
 	@echo -----------------
-	@echo -- Use scripts/logesp to start parser and sentry daemons-
+	@echo -- Use scripts/logesp to start parser and sentry daemons
 	@echo scripts/logesp -h
 	@echo
 	@echo Make sure to edit config/parser.conf
