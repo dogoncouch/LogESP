@@ -65,7 +65,7 @@ daemon-help:
 
 update:
 	@echo Stopping daemons...
-	logespd stop
+	logesp stop
 	@echo Updating environment...
 	pip install -Ur requirements.txt
 	@echo Pulling changes from GitHub...
@@ -74,7 +74,8 @@ update:
 	python manage.py migrate
 	@echo === Reboot or restart UWSGI to update web frontend ===
 	@read -p "Reboot now (y/n)? " REBOOTCHOICE; \
-	    if [ "${REBOOTCHOICE}" = 'y' ]; then reboot; fi
+	    if [ "${REBOOTCHOICE}" = 'y' ]; then reboot; \
+	    else logesp start; fi
 
 newdb: newdb-setup fixtures
 
