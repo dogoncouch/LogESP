@@ -144,12 +144,14 @@ class LiveParser:
                             if dbtries == 0:
                                 dbtries = 40
                                 msg = 'LogESP parser thread for ' + filename + \
-                                        ' got 40 db errors. Event: ' + \
-                                        str(ourline[:120]) + \
+                                        ' got 40 db errors. Restarting. ' + \
+                                        'Event: ' + str(ourline[:160]) + \
                                         '... Error: ' + str(err)
                                 syslog.syslog(syslog.LOG_ERR, msg)
-                            dbtries -= 1
-                            sleep(0.2)
+                                break
+                            else:
+                                dbtries -= 1
+                                sleep(0.2)
 
                 else:
                     # Check if file has been rotated:
