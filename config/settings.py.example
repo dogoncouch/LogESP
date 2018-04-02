@@ -5,6 +5,8 @@ SECRET_KEY = 'v2oem$sm5mtfz4n8=t)c37&y^3=c+)jxl2hf3ws$7(#eevpw+)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 ALLOWED_HOSTS = []
 
@@ -16,6 +18,8 @@ ALLOWED_HOSTS = []
 #EMAIL_HOST_USER = 'logespserver@example.com'
 #EMAIL_HOST_PASSWORD = 'BIGSECRET'
 #EMAIL_ALERT_FROM_ADDRESS = 'noreply@example.com'
+#DEFAULT_FROM_EMAIL = 'noreply@example.com'
+#SERVER_EMAIL = 'noreply@example.com'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/

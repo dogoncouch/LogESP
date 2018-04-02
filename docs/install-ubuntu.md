@@ -69,17 +69,6 @@ make staticfiles
 ```
 Note: When confirming static file collection, you must type `yes`, not `y`.
 
-### Edit config/settings.py
-- Add server IP/FQDN to `ALLOWED_HOSTS`
-- Update `TIME_ZONE` setting
-
-### Edit config/db.conf
-- Update username, password
-
-### Edit config/parser.conf
-- Uncomment necessary files
-- Add more files, if necessary
-
 ### Link daemon script to /usr/local/bin
 ```
 ln -s /opt/LogESP/scripts/logesp /usr/local/bin
@@ -92,7 +81,21 @@ chmod 640 /opt/LogESP/config/db.conf
 chown root.logespd /opt/LogESP/config/parser.conf
 chmod 640 /opt/LogESP/config/parser.conf
 chown -R logespd.www-data /opt/LogESP/run
+cp config/settings.py.example config/settings.py
+chown logespd.www-data config/settings.py
+chmod 640 config/settings.py
 ```
+
+### Edit config/settings.py
+- Add server IP/FQDN to `ALLOWED_HOSTS`
+- Update `TIME_ZONE` setting
+
+### Edit config/db.conf
+- Update username, password
+
+### Edit config/parser.conf
+- Uncomment necessary files
+- Add more files, if necessary
 
 ## Rsyslog Setup
 ### Place Files
@@ -146,7 +149,8 @@ In a production security environment, a few more steps are recommended:
 - Use an SSL certificate signed by your CA
 - Use NTP on log sources for time synchronization
 - Update the `SECRET_KEY` setting in `config/settings.py`
-Note: LogESP isn't ready for production environments yet. Use with caution; review all django settings.
+- Follow all other instructions in the [Django deployment checklist](https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/)
+Note: LogESP is still testing, and should only be deployed in production by people who really know what they are doing.
 
 ### Distributed Environments
 Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.
