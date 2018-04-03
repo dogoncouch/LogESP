@@ -146,6 +146,9 @@ reboot
 ```
 
 ## Extras
+### Updating
+Run `make update` to update pip dependencies, pull changes from GitHub, and restart LogESP.
+
 ### Production Environments
 In a production security environment, a few more steps are recommended:
 - Secure NTP communication
