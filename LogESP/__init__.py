@@ -22,5 +22,5 @@
 
 __author__ = 'Dan Persons <dpersonsdev@gmail.com>'
 __license__ = 'MIT License'
-__version__ = '0.2-beta'
+__version__ = '0.2-beta-dev1'
 

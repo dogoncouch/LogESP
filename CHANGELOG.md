@@ -2,6 +2,10 @@
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
 ## [Unreleased]
+### Fixed
+- `make update` reboot option
+
+## [0.2-beta] 2018-04-04
 ### Added
 - Many filters to limit rules
 - Parse helper types for simpler config updates

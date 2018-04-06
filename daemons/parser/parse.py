@@ -31,6 +31,7 @@ import json
 import syslog
 
 from django.utils import timezone
+from django import db
 #import daemons.parser.parsers
 from daemons.parser.parser import ParseModule
 from siem.models import LogEvent, LogEventParser, ParseHelper
@@ -141,13 +142,20 @@ class LiveParser:
                             e.save()
                             connsuccess = True
                         except Exception as err:
-                            if dbtries == 0:
+                            if dbtries == 20:
+                                db.connections.close_all()
                                 msg = 'LogESP parser thread for ' + filename + \
-                                        ' got 40 db errors. Restarting. ' + \
+                                        ' got a db error. Resetting conn. ' + \
                                         'Event: ' + str(ourline[:160]) + \
                                         '... Error: ' + str(err)
                                 syslog.syslog(syslog.LOG_ERR, msg)
-                                break
+                            elif dbtries == 0:
+                                msg = 'LogESP parser thread for ' + filename + \
+                                        ' got 20 db errors. Crashing. ' + \
+                                        'Event: ' + str(ourline[:160]) + \
+                                        '... Error: ' + str(err)
+                                syslog.syslog(syslog.LOG_ERR, msg)
+                                exit(0)
                             else:
                                 dbtries -= 1
                                 sleep(0.2)
