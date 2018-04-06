@@ -22,6 +22,7 @@
 ### Specifications
 - LogESP version (in `LogESP/__init__.py`): 
 - Python version: 
+- Django version: 
 - Operating system: 
 - Operating system version: 
 - Deployment info
@@ -31,3 +32,4 @@
   - Web server name/version: 
 - Log file type: 
 - Other info that might be useful: 
+
