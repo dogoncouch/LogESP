@@ -76,14 +76,19 @@ update:
 	git pull
 	@echo Updating database
 	python manage.py migrate
-	@read -p "Reboot now (y/n)? " REBOOTCHOICE; \
-	    UWSGIPROC=$(cat /opt/LogESP/run/logesp-uwsgi-master.pid); \
-	    if [ ${REBOOTCHOICE} = y ]; then \
-	    kill -11 "${UWSGIPROC}"; reboot; \
-	    else kill -11 "${UWSGIPROC}"; \
-	    /opt/LogESP/env/bin/uwsgi \
-	    --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini; \
-	    logesp start; echo logesp daemon restarted; fi
+	@echo Restarting UWSGI
+	@kill -11 "$(cat /opt/LogESP/run/logesp-uwsgi-master.pid)"
+	@/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
+	@echo Restarting logesp daemon
+	@logesp start
+	#@read -p "Reboot now (y/n)? " REBOOTCHOICE; \
+	#    UWSGIPROC=$(cat /opt/LogESP/run/logesp-uwsgi-master.pid); \
+	#    if [ ${REBOOTCHOICE} = 'y' ]; then \
+	#    kill -11 "${UWSGIPROC}"; reboot; \
+	#    else kill -11 "${UWSGIPROC}"; \
+	#    /opt/LogESP/env/bin/uwsgi \
+	#    --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini; \
+	#    logesp start; echo logesp daemon restarted; fi
 	@echo Have a nice day!
 
 newdb: newdb-setup fixtures
