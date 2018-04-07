@@ -1,7 +1,7 @@
 # Change log
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
-## [Unreleased]
+## [0.2-beta-r1] 2018-04-07
 ### Fixed
 - `make update` reboot option
 - Recurring parser DB errors
