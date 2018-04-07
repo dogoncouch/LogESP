@@ -78,7 +78,7 @@ update:
 	python manage.py migrate
 	@read -p "Reboot now (y/n)? " REBOOTCHOICE; \
 	    UWSGIPROC=$(cat /opt/LogESP/run/logesp-uwsgi-master.pid); \
-	    if [ "${REBOOTCHOICE}" = 'y' ]; then \
+	    if [ ${REBOOTCHOICE} = y ]; then \
 	    kill -11 "${UWSGIPROC}"; reboot; \
 	    else kill -11 "${UWSGIPROC}"; \
 	    /opt/LogESP/env/bin/uwsgi \
