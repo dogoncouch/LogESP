@@ -66,6 +66,8 @@ class LiveParser:
                             self.parsepath, self.parsehost,
                             helpertype=self.helper_type)
                     c = 6000
+                c -= 1
+
                 # Check for a new line:
                 line = inputfile.readline()
         
@@ -155,10 +157,10 @@ class LiveParser:
                                         'Event: ' + str(ourline[:160]) + \
                                         '... Error: ' + str(err)
                                 syslog.syslog(syslog.LOG_ERR, msg)
-                                exit(0)
+                                exit(1)
                             else:
-                                dbtries -= 1
                                 sleep(0.2)
+                            dbtries -= 1
 
                 else:
                     # Check if file has been rotated:

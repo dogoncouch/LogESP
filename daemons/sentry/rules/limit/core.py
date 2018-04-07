@@ -30,6 +30,8 @@ import json
 import signal
 import syslog
 from time import sleep
+from django import db
+
 import daemons.sentry.rules.limit.limit
 from siem.models import LimitRule
 
@@ -58,14 +60,23 @@ class SentryCore:
                         ' exiting. Rule no longer exists.'
                 exit(0)
             except Exception:
-                if dbtries == 0:
+                if dbtries == 20:
+                    db.connections.close_all()
+                    msg = 'LogESP parser thread for ' + filename + \
+                            ' got a db error. Resetting conn. ' + \
+                            'Event: ' + str(ourline[:160]) + \
+                            '... Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                elif dbtries == 0:
                     dbtries = 20
                     msg = 'LogESP sentry thread for ' + self.rule.name + \
                             ' got 20 db errors while retrieving rules. ' + \
                             'Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
+                    exit(1)
+                else:
+                    sleep(0.2)
                 dbtries -= 1
-                sleep(0.2)
         for r in rules:
             if not r.id in self.rules:
                 self.newrules.append(r)

@@ -30,9 +30,11 @@ import threading
 import os
 import syslog
 from sys import exit
+from django import db
 from django.utils import timezone
 from django.core.mail import send_mass_mail
 from django.contrib.auth.models import User
+
 from LogESP.settings import TIME_ZONE
 try:
     from LogESP.settings import EMAIL_ALERT_FROM_ADDRESS
@@ -62,14 +64,23 @@ class LimitSentry:
                 e = LogEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                if dbtries == 0:
+                if dbtries == 20:
+                    db.connections.close_all()
+                    msg = 'LogESP sentry thread for rule ' + \
+                            self.rule.name + \
+                            ' got a db error. Resetting conn. ' + \
+                            'Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                elif dbtries == 0:
                     dbtries = 20
                     msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
+                    exit(1)
+                else:
+                    sleep(0.2)
                 dbtries -= 1
-                sleep(0.2)
         if e:
             self.lasteventid = e.id
             connsuccess = False
@@ -81,14 +92,23 @@ class LimitSentry:
                                 timezone.now()) - self.timeint)
                     connsuccess = True
                 except Exception as err:
-                    if dbtries == 0:
+                    if dbtries == 20:
+                        db.connections.close_all()
+                        msg = 'LogESP sentry thread for rule ' + \
+                                self.rule.name + \
+                                ' got a db error. Resetting conn. ' + \
+                                'Error: ' + str(err)
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                    elif dbtries == 0:
                         dbtries = 20
                         msg = 'LogESP sentry thread for rule ' + \
                                 self.rule.name + \
                                 ' got 20 db errors. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
+                        exit(1)
+                    else:
+                        sleep(0.2)
                     dbtries -= 1
-                    sleep(0.2)
             if len(erange) != 0:
                 self.lasteventid = erange.first().id - 1
         else:
@@ -103,14 +123,23 @@ class LimitSentry:
                 e = LogEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                dbtries -= 1
-                if dbtries == 0:
+                if dbtries == 20:
+                    db.connections.close_all()
+                    msg = 'LogESP sentry thread for rule ' + \
+                            self.rule.name + \
+                            ' got a db error. Resetting conn. ' + \
+                            'Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                elif dbtries == 0:
                     dbtries = 20
                     msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
-                sleep(0.2)
+                    exit(1)
+                else:
+                    sleep(0.2)
+                dbtries -= 1
         if e:
             self.lasteventid = e.id
         else:
@@ -125,14 +154,23 @@ class LimitSentry:
                 e = RuleEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                if dbtries == 0:
+                if dbtries == 20:
+                    db.connections.close_all()
+                    msg = 'LogESP sentry thread for rule ' + \
+                            self.rule.name + \
+                            ' got a db error. Resetting conn. ' + \
+                            'Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                elif dbtries == 0:
                     dbtries = 20
                     msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
+                    exit(1)
+                else:
+                    sleep(0.2)
                 dbtries -= 1
-                sleep(0.2)
         if e:
             self.lasteventid = e.id
             connsuccess = False
@@ -144,14 +182,23 @@ class LimitSentry:
                                 timezone.now()) - self.timeint)
                     connsuccess = True
                 except Exception as err:
-                    if dbtries == 0:
+                    if dbtries == 20:
+                        db.connections.close_all()
+                        msg = 'LogESP sentry thread for rule ' + \
+                                self.rule.name + \
+                                ' got a db error. Resetting conn. ' + \
+                                'Error: ' + str(err)
+                        syslog.syslog(syslog.LOG_ERR, msg)
+                    elif dbtries == 0:
                         dbtries = 20
                         msg = 'LogESP sentry thread for rule ' + \
                                 self.rule.name + \
                                 ' got 20 db errors. Error: ' + str(err)
                         syslog.syslog(syslog.LOG_ERR, msg)
+                        exit(1)
+                    else:
+                        sleep(0.2)
                     dbtries -= 1
-                    sleep(0.2)
             if len(erange) != 0:
                 self.lasteventid = erange.first().id - 1
         else:
@@ -166,14 +213,23 @@ class LimitSentry:
                 e = RuleEvent.objects.last()
                 connsuccess = True
             except Exception as err:
-                if dbtries == 0:
+                if dbtries == 20:
+                    db.connections.close_all()
+                    msg = 'LogESP sentry thread for rule ' + \
+                            self.rule.name + \
+                            ' got a db error. Resetting conn. ' + \
+                            'Error: ' + str(err)
+                    syslog.syslog(syslog.LOG_ERR, msg)
+                elif dbtries == 0:
                     dbtries = 20
                     msg = 'LogESP sentry thread for rule ' + \
                             self.rule.name + \
                             ' got 20 db errors. Error: ' + str(err)
                     syslog.syslog(syslog.LOG_ERR, msg)
+                    exit(1)
+                else:
+                    sleep(0.2)
                 dbtries -= 1
-                sleep(0.2)
         if e:
             self.lasteventid = e.id
         else:
@@ -251,14 +307,24 @@ class LimitSentry:
                         syslog.syslog(syslog.LOG_NOTICE, msg)
                         exit(0)
                     except Exception:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 if self.rule.time_int != t:
                     self.timeint = timedelta(minutes=self.rule.time_int)
                 # Set EOL time delta:
@@ -407,14 +473,24 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
             else:
                 connsuccess = False
                 dbtries = 20
@@ -440,14 +516,24 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
         else:        
             startdatestamp = timezone.localtime(timezone.now()) - \
                     self.timeint
@@ -477,14 +563,24 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
             else:
                 connsuccess = False
                 dbtries = 20
@@ -510,14 +606,24 @@ class LimitSentry:
                                 raw_text__iregex=rawtextfilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
 
         if len(e) == 0:
             self.justfired = False
@@ -570,14 +676,24 @@ class LimitSentry:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 connsuccess = False
                 dbtries = 20
                 while not connsuccess:
@@ -585,14 +701,24 @@ class LimitSentry:
                         event.source_ids_log.set(list(e))
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 connsuccess = False
                 dbtries = 20
                 while not connsuccess:
@@ -600,14 +726,24 @@ class LimitSentry:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents,
@@ -647,14 +783,23 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
             else:
                 connsuccess = False
                 dbtries = 20
@@ -667,14 +812,24 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
         else:
             startdatestamp = timezone.localtime(
                     timezone.now()) - self.timeint
@@ -691,14 +846,24 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
             else:
                 connsuccess = False
                 dbtries = 20
@@ -711,14 +876,24 @@ class LimitSentry:
                                 message__iregex=messagefilter)
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
 
         if len(e) == 0:
             self.justfired = False
@@ -753,14 +928,24 @@ class LimitSentry:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 connsuccess = False
                 dbtries = 20
                 while not connsuccess:
@@ -768,14 +953,24 @@ class LimitSentry:
                         event.source_ids_rule.set(list(e))
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 connsuccess = False
                 dbtries = 20
                 while not connsuccess:
@@ -783,15 +978,24 @@ class LimitSentry:
                         event.save()
                         connsuccess = True
                     except Exception as err:
-                        if dbtries == 0:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
                             dbtries = 20
                             msg = 'LogESP sentry thread for rule ' + \
                                     self.rule.name + \
-                                    ' got 20 db errors. Error: ' + str(err)
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
                             syslog.syslog(syslog.LOG_ERR, msg)
-                            dbtries = 20
+                            exit(1)
+                        else:
+                            sleep(0.2)
                         dbtries -= 1
-                        sleep(0.2)
                 self.lasteventid = e.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents,
