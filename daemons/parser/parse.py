@@ -42,6 +42,8 @@ class LiveParser:
     def __init__(self):
         """Initialize live parser"""
         self.parser = None
+        self.parser_name = None
+        self.event_type = None
         self.log_source = None
         syslog.openlog(facility=syslog.LOG_DAEMON)
 
@@ -61,9 +63,8 @@ class LiveParser:
                 if c <= 0:
                     self.parser = LogEventParser.objects.get(
                             pk=self.parser.parser.id)
-                    self.parser = ParseModule(parseinfo['parser'],
-                            parseinfo['event_type'],
-                            TIME_ZONE,
+                    self.parser = ParseModule(self.parser_name,
+                            self.event_type, TIME_ZONE,
                             self.parsepath, self.parsehost,
                             helpertype=self.helper_type)
                     c = 6000
@@ -187,11 +188,13 @@ class LiveParser:
         self.parsepath = os.path.abspath(parseinfo['filename'])
         self.parsehost = socket.getfqdn()
         self.helper_type = parseinfo['helper_type']
+        self.parser_name = parseinfo['parser']
         self.parser = ParseModule(parseinfo['parser'],
                 parseinfo['event_type'],
                 TIME_ZONE,
                 self.parsepath, self.parsehost,
                 helpertype=self.helper_type)
+        self.event_type = parseinfo['event_type']
         self.log_source = parseinfo['log_source']
         self.source_process = parseinfo['source_process']
 
