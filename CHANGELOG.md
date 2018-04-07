@@ -5,6 +5,7 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 ### Fixed
 - `make update` reboot option
 - Recurring parser DB errors
+- Parser threads now successfully update themselves
 
 ## [0.2-beta] 2018-04-04
 ### Added

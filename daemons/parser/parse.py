@@ -59,7 +59,8 @@ class LiveParser:
             c = 6000
             while True:
                 if c <= 0:
-                    self.parser = LogEventParser.objects.get(pk=self.parser.id)
+                    self.parser = LogEventParser.objects.get(
+                            pk=self.parser.parser.id)
                     self.parser = ParseModule(parseinfo['parser'],
                             parseinfo['event_type'],
                             TIME_ZONE,
