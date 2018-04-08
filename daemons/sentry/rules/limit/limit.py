@@ -25,9 +25,7 @@
 from time import sleep
 from datetime import timedelta
 from random import randrange
-import json
 import threading
-import os
 import syslog
 from sys import exit
 from django import db
