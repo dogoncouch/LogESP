@@ -28,8 +28,8 @@ import syslog
 from time import sleep
 from django import db
 
-import daemons.sentry.rules.limit.limit
-from siem.models import LimitRule
+import daemons.sentry.rules.list.list
+from siem.models import ListRule
 
 
 class SentryCore:
@@ -49,11 +49,10 @@ class SentryCore:
         dbtries = 20
         while not connsuccess:
             try:
-                rules = LimitRule.objects.all()
+                rules = ListRule.objects.all()
                 connsuccess = True
-            except LimitRule.DoesNotExist:
-                msg = 'LogESP sentry thread for limit rule ' + \
-                        self.rule.name + \
+            except ListRule.DoesNotExist:
+                msg = 'LogESP sentry thread for list rule ' + self.rule.name + \
                         ' exiting. Rule no longer exists.'
                 exit(0)
             except Exception:
@@ -85,7 +84,7 @@ class SentryCore:
         # Start one thread per rule:
         for r in self.newrules:
             thread = threading.Thread(name=r.id,
-                    target=daemons.sentry.rules.limit.limit.start_rule,
+                    target=daemons.sentry.rules.list.list.start_rule,
                     args=(r,))
             thread.daemon = True
             thread.start()
@@ -102,7 +101,7 @@ class SentryCore:
                 self.start_triggers()
                 for t in self.threads:
                     if not self.threads[t].isAlive():
-                        msg = 'LogESP sentry thread for limit rule id ' + \
+                        msg = 'LogESP sentry thread for list rule id ' + \
                                 str(t) + 'has crashed'
                         syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
@@ -110,7 +109,7 @@ class SentryCore:
         except KeyboardInterrupt:
             exit(0)
         except Exception as err:
-            msg = 'LogESP sentry core limit rule thread crashing. Error: ' + \
+            msg = 'LogESP sentry core list rule thread crashing. Error: ' + \
                     str(err)
             syslog.syslog(syslog.LOG_ERR, msg)
 
