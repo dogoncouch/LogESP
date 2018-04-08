@@ -46,6 +46,14 @@ DIV.pagination {
     padding-bottom: 16px;
 }
 
+INPUT {
+    color: #EAE9E7;
+    background-color: #222222;
+    border: 1px solid;
+    border-color: #777777;
+    padding: 2px;
+}
+
 PRE {
     background-color: #222222;
     display: inline-block;
@@ -77,7 +85,7 @@ TD.searchsubmit {
     border: none;
 }
 A.navbar:link, A.navbar:visited {
-    color: #4444FF;
+    color: #55AAFF;
     text-decoration: none;
 }
 
@@ -86,11 +94,11 @@ A.navbar:hover {
 }
 
 A {
-    color: #4444FF;
+    color: #55AAFF;
 }
 
 A:visited {
-    color: #995CDD;
+    color: #AA66BB;
 }
 
 UL {
