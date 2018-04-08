@@ -255,10 +255,8 @@ class ListSentry:
                     # To Do: add file_path attribute to list rules
                     if isfile(self.rule.file_path):
                         with open(self.rule.file_path, 'r') as f:
-                            newlist = f.readlines()
-                        for line in newlist:
-                            matchset.add(line.rstrip())
-                        del(newlist)
+                            matchset.add(set(
+                                [line.rstrip() for line in f.readlines()]))
 
                 # Check the rule:
                 if self.rule.is_enabled:
