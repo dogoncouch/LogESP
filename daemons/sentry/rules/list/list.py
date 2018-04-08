@@ -28,6 +28,8 @@ from random import randrange
 import threading
 import syslog
 from sys import exit
+from os import listdir
+from os.path import isfile, join
 from django import db
 from django.utils import timezone
 from django.core.mail import send_mass_mail
@@ -189,12 +191,6 @@ class ListSentry:
                     timedelta(days=self.rule.backup_lifespan_days)
         while True:
             try:
-                # To Do: Load set from file
-                # Reload every 20 minutes or so.
-
-                # Check the rule:
-                if self.rule.is_enabled:
-                    self.check_logevent()
                 # Refresh the rule:
                 locallifespan = self.rule.local_lifespan_days
                 backuplifespan = self.rule.backup_lifespan_days
@@ -248,6 +244,25 @@ class ListSentry:
                         self.backuplifespandelta = \
                                 timedelta(
                                         days=self.rule.backup_lifespan_days)
+
+                # To Do: Load set from file
+                # Reload every 20 minutes or so.
+                self.matchset = set()
+                if self.rule.full_directory:
+                    # Read all files in directory
+                    pass
+                else:
+                    # To Do: add file_path attribute to list rules
+                    if isfile(self.rule.file_path):
+                        with open(self.rule.file_path, 'r') as f:
+                            newlist = f.readlines()
+                        for line in newlist:
+                            matchset.add(line.rstrip())
+                        del(newlist)
+
+                # Check the rule:
+                if self.rule.is_enabled:
+                    self.check_logevent()
                 # Wait until next interval if firedr,; otherwise ~60 seconds:
                 if self.justfired:
                     sleep(int(self.rule.time_int) * 60)
