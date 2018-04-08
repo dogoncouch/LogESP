@@ -68,18 +68,19 @@ daemon-help:
 	@echo
 
 update:
-	@echo Stopping daemons...
-	logesp stop
 	@echo Updating environment...
 	pip install -Ur requirements.txt
+	@echo Stopping UWSGI...
+	@kill -11 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
 	@echo Pulling changes from GitHub...
 	git pull
 	@echo Updating database
 	python manage.py migrate
-	@echo Restarting UWSGI
-	@kill -11 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
+	@echo Restarting UWSGI...
 	@/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
-	@echo Restarting logesp daemon
+	@echo Restarting logesp daemon...
+	@logesp stop
+	@sleep 0.2
 	@logesp start
 	@echo Have a nice day!
 

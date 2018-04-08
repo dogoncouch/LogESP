@@ -1,0 +1,30 @@
+{% extends "siem/base.html" %}
+
+{% block sub-title %}Regex Tips | {% endblock %}
+
+{% block content-main %}
+
+<h1>Regex Tips</h1>
+<p>Regular expression tips for use with LogESP</p>
+<ul>
+    <li><a href="#search">Event Parsing</a></li><ul>
+</ul>
+
+<a name="searches"></a>
+<h2>Searches and Rules</h2>
+<h3>Reminders</h3>
+<ul>
+    <li>Search/rule regex is case insensitive</li>
+</ul>
+
+<h3>Tricks</h3>
+<p>Match either EXPRESSION1 or EXPRESSION2:</p>
+<pre>(EXPRESSION1|EXPRESSION2)</pre>
+
+<p>Match an expression literally (not just any field that contains it):</p>
+<pre>^EXPRESSION$</pre>
+
+<p>Filter out an expression in a field:</p>
+<pre>^(?!EXPRESSIOON)</pre>
+
+{% endblock %}
