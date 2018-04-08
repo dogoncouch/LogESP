@@ -323,13 +323,13 @@ class ListSentry:
 
             matchedevents = []
             for e in events:
-                # Check if field is in the set we loaded (To Do: )
-                # if match field matches: 
-                # if not self.rule.whitelist: matchedevents.append(e)
+                # To Do:
+                # Check if field is in the set we loaded
+                # if matchfield == self.rule.match_field:
+                #     if not self.rule.friendlist: matchedevents.append(e)
                 # else:
-                # if self.rule.whitelist: matchedevents.append(e)
+                #     if self.rule.friendlist: matchedevents.append(e)
 
-            # Change this stuff to only count events that match:
             totalevents = sum([x.aggregated_events for x in matchedevents])
             logsources = {x.log_source for x in matchedevents}
             sourcehosts = {x.source_host for x in matchedevents}
