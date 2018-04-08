@@ -34,6 +34,9 @@ def event_help(request):
 def daemon_help(request):
     return render(request, 'siem/help_daemons.html')
 
+def regex_help(request):
+    return render(request, 'siem/help_regex.html')
+
 class LogEventSearchView(PermissionRequiredMixin, ListView):
     model = LogEvent
     permission_required = 'siem.view_logevent'

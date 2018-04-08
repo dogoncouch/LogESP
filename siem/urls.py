@@ -16,6 +16,8 @@ urlpatterns = [
         name='event_help'),
     path('help/daemons/', login_required(views.daemon_help),
         name='daemon_help'),
+    path('help/regex/', login_required(views.regex_help),
+        name='regex_help'),
     path('events/', login_required(views.event_index), name='event_index'),
     path('events/log/<int:pk>/', login_required(
         views.LogEventDetailView.as_view()), name='logevent_detail'),

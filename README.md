@@ -39,6 +39,7 @@ LogESP (c) 2018 Dan Persons | [MIT License](LICENSE)
     - [Anatomy of a Log Event](docs/siem/events.md/#anatomy-of-a-log-event)
     - [Anatomy of a Rule Event](docs/siem/events.md/#anatomy-of-a-rule-event)
 - [Daemons](docs/siem/daemons.md)
+- [Regex Tips](docs/siem/regex.md)
 
 ## Introduction
 LogESP is a SIEM (Security Information and Event Management system) written in Python Django. It features a web frontend, and handles log management and forensics, risk management, and asset management.
