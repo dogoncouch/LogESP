@@ -611,75 +611,148 @@ class Sentry:
                 if self.rule.match_field == 'log_source':
                     for e in events:
                         if e.log_source in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'source_host':
                     for e in events:
                         if e.source_host in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'dest_host':
                     for e in events:
                         if e.dest_host in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'source_user':
                     for e in events:
                         if e.source_user in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'target_user':
                     for e in events:
                         if e.target_user in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'command':
                     for e in events:
                         if e.command in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'interface':
                     for e in events:
                         if e.interface in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'path':
                     for e in events:
                         if e.path in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'referrer':
                     for e in events:
                         if e.referrer in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'status':
                     for e in events:
                         if e.status in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext0':
                     for e in events:
                         if e.ext0 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext1':
                     for e in events:
                         if e.ext1 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext2':
                     for e in events:
                         if e.ext2 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext3':
                     for e in events:
                         if e.ext3 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext4':
                     for e in events:
                         if e.ext4 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext5':
                     for e in events:
                         if e.ext5 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext6':
                     for e in events:
                         if e.ext6 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
                 elif self.rule.match_field == 'ext7':
                     for e in events:
                         if e.ext7 in matchset:
-                            matchedevents.append(e)
+                            if not self.rule.match_friendlist:
+                                matchedevents.append(e)
+                        else:
+                            if self.rule.match_friendlist:
+                                matchedevents.append(e)
+
                 events = matchedevents
 
 
@@ -754,7 +827,10 @@ class Sentry:
                         else:
                             sleep(0.2)
                         dbtries -= 1
-                self.lasteventid = events.latest('id').id
+                if isinstance(events, list):
+                    self.lasteventid = events[-1].id
+                else:
+                    self.lasteventid = events.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents,
                             numlogsources, numsourcehosts, numdesthosts)
