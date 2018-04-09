@@ -286,10 +286,6 @@ class Sentry:
                     timedelta(days=self.rule.backup_lifespan_days)
         while True:
             try:
-                # Check the rule:
-                if self.rule.is_enabled:
-                    if self.rule.rule_events: self.check_ruleevent()
-                    else: self.check_logevent()
                 # Refresh the rule:
                 locallifespan = self.rule.local_lifespan_days
                 backuplifespan = self.rule.backup_lifespan_days
@@ -352,6 +348,10 @@ class Sentry:
                     if self.rule.rule_events:
                         self.get_last_ruleevent()
                         expectrule = True
+                # Check the rule:
+                if self.rule.is_enabled:
+                    if self.rule.rule_events: self.check_ruleevent()
+                    else: self.check_logevent()
                 # Wait until next interval if firedr,; otherwise ~60 seconds:
                 if self.justfired:
                     sleep(int(self.rule.time_int) * 60)
