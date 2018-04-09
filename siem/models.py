@@ -106,7 +106,8 @@ class LimitRule(models.Model):
     rule_category = models.CharField(max_length=24, default='default')
     local_lifespan_days = models.IntegerField()
     backup_lifespan_days = models.IntegerField()
-    event_type = models.CharField(max_length=24, default='default')
+    event_type = models.CharField(max_length=24,
+            null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices)
     overkill_modifier = models.DecimalField(
             validators=[validate_modifier_range],
