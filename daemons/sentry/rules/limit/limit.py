@@ -769,8 +769,19 @@ class Sentry:
             numlogsources = len(logsources)
             numsourcehosts = len(sourcehosts)
             numdesthosts = len(desthosts)
+
+            # Check if conditions are met:
+            conditionsmet = False
             if totalevents > self.rule.event_limit and \
                     numlogsources > self.rule.allowed_log_sources:
+                if not self.rule.reverse_logic:
+                    conditionsmet = True
+            else:
+                if self.rule.reverse_logic:
+                    conditionsmet = True
+
+            # Create rule event:
+            if conditionsmet:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
@@ -836,8 +847,10 @@ class Sentry:
                             numlogsources, numsourcehosts, numdesthosts)
                 self.justfired = True
             else:
+                # Conditions not met.
                 self.justfired = False
         else:
+            # Empty query set.
             self.justfired = False
 
 

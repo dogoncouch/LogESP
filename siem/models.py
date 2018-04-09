@@ -99,6 +99,7 @@ class LimitRule(models.Model):
             null=True, blank=True)
     is_builtin = models.BooleanField(default=False)
     is_enabled = models.BooleanField(default=True)
+    reverse_logic = models.BooleanField(default=False)
     email_alerts = models.BooleanField(default=False)
     alert_users = models.ManyToManyField(User,
             related_name='alert_rules', blank=True)

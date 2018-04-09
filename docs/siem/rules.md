@@ -72,6 +72,8 @@ To configure a match list, set the `match_list_path` attribute to the desired fi
 - `ext6`
 - `ext7`
 
+Match lists are only evaluated on rules that watch log events.
+
 ### Magnitude Calculation
 Rule event magnitude is calculated using the following factors:
 
