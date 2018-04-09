@@ -157,7 +157,7 @@ class LimitRule(models.Model):
     match_list_path = models.CharField(max_length=64,
             null=True, blank=True)
     match_field = models.CharField(max_length=32,
-            null=True, blank=True))
+            null=True, blank=True)
     message = models.CharField(max_length=1024)
     def __str__(self):
         return self.name
