@@ -67,9 +67,13 @@ daemon-help:
 	@echo Restart daemons with scripts/logesp restart to re-read config
 	@echo
 
-update:
+update: update-deps update-logesp
+
+update-deps:
 	@echo Updating environment...
 	pip install -Ur requirements.txt
+
+update-logesp:
 	@echo Stopping UWSGI...
 	@kill -11 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
 	@echo Pulling changes from GitHub...
