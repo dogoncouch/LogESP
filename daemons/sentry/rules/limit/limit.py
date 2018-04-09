@@ -708,7 +708,10 @@ class Sentry:
                 event.eol_date_backup = timezone.localtime(
                         timezone.now()).date() + \
                                 self.backuplifespandelta
-                event.event_type = self.rule.event_type
+                if self.rule.event_type:
+                    event.event_type = self.rule.event_type
+                else:
+                    event.event_type = 'all'
                 event.source_rule = self.rule
                 event.event_limit = self.rule.event_limit
                 event.event_count = totalevents
