@@ -607,6 +607,7 @@ class Sentry:
             if matchset:
                 matchedevents = []
                 # Get selected field from events, compare
+                # To Do: update to include matches in part of field only
                 if self.rule.match_field == 'log_source':
                     for e in events:
                         if e.log_source in matchset:
