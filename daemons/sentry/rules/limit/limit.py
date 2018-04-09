@@ -685,7 +685,7 @@ class Sentry:
             totalevents = sum([x.aggregated_events for x in events])
             logsources = set(x.log_source for x in events)
             sourcehosts = set(x.source_host for x in events)
-            desthosts = set)x.dest_host for x in events)
+            desthosts = set(x.dest_host for x in events)
             try: logsources.remove(None)
             except KeyError: pass
             try: sourcehosts.remove(None)
