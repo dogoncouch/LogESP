@@ -2,24 +2,26 @@
 <div id="topbar">
     <div class="navbar">
         <div class="navbar-content">
-            <a class="navbar" href="{% url 'risk:index' %}">
-                <b>Risk</b></a>
-            &middot;
-            <a class="navbar" href="{% url 'risk:ate_index' %}">
-                Adv. Threats</a>
-            &middot;
-            <a class="navbar" href="{% url 'risk:nte_index' %}">
-                Non-Adv. Threats</a>
-            &middot;
-            <a class="navbar" href="{% url 'risk:impact_index' %}">
-                Impacts</a>
-            &middot;
-            <a class="navbar" href="{% url 'risk:response_index' %}">
-                Responses</a>
-        </div>
-        <div class="navbar-right">
-            <a class="navbar" href="{% url 'risk:help_index' %}">
-                Help</a>
+            <div class="navbar-left">
+                <a class="navbar" href="{% url 'risk:index' %}">
+                    <b>Risk</b></a>
+                &middot;
+                <a class="navbar" href="{% url 'risk:ate_index' %}">
+                    Adv. Threats</a>
+                &middot;
+                <a class="navbar" href="{% url 'risk:nte_index' %}">
+                    Non-Adv. Threats</a>
+                &middot;
+                <a class="navbar" href="{% url 'risk:impact_index' %}">
+                    Impacts</a>
+                &middot;
+                <a class="navbar" href="{% url 'risk:response_index' %}">
+                    Responses</a>
+            </div>
+            <div class="navbar-right">
+                <a class="navbar" href="{% url 'risk:help_index' %}">
+                    Help</a>
+            </div>
         </div>
     </div>
 </div>
