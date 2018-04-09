@@ -80,7 +80,7 @@ update:
 	@/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
 	@echo Restarting logesp daemon...
 	@logesp stop
-	@sleep 0.5
+	@sleep 1
 	@logesp start
 	@echo Have a nice day!
 
