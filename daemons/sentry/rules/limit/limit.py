@@ -909,7 +909,7 @@ class Sentry:
             self.justfired = False
 
 
-def start_rule(rule):
+def main(rule):
     """Initialize trigger object and start watching"""
     
     sentry = Sentry(rule)

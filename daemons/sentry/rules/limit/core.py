@@ -85,7 +85,7 @@ class SentryCore:
         # Start one thread per rule:
         for r in self.newrules:
             thread = threading.Thread(name=r.id,
-                    target=daemons.sentry.rules.limit.limit.start_rule,
+                    target=daemons.sentry.rules.limit.limit.main,
                     args=(r,))
             thread.daemon = True
             thread.start()

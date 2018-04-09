@@ -210,7 +210,7 @@ class LiveParser:
             syslog.syslog(syslog.LOG_ERR, msg)
 
 
-def start_parse(parseinfo):
+def main(parseinfo):
     """Start a parser"""
     parseengine = LiveParser()
     parseengine.parse_file(parseinfo)

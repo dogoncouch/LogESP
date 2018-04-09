@@ -90,7 +90,7 @@ class ParseCore:
             self.get_config()
             for p in self.plist:
                 thread = Thread(name=p['filename'],
-                        target=daemons.parser.parse.start_parse,
+                        target=daemons.parser.parse.main,
                         args=(p,))
                 thread.daemon = True
                 thread.start()
