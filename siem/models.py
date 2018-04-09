@@ -97,7 +97,7 @@ class LimitRule(models.Model):
     name = models.CharField(max_length=32)
     desc = models.CharField(max_length=200,
             null=True, blank=True)
-    is_builtin = models.BooleanField(default=False, blank=True)
+    is_builtin = models.BooleanField(default=False)
     is_enabled = models.BooleanField(default=True)
     email_alerts = models.BooleanField(default=False)
     alert_users = models.ManyToManyField(User,
@@ -158,6 +158,7 @@ class LimitRule(models.Model):
             null=True, blank=True)
     match_field = models.CharField(max_length=32,
             null=True, blank=True)
+    match_friendlist = models.BooleanField(default=False)
     message = models.CharField(max_length=1024)
     def __str__(self):
         return self.name

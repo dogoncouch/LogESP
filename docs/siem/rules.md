@@ -6,6 +6,7 @@ LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 - [Limit Rules](#limit-rules)
     - [Rule vs. Log Events](#rule-vs-log-events)
     - [Filters](#filters)
+    - [Match Lists](#match-lists)
     - [Magnitude Calculation](#magnitude-calculation)
 
 ## Sentry Daemon
@@ -46,6 +47,30 @@ source_rule__name   Rule    Yes
 magnitude           Rule    No
 ```
 In addition to these filters, rule events have an optional `event_type` attribute. Event types must match exactly, if present.
+
+### Match Lists
+Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the `match_friendlist` attribute to `True`).
+
+To configure a match list, set the `match_list_path` attribute to the desired file or directory, and set the `match_field` attribute to the desired field. Choose from the following fields:
+
+- `log_source`
+- `source_host`
+- `dest_host`
+- `source_user`
+- `target_user`
+- `command`
+- `interface`
+- `path`
+- `referrer`
+- `status`
+- `ext0`
+- `ext1`
+- `ext2`
+- `ext3`
+- `ext4`
+- `ext5`
+- `ext6`
+- `ext7`
 
 ### Magnitude Calculation
 Rule event magnitude is calculated using the following factors:

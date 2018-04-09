@@ -11,6 +11,7 @@
     <li><a href="{% url 'siem:rule_help' %}#limitrules">Limit Rules</a><ul>
         <li><a href="{% url 'siem:rule_help' %}#rulevlog">Rule vs. Log Events</a></li>
         <li><a href="{% url 'siem:rule_help' %}#filters">Filters</a></li>
+        <li><a href="{% url 'siem:rule_help' %}#match-lists">Match Lists</a></li>
         <li><a href="{% url 'siem:rule_help' %}#magnitude">Magnitude Calculation</a></li>
         </ul>
     </li>
@@ -56,6 +57,33 @@
     <tr><td>magnitude</td><td>Rule</td><td>No</td></tr>
 </table>
 <p>In addition to these filters, rule events have an optional event_type attribute. Event types must match exactly, if present.</p>
+
+<a name="match-lists"></a>
+<h3>Match Lists</h3>
+<p>Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the <b>match_friendlist</b> attribute to `True`).</p>
+
+<p>To configure a match list, set the <b>match_list_path</b> attribute to the desired file or directory, and set the <b>match_field</b> attribute to the desired field. Choose from the following fields:</p>
+
+<ul>
+    <li>log_source</li>
+    <li>source_host</li>
+    <li>dest_host</li>
+    <li>source_user</li>
+    <li>target_user</li>
+    <li>command</li>
+    <li>interface</li>
+    <li>path</li>
+    <li>referrer</li>
+    <li>status</li>
+    <li>ext0</li>
+    <li>ext1</li>
+    <li>ext2</li>
+    <li>ext3</li>
+    <li>ext4</li>
+    <li>ext5</li>
+    <li>ext6</li>
+    <li>ext7</li>
+</ul>
 
 <a name="magnitude"></a>
 <h3>Magnitude Calculation</h3>
