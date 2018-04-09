@@ -311,6 +311,7 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
             'path_filter_regex', 'parameters_filter_regex',
             'referrer_filter_regex',
             'rulename_filter_regex', 'magnitude_filter',
+            'match_list_path', 'match_field',
             'message']
     def get_success_url(self):
         return reverse_lazy('siem:lr_detail', args=(self.object.id,))
@@ -335,6 +336,7 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
             'path_filter_regex', 'parameters_filter_regex',
             'referrer_filter_regex',
             'rulename_filter_regex', 'magnitude_filter',
+            'match_list_path', 'match_field',
             'message']
     def get_success_url(self):
         return reverse_lazy('siem:lr_detail', args=(self.object.id,))

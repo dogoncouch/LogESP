@@ -154,6 +154,10 @@ class LimitRule(models.Model):
     rulename_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
     magnitude_filter = models.IntegerField(null=True, blank=True)
+    match_list_path = models.CharField(max_length=64,
+            null=True, blank=True)
+    match_field = models.CharField(max_length=32,
+            null=True, blank=True))
     message = models.CharField(max_length=1024)
     def __str__(self):
         return self.name
