@@ -754,7 +754,7 @@ class Sentry:
                         else:
                             sleep(0.2)
                         dbtries -= 1
-                self.lasteventid = e.latest('id').id
+                self.lasteventid = events.latest('id').id
                 if self.rule.email_alerts:
                     self.send_email_alerts(magnitude, totalevents,
                             numlogsources, numsourcehosts, numdesthosts)
