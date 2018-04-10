@@ -6,6 +6,9 @@
 #    read -sp 'MariaDB Root Password (again): ' MDBPASS1
 #done
 
+echo "This is an unfinished script."
+echo "As a safety precaution, it doesn't work at all"
+exit 1
 
 echo '=== LogESP Database Info ==='
 read -p 'DB Instance Name: ' LOGESPDBINSTANCE
