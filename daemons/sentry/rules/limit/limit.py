@@ -772,6 +772,8 @@ class Sentry:
                                     matchedevents.append(e)
 
                 events = matchedevents
+                del(matchedevents)
+                del(matchset)
 
 
             totalevents = sum([x.aggregated_events for x in events])
