@@ -54,24 +54,24 @@ Rules can also compare a field in events to a file containing one item per line.
 
 To configure a match list, set the `match_list_path` attribute to the desired file or directory, and set the `match_field` attribute to the desired field. Choose from the following fields:
 
-- `log_source`
-- `source_host`
-- `dest_host`
-- `source_user`
-- `target_user`
-- `command`
-- `interface`
-- `path`
-- `referrer`
-- `status`
-- `ext0`
-- `ext1`
-- `ext2`
-- `ext3`
-- `ext4`
-- `ext5`
-- `ext6`
-- `ext7`
+- `log_source` - must equal line from list
+- `source_host` - must contain line from list
+- `dest_host` - must contain line from list
+- `source_user` - must equal line from list
+- `target_user` - must equal line from list
+- `command` - must contain line from list
+- `interface` - must equal line from list
+- `path` - must contain line from list
+- `referrer` - must contain line from list
+- `status` - must equal line from list
+- `ext0` - must contain line from list
+- `ext1` - must contain line from list
+- `ext2` - must contain line from list
+- `ext3` - must contain line from list
+- `ext4` - must contain line from list
+- `ext5` - must contain line from list
+- `ext6` - must contain line from list
+- `ext7` - must contain line from list
 
 Match lists are only evaluated on rules that watch log events.
 
