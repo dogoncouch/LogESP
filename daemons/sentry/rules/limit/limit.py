@@ -869,7 +869,7 @@ class Sentry:
                 self.justfired = False
         else:
             # Empty query set.
-            if self.rule.reverse_logic
+            if self.rule.reverse_logic:
                 event = RuleEvent()
                 event.date_stamp = timezone.localtime(timezone.now())
                 event.time_zone = TIME_ZONE
