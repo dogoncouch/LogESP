@@ -13,8 +13,8 @@
             <div class="navbar-right">
             {% if user.is_staff %}
                 <a class="navbar" href="{% url 'admin:index' %}">Admin</a>
+                &middot;
             {% endif %}
-            &middot;
             {% if user.is_authenticated %}
                 <a class="navbar" href="{% url 'password_change' %}">
                     Change Password</a>
