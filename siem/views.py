@@ -296,8 +296,8 @@ class LRCreateView(PermissionRequiredMixin, CreateView):
     model = LimitRule
     permission_required = 'siem.add_limitrule'
     fields = ['name', 'desc', 'is_enabled', 'rule_events',
-            'email_alerts', 'alert_users',
-            'rule_category', 'event_type', 'reverse_logic',
+            'reverse_logic', 'email_alerts', 'alert_users',
+            'rule_category', 'event_type',
             'local_lifespan_days', 'backup_lifespan_days',
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit', 'allowed_log_sources',
@@ -322,8 +322,8 @@ class LRUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'siem.change_limitrule'
     template_name = 'siem/limitrule_update_form.html'
     fields = ['name', 'desc', 'is_enabled', 'rule_events',
-            'email_alerts', 'alert_users',
-            'rule_category', 'event_type', 'reverse_logic',
+            'reverse_logic', 'email_alerts', 'alert_users',
+            'rule_category', 'event_type',
             'local_lifespan_days', 'backup_lifespan_days',
             'severity', 'overkill_modifier', 'severity_modifier',
             'time_int', 'event_limit', 'allowed_log_sources',
