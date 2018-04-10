@@ -869,7 +869,64 @@ class Sentry:
                 self.justfired = False
         else:
             # Empty query set.
-            self.justfired = False
+            if self.rule.reverse_logic
+                event = RuleEvent()
+                event.date_stamp = timezone.localtime(timezone.now())
+                event.time_zone = TIME_ZONE
+                event.rule_category = self.rule.rule_category
+                event.eol_date_local = timezone.localtime(
+                        timezone.now()).date() + \
+                                self.locallifespandelta
+                event.eol_date_backup = timezone.localtime(
+                        timezone.now()).date() + \
+                                self.backuplifespandelta
+                if self.rule.event_type:
+                    event.event_type = self.rule.event_type
+                else:
+                    event.event_type = 'all'
+                event.source_rule = self.rule
+                event.event_limit = self.rule.event_limit
+                event.event_count = 0
+                event.time_int = self.rule.time_int
+                event.severity = self.rule.severity
+                magnitude = int((1 + \
+                        ((totalevents / (self.rule.event_limit + 1)) * \
+                        float(self.rule.overkill_modifier)) - 1) * \
+                        ((8 - self.rule.severity) * \
+                        float(self.rule.severity_modifier)))
+                event.magnitude = magnitude
+                event.message = self.rule.message
+                event.log_source_count = 0
+                event.source_host_count = 0
+                event.dest_host_count = 0
+                connsuccess = False
+                dbtries = 20
+                while not connsuccess:
+                    try:
+                        event.save()
+                        connsuccess = True
+                    except Exception as err:
+                        if dbtries == 20:
+                            db.connections.close_all()
+                            msg = 'LogESP sentry thread for limit rule ' + \
+                                    self.rule.name + \
+                                    ' got a db error. Resetting conn. ' + \
+                                    'Error: ' + str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                        elif dbtries == 0:
+                            dbtries = 20
+                            msg = 'LogESP sentry thread for limit rule ' + \
+                                    self.rule.name + \
+                                    ' got 20 db errors. Crashing. Error: ' + \
+                                    str(err)
+                            syslog.syslog(syslog.LOG_ERR, msg)
+                            exit(1)
+                        else:
+                            sleep(0.2)
+                        dbtries -= 1
+                self.justfired = True
+            else:
+                self.justfired = False
 
 
     def check_ruleevent(self):
