@@ -11,8 +11,8 @@
     <li><a href="#limitrules">Limit Rules</a><ul>
         <li><a href="#rulevlog">Rule vs. Log Events</a></li>
         <li><a href="#filters">Filters</a></li>
-        <li><a href="#match-lists">Match Lists</a></li>
         <li><a href="#reverse-matching">Reverse Matching</a></li>
+        <li><a href="#match-lists">Match Lists</a></li>
         <li><a href="#magnitude">Magnitude Calculation</a></li>
         </ul>
     </li>
@@ -59,6 +59,10 @@
 </table>
 <p>In addition to these filters, rule events have an optional event_type attribute. Event types must match exactly, if present.</p>
 
+<a name="reverse-matching"></a>
+<h3>Reverse Matching</h3>
+<p>Limit rules have a <b>reverse_logic</b> attribute. If set to true, the rule will go off if the conditions are <i><b>not</b></i> met (i.e. a dead process rule).</p>
+
 <a name="match-lists"></a>
 <h3>Match Lists</h3>
 <p>Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the <b>match_friendlist</b> attribute to `True`).</p>
@@ -87,11 +91,6 @@
 </ul>
 
 <p>Match lists are only evaluated on rules that watch log events.</p>
-
-<a name="reverse-matching"></a>
-<h3>Reverse Matching</h3>
-<p>Limit rules have a <b>reverse_logic</b> attribute. If set to true, the rule will go off if the conditions are <i><b>not</b></i> met (i.e. a dead process rule).</p>
-
 
 <a name="magnitude"></a>
 <h3>Magnitude Calculation</h3>

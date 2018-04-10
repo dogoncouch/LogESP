@@ -6,8 +6,8 @@ LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 - [Limit Rules](#limit-rules)
     - [Rule vs. Log Events](#rule-vs-log-events)
     - [Filters](#filters)
-    - [Match Lists](#match-lists)
     - [Reverse Matching](#reverse-matching)
+    - [Match Lists](#match-lists)
     - [Magnitude Calculation](#magnitude-calculation)
 
 ## Sentry Daemon
@@ -49,6 +49,9 @@ magnitude           Rule    No
 ```
 In addition to these filters, rule events have an optional `event_type` attribute. Event types must match exactly, if present.
 
+### Reverse Matching
+Limit rules have a `reverse_logic` attribute. If set to true, the rule will go off if the conditions are *not* met (i.e. a dead process rule).
+
 ### Match Lists
 Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the `match_friendlist` attribute to `True`).
 
@@ -74,9 +77,6 @@ To configure a match list, set the `match_list_path` attribute to the desired fi
 - `ext7` - must contain line from list
 
 Match lists are only evaluated on rules that watch log events.
-
-### Reverse Matching
-Limit rules have a `reverse_logic` attribute. If set to true, the rule will go off if the conditions are *not* met (i.e. a dead process rule).
 
 ### Magnitude Calculation
 Rule event magnitude is calculated using the following factors:
