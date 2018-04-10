@@ -719,12 +719,12 @@ class Sentry:
                 elif self.rule.match_field == 'ext2':
                     for e in events:
                         for m in matchlist:
-                        if e.ext2 in m:
-                            if not self.rule.match_friendlist:
-                                matchedevents.append(e)
-                        else:
-                            if self.rule.match_friendlist:
-                                matchedevents.append(e)
+                            if e.ext2 in m:
+                                if not self.rule.match_friendlist:
+                                    matchedevents.append(e)
+                            else:
+                                if self.rule.match_friendlist:
+                                    matchedevents.append(e)
                 elif self.rule.match_field == 'ext3':
                     for e in events:
                         for m in matchlist:
