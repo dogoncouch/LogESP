@@ -105,8 +105,8 @@ class LimitRule(models.Model):
             related_name='alert_rules', blank=True)
     rule_events = models.BooleanField(default=False)
     rule_category = models.CharField(max_length=24, default='default')
-    local_lifespan_days = models.IntegerField()
-    backup_lifespan_days = models.IntegerField()
+    local_lifespan_days = models.IntegerField(default=185)
+    backup_lifespan_days = models.IntegerField(default=366)
     event_type = models.CharField(max_length=24,
             null=True, blank=True)
     severity = models.IntegerField(choices=severity_choices)
@@ -116,8 +116,8 @@ class LimitRule(models.Model):
     severity_modifier = models.DecimalField(
             validators=[validate_modifier_range],
             decimal_places=1, max_digits=3, default=1)
-    time_int = models.IntegerField()
-    event_limit = models.IntegerField()
+    time_int = models.IntegerField(default=5)
+    event_limit = models.IntegerField(default=0)
     allowed_log_sources = models.IntegerField(default=0)
     message_filter_regex = models.CharField(max_length=1024,
             null=True, blank=True)
