@@ -610,7 +610,7 @@ class Sentry:
                 # To Do: update to include matches in part of field only
                 if self.rule.match_field == 'log_source':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.log_source in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -619,7 +619,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'source_host':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.source_host in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -628,7 +628,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'dest_host':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.dest_host in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -637,7 +637,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'source_user':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.source_user in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -646,7 +646,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'target_user':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.target_user in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -655,7 +655,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'command':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.command in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -664,7 +664,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'interface':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.interface in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -673,7 +673,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'path':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.path in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -682,7 +682,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'referrer':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.referrer in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -691,7 +691,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'status':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.status in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -700,7 +700,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext0':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext0 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -709,7 +709,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext1':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext1 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -718,7 +718,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext2':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext2 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -727,7 +727,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext3':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext3 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -736,7 +736,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext4':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext4 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -745,7 +745,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext5':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext5 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -754,7 +754,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext6':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext6 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
@@ -763,7 +763,7 @@ class Sentry:
                                     matchedevents.append(e)
                 elif self.rule.match_field == 'ext7':
                     for e in events:
-                        for m in matchlist:
+                        for m in matchset:
                             if e.ext7 in m:
                                 if not self.rule.match_friendlist:
                                     matchedevents.append(e)
