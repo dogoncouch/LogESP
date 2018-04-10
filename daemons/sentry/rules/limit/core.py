@@ -90,7 +90,7 @@ class SentryCore:
             thread.daemon = True
             thread.start()
 
-            self.threads[r.id] = thread
+            self.threads[r.name] = thread
         self.newrules = []
 
 
@@ -102,8 +102,8 @@ class SentryCore:
                 self.start_triggers()
                 for t in self.threads:
                     if not self.threads[t].isAlive():
-                        msg = 'LogESP sentry thread for limit rule id ' + \
-                                str(t) + 'has crashed'
+                        msg = 'LogESP sentry thread for limit rule ' + \
+                                str(t) + ' has crashed'
                         syslog.syslog(syslog.LOG_ERR, msg)
                 sleep(120)
 
