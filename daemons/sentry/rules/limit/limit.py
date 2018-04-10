@@ -819,11 +819,20 @@ class Sentry:
                 event.event_count = totalevents
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
-                magnitude = int((1 + \
-                        ((totalevents / (self.rule.event_limit + 1)) * \
-                        float(self.rule.overkill_modifier)) - 1) * \
-                        ((8 - self.rule.severity) * \
-                        float(self.rule.severity_modifier)))
+                if self.rule.reverse_logic:
+                    # To Do: re-evaluate this calculation:
+                    magnitude = int((1 + \
+                            (((self.rule.event_limit + 1) / totalevents) * \
+                            float(self.rule.overkill_modifier)) - 1) * \
+                            ((8 - self.rule.severity) * \
+                            float(self.rule.severity_modifier)))
+                    pass
+                else:
+                    magnitude = int((1 + \
+                            ((totalevents / (self.rule.event_limit + 1)) * \
+                            float(self.rule.overkill_modifier)) - 1) * \
+                            ((8 - self.rule.severity) * \
+                            float(self.rule.severity_modifier)))
                 event.magnitude = magnitude
                 event.message = self.rule.message
                 event.log_source_count = numlogsources
@@ -889,10 +898,11 @@ class Sentry:
                 event.event_count = 0
                 event.time_int = self.rule.time_int
                 event.severity = self.rule.severity
+                # To Do: re-evaluate this calculation:
                 magnitude = int((1 + \
                         float(self.rule.overkill_modifier) - 1) * \
                         ((8 - self.rule.severity) * \
-                        float(self.rule.severity_modifier)))
+                        float(self.rule.severity_modifier) * 4))
                 event.magnitude = magnitude
                 event.message = self.rule.message
                 event.log_source_count = 0
