@@ -771,6 +771,7 @@ class Sentry:
                                 if self.rule.match_friendlist:
                                     matchedevents.append(e)
 
+                del(events)
                 events = matchedevents
                 del(matchedevents)
                 del(matchset)
