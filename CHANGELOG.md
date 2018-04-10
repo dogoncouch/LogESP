@@ -1,6 +1,11 @@
 # Change log
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
+## [0.2-beta-r2] 2018-04-10
+### Added
+- Block/allow lists for limit rules (match lists)
+- Dead process rule option for limit rules (`reverse_logic` attribute)
+
 ## [0.2-beta-r1] 2018-04-07
 ### Fixed
 - `make update` reboot option
