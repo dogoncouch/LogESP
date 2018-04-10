@@ -20,6 +20,7 @@
     <li>SIEM Event Lifespan: {{ lr.local_lifespan_days }} days</li>
     <li>Backup Event Lifespan: {{ lr.backup_lifespan_days }} days</li>
     <li>Enabled?: {{ lr.is_enabled }}</li>
+    <li>Reversed Logic?: {{ lr.reverse_logic }}</li>
     <li>Email alerts enabled?: {{ lr.email_alerts }}</li>
     <li>Alert Users:<ul>
             {% for u in lr.alert_users.all %}
@@ -51,6 +52,11 @@
             <li>Source User Filter Regex: {{ lr.source_user_filter_regex }}</li>
             <li>Target User Filter Regex: {{ lr.target_user_filter_regex }}</li>
             <li>Raw Text Filter Regex: {{ lr.raw_text_filter_regex }}</li>
+            <li>Match List:<ul>
+                <li>Match List Path: {{ lr.match_list_path }}</li>
+                <li>Match Field: {{ lr.match_field }}</li>
+                <li>Reverse Matching?: {{ lr.match_friendlist }}</li>
+                </ul>
             </ul>
         <li>Rule Event Filters:<ul>
             <li>Rule Name Filter Regex: {{ lr.rulename_filter_regex }}</li>
