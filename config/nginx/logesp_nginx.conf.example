@@ -17,6 +17,7 @@ server {
 
     ssl_certificate /etc/nginx/ssl/nginx.crt;
     ssl_certificate_key /etc/nginx/ssl/nginx.key;
+    ssl_protocols TLSv1.2
 
     if ($scheme = http) {
         return 301 https://$server_name$request_uri;

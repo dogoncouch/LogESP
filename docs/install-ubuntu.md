@@ -118,7 +118,7 @@ ln -s /opt/LogESP/config/nginx/logesp_nginx.conf /etc/nginx/sites-enabled/
 ### Create SSL Certificate
 ```
 mkdir /etc/nginx/ssl
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt
 ```
 In a production environment, use an SSL certificate signed by your CA.
 
