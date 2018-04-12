@@ -1,6 +1,10 @@
 # Change log
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
+## [Unreleased]
+### Updated
+- More security in default nginx setup
+
 ## [0.2-beta-r2] 2018-04-10
 ### Added
 - Block/allow lists for limit rules (match lists)
