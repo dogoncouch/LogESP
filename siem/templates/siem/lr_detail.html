@@ -17,37 +17,37 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Name</td><td class="right">{{ lr.name }}</td><td>The rule name.</td>
+        <td class="right">Name</td><td>{{ lr.name }}</td><td>The rule name.</td>
     </tr>
     <tr>
-        <td class="right">Desc</td><td class="right">{{ lr.desc }}</td><td>The rule description.</td>
+        <td class="right">Desc</td><td>{{ lr.desc }}</td><td>The rule description.</td>
     </tr>
     <tr>
-        <td class="right">Enabled?</td><td class="right">{{ lr.is_enabled }}</td><td>Whether the rule is enabled.</td>
+        <td class="right">Enabled?</td><td>{{ lr.is_enabled }}</td><td>Whether the rule is enabled.</td>
     </tr>
     <tr>
-        <td class="right">Reversed?</td><td class="right">{{ lr.reverse_logic }}</td><td>Whether the rule logic is reversed.</td>
+        <td class="right">Reversed?</td><td>{{ lr.reverse_logic }}</td><td>Whether the rule logic is reversed.</td>
     </tr>
     <tr>
-        <td class="right">Rule Events?</td><td class="right">{{ lr.rule_events }}</td><td>Whether the rule wathes rule events (vs. log events).</td>
+        <td class="right">Rule Events?</td><td>{{ lr.rule_events }}</td><td>Whether the rule wathes rule events (vs. log events).</td>
     </tr>
     <tr>
-        <td class="right">Category</td><td class="right">{{ lr.rule_category }}</td><td>The rule category.</td>
+        <td class="right">Category</td><td>{{ lr.rule_category }}</td><td>The rule category.</td>
     </tr>
     <tr>
-        <td class="right">Event Lifespan (local)</td><td class="right">{{ lr.local_lifespan_days }}</td><td>The lifespan of resulting events in the local database.</td>
+        <td class="right">Event Lifespan (local)</td><td>{{ lr.local_lifespan_days }}</td><td>The lifespan of resulting events in the local database.</td>
     </tr>
     <tr>
-        <td class="right">Event Lifespan (backup)</td><td class="right">{{ lr.backup_lifespan_days }}</td><td>The lifespan of backup copies of resulting events.</td>
+        <td class="right">Event Lifespan (backup)</td><td>{{ lr.backup_lifespan_days }}</td><td>The lifespan of backup copies of resulting events.</td>
     </tr>
     <tr>
-        <td class="right">Alerts Enabled?</td><td class="right">{{ lr.email_alerts }}</td><td>Whether the rule triggers email alerts.</td>
+        <td class="right">Alerts Enabled?</td><td>{{ lr.email_alerts }}</td><td>Whether the rule triggers email alerts.</td>
     </tr>
     <tr>
-        <td class="right">Email Alert Users</td><td class="right">{{ lr.alert_users }}</td><td>Users to alert via email.</td>
+        <td class="right">Email Alert Users</td><td>{{ lr.alert_users }}</td><td>Users to alert via email.</td>
     </tr>
     <tr>
-        <td class="right">Message</td><td class="right">{{ lr.message }}</td><td>The message for events created by the rule.</td>
+        <td class="right">Message</td><td>{{ lr.message }}</td><td>The message for events created by the rule.</td>
     </tr>
 </table>
 
@@ -57,19 +57,19 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Severity</td><td class="right">{{ lr.severity }}</td><td>The rule's severity.</td>
+        <td class="right">Severity</td><td>{{ lr.severity }}</td><td>The rule's severity.</td>
     </tr>
     <tr>
-        <td class="right">Severity Modifier</td><td class="right">{{ lr.severity_modifier }}</td><td>The multiplier for severity when calculating magnitude.</td>
+        <td class="right">Severity Modifier</td><td>{{ lr.severity_modifier }}</td><td>The multiplier for severity when calculating magnitude.</td>
     </tr>
     <tr>
-        <td class="right">overkill Modifier</td><td class="right">{{ lr.overkill_modifier }}</td><td>The multiplier for overkill ratio when calculating magnitude.</td>
+        <td class="right">overkill Modifier</td><td>{{ lr.overkill_modifier }}</td><td>The multiplier for overkill ratio when calculating magnitude.</td>
     </tr>
     <tr>
-        <td class="right">Time Interval</td><td class="right">{{ lr.time_int }}</td><td>The time interval for the rule to monitor.</td>
+        <td class="right">Time Interval</td><td>{{ lr.time_int }}</td><td>The time interval for the rule to monitor.</td>
     </tr>
     <tr>
-        <td class="right">Event Limit</td><td class="right">{{ lr.event_limit }}</td><td>The number of events to allow before triggering the rule.</td>
+        <td class="right">Event Limit</td><td>{{ lr.event_limit }}</td><td>The number of events to allow before triggering the rule.</td>
     </tr>
 </table>
 <h2>Basic Criteria</h2>
@@ -78,10 +78,10 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Event Type</td><td class="right">{% if lr.event_type %}{{ lr.event_type }}{% endif %}</td><td>The event type for the rule to monitor.</td>
+        <td class="right">Event Type</td><td>{% if lr.event_type %}{{ lr.event_type }}{% endif %}</td><td>The event type for the rule to monitor.</td>
     </tr>
     <tr>
-        <td class="right">Message Filter</td><td class="right">{% if lr.message_filter_regex %}{{ lr.message_filter_regex }}{% endif %}</td><td>Search criteria for the event's message attribute (case insensitive regex).</td>
+        <td class="right">Message Filter</td><td>{% if lr.message_filter_regex %}{{ lr.message_filter_regex }}{% endif %}</td><td>Search criteria for the event's message attribute (case insensitive regex).</td>
     </tr>
 </table>
 <h2>Log Event Criteria</h2>
@@ -92,52 +92,52 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Log Source Filter</td><td class="right">{% if lr.log_source_filter_regex %}{{ lr.log_source_filter_regex }}{% endif %}</td><td>Search criteria for the event's log_source attribute.</td>
+        <td class="right">Log Source Filter</td><td>{% if lr.log_source_filter_regex %}{{ lr.log_source_filter_regex }}{% endif %}</td><td>Search criteria for the event's log_source attribute.</td>
     </tr>
     <tr>
-        <td class="right">Source Process Filter</td><td class="right">{% if lr.process_filter_regex %}{{ lr.process_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_process attribute.</td>
+        <td class="right">Source Process Filter</td><td>{% if lr.process_filter_regex %}{{ lr.process_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_process attribute.</td>
     </tr>
     <tr>
-        <td class="right">Action Filter</td><td class="right">{% if lr. %}{{ lr.action_filter_regex }}{% endif %}</td><td>Search criteria for the event's action attribute.</td>
+        <td class="right">Action Filter</td><td>{% if lr. %}{{ lr.action_filter_regex }}{% endif %}</td><td>Search criteria for the event's action attribute.</td>
     </tr>
     <tr>
-        <td class="right">Interface Filter</td><td class="right">{% if lr.action_filter_regex %}{{ lr.interface_filter_regex }}{% endif %}</td><td>Search criteria for the event's interface attribute.</td>
+        <td class="right">Interface Filter</td><td>{% if lr.action_filter_regex %}{{ lr.interface_filter_regex }}{% endif %}</td><td>Search criteria for the event's interface attribute.</td>
     </tr>
     <tr>
-        <td class="right">Status Filter</td><td class="right">{% if lr.status_filter_regex %}{{ lr.status_filter_regex }}{% endif %}</td><td>Search criteria for the event's status attribute.</td>
+        <td class="right">Status Filter</td><td>{% if lr.status_filter_regex %}{{ lr.status_filter_regex }}{% endif %}</td><td>Search criteria for the event's status attribute.</td>
     </tr>
     <tr>
-        <td class="right">Source Host Filter</td><td class="right">{% if lr.source_host_filter_regex %}{{ lr.source_host_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_host attribute.</td>
+        <td class="right">Source Host Filter</td><td>{% if lr.source_host_filter_regex %}{{ lr.source_host_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_host attribute.</td>
     </tr>
     <tr>
-        <td class="right">Source Port Filter</td><td class="right">{% if lr.source_port_filter_regex %}{{ lr.source_port_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_port attribute.</td>
+        <td class="right">Source Port Filter</td><td>{% if lr.source_port_filter_regex %}{{ lr.source_port_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_port attribute.</td>
     </tr>
     <tr>
-        <td class="right">Dest Host Filter</td><td class="right">{% if lr.dest_host_filter_regex %}{{ lr.dest_host_filter_regex }}{% endif %}</td><td>Search criteria for the event's dest_host attribute.</td>
+        <td class="right">Dest Host Filter</td><td>{% if lr.dest_host_filter_regex %}{{ lr.dest_host_filter_regex }}{% endif %}</td><td>Search criteria for the event's dest_host attribute.</td>
     </tr>
     <tr>
-        <td class="right">Dest Port Filter</td><td class="right">{% if lr.dest_port_filter_regex %}{{ lr.dest_port_filter_regex }}{% endif %}</td><td>Search criteria for the event's dest_port attribute.</td>
+        <td class="right">Dest Port Filter</td><td>{% if lr.dest_port_filter_regex %}{{ lr.dest_port_filter_regex }}{% endif %}</td><td>Search criteria for the event's dest_port attribute.</td>
     </tr>
     <tr>
-        <td class="right">Command Filter</td><td class="right">{% if lr.command_filter_regex %}{{ lr.command_filter_regex }}{% endif %}</td><td>Search criteria for the event's command attribute.</td>
+        <td class="right">Command Filter</td><td>{% if lr.command_filter_regex %}{{ lr.command_filter_regex }}{% endif %}</td><td>Search criteria for the event's command attribute.</td>
     </tr>
     <tr>
-        <td class="right">Source User Filter</td><td class="right">{% if lr.source_user_filter_regex %}{{ lr.source_user_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_user attribute.</td>
+        <td class="right">Source User Filter</td><td>{% if lr.source_user_filter_regex %}{{ lr.source_user_filter_regex }}{% endif %}</td><td>Search criteria for the event's source_user attribute.</td>
     </tr>
     <tr>
-        <td class="right">Target User Filter</td><td class="right">{% if lr.target_user_filter_regex %}{{ lr.target_user_filter_regex }}{% endif %}</td><td>Search criteria for the event's target_user attribute.</td>
+        <td class="right">Target User Filter</td><td>{% if lr.target_user_filter_regex %}{{ lr.target_user_filter_regex }}{% endif %}</td><td>Search criteria for the event's target_user attribute.</td>
     </tr>
     <tr>
-        <td class="right">Path Filter</td><td class="right">{% if lr.path_filter_regex %}{{ lr.path_filter_regex }}{% endif %}</td><td>Search criteria for the event's path attribute.</td>
+        <td class="right">Path Filter</td><td>{% if lr.path_filter_regex %}{{ lr.path_filter_regex }}{% endif %}</td><td>Search criteria for the event's path attribute.</td>
     </tr>
     <tr>
-        <td class="right">Parameters Filter</td><td class="right">{% if lr.parameters_filter_regex %}{{ lr.parameters_filter_regex }}{% endif %}</td><td>Search criteria for the event's parameters attribute.</td>
+        <td class="right">Parameters Filter</td><td>{% if lr.parameters_filter_regex %}{{ lr.parameters_filter_regex }}{% endif %}</td><td>Search criteria for the event's parameters attribute.</td>
     </tr>
     <tr>
-        <td class="right">Referrer Filter</td><td class="right">{% if lr.referrer_filter_regex %}{{ lr.referrer_filter_regex }}{% endif %}</td><td>Search criteria for the event's referrer attribute.</td>
+        <td class="right">Referrer Filter</td><td>{% if lr.referrer_filter_regex %}{{ lr.referrer_filter_regex }}{% endif %}</td><td>Search criteria for the event's referrer attribute.</td>
     </tr>
     <tr>
-        <td class="right">Raw Text Filter</td><td class="right">{% if lr.raw_text_filter_regex %}{{ lr.raw_text_filter_regex }}{% endif %}</td><td>Search criteria for the raw event.</td>
+        <td class="right">Raw Text Filter</td><td>{% if lr.raw_text_filter_regex %}{{ lr.raw_text_filter_regex }}{% endif %}</td><td>Search criteria for the raw event.</td>
     </tr>
 </table>
 <h3>List Matching</h3>
@@ -146,13 +146,13 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Match List File Path</td><td class="right">{% if lr.match_list_path %}{{ lr.match_list_path }}{% endif %}</td><td>The path for the match list file on the LogESP server.</td>
+        <td class="right">Match List File Path</td><td>{% if lr.match_list_path %}{{ lr.match_list_path }}{% endif %}</td><td>The path for the match list file on the LogESP server.</td>
     </tr>
     <tr>
-        <td class="right">Match Field</td><td class="right">{% if lr.match_field %}{{ lr.match_field }}{% endif %}</td><td>The event field to compare to the match list.</td>
+        <td class="right">Match Field</td><td>{% if lr.match_field %}{{ lr.match_field }}{% endif %}</td><td>The event field to compare to the match list.</td>
     </tr>
     <tr>
-        <td class="right">Allow List</td><td class="right">{{ lr.match_allowlist }}</td><td>Use list as allowlist instead of blocklist.</td>
+        <td class="right">Allow List</td><td>{{ lr.match_allowlist }}</td><td>Use list as allowlist instead of blocklist.</td>
     </tr>
 </table>
 <h2>Rule Event Criteria</h2>
@@ -161,10 +161,10 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Magnitude Filter</td><td class="right">{% if lr.magnitude_filter %}{{ lr.magnitude_filter }}{% endif %}</td><td>The minimum magnitude required to set off the rule.</td>
+        <td class="right">Magnitude Filter</td><td>{% if lr.magnitude_filter %}{{ lr.magnitude_filter }}{% endif %}</td><td>The minimum magnitude required to set off the rule.</td>
     </tr>
     <tr>
-        <td class="right">Rule Name Filter</td><td class="right">{% if lr.rulename_filter_regex %}{{ lr.rulename_filter_regex }}{% endif %}</td><td>Search criteria for the name of the event's source rule.</td>
+        <td class="right">Rule Name Filter</td><td>{% if lr.rulename_filter_regex %}{{ lr.rulename_filter_regex }}{% endif %}</td><td>Search criteria for the name of the event's source rule.</td>
     </tr>
 </table>
 
