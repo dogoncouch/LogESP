@@ -5,8 +5,8 @@ LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 - [Sentry Daemon](#sentry-daemon)
 - [Limit Rules](#limit-rules)
     - [Rule vs. Log Events](#rule-vs-log-events)
-    - [Filters](#filters)
     - [Reverse Matching](#reverse-matching)
+    - [Filters](#filters)
     - [Match Lists](#match-lists)
     - [Magnitude Calculation](#magnitude-calculation)
 
@@ -18,6 +18,9 @@ Limit rules define a set of event criteria, an event limit, and a time interval.
 
 ### Rule vs. Log Events
 If a rule's `rule_events` attribute is set to True, it will monitor rule events; otherwise, it will monitor log events.
+
+### Reverse Matching
+Limit rules have a `reverse_logic` attribute. If set to true, the rule will go off if the conditions are *not* met (i.e. a dead process rule).
 
 ### Filters
 Filters check to see if a certain field contains a certain string. They are case insensitive. If left blank, they will always match. If all of the filters in a rule are met, the rule is considered to be broken. Mostfields can use regular expressions.
@@ -48,9 +51,6 @@ source_rule__name   Rule    Yes
 magnitude           Rule    No
 ```
 In addition to these filters, rule events have an optional `event_type` attribute. Event types must match exactly, if present.
-
-### Reverse Matching
-Limit rules have a `reverse_logic` attribute. If set to true, the rule will go off if the conditions are *not* met (i.e. a dead process rule).
 
 ### Match Lists
 Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the `match_friendlist` attribute to `True`).

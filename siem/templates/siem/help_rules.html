@@ -10,8 +10,8 @@
     <li><a href="#daemon">Sentry Daemon</a></li>
     <li><a href="#limitrules">Limit Rules</a><ul>
         <li><a href="#rulevlog">Rule vs. Log Events</a></li>
-        <li><a href="#filters">Filters</a></li>
         <li><a href="#reverse-matching">Reverse Matching</a></li>
+        <li><a href="#filters">Filters</a></li>
         <li><a href="#match-lists">Match Lists</a></li>
         <li><a href="#magnitude">Magnitude Calculation</a></li>
         </ul>
@@ -30,6 +30,10 @@
 <a name="rulevlog"></a>
 <h3>Rule vs. Log Events</h3>
 <p>If a rule's rule_events attribute is set to True, it will monitor rule events; otherwise, it will monitor log events.</p>
+
+<a name="reverse-matching"></a>
+<h3>Reverse Matching</h3>
+<p>Limit rules have a <b>reverse_logic</b> attribute. If set to true, the rule will go off if the conditions are <i><b>not</b></i> met (i.e. a dead process rule).</p>
 
 <a name="filters"></a>
 <h3>Filters</h3>
@@ -58,10 +62,6 @@
     <tr><td>magnitude</td><td>Rule</td><td>No</td></tr>
 </table>
 <p>In addition to these filters, rule events have an optional event_type attribute. Event types must match exactly, if present.</p>
-
-<a name="reverse-matching"></a>
-<h3>Reverse Matching</h3>
-<p>Limit rules have a <b>reverse_logic</b> attribute. If set to true, the rule will go off if the conditions are <i><b>not</b></i> met (i.e. a dead process rule).</p>
 
 <a name="match-lists"></a>
 <h3>Match Lists</h3>
