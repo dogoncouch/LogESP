@@ -357,8 +357,7 @@ class LPIndexView(PermissionRequiredMixin, ListView):
     template_name = 'siem/lp_index.html'
     context_object_name = 'lp_list'
     def get_queryset(self):
-        return LogEventParser.objects.order_by('is_builtin',
-                'is_enabled', 'name')
+        return LogEventParser.objects.order_by('is_builtin', 'name')
 
 class LPDetailView(PermissionRequiredMixin, DetailView):
     model = LogEventParser
