@@ -61,16 +61,12 @@ PRE {
 }
 
 TABLE, TH, TD {
-    border: 1px solid;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px dotted;
+    border-right: 1px dotted;
     border-color: #444444;
 }
-
-TR {
-    border-top: 2px solid;
-    border-color: #444444;
-}
-
-TH.left { text-align: left; }
 
 TABLE.event {
     border-collapse: collapse;
@@ -81,6 +77,8 @@ TABLE.event {
 }
 
 TABLE.searchform { border: none; }
+
+TH.left { text-align: left; }
 
 TD.right {
     text-align: right;
