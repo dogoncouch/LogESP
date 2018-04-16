@@ -60,9 +60,13 @@ PRE {
     padding: 8px;
 }
 
-TABLE, TH, TD, TR {
+TABLE, TH, TD {
     border: 1px solid;
     border-color: #444444;
+}
+
+TR {
+    border-top: 2px solid;
 }
 
 TH.left { text-align: left; }
