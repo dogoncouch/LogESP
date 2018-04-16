@@ -67,6 +67,7 @@ TABLE, TH, TD {
 
 TR {
     border-top: 2px solid;
+    border-color: #444444;
 }
 
 TH.left { text-align: left; }
