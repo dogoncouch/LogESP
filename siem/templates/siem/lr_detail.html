@@ -11,58 +11,161 @@
 &middot;
 <a href="{% url 'siem:lr_index' %}">Index</a>
 
-<ul>
-    <li>ID: {{ lr.id }}</li>
-    <li>Name: {{ lr.name }}</li>
-    <li>Desc: {{ lr.desc }}</li>
-    <li>Built-in?: {{lr.is_builtin }}</li>
-    <li>Rule Category: {{ lr.rule_category }}</li>
-    <li>SIEM Event Lifespan: {{ lr.local_lifespan_days }} days</li>
-    <li>Backup Event Lifespan: {{ lr.backup_lifespan_days }} days</li>
-    <li>Enabled?: {{ lr.is_enabled }}</li>
-    <li>Reversed Logic?: {{ lr.reverse_logic }}</li>
-    <li>Email alerts enabled?: {{ lr.email_alerts }}</li>
-    <li>Alert Users:<ul>
-            {% for u in lr.alert_users.all %}
-            <li>{{ u.name }} ({{ u.email }})</li>
-            {% endfor %}
-        </ul>
-    <li>Rule Events?: {{ lr.rule_events }}</li>
-    <li>Event Type: {{ lr.event_type }}</li>
-    <li>Timing and Severity:<ul>
-            <li>Severity: {{ lr.severity }}</li>
-            <li>Overkill Modifier: {{ lr.overkill_modifier }}</li>
-            <li>Severity Modifier: {{ lr.severity_modifier }}</li>
-            <li>Time Interval: {{ lr.time_int }}</li>
-            <li>Event Limit: {{ lr.event_limit }}</li>
-        </ul></li>
-    <li>Trigger Logic:<ul>
-        <li>Allowed Source Hosts: {{ lr.allowed_log_sources }}</li>
-        <li>Message Filter Regex: {{ lr.message_filter_regex }}</li>
-        <li>Log Event Filters:<ul>
-            <li>Log Source Filter Regex: {{ lr.log_source_filter_regex }}</li>
-            <li>Process Filter Regex: {{ lr.process_filter_regex }}</li>
-            <li>Action Filter Regex: {{ lr.action_filter_regex }}</li>
-            <li>Interface Filter Regex: {{ lr.interface_filter_regex }}</li>
-            <li>Status Filter Regex: {{ lr.status_filter_regex }}</li>
-            <li>Source Host Filter Regex: {{ lr.source_host_filter_regex }}</li>
-            <li>Source Port Filter Regex: {{ lr.source_port_filter_regex }}</li>
-            <li>Dest Host Filter Regex: {{ lr.dest_host_filter_regex }}</li>
-            <li>Dest Port Filter Regex: {{ lr.dest_port_filter_regex }}</li>
-            <li>Source User Filter Regex: {{ lr.source_user_filter_regex }}</li>
-            <li>Target User Filter Regex: {{ lr.target_user_filter_regex }}</li>
-            <li>Raw Text Filter Regex: {{ lr.raw_text_filter_regex }}</li>
-            <li>Match List:<ul>
-                <li>Match List Path: {{ lr.match_list_path }}</li>
-                <li>Match Field: {{ lr.match_field }}</li>
-                <li>Reverse Matching?: {{ lr.match_allowlist }}</li>
-                </ul>
-            </ul>
-        <li>Rule Event Filters:<ul>
-            <li>Rule Name Filter Regex: {{ lr.rulename_filter_regex }}</li>
-            <li>Min. Magnitude: {{ lr.magnitude_filter }}</li></ul>
-        </ul></li>
-    <li>Message: {{ lr.message }}</li>
-</ul>
+<h2>Rule Settings</h2>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Name</td><td class="right">{{ lr.name }}</td><td>The rule name.</td>
+    </tr>
+    <tr>
+        <td class="right">Desc</td><td class="right">{{ lr.desc }}</td><td>The rule description.</td>
+    </tr>
+    <tr>
+        <td class="right">Enabled?</td><td class="right">{{ lr.is_enabled }}</td><td>Whether the rule is enabled.</td>
+    </tr>
+    <tr>
+        <td class="right">Reversed?</td><td class="right">{{ lr.reverse_logic }}</td><td>Whether the rule logic is reversed.</td>
+    </tr>
+    <tr>
+        <td class="right">Rule Events?</td><td class="right">{{ lr.rule_events }}</td><td>Whether the rule wathes rule events (vs. log events).</td>
+    </tr>
+    <tr>
+        <td class="right">Category</td><td class="right">{{ lr.rule_category }}</td><td>The rule category.</td>
+    </tr>
+    <tr>
+        <td class="right">Event Lifespan (local)</td><td class="right">{{ lr.local_lifespan_days }}</td><td>The lifespan of resulting events in the local database.</td>
+    </tr>
+    <tr>
+        <td class="right">Event Lifespan (backup)</td><td class="right">{{ lr.backup_lifespan_days }}</td><td>The lifespan of backup copies of resulting events.</td>
+    </tr>
+    <tr>
+        <td class="right">Alerts Enabled?</td><td class="right">{{ lr.email_alerts }}</td><td>Whether the rule triggers email alerts.</td>
+    </tr>
+    <tr>
+        <td class="right">Email Alert Users</td><td class="right">{{ lr.alert_users }}</td><td>Users to alert via email.</td>
+    </tr>
+    <tr>
+        <td class="right">Message</td><td class="right">{{ lr.message }}</td><td>The message for events created by the rule.</td>
+    </tr>
+</table>
+
+<h2>Timing and Severity</h2>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Severity</td><td class="right">{{ lr.severity }}</td><td>The rule's severity.</td>
+    </tr>
+    <tr>
+        <td class="right">Severity Modifier</td><td class="right">{{ lr.severity_modifier }}</td><td>The multiplier for severity when calculating magnitude.</td>
+    </tr>
+    <tr>
+        <td class="right">overkill Modifier</td><td class="right">{{ lr.overkill_modifier }}</td><td>The multiplier for overkill ratio when calculating magnitude.</td>
+    </tr>
+    <tr>
+        <td class="right">Time Interval</td><td class="right">{{ lr.time_int }}</td><td>The time interval for the rule to monitor.</td>
+    </tr>
+    <tr>
+        <td class="right">Event Limit</td><td class="right">{{ lr.event_limit }}</td><td>The number of events to allow before triggering the rule.</td>
+    </tr>
+</table>
+<h2>Basic Criteria</h2>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Event Type</td><td class="right">{{ lr.event_type }}</td><td>The event type for the rule to monitor.</td>
+    </tr>
+    <tr>
+        <td class="right">Message Filter</td><td class="right">{{ lr.message_filter_regex }}</td><td>Search criteria for the event's message attribute (case insensitive regex).</td>
+    </tr>
+</table>
+<h2>Log Event Criteria</h2>
+<h3>Regular Expression Filters</h3>
+<p>All regular expression filters use case insensitive regular expressions.</p>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Log Source Filter</td><td class="right">{{ lr.log_source_filter_regex }}</td><td>Search criteria for the event's log_source attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Source Process Filter</td><td class="right">{{ lr.process_filter_regex }}</td><td>Search criteria for the event's source_process attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Action Filter</td><td class="right">{{ lr.action_filter_regex }}</td><td>Search criteria for the event's action attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Interface Filter</td><td class="right">{{ lr.interface_filter_regex }}</td><td>Search criteria for the event's interface attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Status Filter</td><td class="right">{{ lr.status_filter_regex }}</td><td>Search criteria for the event's status attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Source Host Filter</td><td class="right">{{ lr.source_host_filter_regex }}</td><td>Search criteria for the event's source_host attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Source Port Filter</td><td class="right">{{ lr.source_port_filter_regex }}</td><td>Search criteria for the event's source_port attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Dest Host Filter</td><td class="right">{{ lr.dest_host_filter_regex }}</td><td>Search criteria for the event's dest_host attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Dest Port Filter</td><td class="right">{{ lr.dest_port_filter_regex }}</td><td>Search criteria for the event's dest_port attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Command Filter</td><td class="right">{{ lr.command_filter_regex }}</td><td>Search criteria for the event's command attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Source User Filter</td><td class="right">{{ lr.source_user_filter_regex }}</td><td>Search criteria for the event's source_user attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Target User Filter</td><td class="right">{{ lr.target_user_filter_regex }}</td><td>Search criteria for the event's target_user attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Path Filter</td><td class="right">{{ lr.path_filter_regex }}</td><td>Search criteria for the event's path attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Parameters Filter</td><td class="right">{{ lr.parameters_filter_regex }}</td><td>Search criteria for the event's parameters attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Referrer Filter</td><td class="right">{{ lr.referrer_filter_regex }}</td><td>Search criteria for the event's referrer attribute.</td>
+    </tr>
+    <tr>
+        <td class="right">Raw Text Filter</td><td class="right">{{ lr.raw_text_filter_regex }}</td><td>Search criteria for the raw event.</td>
+    </tr>
+</table>
+<h3>List Matching</h3>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Match List File Path</td><td class="right">{{ lr.match_list_path }}</td><td>The path for the match list file on the LogESP server.</td>
+    </tr>
+    <tr>
+        <td class="right">Match Field</td><td class="right">{{ lr.match_field }}</td><td>The event field to compare to the match list.</td>
+    </tr>
+    <tr>
+        <td class="right">Allow List</td><td class="right">{{ lr.match_allowlist }}</td><td>Use list as allowlist instead of blocklist.</td>
+    </tr>
+</table>
+<h2>Rule Event Criteria</h2>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Magnitude Filter</td><td class="right">{{ lr.magnitude_filter }}</td><td>The minimum magnitude required to set off the rule.</td>
+    </tr>
+    <tr>
+        <td class="right">Rule Name Filter</td><td class="right">{{ lr.rulename_filter_regex }}</td><td>Search criteria for the name of the event's source rule.</td>
+    </tr>
+</table>
 
 {% endblock %}
