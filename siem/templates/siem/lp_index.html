@@ -9,13 +9,13 @@
 
 {% if lp_list %}
     <table>
-        <tr><th>Name</th><th>Fields</th><th>Built-<br>in?</th></tr>
+        <tr><th>Name</th><th>Built-<br>in?</th><th>Fields</th></tr>
         {% for lp in lp_list %}
             <tr>
                 <td><a href="{% url 'siem:lp_detail' lp.id %}">
                         {{ lp }}</a></td>
-                <td>{{ lp.fields }}</td>
                 <td>{{ lp.is_builtin }}</td>
+                <td>{{ lp.fields }}</td>
             </tr>
         {% endfor %}
     </table>
