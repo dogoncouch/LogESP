@@ -60,7 +60,7 @@ PRE {
     padding: 8px;
 }
 
-TABLE, TH, TD {
+TABLE, TH, TD, TR {
     border: 1px solid;
     border-color: #444444;
 }
