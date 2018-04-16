@@ -75,7 +75,7 @@ update-deps:
 
 update-logesp:
 	@echo Stopping UWSGI...
-	@kill -11 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
+	@kill -9 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
 	@echo Pulling changes from GitHub...
 	git pull
 	@echo Updating database
