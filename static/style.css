@@ -76,6 +76,10 @@ TABLE.event {
 
 TABLE.searchform { border: none; }
 
+TD.right {
+    text-align: right;
+}
+
 TD.searchform {
     border: none;
     text-align: right;

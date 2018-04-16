@@ -12,86 +12,71 @@
             <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td>Name</td><td>{{ form.name }}</td><td>The rule name.</td>
+            <td class="right">Name</td><td class="right">{{ form.name }}</td><td>The rule name.</td>
         </tr>
         <tr>
-            <td>Desc</td><td>{{ form.desc }}</td><td>The rule description.</td>
+            <td class="right">Desc</td><td class="right">{{ form.desc }}</td><td>The rule description.</td>
         </tr>
         <tr>
-            <td>Enabled?</td><td>{{ form.is_enabled }}</td><td>Whether the rule is enabled.</td>
+            <td class="right">Enabled?</td><td class="right">{{ form.is_enabled }}</td><td>Whether the rule is enabled.</td>
         </tr>
         <tr>
-            <td>Reversed?</td><td>{{ form.reverse_logic }}</td><td>Whether the rule logic is reversed.</td>
+            <td class="right">Reversed?</td><td class="right">{{ form.reverse_logic }}</td><td>Whether the rule logic is reversed.</td>
         </tr>
         <tr>
-            <td>Rule Events?</td><td>{{ form.rule_events }}</td><td>Whether the rule wathes rule events (vs. log events).</td>
+            <td class="right">Rule Events?</td><td class="right">{{ form.rule_events }}</td><td>Whether the rule wathes rule events (vs. log events).</td>
         </tr>
         <tr>
-            <td>Category</td><td>{{ form.rule_category }}</td><td>The rule category.</td>
+            <td class="right">Category</td><td class="right">{{ form.rule_category }}</td><td>The rule category.</td>
         </tr>
         <tr>
-            <td>Event Lifespan (local)</td><td>{{ form.local_lifespan_days }}</td><td>The lifespan of resulting events in the local database.</td>
+            <td class="right">Event Lifespan (local)</td><td class="right">{{ form.local_lifespan_days }}</td><td>The lifespan of resulting events in the local database.</td>
         </tr>
         <tr>
-            <td>Event Lifespan (backup)</td><td>{{ form.backup_lifespan_days }}</td><td>The lifespan of backup copies of resulting events.</td>
+            <td class="right">Event Lifespan (backup)</td><td class="right">{{ form.backup_lifespan_days }}</td><td>The lifespan of backup copies of resulting events.</td>
         </tr>
         <tr>
-            <td>Alerts Enabled?</td><td>{{ form.email_alerts }}</td><td>Whether the rule triggers email alerts.</td>
+            <td class="right">Alerts Enabled?</td><td class="right">{{ form.email_alerts }}</td><td>Whether the rule triggers email alerts.</td>
         </tr>
         <tr>
-            <td>Email Alert Users</td><td>{{ form.alert_users }}</td><td>Users to alert via email.</td>
+            <td class="right">Email Alert Users</td><td class="right">{{ form.alert_users }}</td><td>Users to alert via email.</td>
         </tr>
         <tr>
-            <td>Message</td><td>{{ form.message }}</td><td>The message for events created by the rule.</td>
+            <td class="right">Message</td><td class="right">{{ form.message }}</td><td>The message for events created by the rule.</td>
         </tr>
     </table>
 
     <h2>Timing and Severity</h2>
     <table>
         <tr>
-            <td>Severity</td><td>{{ form.severity }}</td><td>The rule's severity.</td>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td>Severity Modifier</td><td>{{ form.severity_modifier }}</td><td>The multiplier for severity when calculating magnitude.</td>
+            <td class="right">Severity</td><td class="right">{{ form.severity }}</td><td>The rule's severity.</td>
         </tr>
         <tr>
-            <td>overkill Modifier</td><td>{{ form.overkill_modifier }}</td><td>The multiplier for overkill ratio when calculating magnitude.</td>
+            <td class="right">Severity Modifier</td><td class="right">{{ form.severity_modifier }}</td><td>The multiplier for severity when calculating magnitude.</td>
         </tr>
         <tr>
-            <td>Time Interval</td><td>{{ form.time_int }}</td><td>The time interval for the rule to monitor.</td>
+            <td class="right">overkill Modifier</td><td class="right">{{ form.overkill_modifier }}</td><td>The multiplier for overkill ratio when calculating magnitude.</td>
         </tr>
         <tr>
-            <td>Event Limit</td><td>{{ form.event_limit }}</td><td>The number of events to allow before triggering the rule.</td>
+            <td class="right">Time Interval</td><td class="right">{{ form.time_int }}</td><td>The time interval for the rule to monitor.</td>
         </tr>
         <tr>
-            <td></td><td>{{ form. }}</td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>{{ form. }}</td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>{{ form. }}</td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>{{ form. }}</td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>{{ form. }}</td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>{{ form. }}</td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>{{ form. }}</td><td></td>
+            <td class="right">Event Limit</td><td class="right">{{ form.event_limit }}</td><td>The number of events to allow before triggering the rule.</td>
         </tr>
     </table>
     <h2>Basic Criteria</h2>
     <table>
         <tr>
-            <td>Event Type</td><td>{{ form.event_type }}</td><td>The event type for the rule to monitor.</td>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td>Message Filter</td><td>{{ form.message_filter_regex }}</td><td>Search criteria for the event's message attribute (case insensitive regex).</td>
+            <td class="right">Event Type</td><td class="right">{{ form.event_type }}</td><td>The event type for the rule to monitor.</td>
+        </tr>
+        <tr>
+            <td class="right">Message Filter</td><td class="right">{{ form.message_filter_regex }}</td><td>Search criteria for the event's message attribute (case insensitive regex).</td>
         </tr>
     </table>
     <h2>Log Event Criteria</h2>
@@ -99,73 +84,82 @@
     <p>All regular expression filters use case insensitive regular expressions.</p>
     <table>
         <tr>
-            <td>Log Source Filter</td><td>{{ form.log_source_filter_regex }}</td><td>Search criteria for the event's log_source attribute.</td>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td>Source Process Filter</td><td>{{ form.source_process_filter_regex }}</td><td>Search criteria for the event's source_process attribute.</td>
+            <td class="right">Log Source Filter</td><td class="right">{{ form.log_source_filter_regex }}</td><td>Search criteria for the event's log_source attribute.</td>
         </tr>
         <tr>
-            <td>Action Filter</td><td>{{ form.action_filter_regex }}</td><td>Search criteria for the event's action attribute.</td>
+            <td class="right">Source Process Filter</td><td class="right">{{ form.process_filter_regex }}</td><td>Search criteria for the event's source_process attribute.</td>
         </tr>
         <tr>
-            <td>Interface Filter</td><td>{{ form.interface_filter_regex }}</td><td>Search criteria for the event's interface attribute.</td>
+            <td class="right">Action Filter</td><td class="right">{{ form.action_filter_regex }}</td><td>Search criteria for the event's action attribute.</td>
         </tr>
         <tr>
-            <td>Status Filter</td><td>{{ form.status_filter_regex }}</td><td>Search criteria for the event's status attribute.</td>
+            <td class="right">Interface Filter</td><td class="right">{{ form.interface_filter_regex }}</td><td>Search criteria for the event's interface attribute.</td>
         </tr>
         <tr>
-            <td>Source Host Filter</td><td>{{ form.source_host_filter_regex }}</td><td>Search criteria for the event's source_host attribute.</td>
+            <td class="right">Status Filter</td><td class="right">{{ form.status_filter_regex }}</td><td>Search criteria for the event's status attribute.</td>
         </tr>
         <tr>
-            <td>Source Port Filter</td><td>{{ form.source_port_filter_regex }}</td><td>Search criteria for the event's source_port attribute.</td>
+            <td class="right">Source Host Filter</td><td class="right">{{ form.source_host_filter_regex }}</td><td>Search criteria for the event's source_host attribute.</td>
         </tr>
         <tr>
-            <td>Dest Host Filter</td><td>{{ form.dest_host_filter_regex }}</td><td>Search criteria for the event's dest_host attribute.</td>
+            <td class="right">Source Port Filter</td><td class="right">{{ form.source_port_filter_regex }}</td><td>Search criteria for the event's source_port attribute.</td>
         </tr>
         <tr>
-            <td>Dest Port Filter</td><td>{{ form.dest_port_filter_regex }}</td><td>Search criteria for the event's dest_port attribute.</td>
+            <td class="right">Dest Host Filter</td><td class="right">{{ form.dest_host_filter_regex }}</td><td>Search criteria for the event's dest_host attribute.</td>
         </tr>
         <tr>
-            <td>Command Filter</td><td>{{ form.command_filter_regex }}</td><td>Search criteria for the event's command attribute.</td>
+            <td class="right">Dest Port Filter</td><td class="right">{{ form.dest_port_filter_regex }}</td><td>Search criteria for the event's dest_port attribute.</td>
         </tr>
         <tr>
-            <td>Source User Filter</td><td>{{ form.source_user_filter_regex }}</td><td>Search criteria for the event's source_user attribute.</td>
+            <td class="right">Command Filter</td><td class="right">{{ form.command_filter_regex }}</td><td>Search criteria for the event's command attribute.</td>
         </tr>
         <tr>
-            <td>Target User Filter</td><td>{{ form.target_user_filter_regex }}</td><td>Search criteria for the event's target_user attribute.</td>
+            <td class="right">Source User Filter</td><td class="right">{{ form.source_user_filter_regex }}</td><td>Search criteria for the event's source_user attribute.</td>
         </tr>
         <tr>
-            <td>Path Filter</td><td>{{ form.path_filter_regex }}</td><td>Search criteria for the event's path attribute.</td>
+            <td class="right">Target User Filter</td><td class="right">{{ form.target_user_filter_regex }}</td><td>Search criteria for the event's target_user attribute.</td>
         </tr>
         <tr>
-            <td>Parameters Filter</td><td>{{ form.parameters_filter_regex }}</td><td>Search criteria for the event's parameters attribute.</td>
+            <td class="right">Path Filter</td><td class="right">{{ form.path_filter_regex }}</td><td>Search criteria for the event's path attribute.</td>
         </tr>
         <tr>
-            <td>Referrer Filter</td><td>{{ form.referrer_filter_regex }}</td><td>Search criteria for the event's referrer attribute.</td>
+            <td class="right">Parameters Filter</td><td class="right">{{ form.parameters_filter_regex }}</td><td>Search criteria for the event's parameters attribute.</td>
         </tr>
         <tr>
-            <td>Raw Text Filter</td><td>{{ form.raw_text_filter_regex }}</td><td>Search criteria for the raw event.</td>
+            <td class="right">Referrer Filter</td><td class="right">{{ form.referrer_filter_regex }}</td><td>Search criteria for the event's referrer attribute.</td>
+        </tr>
+        <tr>
+            <td class="right">Raw Text Filter</td><td class="right">{{ form.raw_text_filter_regex }}</td><td>Search criteria for the raw event.</td>
         </tr>
     </table>
     <h3>List Matching</h3>
     <table>
         <tr>
-            <td>Match List File Path</td><td>{{ form.match_list_path }}</td><td>The path for the match list file on the LogESP server.</td>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td>Match Field</td><td>{{ form.match_field }}</td><td>The event field to compare to the match list.</td>
+            <td class="right">Match List File Path</td><td class="right">{{ form.match_list_path }}</td><td>The path for the match list file on the LogESP server.</td>
         </tr>
         <tr>
-            <td>Allow List</td><td>{{ form.match_allowlist }}</td><td>Use list as allowlist instead of blocklist.</td>
+            <td class="right">Match Field</td><td class="right">{{ form.match_field }}</td><td>The event field to compare to the match list.</td>
+        </tr>
+        <tr>
+            <td class="right">Allow List</td><td class="right">{{ form.match_allowlist }}</td><td>Use list as allowlist instead of blocklist.</td>
         </tr>
     </table>
     <h2>Rule Event Criteria</h2>
     <table>
         <tr>
-            <td>Magnitude Filter</td><td>{{ form.magnitude_filter }}</td><td>The minimum magnitude required to set off the rule.</td>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td>Rule Name Filter</td><td>{{ form.rulename_filter_regex }}</td><td>Search criteria for the name of the event's source rule.</td>
+            <td class="right">Magnitude Filter</td><td class="right">{{ form.magnitude_filter }}</td><td>The minimum magnitude required to set off the rule.</td>
+        </tr>
+        <tr>
+            <td class="right">Rule Name Filter</td><td class="right">{{ form.rulename_filter_regex }}</td><td>Search criteria for the name of the event's source rule.</td>
         </tr>
     </table>
     <input type="submit" value="Save" />
