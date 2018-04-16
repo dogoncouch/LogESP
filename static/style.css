@@ -65,13 +65,10 @@ TABLE, TH, TD, TR {
     border-color: #444444;
 }
 
-TABLE {
-    border-collapse: collapse;
-}
-
 TH.left { text-align: left; }
 
 TABLE.event {
+    border-collapse: collapse;
     display: inline-block;
     max-width: 100%;
     overflow-x: auto;
