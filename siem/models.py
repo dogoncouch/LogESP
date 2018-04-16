@@ -160,7 +160,7 @@ class LimitRule(models.Model):
             null=True, blank=True)
     match_field = models.CharField(max_length=32,
             null=True, blank=True)
-    match_friendlist = models.BooleanField(default=False)
+    match_allowlist = models.BooleanField(default=False)
     message = models.CharField(max_length=1024)
     def __str__(self):
         return self.name

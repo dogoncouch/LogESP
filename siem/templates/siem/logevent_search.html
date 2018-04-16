@@ -111,7 +111,7 @@
             <td>{{ e.date_stamp }}</a></td>
             <td>{{ e.event_type }}</td>
             <td>{{ e.log_source }}</td>
-            <td>{{ e.source_process|truncatechars:12 }}</td>
+            <td>{{ e.source_process }}</td>
             <td>{{ e.aggregated_events }}</td>
             <td>{{ e.source_host }}{% if e.source_port %}:{{ e.source_port }}{% endif %}</td>
             <td>{{ e.dest_host}}{% if e.dest_port %}:{{ e.dest_port }}{% endif %}</td>
