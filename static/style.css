@@ -63,8 +63,8 @@ PRE {
 TABLE, TH, TD {
     border-top: 1px solid;
     border-bottom: 1px solid;
-    border-left: 1px dotted;
-    border-right: 1px dotted;
+    border-left: 1px dashed;
+    border-right: 1px dashed;
     border-color: #444444;
 }
 
