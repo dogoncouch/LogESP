@@ -4,6 +4,10 @@
 
 {% block content-main %}
 
+{% if form.errors %}
+<p>There were some errors.</p>
+{% endif %}
+
 <h1>Add Limit Rule</h1>
 <form action="" method="post">{% csrf_token %}
     <h2>Rule Settings</h2>
