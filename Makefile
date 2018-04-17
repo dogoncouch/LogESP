@@ -79,11 +79,11 @@ update-logesp:
 	@echo Updating database
 	python manage.py migrate
 	@echo Restarting logesp daemon...
-	@logesp stop
+	logesp stop
 	@sleep 2
-	@logesp start
+	logesp start
 	@echo Restarting UWSGI...
-	@kill -1 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
+	/opt/LogESP/env/bin/uwsgi --reload /opt/LogESP/run/logesp-uwsgi-master.pid
 	@echo Have a nice day!
 
 newdb: newdb-setup fixtures
