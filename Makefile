@@ -74,8 +74,6 @@ update-deps:
 	pip install -Ur requirements.txt
 
 update-logesp:
-	@echo Stopping UWSGI...
-	@kill -11 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
 	@echo Pulling changes from GitHub...
 	git pull
 	@echo Updating database
@@ -86,6 +84,8 @@ update-logesp:
 	@logesp stop
 	@sleep 2
 	@logesp start
+	@echo Restarting UWSGI...
+	@kill -1 $(cat /opt/LogESP/run/logesp-uwsgi-master.pid)
 	@echo Have a nice day!
 
 newdb: newdb-setup fixtures
