@@ -4,6 +4,11 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 ## [Unreleased]
 ### Updated
 - More security in default nginx setup
+- `make update` reloads uwsgi properly
+- UI color scheme is easier to look at (based on xterm-256color/vim)
+
+### Added
+- Inline documentation in limit rule templates
 
 ## [0.2-beta-r2] 2018-04-10
 ### Added

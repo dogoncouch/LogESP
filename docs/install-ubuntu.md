@@ -13,6 +13,7 @@ LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 - [Edit rc.local](#edit-rclocal)
 - [Reboot](#reboot)
 - [Extras](#extras)
+  - [Updating](#updating)
   - [Production Environments](#production-environments)
   - [Distributed Environments](#distributed-environments)
 
@@ -152,15 +153,16 @@ Run `make update` to update pip dependencies, pull changes from GitHub, and rest
 
 ### Production Environments
 In a production security environment, a few more steps are recommended:
-- Secure NTP communication
 - Use an SSL certificate signed by your CA
 - Use NTP on log sources for time synchronization
+- Secure NTP communication
 - Update the `SECRET_KEY` setting in `config/settings.py`
 - Follow all other instructions in the [Django deployment checklist](https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/)
+
 Note: LogESP is still testing, and should only be deployed in production by people who really know what they are doing.
 
 ### Distributed Environments
-Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `start.sh` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.
+Event parsing can be distributed among multiple syslog servers, if necessary. Adding the `-p` option to the `logesp` command in `/etc/rc.local` on all but the main server will avoid redundant rule checking. Using MariaDB with SSL is recommended.
 
 A few extra precautions are recommended:
 - Use separate MariaDB credentials (with minimal permissions) on servers
