@@ -78,8 +78,6 @@ update-logesp:
 	git pull
 	@echo Updating database
 	python manage.py migrate
-	@echo Restarting UWSGI...
-	@/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
 	@echo Restarting logesp daemon...
 	@logesp stop
 	@sleep 2
