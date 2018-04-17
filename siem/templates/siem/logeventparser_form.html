@@ -6,6 +6,28 @@
 
 <h1>Add Log Event Parser</h1>
 <form action="" method="post">{% csrf_token %}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td class="right">{{ form.name }}</td><td>The parser name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td class="right">{{ form.desc }}</td><td>A description of the parser.</td>
+        </tr>
+        <tr>
+            <td class="right">Match Regex</td><td class="right">{{ form.match_regex }}</td><td>The regular expression for finding attributes.</td>
+        </tr>
+        <tr>
+            <td class="right">Fields</td><td class="right">{{ form.fields }}</td><td>The fields parsed by the regular expression.</td>
+        </tr>
+        <tr>
+            <td class="right">Backup Match Regex</td><td class="right">{{ form.backup_match_regex }}</td><td>A backup regular expression, in case the first one fails.</td>
+        </tr>
+        <tr>
+            <td class="right">Backup Fields</td><td class="right">{{ form.backup_fields }}</td><td>The fields parsed by the backup regular expression.</td>
+        </tr>
     {{ form.as_p }}
     <input type="submit" value="Save" />
 </form>
