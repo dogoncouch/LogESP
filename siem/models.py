@@ -129,8 +129,6 @@ class LimitRule(models.Model):
             null=True, blank=True)
     action_filter_regex = models.CharField(max_length=48,
             null=True, blank=True)
-    command_filter_regex = models.CharField(max_length=64,
-            null=True, blank=True)
     interface_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
     status_filter_regex = models.CharField(max_length=24,
@@ -146,6 +144,8 @@ class LimitRule(models.Model):
     source_user_filter_regex = models.CharField(max_length=32,
             null=True, blank=True)
     target_user_filter_regex = models.CharField(max_length=32,
+            null=True, blank=True)
+    command_filter_regex = models.CharField(max_length=64,
             null=True, blank=True)
     path_filter_regex = models.CharField(max_length=128, default='',
             null=True, blank=True)

@@ -6,6 +6,11 @@
 
 {% if form.errors %}
 <p>There were some errors.</p>
+
+{% for field in form %}
+{{ field.label_tag }}: {{ field.errors }}
+{% endfor %}
+
 {% endif %}
 
 <h1>Add Limit Rule</h1>
