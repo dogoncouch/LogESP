@@ -5,8 +5,70 @@
 {% block content-main %}
 
 <h1>Add Hardware Asset</h1>
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td>{{ form.name }}</td><td>The hardware asset's name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td>{{ form.desc }}</td><td>A description of the hardware asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Org. Unit</td><td>{{ form.org_unit }}</td><td>The organizational unit that this asset belongs to.</td>
+        </tr>
+        <tr>
+            <td class="right">Asset Owner</td><td>{{ form.asset_owner }}</td><td>The owner of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Asset Custodian</td><td>{{ form.asset_custodian }}</td><td>The person responsible for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Parent Hardware</td><td>{{ form.parent_hardware }}</td><td>The parent hardware of this hardware asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Type</td><td>{{ form.hardware_type }}</td><td>The hardware type.</td>
+        </tr>
+        <tr>
+            <td class="right">Property ID</td><td>{{ form.property_id }}</td><td>This asset's company-assigned property ID.</td>
+        </tr>
+        <tr>
+            <td class="right">Device Maker</td><td>{{ form.device_maker }}</td><td>The manufacturer of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Device Model</td><td>{{ form.device_model }}</td><td>The model name or number for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Location</td><td>{{ form.location }}</td><td>The physical location of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Status</td><td>{{ form.status }}</td><td>The current status of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Date Added</td><td>{{ form.date_added }}</td><td>The date that this asset was added to the system.</td>
+        </tr>
+        <tr>
+            <td class="right">End of Life</td><td>{{ form.end_of_life }}</td><td>This asset's expected end of life date.</td>
+        </tr>
+        <tr>
+            <td class="right"></td><td>{{ form. }}</td><td></td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 

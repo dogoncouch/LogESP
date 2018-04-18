@@ -5,8 +5,37 @@
 {% block content-main %}
 
 <h1>Add Organizational Unit</h1>
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td>{{ form.name }}</td><td>The organizational unit's name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td>{{ form.desc }}</td><td>A description of the organizational unit.</td>
+        </tr>
+        <tr>
+            <td class="right">Contact</td><td>{{ form.unit_contact }}</td><td>The contact person for this organizational unit.</td>
+        </tr>
+        <tr>
+            <td class="right">Parent OU</td><td>{{ form.parent_ou }}</td><td>This organizational unit's parent OU.</td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 
