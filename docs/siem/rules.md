@@ -53,7 +53,7 @@ magnitude           Rule    No
 In addition to these filters, rule events have an optional `event_type` attribute. Event types must match exactly, if present.
 
 ### Match Lists
-Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the `match_friendlist` attribute to `True`).
+Rules can also compare a field in events to a file containing one item per line. Events will only be counted toward the rule if the specified field matches a line in the file (this can be reversed by setting the `match_allowlist` attribute to `True`).
 
 To configure a match list, set the `match_list_path` attribute to the desired file or directory, and set the `match_field` attribute to the desired field. Choose from the following fields:
 
