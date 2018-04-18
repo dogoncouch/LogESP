@@ -23,22 +23,22 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
-        <td class="right">Name</td><td class="right">{{ lp.name }}</td><td>The parser name.</td>
+        <td class="right">Name</td><td>{{ lp.name }}</td><td>The parser name.</td>
     </tr>
     <tr>
-        <td class="right">Desc</td><td class="right">{{ lp.desc }}</td><td>A description of the parser.</td>
+        <td class="right">Desc</td><td>{{ lp.desc }}</td><td>A description of the parser.</td>
     </tr>
     <tr>
-        <td class="right">Match Regex</td><td class="right">{{ lp.match_regex }}</td><td>The regular expression for finding attributes.</td>
+        <td class="right">Match Regex</td><td>{{ lp.match_regex }}</td><td>The regular expression for finding attributes.</td>
     </tr>
     <tr>
-        <td class="right">Fields</td><td class="right">{{ lp.fields }}</td><td>The fields parsed by the regular expression.</td>
+        <td class="right">Fields</td><td>{{ lp.fields }}</td><td>The fields parsed by the regular expression.</td>
     </tr>
     <tr>
-        <td class="right">Backup Match Regex</td><td class="right">{% if lp.backup_match_regex %}{{ lp.backup_match_regex }}{% endif %}</td><td>A backup regular expression, in case the first one fails.</td>
+        <td class="right">Backup Match Regex</td><td>{% if lp.backup_match_regex %}{{ lp.backup_match_regex }}{% endif %}</td><td>A backup regular expression, in case the first one fails.</td>
     </tr>
     <tr>
-        <td class="right">Backup Fields</td><td class="right">{% if lp.backup_fields %}{{ lp.backup_fields }}{% endif %}</td><td>The fields parsed by the backup regular expression.</td>
+        <td class="right">Backup Fields</td><td>{% if lp.backup_fields %}{{ lp.backup_fields }}{% endif %}</td><td>The fields parsed by the backup regular expression.</td>
     </tr>
 </table>
 
