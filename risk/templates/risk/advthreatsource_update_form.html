@@ -5,8 +5,52 @@
 {% block content-main %}
 
 <h1>Update Adversarial Threat Source</h1>
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th>Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td>{{ form.name }}</td><td>The name of the threat source.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td>{{ form.desc }}</td><td>A description of the threat source.</td>
+        </tr>
+        <tr>
+            <td class="right">Source Type</td><td>{{ form.source_type }}</td><td>The threat source type.</td>
+        </tr>
+        <tr>
+            <td class="right">Info Source</td><td>{{ form.info_source }}</td><td>The source of information on this threat source.</td>
+        </tr>
+        <tr>
+            <td class="right">Info Source Tier</td><td>{{ form.tier }}</td><td>The info source tier.</td>
+        </tr>
+        <tr>
+            <td class="right">In Scope?</td><td>{{ form.in_scope }}</td><td>Whether this threat source is within the scope of this assessment.</td>
+        </tr>
+        <tr>
+            <td class="right">Capability</td><td>{{ form.capability }}</td><td>This threat source's level of capability.</td>
+        </tr>
+        <tr>
+            <td class="right">Intent</td><td>{{ form.intent }}</td><td>This threat source's level of intent.</td>
+        </tr>
+        <tr>
+            <td class="right">Targeting</td><td>{{ form.targeting }}</td><td>This threat source's level of specific targeting.</td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 
