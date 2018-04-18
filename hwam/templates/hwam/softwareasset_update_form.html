@@ -48,10 +48,16 @@
             <td class="right">Parent Software</td><td>{{ form.parent_software }}</td><td>Parent software of this asset.</td>
         </tr>
         <tr>
-            <td class="right">Type</td><td>{{ form.software_type }}</td><td>The software type.</td>
+            <td class="right">Software Property ID</td><td>{{ form.sw_property_id }}</td><td>This asset's company-assigned software property ID.</td>
+        </tr>
+    </table>
+    <h2>Package Info</h2>
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
-            <td class="right">Software Property ID</td><td>{{ form.sw_property_id }}</td><td>This asset's company-assigned software property ID.</td>
+            <td class="right">Type</td><td>{{ form.software_type }}</td><td>The software type.</td>
         </tr>
         <tr>
             <td class="right">Package Vendor</td><td>{{ form.package_vendor }}</td><td>The vendor for this asset.</td>
@@ -70,6 +76,12 @@
         </tr>
         <tr>
             <td class="right">End of Life</td><td>{{ form.date_eol }}</td><td>This asset's expected end of life date.</td>
+        </tr>
+    </table>
+    <h2>Networking Info</h2>
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
             <td class="right">Hostname</td><td>{{ form.hostname }}</td><td>This asset's hostname, if applicable.</td>

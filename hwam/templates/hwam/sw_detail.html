@@ -80,7 +80,7 @@
         {{ sw.package_vendor }} {{ sw.package_name }}-{{ sw.package_version }}
     </li> 
     <li>Software Property ID: {{ sw.sw_property_id }}</li>
-    <li>Status: {{ sw.status }}</li>
+    <li>Status: {{ sw.get_status_display }}</li>
     <li>Lifespan:<ul>
         <li>Date Added: {{ sw.date_added }}</li>
         <li>EOL Date: {{ sw.date_eol }}</li></ul></li>
