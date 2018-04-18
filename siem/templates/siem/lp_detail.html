@@ -1,26 +1,45 @@
 {% extends "siem/base.html" %}
 
-{% block sub-title %}Parser - {{ lp }} | {% endblock %}
+{% block sub-title %}Parser | {% endblock %}
 
 {% block content-main %}
 
-<h1>{{ lp }} (Parser)</h1>
-<a href="{% url 'siem:lp_update' lp.id %}">Edit</a>
-&middot;
-<a href="{% url 'siem:lp_delete' lp.id %}">Delete</a>
-&middot;
-<a href="{% url 'siem:lp_index' %}">Index</a>
+{% if form.errors %}
+<p>There were some errors.</p>
+
 <ul>
-    <li>ID: {{ lp.id }}</li>
-    <li>Name: {{ lp.name }}</li>
-    <li>Desc: {{ lp.desc }}</li>
-    <li>Built-in?: {{lp.is_builtin }}</li>
-    <li>Primary Matching<ul>
-        <li>Match Regex: {{ lp.match_regex }}</li>
-        <li>Fields: {{ lp.fields }}</li></ul></li>
-    <li>Backup Matching:<ul>
-        <li>Backup Match Regex: {{ lp.backup_match_regex }}</li>
-        <li>Backup Fields: {{ lp.backup_fields }}</li></ul></li>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
 </ul>
+
+{% endif %}
+
+<h1>Log Event Parser</h1>
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">Name</td><td class="right">{{ lp.name }}</td><td>The parser name.</td>
+    </tr>
+    <tr>
+        <td class="right">Desc</td><td class="right">{{ lp.desc }}</td><td>A description of the parser.</td>
+    </tr>
+    <tr>
+        <td class="right">Match Regex</td><td class="right">{{ lp.match_regex }}</td><td>The regular expression for finding attributes.</td>
+    </tr>
+    <tr>
+        <td class="right">Fields</td><td class="right">{{ lp.fields }}</td><td>The fields parsed by the regular expression.</td>
+    </tr>
+    <tr>
+        <td class="right">Backup Match Regex</td><td class="right">{% if lp.backup_match_regex %}{{ lp.backup_match_regex }}{% endif %}</td><td>A backup regular expression, in case the first one fails.</td>
+    </tr>
+    <tr>
+        <td class="right">Backup Fields</td><td class="right">{% if lp.backup_fields %}{{ lp.backup_fields }}{% endif %}</td><td>The fields parsed by the backup regular expression.</td>
+    </tr>
+</table>
 
 {% endblock %}

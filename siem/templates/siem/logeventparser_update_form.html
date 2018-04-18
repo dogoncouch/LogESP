@@ -1,12 +1,47 @@
 {% extends "siem/base.html" %}
 
-{% block sub-title %}Parser | {% endblock %}
+{% block sub-title %}Update Parser | {% endblock %}
 
 {% block content-main %}
 
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <h1>Update Log Event Parser</h1>
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td class="right">{{ form.name }}</td><td>The parser name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td class="right">{{ form.desc }}</td><td>A description of the parser.</td>
+        </tr>
+        <tr>
+            <td class="right">Match Regex</td><td class="right">{{ form.match_regex }}</td><td>The regular expression for finding attributes.</td>
+        </tr>
+        <tr>
+            <td class="right">Fields</td><td class="right">{{ form.fields }}</td><td>The fields parsed by the regular expression.</td>
+        </tr>
+        <tr>
+            <td class="right">Backup Match Regex</td><td class="right">{{ form.backup_match_regex }}</td><td>A backup regular expression, in case the first one fails.</td>
+        </tr>
+        <tr>
+            <td class="right">Backup Fields</td><td class="right">{{ form.backup_fields }}</td><td>The fields parsed by the backup regular expression.</td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 

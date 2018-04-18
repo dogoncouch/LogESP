@@ -4,6 +4,19 @@
 
 {% block content-main %}
 
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <h1>Add Log Event Parser</h1>
 <form action="" method="post">{% csrf_token %}
     <table>

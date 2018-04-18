@@ -6,6 +6,15 @@
 
 {% if form.errors %}
 <p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
 {% endif %}
 
 <h1>Update Limit Rule</h1>
@@ -84,6 +93,12 @@
         </tr>
     </table>
     <h2>Log Event Criteria</h2>
+    <h3>Basic Filters</h3>
+    <table>
+        <tr>
+            <td class="right">Allowed Log Sources</td><td class="right">{{ form.allowed_log_sources }}</td><td>Number of log sources allowed before triggering an event.</td>
+        </tr>
+    </table>
     <h3>Regular Expression Filters</h3>
     <p>All regular expression filters use case insensitive regular expressions.</p>
     <table>
