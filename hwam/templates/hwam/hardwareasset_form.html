@@ -19,6 +19,7 @@
 {% endif %}
 
 <form action="" method="post">{% csrf_token %}
+    <h2>Basic Info</h2>
     <table>
         <tr>
             <th>Attribute</th><th>Setting</th><th class="left">Description</th>
@@ -42,10 +43,13 @@
             <td class="right">Parent Hardware</td><td>{{ form.parent_hardware }}</td><td>The parent hardware of this asset.</td>
         </tr>
         <tr>
-            <td class="right">Type</td><td>{{ form.hardware_type }}</td><td>The hardware type.</td>
-        </tr>
-        <tr>
             <td class="right">Property ID</td><td>{{ form.property_id }}</td><td>This asset's company-assigned property ID.</td>
+        </tr>
+    </table>
+    <h2>Device Info</h2>
+    <table>
+        <tr>
+            <td class="right">Type</td><td>{{ form.hardware_type }}</td><td>The hardware type.</td>
         </tr>
         <tr>
             <td class="right">Device Maker</td><td>{{ form.device_maker }}</td><td>The manufacturer of this asset.</td>
@@ -53,6 +57,9 @@
         <tr>
             <td class="right">Device Model</td><td>{{ form.device_model }}</td><td>The model name or number for this asset.</td>
         </tr>
+    </table>
+    <h2>Status Info</h2>
+    <table>
         <tr>
             <td class="right">Location</td><td>{{ form.location }}</td><td>The physical location of this asset.</td>
         </tr>

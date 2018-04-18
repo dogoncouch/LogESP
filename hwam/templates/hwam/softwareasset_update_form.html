@@ -19,6 +19,7 @@
 {% endif %}
 
 <form action="" method="post">{% csrf_token %}
+    <h2>Basic Info</h2>
     <table>
         <tr>
             <th>Attribute</th><th>Setting</th><th class="left">Description</th>
@@ -67,6 +68,12 @@
         </tr>
         <tr>
             <td class="right">Package Version</td><td>{{ form.package_version }}</td><td>The package version for this asset.</td>
+        </tr>
+    </table>
+    <h2>Status Info</h2>
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
         </tr>
         <tr>
             <td class="right">Status</td><td>{{ form.status }}</td><td>The current status of this asset.</td>
