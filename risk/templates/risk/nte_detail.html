@@ -29,7 +29,7 @@
                         ({{ v.pervasiveness }})</a></li>
             {% endfor %}
         </ul></li>
-    <li>Responses: (effectiveness/status)<ul>
+    <li>Responses (effectiveness/status):<ul>
             {% for r in nte.responses.all %}
                 <li><a href="{% url 'risk:response_detail' r.id %}">{{ r }}
                     ({{ r.effectiveness }}/{{ r.get_status_display }})</a></li>
