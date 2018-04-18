@@ -10,6 +10,7 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 ### Added
 - Inline documentation in SIEM templates
 - Inline documentation in Risk form templates
+- Inline documentation in Asset form templates
 
 ## [0.2-beta-r2] 2018-04-10
 ### Added
