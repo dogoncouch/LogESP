@@ -5,8 +5,100 @@
 {% block content-main %}
 
 <h1>Add Software Asset</h1>
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td>{{ form.name }}</td><td>The software asset's name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td>{{ form.desc }}</td><td>A description of the software asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Org. Unit</td><td>{{ form.org_unit }}</td><td>The organizational unit to which this asset belongs.</td>
+        </tr>
+        <tr>
+            <td class="right">Custodian (SWAM)</td><td>{{ form.custodian_swam }}</td><td>This asset's software asset management custodian.</td>
+        </tr>
+        <tr>
+            <td class="right">Custodian (CSM)</td><td>{{ form.custodian_csm }}</td><td>This asset's configuration security management custodian.</td>
+        </tr>
+        <tr>
+            <td class="right">Custodian (VUL)</td><td>{{ form.custodian_vul }}</td><td>This asset's patching/vulnerability management custodian.</td>
+        </tr>
+        <tr>
+            <td class="right">Parent Hardware</td><td>{{ form.parent_hardware }}</td><td>The parent hardware of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Parent Software</td><td>{{ form.parent_software }}</td><td>Parent software of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Type</td><td>{{ form.software_type }}</td><td>The software type.</td>
+        </tr>
+        <tr>
+            <td class="right">Property ID</td><td>{{ form.sw_property_id }}</td><td>This asset's company-assigned software property ID.</td>
+        </tr>
+        <tr>
+            <td class="right">Package Name</td><td>{{ form.package_name }}</td><td>The package name for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Package Version</td><td>{{ form.package_version }}</td><td>The package version for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Status</td><td>{{ form.status }}</td><td>The current status of this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">Date Added</td><td>{{ form.date_added }}</td><td>The date that this asset was added to the system.</td>
+        </tr>
+        <tr>
+            <td class="right">End of Life</td><td>{{ form.end_of_life }}</td><td>This asset's expected end of life date.</td>
+        </tr>
+        <tr>
+            <td class="right">Hostname</td><td>{{ form.hostname }}</td><td>This asset's hostname, if applicable.</td>
+        </tr>
+        <tr>
+            <td class="right">Domain Name</td><td>{{ form.domain_name }}</td><td>This asset's domain name, if applicable.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv4 Address 1</td><td>{{ form.ip4_address_1 }}</td><td>The first IPv4 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv4 Address 2</td><td>{{ form.ip4_address_2 }}</td><td>The second IPv4 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv4 Address 3</td><td>{{ form.ip4_address_3 }}</td><td>The third IPv4 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv4 Address 4</td><td>{{ form.ip4_address_4 }}</td><td>The fourth IPv4 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv6 Address 1</td><td>{{ form.ip6_address_1 }}</td><td>The first IPv6 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv6 Address 2</td><td>{{ form.ip6_address_2 }}</td><td>The second IPv6 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv6 Address 3</td><td>{{ form.ip6_address_3 }}</td><td>The third IPv6 address for this asset.</td>
+        </tr>
+        <tr>
+            <td class="right">IPv6 Address 4</td><td>{{ form.ip6_address_4 }}</td><td>The fourth IPv6 address for this asset.</td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 
