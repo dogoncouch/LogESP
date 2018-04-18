@@ -5,8 +5,64 @@
 {% block content-main %}
 
 <h1>Add Non-Adversarial Threat Event</h1>
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td>{{ form.name }}</td><td>The threat event's name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td>{{ form.desc }}</td><td>A description of the threat event.</td>
+        </tr>
+        <tr>
+            <td class="right">Event Type</td><td>{{ form.event_type }}</td><td>The threat event type.</td>
+        </tr>
+        <tr>
+            <td class="right">Sources</td><td>{{ form.sources }}</td><td>The threat sources related to this event.</td>
+        </tr>
+        <tr>
+            <td class="right">Relevance</td><td>{{ form.relevance }}</td><td>The relevance of this threat event.</td>
+        </tr>
+        <tr>
+            <td class="right">Info Source</td><td>{{ form.info_source }}</td><td>The source for information on this threat event.</td>
+        </tr>
+        <tr>
+            <td class="right">Info Source Tier</td><td>{{ form.tier }}</td><td>The info source tier.</td>
+        </tr>
+        <tr>
+            <td class="right">Likelihood of Initiation</td><td>{{ form.likelihood_initiation }}</td><td>The likelihood of this threat event being initiated.</td>
+        </tr>
+        <tr>
+            <td class="right">Likelihood of Impact</td><td>{{ form.likelihood_impact }}</td><td>The likelihood of this threat event, if initiated, having an adverse impact.</td>
+        </tr>
+        <tr>
+            <td class="right">Risk Conditions</td><td>{{ form.risk_conditions }}</td><td>Predisposing conditions related to this threat event.</td>
+        </tr>
+        <tr>
+            <td class="right">Impacts</td><td>{{ form.impacts }}</td><td>Potential impacts of this threat event.</td>
+        </tr>
+        <tr>
+            <td class="right">Responses</td><td>{{ form.responses }}</td><td>Precautions taken in response to this threat event.</td>
+        </tr>
+        <tr>
+            <td class="right">Assigned Risk</td><td>{{ form.assigned_risk }}</td><td>The level of risk assigned to this threat event, after weighing the details.</td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 
