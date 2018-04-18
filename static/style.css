@@ -108,3 +108,8 @@ A:visited {
 UL {
     list-style-position: outside;
 }
+
+LI {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
