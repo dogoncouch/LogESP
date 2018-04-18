@@ -8,7 +8,8 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 - UI color scheme is easier to look at (based on xterm-256color/vim)
 
 ### Added
-- Inline documentation in limit rule templates
+- Inline documentation in SIEM templates
+- Inline documentation in Risk form templates
 
 ## [0.2-beta-r2] 2018-04-10
 ### Added
