@@ -11,6 +11,32 @@
 &middot;
 <a href="{% url 'siem:ph_index' %}">Index</a>
 
+<table>
+    <tr>
+        <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">ID</td><td>{{ ph.id }}</td><td>The parse helper's internal ID</td>
+    </tr>
+    <tr>
+        <td class="right">Built-in?</td><td>{{ ph.is_builtin }}</td><td>Whether the parse helper is built-in to LogESP.</td>
+    </tr>
+    <tr>
+        <td class="right">Name</td><td>{{ ph.name }}</td><td>The parse helper name.</td>
+    </tr>
+    <tr>
+        <td class="right">Desc</td><td>{{ ph.desc }}</td><td>A description of the parse helper.</td>
+    </tr>
+    <tr>
+        <td class="right">Helper Type</td><td>{{ ph.helper_type }}</td><td>The parse helper type that this helper belongs to.</td>
+    </tr>
+    <tr>
+        <td class="right">Match Regex</td><td>{{ ph.match_regex }}</td><td>The regular expression for finding attributes.</td>
+    </tr>
+    <tr>
+        <td class="right">Fields</td><td>{{ ph.fields }}</td><td>The fields parsed by the regular expression</td>
+    </tr>
+</table>
 <ul>
     <li>ID: {{ ph.id }}</li>
     <li>Helper Type: {{ ph.helper_type }}</li>

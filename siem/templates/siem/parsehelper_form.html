@@ -4,9 +4,41 @@
 
 {% block content-main %}
 
+{% if form.errors %}
+<p>There were some errors.</p>
+
+<ul>
+    {% for field in form %}
+    {% if field.errors %}
+    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
 <h1>Add Parse Helper</h1>
 <form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <table>
+        <tr>
+            <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+        </tr>
+        <tr>
+            <td class="right">Name</td><td>{{ form.name }}</td><td>The parse helper name.</td>
+        </tr>
+        <tr>
+            <td class="right">Desc</td><td>{{ form.desc }}</td><td>A description of the parse helper.</td>
+        </tr>
+        <tr>
+            <td class="right">Helper Type</td><td>{{ form.helper_type }}</td><td>The parse helper type that this helper belongs to.</td>
+        </tr>
+        <tr>
+            <td class="right">Match Regex</td><td>{{ form.match_regex }}</td><td>The regular expression for finding attributes.</td>
+        </tr>
+        <tr>
+            <td class="right">Fields</td><td>{{ form.fields }}</td><td>The fields parsed by the regular expression</td>
+        </tr>
+    </table>
     <input type="submit" value="Save" />
 </form>
 

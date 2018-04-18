@@ -17,6 +17,12 @@
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
     </tr>
     <tr>
+        <td class="right">ID</td><td>{{ ph.id }}</td><td>The limit rule's internal ID</td>
+    </tr>
+    <tr>
+        <td class="right">Built-in?</td><td>{{ ph.is_builtin }}</td><td>Whether the limit rule is built-in to LogESP.</td>
+    </tr>
+    <tr>
         <td class="right">Name</td><td>{{ lr.name }}</td><td>The rule name.</td>
     </tr>
     <tr>

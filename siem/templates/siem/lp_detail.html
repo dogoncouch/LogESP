@@ -1,6 +1,6 @@
 {% extends "siem/base.html" %}
 
-{% block sub-title %}Parser | {% endblock %}
+{% block sub-title %}Parser - {{ lp }} | {% endblock %}
 
 {% block content-main %}
 
@@ -17,10 +17,21 @@
 
 {% endif %}
 
-<h1>Log Event Parser</h1>
+<h1>{{ lp }} (Parser)</h1>
+<a href="{% url 'siem:lp_update' lp.id %}">Edit</a>
+&middot;
+<a href="{% url 'siem:lp_delete' lp.id %}">Delete</a>
+&middot;
+<a href="{% url 'siem:lp_index' %}">Index</a>
 <table>
     <tr>
         <th>Attribute</th><th>Setting</th><th class="left">Description</th>
+    </tr>
+    <tr>
+        <td class="right">ID</td><td>{{ ph.id }}</td><td>The parser's internal ID</td>
+    </tr>
+    <tr>
+        <td class="right">Built-in?</td><td>{{ ph.is_builtin }}</td><td>Whether the parser is built-in to LogESP.</td>
     </tr>
     <tr>
         <td class="right">Name</td><td>{{ lp.name }}</td><td>The parser name.</td>
