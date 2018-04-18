@@ -1,7 +1,7 @@
 # Change log
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
-## [Unreleased]
+## [0.2-beta-r4] - 2018-04-18
 ### Updated
 - More security in default nginx setup
 - `make update` reloads uwsgi properly
@@ -11,6 +11,7 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 - Inline documentation in SIEM templates
 - Inline documentation in Risk form templates
 - Inline documentation in Asset form templates
+- Package vendor, more IPs to software assets
 
 ## [0.2-beta-r2] 2018-04-10
 ### Added
