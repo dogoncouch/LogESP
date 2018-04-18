@@ -76,24 +76,70 @@
             </ul></li>
     {% endif %}
     <li>Software Type: {{ sw.software_type }}</li>
-    <li>Hostname: {{ sw.hostname }}</li>
-    <li>Domain Name: {{ sw.domain_name }}</li>
-    <li>IPv4 Address 1: {{ sw.ip4_address_1 }}</li>
-    <li>IPv4 Address 2: {{ sw.ip4_address_2 }}</li>
-    <li>IPv4 Address 3: {{ sw.ip4_address_3 }}</li>
-    <li>IPv4 Address 4: {{ sw.ip4_address_4 }}</li>
-    <li>IPv6 Address 1: {{ sw.ip6_address_1 }}</li>
-    <li>IPv6 Address 2: {{ sw.ip6_address_2 }}</li>
-    <li>IPv6 Address 3: {{ sw.ip6_address_3 }}</li>
-    <li>IPv6 Address 4: {{ sw.ip6_address_4 }}</li>
-    <li>Package Name/Version:
-        {{ sw.package_name }}-{{ sw.package_version }}
+    <li>Package Vendor/Name/Version:
+        {{ sw.package_vendor }} {{ sw.package_name }}-{{ sw.package_version }}
     </li> 
     <li>Software Property ID: {{ sw.sw_property_id }}</li>
     <li>Status: {{ sw.status }}</li>
     <li>Lifespan:<ul>
         <li>Date Added: {{ sw.date_added }}</li>
         <li>EOL Date: {{ sw.date_eol }}</li></ul></li>
+    <li>Networking<ul>
+        <li>Hostname: {{ sw.hostname }}</li>
+        <li>Domain Name: {{ sw.domain_name }}</li>
+        <li>IPv4 Addresses:<ul>
+            {% if sw.ip4_address_1 %}
+            <li>IPv4 Address 1: {{ sw.ip4_address_1 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_2 %}
+            <li>IPv4 Address 2: {{ sw.ip4_address_2 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_3 %}
+            <li>IPv4 Address 3: {{ sw.ip4_address_3 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_4 %}
+            <li>IPv4 Address 4: {{ sw.ip4_address_4 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_5 %}
+            <li>IPv4 Address 5: {{ sw.ip4_address_5 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_6 %}
+            <li>IPv4 Address 6: {{ sw.ip4_address_6 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_7 %}
+            <li>IPv4 Address 7: {{ sw.ip4_address_7 }}</li>
+            {% endif %}
+            {% if sw.ip4_address_8 %}
+            <li>IPv4 Address 8: {{ sw.ip4_address_8 }}</li>
+            {% endif %}
+            </ul></li>
+        <li>IPv6 Addresses:<ul>
+            {% if sw.ip6_address_1 %}
+            <li>IPv6 Address 1: {{ sw.ip6_address_1 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_2 %}
+            <li>IPv6 Address 2: {{ sw.ip6_address_2 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_3 %}
+            <li>IPv6 Address 3: {{ sw.ip6_address_3 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_4 %}
+            <li>IPv6 Address 4: {{ sw.ip6_address_4 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_5 %}
+            <li>IPv6 Address 5: {{ sw.ip6_address_5 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_6 %}
+            <li>IPv6 Address 6: {{ sw.ip6_address_6 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_7 %}
+            <li>IPv6 Address 7: {{ sw.ip6_address_7 }}</li>
+            {% endif %}
+            {% if sw.ip6_address_8 %}
+            <li>IPv6 Address 8: {{ sw.ip6_address_8 }}</li>
+            {% endif %}
+            </ul></li>
+        </ul></li>
 </ul>
 
 {% endblock %}
