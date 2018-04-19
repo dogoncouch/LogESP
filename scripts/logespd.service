@@ -1,0 +1,15 @@
+[Unit]
+Description=LogESP daemon
+Requires=mysql.service network.target
+Documentation=https://github.com/dogoncouch/LogESP
+DefaultDependencies=no
+
+[Service]
+RemainAfterExit=true
+ExecStart=/opt/LogESP/scripts/logesp start
+ExecStop=/opt/LogESP/scripts/logesp stop
+StandardOutput=null
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
