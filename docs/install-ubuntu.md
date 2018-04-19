@@ -70,9 +70,11 @@ make staticfiles
 ```
 Note: When confirming static file collection, you must type `yes`, not `y`.
 
-### Link daemon script to /usr/local/bin
+### Link daemon scripts
 ```
 ln -s /opt/LogESP/scripts/logesp /usr/local/bin
+ln -s /opt/LogESP/scripts/logespd.service /etc/systemd/system
+ln -s /opt/LogESP/scripts/logesp-uwsgi.service /etc/systemd/system
 ```
 
 ### Update Permissions
@@ -134,14 +136,6 @@ chown www-data.www-data /opt/LogESP/run/logesp-uwsgi-master.pid
 chmod 644 /opt/LogESP/run/logesp-uwsgi-master.pid
 ```
 
-## Edit rc.local
-- Add the following:
-```
-/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
-su -s '/bin/bash' -c '> /opt/LogESP/run/logesp.pid' logespd
-/opt/LogESP/scripts/logesp start
-```
-
 ## Reboot
 ```
 reboot
@@ -149,7 +143,7 @@ reboot
 
 ## Extras
 ### Updating
-Run `make update` to update pip dependencies, pull changes from GitHub, and restart LogESP.
+Run `make update` to update pip dependencies, pull changes from GitHub, and restart LogESP. Run `make update-logesp` to skip dependency updates.
 
 ### Production Environments
 In a production security environment, a few more steps are recommended:
