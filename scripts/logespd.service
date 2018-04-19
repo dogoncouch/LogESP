@@ -7,6 +7,7 @@ DefaultDependencies=no
 [Service]
 RemainAfterExit=true
 ExecStart=/opt/LogESP/scripts/logesp start
+ExecReload=/opt/LogESP/scripts/logesp restart
 ExecStop=/opt/LogESP/scripts/logesp stop
 StandardOutput=null
 Restart=on-failure

@@ -1,11 +1,13 @@
 [Unit]
 Description=LogESP uwsgi
 Requires=network.target
+Before=nginx.service
 DefaultDependencies=no
 
 [Service]
 RemainAfterExit=true
 ExecStart=/opt/LogESP/env/bin/uwsgi --ini /opt/LogESP/config/nginx/logesp_uwsgi.ini
+ExecReload=/opt/LogESP/env/bin/uwsgi --reload /opt/LogESP/run/logesp-uwsgi-master.pid
 ExecStop=/opt/LogESP/env/bin/uwsgi --stop /opt/LogESP/run/logesp-uwsgi-master.pid
 StandardOutput=null
 Restart=on-failure

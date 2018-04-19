@@ -136,23 +136,6 @@ if [ $STARTING ]; then
         fi
     fi
 
-elif [ $STOPPING ]; then
-    if [ -s "${PIDFILE}" ]; then
-        PIDLIST=`cat "${PIDFILE}"`
-        for PID in ${PIDLIST[@]}; do
-            kill ${PID}
-        done
-        > "${PIDFILE}"
-        #rm -f "${PIDFILE}"
-    else
-        read LOGESPPROC WASTE <<< `ps aux | grep 'daemons.logespcore.main' | grep -v grep | awk '{print $2}'`
-        if [ ${LOGESPPROC} ]; then
-            kill "${LOGESPPROC}"
-        else
-            echo "LogESP daemon not running."
-        fi
-    fi
-
 elif [ $RESTARTING ]; then
     if [ -s "${PIDFILE}" ]; then
         PIDLIST=`cat "${PIDFILE}"`
@@ -173,6 +156,23 @@ elif [ $RESTARTING ]; then
     sleep 0.5
     export ENVBASE LOGESPBASE RUNPARSER RUNSENTRY PIDFILE
     su -s '/bin/bash' -c 'source "${ENVBASE}/bin/activate" ; python "${LOGESPBASE}/manage.py" shell -c "import daemons.logespcore ; daemons.logespcore.main(parser=${RUNPARSER}, sentry=${RUNSENTRY})" & echo -n "$! " >> "${PIDFILE}"' logespd
+
+elif [ $STOPPING ]; then
+    if [ -s "${PIDFILE}" ]; then
+        PIDLIST=`cat "${PIDFILE}"`
+        for PID in ${PIDLIST[@]}; do
+            kill ${PID}
+        done
+        > "${PIDFILE}"
+        #rm -f "${PIDFILE}"
+    else
+        read LOGESPPROC WASTE <<< `ps aux | grep 'daemons.logespcore.main' | grep -v grep | awk '{print $2}'`
+        if [ ${LOGESPPROC} ]; then
+            kill "${LOGESPPROC}"
+        else
+            echo "LogESP daemon not running."
+        fi
+    fi
 
 elif [ $CLEANING ]; then
     if [ $CLEANINGLOCAL ]; then

@@ -73,8 +73,10 @@ Note: When confirming static file collection, you must type `yes`, not `y`.
 ### Link daemon scripts
 ```
 ln -s /opt/LogESP/scripts/logesp /usr/local/bin
-ln -s /opt/LogESP/scripts/logespd.service /etc/systemd/system
-ln -s /opt/LogESP/scripts/logesp-uwsgi.service /etc/systemd/system
+ln -s /opt/LogESP/scripts/logespd.service /lib/systemd/system
+ln -s /opt/LogESP/scripts/logesp-uwsgi.service /lib/systemd/system
+systemctl enable logespd
+systemctl enable logesp-uwsgi
 ```
 
 ### Update Permissions
