@@ -1,7 +1,6 @@
 [Unit]
 Description=LogESP uwsgi
-Requires=network.target
-Before=nginx.service
+After=network.target
 DefaultDependencies=no
 
 [Service]
