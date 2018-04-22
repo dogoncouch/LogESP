@@ -1,6 +1,14 @@
 # Change log
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
+## [Unreleased]
+### Added
+- systemd daemon scripts for logespd, logesp-uwsgi
+- Default search window is 7 days
+
+### Fixed
+- Hang on shutdown due to uwsgi not exiting properly
+
 ## [0.2-beta-r4] - 2018-04-18
 ### Updated
 - More security in default nginx setup

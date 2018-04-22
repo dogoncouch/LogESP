@@ -84,29 +84,13 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not referrer_val: referrer_val = ''
         if not message_val: message_val = ''
         if not raw_val: raw_val = ''
+        if not starttime_val and not endtime_val:
+            starttime_val = (timezone.localtime(timezone.now()) - \
+                    timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')
         if endtime_val and starttime_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__gte=starttime_val,
                 parsed_at__lte=endtime_val,
-                event_type__iregex=type_val,
-                log_source__iregex=log_source_val,
-                source_process__iregex=process_val,
-                source_host__iregex=source_host_val,
-                source_port__iregex=source_port_val,
-                dest_host__iregex=dest_host_val,
-                dest_port__iregex=dest_port_val,
-                source_user__iregex=source_user_val,
-                target_user__iregex=target_user_val,
-                action__iregex=action_val,
-                command__iregex=command_val,
-                sessionid__iregex=session_val,
-                interface__iregex=interface_val,
-                status__iregex=status_val,
-                message__iregex=message_val,
-                raw_text__iregex=raw_val).order_by('-id')
-        elif starttime_val and not endtime_val:
-            new_context = LogEvent.objects.filter(
-                parsed_at__gte=starttime_val,
                 event_type__iregex=type_val,
                 log_source__iregex=log_source_val,
                 source_process__iregex=process_val,
@@ -144,6 +128,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 raw_text__iregex=raw_val).order_by('-id')
         else:
             new_context = LogEvent.objects.filter(
+                parsed_at__gte=starttime_val,
                 event_type__iregex=type_val,
                 log_source__iregex=log_source_val,
                 source_process__iregex=process_val,
@@ -160,6 +145,24 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 status__iregex=status_val,
                 message__iregex=message_val,
                 raw_text__iregex=raw_val).order_by('-id')
+        #else:
+        #    new_context = LogEvent.objects.filter(
+        #        event_type__iregex=type_val,
+        #        log_source__iregex=log_source_val,
+        #        source_process__iregex=process_val,
+        #        source_host__iregex=source_host_val,
+        #        source_port__iregex=source_port_val,
+        #        dest_host__iregex=dest_host_val,
+        #        dest_port__iregex=dest_port_val,
+        #        source_user__iregex=source_user_val,
+        #        target_user__iregex=target_user_val,
+        #        action__iregex=action_val,
+        #        command__iregex=command_val,
+        #        sessionid__iregex=session_val,
+        #        interface__iregex=interface_val,
+        #        status__iregex=status_val,
+        #        message__iregex=message_val,
+        #        raw_text__iregex=raw_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(LogEventSearchView,self).get_context_data(**kwargs)
@@ -230,17 +233,13 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
         if not type_val: type_val = ''
         if not mag_val: mag_val = 0
         if not message_val: message_val = ''
+        if not starttime_val and not endtime_val:
+            starttime_val = (timezone.localtime(timezone.now()) - \
+                    timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')
         if starttime_val and endtime_val:
             new_context = RuleEvent.objects.filter(
                 date_stamp__gte=starttime_val,
                 date_stamp__lte=endtime_val,
-                rule_category__iregex=category_val,
-                event_type__iregex=type_val,
-                magnitude__gte=mag_val,
-                message__iregex=message_val).order_by('-id')
-        elif starttime_val and not endtime_val:
-            new_context = RuleEvent.objects.filter(
-                date_stamp__gte=starttime_val,
                 rule_category__iregex=category_val,
                 event_type__iregex=type_val,
                 magnitude__gte=mag_val,
@@ -254,10 +253,17 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
                 message__iregex=message_val).order_by('-id')
         else:
             new_context = RuleEvent.objects.filter(
+                date_stamp__gte=starttime_val,
                 rule_category__iregex=category_val,
                 event_type__iregex=type_val,
                 magnitude__gte=mag_val,
                 message__iregex=message_val).order_by('-id')
+        #else:
+        #    new_context = RuleEvent.objects.filter(
+        #        rule_category__iregex=category_val,
+        #        event_type__iregex=type_val,
+        #        magnitude__gte=mag_val,
+        #        message__iregex=message_val).order_by('-id')
         return new_context
     def get_context_data(self, **kwargs):
         context = super(RuleEventSearchView,self).get_context_data(**kwargs)
