@@ -353,10 +353,10 @@ class Sentry:
                     if self.rule.rule_events: self.check_ruleevent()
                     else: self.check_logevent()
                 # Wait until next interval if firedr,; otherwise ~60 seconds:
-                if self.justfired:
+                if self.justfired or self.rule.time_int < 5:
                     sleep(int(self.rule.time_int) * 60)
                 else:
-                    sleep(randrange(45, 60))
+                    sleep(randrange(220, 240))
             except Exception as err:
                 msg = 'LogESP sentry thread for limit rule ' + \
                         self.rule.name + \
