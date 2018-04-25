@@ -9,6 +9,9 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 ### Fixed
 - Hang on shutdown due to uwsgi not exiting properly
 
+### Updated
+- Rule efficiency tweaks, rules no longer run every minute if not fired
+
 ## [0.2-beta-r4] - 2018-04-18
 ### Updated
 - More security in default nginx setup
