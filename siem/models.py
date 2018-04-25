@@ -39,7 +39,7 @@ class ParseHelper(models.Model):
         unique_together = ('name', 'is_builtin')
 
 class LogEvent(models.Model):
-    parsed_at = models.DateTimeField(6, auto_now_add=True)
+    parsed_at = models.DateTimeField(6, auto_now_add=True, db_index=True)
     time_zone = models.CharField(max_length=32,
             null=True, blank=True)
     eol_date_local = models.DateField()
@@ -170,7 +170,7 @@ class LimitRule(models.Model):
 
 
 class RuleEvent(models.Model):
-    date_stamp = models.DateTimeField(auto_now_add=True)
+    date_stamp = models.DateTimeField(auto_now_add=True, db_index=True)
     time_zone = models.CharField(max_length=32)
     eol_date_local = models.DateField()
     eol_date_backup = models.DateField()
