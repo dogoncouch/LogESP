@@ -81,7 +81,8 @@ class LiveParser:
 
                     #if entry:
                     e = LogEvent()
-                    e.parsed_at = timezone.localtime(timezone.now())
+                    # This should be unnecessary now with auto_now:
+                    #e.parsed_at = timezone.localtime(timezone.now())
                     e.time_zone = entry['time_zone']
                     e.eol_date_local = timezone.localtime(
                             timezone.now()).date() + \
