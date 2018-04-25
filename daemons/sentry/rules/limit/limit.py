@@ -175,6 +175,10 @@ class Sentry:
 
         while True:
             try:
+                # Check the rule:
+                if self.rule.is_enabled:
+                    if self.rule.rule_events: self.check_ruleevents()
+                    else: self.check_logevents()
                 # Refresh the rule:
                 locallifespan = self.rule.local_lifespan_days
                 backuplifespan = self.rule.backup_lifespan_days
@@ -229,19 +233,19 @@ class Sentry:
                         self.backuplifespandelta = \
                                 timedelta(
                                         days=self.rule.backup_lifespan_days)
-                # Check for change in event type:
+                # Check for change in event type, set last event:
                 if expectrule:
                     if not self.rule.rule_events:
                         self.get_last_logevent()
                         expectrule = False
+                    else:
+                        self.get_last_ruleevent()
                 else:
                     if self.rule.rule_events:
                         self.get_last_ruleevent()
                         expectrule = True
-                # Check the rule:
-                if self.rule.is_enabled:
-                    if self.rule.rule_events: self.check_ruleevent()
-                    else: self.check_logevent()
+                    else:
+                        self.get_last_logevent
                 # Wait until next interval:
                 sleep(randrange(int(self.rule.time_int) * 60 - 10,
                         int(self.rule.time_int) * 60))
@@ -253,7 +257,7 @@ class Sentry:
                 exit(0)
 
 
-    def check_logevent(self):
+    def check_logevents(self):
         """Check log events based on a rule"""
         
         if self.rule.log_source_filter_regex:
@@ -366,8 +370,7 @@ class Sentry:
                             parameters__iregex=parametersfilter,
                             referrer__iregex=referrerfilter,
                             message__iregex=messagefilter,
-                            raw_text__iregex=rawtextfilter).only(
-                                    str(qfields)[1:-1])
+                            raw_text__iregex=rawtextfilter)
                 else:
                     events = LogEvent.objects.filter(
                             id__gt=self.lasteventid,
@@ -386,8 +389,7 @@ class Sentry:
                             parameters__iregex=parametersfilter,
                             referrer__iregex=referrerfilter,
                             message__iregex=messagefilter,
-                            raw_text__iregex=rawtextfilter).only(
-                                    str(qfields)[1:-1])
+                            raw_text__iregex=rawtextfilter)
                 connsuccess = True
             except Exception as err:
                 if dbtries in [5, 10, 15, 20]:
@@ -698,11 +700,8 @@ class Sentry:
                     self.send_email_alerts(magnitude, totalevents,
                             numlogsources, numsourcehosts, numdesthosts)
 
-        # Get last event id:
-        self.rule.get_last_eventid()
 
-
-    def check_ruleevent(self):
+    def check_ruleevents(self):
         """Check rule events based on a rule"""
 
         if self.rule.rulename_filter_regex:
@@ -813,9 +812,6 @@ class Sentry:
             if self.rule.email_alerts:
                 self.send_email_alerts(magnitude, totalevents,
                         numlogsources, numsourcehosts, numdesthosts)
-            
-        # Get last event id:
-        self.get_last_ruleevent()
 
 
 def main(rule):
