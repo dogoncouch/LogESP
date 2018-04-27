@@ -152,12 +152,12 @@ def check_entry(entry):
         entry['target_user'] = entry['target_user'][:32]
     if len(entry['sessionid']) > 24:
         entry['sessionid'] = entry['sessionid'][:24]
-    if len(entry['path']) > 256:
-        entry['path'] = entry['path'][:256]
+    if len(entry['path']) > 384:
+        entry['path'] = entry['path'][:384]
     if len(entry['parameters']) > 384:
         entry['parameters'] = entry['parameters'][:384]
-    if len(entry['referrer']) > 384:
-        entry['referrer'] = entry['referrer'][:256]
+    if len(entry['referrer']) > 400:
+        entry['referrer'] = entry['referrer'][:400]
     if len(entry['message']) > 1024:
         entry['message'] = entry['message'][:1024]
     if len(entry['ext0']) > 192:
