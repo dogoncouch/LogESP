@@ -245,7 +245,7 @@ class Sentry:
                         self.get_last_ruleevent()
                         expectrule = True
                     else:
-                        self.get_last_logevent
+                        self.get_last_logevent()
                 # Wait until next interval:
                 sleep(randrange(int(self.rule.time_int) * 60 - 10,
                         int(self.rule.time_int) * 60))
