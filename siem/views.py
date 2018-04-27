@@ -87,7 +87,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
         if not raw_val: raw_val = ''
         if not starttime_val and not endtime_val:
             starttime_val = (timezone.localtime(timezone.now()) - \
-                    timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')
+                    timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
         if endtime_val and starttime_val:
             new_context = LogEvent.objects.filter(
                 parsed_at__gte=starttime_val,
@@ -212,7 +212,7 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 not context['endtime_filter']:
             context['starttime_filter'] = (
                     timezone.localtime(timezone.now()) - \
-                    timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')
+                    timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')
         context['order'] = 'desc'
         return context
 
