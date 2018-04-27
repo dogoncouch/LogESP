@@ -208,6 +208,11 @@ class LogEventSearchView(PermissionRequiredMixin, ListView):
                 'starttime_filter', '')
         context['endtime_filter'] = self.request.GET.get(
                 'endtime_filter', '')
+        if not context['starttime_filter'] and \
+                not context['endtime_filter']:
+            context['starttime_filter'] = (
+                    timezone.localtime(timezone.now()) - \
+                    timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')
         context['order'] = 'desc'
         return context
 
@@ -276,6 +281,11 @@ class RuleEventSearchView(PermissionRequiredMixin, ListView):
                 'starttime_filter', '')
         context['endtime_filter'] = self.request.GET.get(
                 'endtime_filter', '')
+        if not context['starttime_filter'] and \
+                not context['endtime_filter']:
+            context['starttime_filter'] = (
+                    timezone.localtime(timezone.now()) - \
+                    timedelta(days=7)).strftime('%Y-%m-%d %H:%M:%S')
         return context
 
 class RuleEventDetailView(PermissionRequiredMixin, DetailView):
