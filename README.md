@@ -50,7 +50,7 @@ LogESP is a SIEM (Security Information and Event Management system) written in P
 #### Security
 LogESP was designed and built as a security application, and minimalism can be good for security.
 
-- LogESP is built on the Python Django framework
+- LogESP is built on the Python Django framework.
 - LogESP does not require credentials, or installation of its software, on log sources. Event forwarding is left entirely up to syslog daemons.
 - The LogESP web interface uses no client-side scripting.
 
