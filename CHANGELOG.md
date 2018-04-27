@@ -5,6 +5,7 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 ### Added
 - systemd daemon scripts for logespd, logesp-uwsgi
 - Default search window is 7 days
+- Log event db index for `parsed_at` field
 
 ### Fixed
 - Hang on shutdown due to uwsgi not exiting properly
