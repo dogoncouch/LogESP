@@ -63,14 +63,6 @@ useradd -r -d /opt/LogESP -s /sbin/nologin -U logespd
 gpasswd -a logespd adm
 ```
 
-### Set Up Static Files, Database
-- Set up database, collect static files:
-```
-make newdb
-make staticfiles
-```
-Note: When confirming static file collection, you must type `yes`, not `y`.
-
 ### Link daemon scripts
 ```
 ln -s /opt/LogESP/scripts/logesp /usr/local/bin
@@ -95,6 +87,7 @@ chown -R logespd.www-data /opt/LogESP/run
 ```
 
 ### Edit config/settings.py
+- `cp config/settings.py.example config/settings.py`
 - Add server IP/FQDN to `ALLOWED_HOSTS`
 - Update `TIME_ZONE` setting
 
@@ -104,6 +97,14 @@ chown -R logespd.www-data /opt/LogESP/run
 ### Edit config/parser.conf
 - Uncomment necessary files
 - Add more files, if necessary
+
+### Set Up Static Files, Database
+- Set up database, collect static files:
+```
+make newdb
+make staticfiles
+```
+Note: When confirming static file collection, you must type `yes`, not `y`.
 
 ## Rsyslog Setup
 ### Place Files
