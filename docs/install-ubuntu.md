@@ -84,6 +84,7 @@ cp config/settings.py.example config/settings.py
 chown logespd.www-data config/settings.py
 chmod 640 config/settings.py
 chown -R logespd.www-data /opt/LogESP/run
+chmod 770 run
 ```
 
 ### Edit config/settings.py
@@ -109,8 +110,9 @@ Note: When confirming static file collection, you must type `yes`, not `y`.
 ### Place Files
 ```
 cp /opt/LogESP/config/rsyslog/server/*.conf /etc/rsyslog.d/
-touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
-chown syslog.adm /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
+mkdir /var/log/uwsgi
+touch /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log /var/log/uwsgi/logesp.log
+chown -R syslog.adm /var/log/uwsgi /var/log/cisco.log /var/log/snort.log /var/log/audit.log /var/log/windows.log
 ```
 This configuration uses a UDP server. In a production environment, using a TCP syslog server with public key infrastructure integration is recommended. Log sources that require UDP should communicate out of band (i.e. on a management network).
 
