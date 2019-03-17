@@ -37,7 +37,7 @@ Note: Change the password below (IDENTIFIED BY). Even though it's localhost.
 CREATE DATABASE siem_data CHARACTER SET UTF8;
 CREATE USER logespctrl@localhost IDENTIFIED BY 'siems2bfine';
 USE siem_data;
-GRANT ALL PRIVILEGES ON siem_data TO logespctrl@localhost;
+GRANT ALL PRIVILEGES ON siem_data.* TO logespctrl@localhost;
 FLUSH PRIVILEGES;
 exit
 ```
@@ -87,7 +87,6 @@ chown -R logespd.www-data /opt/LogESP/run
 ```
 
 ### Edit config/settings.py
-- `cp config/settings.py.example config/settings.py`
 - Add server IP/FQDN to `ALLOWED_HOSTS`
 - Update `TIME_ZONE` setting
 

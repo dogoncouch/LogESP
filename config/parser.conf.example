@@ -33,13 +33,13 @@ backup_lifespan_days=366
 #backup_lifespan_days=366
 #facility=2
 
-#[daemon]
-#filename=/var/log/daemon.log
-#event_type=daemon
-#parser=syslog
-#local_lifespan_days=185
-#backup_lifespan_days=366
-#facility=3
+[daemon]
+filename=/var/log/daemon.log
+event_type=daemon
+parser=syslog
+local_lifespan_days=185
+backup_lifespan_days=366
+facility=3
 
 #[audit]
 #filename=/var/log/audit.log
@@ -50,14 +50,14 @@ backup_lifespan_days=366
 #backup_lifespan_days=366
 #facility=22
 
-#[cisco]
-#filename=/var/log/cisco.log
-#event_type=cisco_ios
-#parser=cisco_ios
-#helper_type=cisco_ios
-#local_lifespan_days=185
-#backup_lifespan_days=366
-#facility=23
+[cisco]
+filename=/var/log/cisco.log
+event_type=cisco_ios
+parser=cisco_ios
+helper_type=cisco_ios
+local_lifespan_days=185
+backup_lifespan_days=366
+facility=23
 
 #[snort]
 #filename=/var/log/snort.log

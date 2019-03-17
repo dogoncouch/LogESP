@@ -22,7 +22,7 @@ class LogEventParser(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        permissions = (('view_logeventparser', 'Can view log event parsers'),)
+        #permissions = (('view_logeventparser', 'Can view log event parsers'),)
         unique_together = ('name', 'is_builtin')
 
 class ParseHelper(models.Model):
@@ -35,7 +35,7 @@ class ParseHelper(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        permissions = (('view_logeventparser', 'Can view log event parsers'),)
+        #permissions = (('view_logeventparser', 'Can view log event parsers'),)
         unique_together = ('name', 'is_builtin')
 
 class LogEvent(models.Model):
@@ -89,8 +89,8 @@ class LogEvent(models.Model):
     ext7 = models.CharField(max_length=45, default='')
     parsed_on = models.CharField(max_length=32)
     source_path = models.CharField(max_length=200,)
-    class Meta:
-        permissions = (('view_logevent', 'Can view log events'),)
+    #class Meta:
+        #permissions = (('view_logevent', 'Can view log events'),)
 
 
 class LimitRule(models.Model):
@@ -165,7 +165,7 @@ class LimitRule(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        permissions = (('view_limitrule', 'Can view limit rules'),)
+        #permissions = (('view_limitrule', 'Can view limit rules'),)
         unique_together = ('name', 'is_builtin')
 
 
@@ -197,5 +197,5 @@ class RuleEvent(models.Model):
             null=True, blank=True)
     dest_host_count = models.IntegerField(
             null=True, blank=True)
-    class Meta:
-        permissions = (('view_ruleevent', 'Can view rule events'),)
+    #class Meta:
+        #permissions = (('view_ruleevent', 'Can view rule events'),)

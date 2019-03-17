@@ -8,7 +8,7 @@ DEBUG = False
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Email settings
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -26,4 +26,4 @@ ALLOWED_HOSTS = []
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/New_York'
+TIME_ZONE = 'Etc/UTC'
