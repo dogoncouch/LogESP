@@ -1,7 +1,9 @@
 # LogESP Installation
 LogESP (c) 2018 Dan Persons | [MIT License](../LICENSE)
 
-- Ubuntu server 16.04
+- Tested on:
+  - Ubuntu server 16.04
+  - Ubuntu server 18.04
 
 ## Index
 
