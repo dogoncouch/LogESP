@@ -130,7 +130,8 @@ openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096
 In a production environment, use an SSL certificate signed by your CA.
 
 ### Set Server Name
-Edit `/opt/LogESP/config/nginx/logesp_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
+- Edit `/opt/LogESP/config/nginx/logesp_nginx.conf`, and replace `0.0.0.0` with your server FQDN or IP address.
+- If you are going to be using a trusted certificate, uncomment the line that starts with `add_header Strict-Transport-Security`.
 
 ### Set PID File Permissions
 ```
