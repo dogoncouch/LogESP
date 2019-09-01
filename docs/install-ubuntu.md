@@ -27,6 +27,7 @@ On small home networks, LogESP can be run on an ubuntu server virtual machine wi
 apt update ; apt upgrade
 apt install build-essential python3-dev python3-venv libmysqlclient-dev mariadb-server nginx ntp
 ```
+Notes: On some Debian derived Linux distros, you may need to replace `libmysqlclient-dev` with `default-libmysqlclient-dev` and additionally install `git` for these instructions to work.
 
 ## Mariadb Setup
 ```
