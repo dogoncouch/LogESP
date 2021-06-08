@@ -1,7 +1,7 @@
 # Change log
 Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 
-## [Unreleased]
+## [0.2-beta-r10] 2021-06-06
 ### Added
 - systemd daemon scripts for logespd, logesp-uwsgi
 - Default search window is 1 day for log events, 7 for rule events
@@ -9,6 +9,7 @@ Change log for [LogESP](https://github.com/dogoncouch/LogESP)
 - Rule event db index for `date_stamp` field
 
 ### Fixed
+- Django version vulnerabilities
 - Hang on shutdown due to uwsgi not exiting properly
 
 ### Updated
